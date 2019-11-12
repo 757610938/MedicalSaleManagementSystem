@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd  ">
+
+    <context:component-scan base-package="com.medicalSaleManagementSystem">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+
+    </context:component-scan>
+    <!--Srping的配置文件，这里主要配置和业务逻辑有关的-->
+    <!-- ===========================数据源，事务控制，等等============================== -->
+
+    <context:property-placeholder location="classpath:dbconfig.properties" ignore-unresolvable="true"/>
+
+    <bean id="pooledDataSource" class="com.alibaba.druid.pool.DruidDataSource" >
+        <property name="username" value="${jdbc.username}"/>
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name = "filters" value = "${filters}" />
+        <!-- 最大并发连接数 -->
+        <property name="maxActive" value="${maxActive}" />
+        <!-- 初始化连接数量 -->
+        <property name="initialSize" value="${initialSize}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${maxWait}" />
+        <!-- 最小空闲连接数 -->
+        <property name="minIdle" value="${minIdle}" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+        <property name="validationQuery" value="${validationQuery}" />
+        <!-- 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效 -->
+        <property name="testWhileIdle" value="${testWhileIdle}" />
+        <!-- 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+        <property name="testOnBorrow" value="${testOnBorrow}" />
+        <!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+        <property name="testOnReturn" value="${testOnReturn}" />
+        <property name="maxOpenPreparedStatements" value="${maxOpenPreparedStatements}" />
+        <!-- 打开removeAbandoned功能 -->
+        <property name="removeAbandoned" value="${removeAbandoned}" />
+        <!-- 1800秒，也就是30分钟 -->
+        <property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}" />
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="${logAbandoned}" />
+
+        <!-- 慢sql查询 -->
+        <property name="connectionProperties" value="druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000"/>
+
+    </bean>
+
+    <!--Start druid开启spring的监控 需要引入aspectjweaver包-->
+    <!--p:filters="stat,wall,log4j"   stat和wall。一个是用于监控，一个是用于防火墙。如果想使用sql防火墙，必须加上wall-->
+    <!--druid spring monitor setting-->
+    <bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor" />
+    <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
+        <property name="patterns">
+            <list>
+                <!-- 配置监听的bean路径 支持方法名的拦截 -->
+                <value>com.medicalSaleManagementSystem.core.service.*</value>
+                <value>com.medicalSaleManagementSystem.core.dao</value>
+            </list>
+        </property>
+    </bean>
+    <!-- 基于AspectJ的自动代理.使用AnnotationAwareAspectJAutoProxyCreator  -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <aop:config>
+        <aop:advisor advice-ref="druid-stat-interceptor"
+                     pointcut-ref="druid-stat-pointcut" />
+        <!-- pointcut-ref="druid-stat-pointcut"在idea中报Cannot resolve Spring Pointcut 'druid-stat-pointcut'  不用管它 -->
+    </aop:config>
+    <!--End druid开启spring的监控 -->
+
+    <!-- ==========================配置和MyBatis的整合============================ -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定mybatis全局配置文件的位置 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="dataSource" ref="pooledDataSource"/>
+        <!-- 指定mybatis，mapper文件的位置-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+    <!-- 配置扫描器 将mybatis接口的实现加入到ioc容器中 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描所有的dao接口的实现加入到ioc容器中-->
+        <property name="basePackage" value="com.medicalSaleManagementSystem.core.dao"/>
+    </bean>
+
+    <!-- 配置一个可以执行批量的sqlSession-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <constructor-arg name="executorType" value="BATCH"/>
+    </bean>
+    <!-- ========================================================================= -->
+
+    <!-- =======================事务控制的配置 ================重点====================-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 控制住数据源 -->
+        <property name="dataSource" ref="pooledDataSource"/>
+    </bean>
+
+    <!--开启基于注解的事务，使用xml配置形式的事务（必要主要的都是使用配置式）-->
+    <aop:config>
+        <!--切入点表达式 -->
+        <aop:pointcut id="txPoint" expression="(execution(* com.medicalSaleManagementSystem.core.service..*(..))) or (execution(* com.medicalSaleManagementSystem.token..*(..))) "/>
+        <!-- 配置事务增强 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
+    </aop:config>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 所有方法都是事务方法 -->
+            <tx:method name="*"/>
+            <!-- 以GET开始的所有方法 -->
+            <tx:method name="get*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- Spring配置文件的核心点（数据源、与mybatis的整合，事务控制） -->
+
+    <!-- 工具类配置 -->
+    <bean id="pictureBase64Util" class="com.medicalSaleManagementSystem.util.PictureBase64Util"/>
+
+    <import resource="Spring-redis.xml"/>
+    <import resource="Spring-shiro.xml"/>
+</beans>
