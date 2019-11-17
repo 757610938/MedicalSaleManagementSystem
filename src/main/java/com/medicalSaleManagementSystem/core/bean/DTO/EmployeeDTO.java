@@ -1,8 +1,11 @@
-package com.medicalSaleManagementSystem.core.bean.POJO;
+package com.medicalSaleManagementSystem.core.bean.DTO;
 
 import java.util.Date;
 
-public class Employee {
+/**
+ * action 与service层
+ */
+public class EmployeeDTO {
     private Integer empId;
 
     private String empAccount;
