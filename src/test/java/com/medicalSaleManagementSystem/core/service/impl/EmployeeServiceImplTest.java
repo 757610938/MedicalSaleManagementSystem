@@ -31,9 +31,9 @@ public class EmployeeServiceImplTest {
         EmployeeServiceImpl employeeService = ac.getBean("employeeServiceImpl", EmployeeServiceImpl.class);
         //3.执行方法
         EmployeeDTO  employeeDTO = new EmployeeDTO();
-        employeeDTO.setEmpAccount("linxianqin");
-        employeeDTO.setEmpPassword("12345678");
-        Msg msg = employeeService.registerUser(employeeDTO);
+        employeeDTO.setEmpAccount("admin");
+        employeeDTO.setEmpPassword("123456");
+        Msg msg = employeeService.registerEmployee(employeeDTO);
         System.out.println(msg.getCode());
         System.out.println(msg.getMsg());
     }
@@ -54,6 +54,30 @@ public class EmployeeServiceImplTest {
         System.out.println(msg.getCode());
         System.out.println(msg.getMsg());
     }
-
-
+    /**
+     *  删除账户，将employee表中的valid状态改为1
+     * @return 消息类
+     * @author 林贤钦
+     */
+    @Test
+    public void deleteEmployee(){
+        //1.获取容器
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        //2.获取业务层对象
+        EmployeeServiceImpl employeeService = ac.getBean("employeeServiceImpl", EmployeeServiceImpl.class);
+        //3.执行方法
+        Msg msg = employeeService.deleteEmployee(1);
+        System.out.println(msg.getCode());
+        System.out.println(msg.getMsg());
+    }
+    public void getEmployee(){
+        //1.获取容器
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        //2.获取业务层对象
+        EmployeeServiceImpl employeeService = ac.getBean("employeeServiceImpl", EmployeeServiceImpl.class);
+        //3.执行方法
+        Msg msg = employeeService.deleteEmployee(1);
+        System.out.println(msg.getCode());
+        System.out.println(msg.getMsg());
+    }
 }

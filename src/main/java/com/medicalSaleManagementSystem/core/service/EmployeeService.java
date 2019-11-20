@@ -1,6 +1,5 @@
 package com.medicalSaleManagementSystem.core.service;
 
-import com.medicalSaleManagementSystem.core.bean.DO.EmployeeDo;
 import com.medicalSaleManagementSystem.core.bean.DTO.EmployeeDTO;
 import com.medicalSaleManagementSystem.core.bean.DTO.Msg;
 
@@ -26,7 +25,7 @@ public interface EmployeeService {
      * @return 消息类
      * @author 林贤钦
      */
-    Msg registerUser(EmployeeDTO employeeDTO);
+    Msg registerEmployee(EmployeeDTO employeeDTO);
 
     /**
      * 查找数据库是否存在账号
@@ -35,6 +34,7 @@ public interface EmployeeService {
      * @author 林贤钦
      */
     Msg findEmployeeByAccount(String account);
+
     /**
      *  删除账户，将employee表中的valid状态改为1
      * @param empId
@@ -42,6 +42,7 @@ public interface EmployeeService {
      * @author 林贤钦
      */
     Msg deleteEmployee(Integer empId);
+
     /**
      * 获取员工的学生信息
      *
@@ -50,6 +51,7 @@ public interface EmployeeService {
      * @author 林贤钦
      */
     Msg getEmployee(EmployeeDTO employeeDTO);
+
     /**
      * 更新员工的学生信息
      *

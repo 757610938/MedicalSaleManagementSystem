@@ -55,7 +55,7 @@ public class EmployeeServiceImpl  implements EmployeeService {
      * @author 林贤钦
      */
     @Override
-    public Msg registerUser(EmployeeDTO employeeDTO) {
+    public Msg registerEmployee(EmployeeDTO employeeDTO) {
         Msg msg = findEmployeeByAccount(employeeDTO.getEmpAccount());//查询账户是否存在
         if (msg.getCode() == 100) {
             return Msg.fail("账号已存在");
@@ -63,6 +63,7 @@ public class EmployeeServiceImpl  implements EmployeeService {
             Employee employee =employeeDtoToPojo(employeeDTO);//将DTO转换成POJO
             employee.setEmpPassword(MD5Util.string2MD5(employeeDTO.getEmpPassword()));//md5加密密码
             employee.setGenTime(new Date(System.currentTimeMillis()));//创建账户时间
+            employee.setValid(1);//将 employee表中的valid状态改为1
             employeeMapper.insertSelective(employee);//将账户存入数据库中
             return Msg.success();
         }
@@ -73,7 +74,7 @@ public class EmployeeServiceImpl  implements EmployeeService {
      * @param account 用户名
      * @return 消息类
      * @author 林贤钦
-     * @return
+     * @return Msg
      */
     @Override
     public Msg findEmployeeByAccount(String account) {
@@ -149,15 +150,15 @@ public class EmployeeServiceImpl  implements EmployeeService {
     }
 
     /**
-     * 用户DTO转换成POJO
+     * DTO转换成POJO
      *
      * @param employeeDTO
      * @return 用户类
      * @author 林贤钦
      */
-    private Employee employeeDtoToPojo(EmployeeDTO employeeDTO){
+    private Employee employeeDtoToPojo(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
-        if(employeeDTO.getEmpId()!=null){
+        if(employeeDTO.getEmpId()!=null&&!"".equals(employeeDTO.getEmpId())){
             employee.setEmpId(employeeDTO.getEmpId());
         }
         if(employeeDTO.getEmpAccount()!=null&&!"".equals(employeeDTO.getEmpAccount())){
@@ -211,15 +212,15 @@ public class EmployeeServiceImpl  implements EmployeeService {
         return employee;
     }
     /**
-     * 用户POJO转换成DTO
+     * POJO转换成DTO
      *
      * @param employee
-     * @return 用户类
+     * @return employeeDTO
      * @author 林贤钦
      */
     private EmployeeDTO employeePojoToDto(Employee employee){
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        if(employee.getEmpId()!=null){
+        if(employee.getEmpId()!=null&&!"".equals(employee.getEmpId())){
             employeeDTO.setEmpId(employee.getEmpId());
         }
         if(employee.getEmpAccount()!=null&&!"".equals(employee.getEmpAccount())){

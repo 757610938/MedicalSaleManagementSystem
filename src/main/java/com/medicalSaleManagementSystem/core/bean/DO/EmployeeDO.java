@@ -2,7 +2,7 @@ package com.medicalSaleManagementSystem.core.bean.DO;
 
 import java.util.Date;
 
-public class EmployeeDo {
+public class EmployeeDO {
     private Integer empId;
 
     private String empAccount;
