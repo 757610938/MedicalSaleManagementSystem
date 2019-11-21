@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="cacheEnabled" value="true" />
+        <!-- 开启mybatis 延迟加载-->
+        <setting name="lazyLoadingEnabled" value="false"/>
+<!--        <setting name="logImpl" value="LOG4J2" />-->
+    </settings>
+    <!-- 给包起别名可以在这里起 -->
+    <typeAliases>
+        <!-- 用于指定要配置别名的包，当指定之后，该包下的实体类都会注册别名，并且类名就是别名，不再区分大小写-->
+        <package name="com.medicalSaleManagementSystem.core.bean.POJO"/>
+    </typeAliases>
+
+    <!-- 这里是mybatis的分页插件，不一定用得上，再说 -->
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="reasonable" value="true"/>
+            <!-- 使用下面的方式配置参数 -->
+<!--            <property name="param1" value="value1"/>-->
+        </plugin>
+    </plugins>
+</configuration>
