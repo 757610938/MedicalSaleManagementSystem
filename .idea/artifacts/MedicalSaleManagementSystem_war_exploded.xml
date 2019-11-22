@@ -1,6 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="MedicalSaleManagementSystem:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/MedicalSaleManagementSystem_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/medicalSaleManagementSystem</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>MedicalSaleManagementSystem</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -69,6 +76,7 @@
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-quartz:1.4.0" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-spring:1.4.0" />
           <element id="library" level="project" name="Maven: net.mingsoft:shiro-freemarker-tags:0.1" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Maven: com.google.zxing:javase:3.1.0" />
           <element id="library" level="project" name="Maven: com.google.zxing:core:3.1.0" />
           <element id="library" level="project" name="Maven: org.quartz-scheduler:quartz:2.2.1" />
@@ -83,8 +91,10 @@
           <element id="library" level="project" name="Maven: com.mortennobel:java-image-scaling:0.8.6" />
           <element id="library" level="project" name="Maven: com.jhlabs:filters:2.0.235" />
           <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.20" />
-          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.16" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.10.0" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.10.0" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-web:2.9.1" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-nop:1.7.2" />
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.5" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.5" />
@@ -106,6 +116,9 @@
           <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.6" />
           <element id="library" level="project" name="Maven: net.sf.ezmorph:ezmorph:1.0.6" />
         </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/medicalSaleManagementSystem/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="MedicalSaleManagementSystem/web/Web" />
     </root>
