@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.MedicineMapper">
-  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.POJO.Medicine">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
     <id column="medicine_id" jdbcType="INTEGER" property="medicineId" />
     <result column="medicine_Approval_Number" jdbcType="VARCHAR" property="medicineApprovalNumber" />
     <result column="medicine_Name" jdbcType="VARCHAR" property="medicineName" />
@@ -85,7 +85,7 @@
     medicine_Picture, medicine_Stock_Amount, medicine_Purchase_Price, medicine_Retail_Price, 
     medicine_Wholesale_Price
   </sql>
-  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.MedicineExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.MedicineExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -109,13 +109,13 @@
     delete from tb_medicine
     where medicine_id = #{medicineId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.MedicineExample">
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.MedicineExample">
     delete from tb_medicine
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Medicine">
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
     insert into tb_medicine (medicine_id, medicine_Approval_Number, 
       medicine_Name, medicine_English_Name, medicine_Dosageform_Category, 
       medicine_Manufacturer, medicine_Specification, 
@@ -133,7 +133,7 @@
       #{medicinePurchasePrice,jdbcType=DOUBLE}, #{medicineRetailPrice,jdbcType=DOUBLE}, 
       #{medicineWholesalePrice,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Medicine">
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
     insert into tb_medicine
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="medicineId != null">
@@ -242,7 +242,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.MedicineExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.MedicineExample" resultType="java.lang.Long">
     select count(*) from tb_medicine
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -330,7 +330,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Medicine">
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
     update tb_medicine
     <set>
       <if test="medicineApprovalNumber != null">
@@ -384,7 +384,7 @@
     </set>
     where medicine_id = #{medicineId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Medicine">
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
     update tb_medicine
     set medicine_Approval_Number = #{medicineApprovalNumber,jdbcType=VARCHAR},
       medicine_Name = #{medicineName,jdbcType=VARCHAR},

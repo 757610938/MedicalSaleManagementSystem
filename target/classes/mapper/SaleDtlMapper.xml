@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.SaleDtlMapper">
-  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtl">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.SaleDtl">
     <id column="sale_Dtl_id" jdbcType="INTEGER" property="saleDtlId" />
     <result column="sale_Dtl_OrderId" jdbcType="VARCHAR" property="saleDtlOrderid" />
     <result column="sale_OrderId" jdbcType="VARCHAR" property="saleOrderid" />
@@ -71,7 +71,7 @@
     sale_Dtl_id, sale_Dtl_OrderId, sale_OrderId, medicine_id, sale_Dtl_Total_Amount, 
     sale_Dtl_Remark
   </sql>
-  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtlExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtlExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -95,13 +95,13 @@
     delete from tb_sale_dtl
     where sale_Dtl_id = #{saleDtlId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtlExample">
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtlExample">
     delete from tb_sale_dtl
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtl">
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtl">
     insert into tb_sale_dtl (sale_Dtl_id, sale_Dtl_OrderId, sale_OrderId, 
       medicine_id, sale_Dtl_Total_Amount, sale_Dtl_Remark
       )
@@ -109,7 +109,7 @@
       #{medicineId,jdbcType=INTEGER}, #{saleDtlTotalAmount,jdbcType=INTEGER}, #{saleDtlRemark,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtl">
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtl">
     insert into tb_sale_dtl
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="saleDtlId != null">
@@ -152,7 +152,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtlExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtlExample" resultType="java.lang.Long">
     select count(*) from tb_sale_dtl
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -196,7 +196,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtl">
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtl">
     update tb_sale_dtl
     <set>
       <if test="saleDtlOrderid != null">
@@ -217,7 +217,7 @@
     </set>
     where sale_Dtl_id = #{saleDtlId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtl">
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtl">
     update tb_sale_dtl
     set sale_Dtl_OrderId = #{saleDtlOrderid,jdbcType=VARCHAR},
       sale_OrderId = #{saleOrderid,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.PurchaseMapper">
-  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.POJO.Purchase">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.Purchase">
     <id column="pur_id" jdbcType="INTEGER" property="purId" />
     <result column="pur_OrderId" jdbcType="VARCHAR" property="purOrderid" />
     <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     pur_id, pur_OrderId, supplier_id, emp_id, pur_Total_Money
   </sql>
-  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.PurchaseExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.PurchaseExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -93,19 +93,19 @@
     delete from tb_purchase
     where pur_id = #{purId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.PurchaseExample">
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.PurchaseExample">
     delete from tb_purchase
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Purchase">
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Purchase">
     insert into tb_purchase (pur_id, pur_OrderId, supplier_id, 
       emp_id, pur_Total_Money)
     values (#{purId,jdbcType=INTEGER}, #{purOrderid,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER}, 
       #{empId,jdbcType=INTEGER}, #{purTotalMoney,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Purchase">
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Purchase">
     insert into tb_purchase
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="purId != null">
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.PurchaseExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.PurchaseExample" resultType="java.lang.Long">
     select count(*) from tb_purchase
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Purchase">
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Purchase">
     update tb_purchase
     <set>
       <if test="purOrderid != null">
@@ -200,7 +200,7 @@
     </set>
     where pur_id = #{purId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Purchase">
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Purchase">
     update tb_purchase
     set pur_OrderId = #{purOrderid,jdbcType=VARCHAR},
       supplier_id = #{supplierId,jdbcType=INTEGER},
