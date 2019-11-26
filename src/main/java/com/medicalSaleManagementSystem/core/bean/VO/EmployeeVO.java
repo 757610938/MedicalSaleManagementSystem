@@ -2,7 +2,9 @@ package com.medicalSaleManagementSystem.core.bean.VO;
 
 import java.util.Date;
 
+
 public class EmployeeVO {
+
     private Integer empId;
 
     private String empAccount;
@@ -28,6 +30,16 @@ public class EmployeeVO {
     private String empPosition;
 
     private Double empWages;
+
+    private Date genTime;
+
+    private Date lastLoginTime;
+
+    private String loginIp;
+
+    private Date loginTime;
+
+    private Integer valid;
 
     public Integer getEmpId() {
         return empId;
@@ -131,5 +143,69 @@ public class EmployeeVO {
 
     public void setEmpWages(Double empWages) {
         this.empWages = empWages;
+    }
+
+    public Date getGenTime() {
+        return genTime;
+    }
+
+    public void setGenTime(Date genTime) {
+        this.genTime = genTime;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getLoginIp() {
+        return loginIp;
+    }
+
+    public void setLoginIp(String loginIp) {
+        this.loginIp = loginIp == null ? null : loginIp.trim();
+    }
+
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public Integer getValid() {
+        return valid;
+    }
+
+    public void setValid(Integer valid) {
+        this.valid = valid;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeDTO{" +
+                "empId=" + empId +
+                ", empAccount='" + empAccount + '\'' +
+                ", empPassword='" + empPassword + '\'' +
+                ", empName='" + empName + '\'' +
+                ", empSex='" + empSex + '\'' +
+                ", empBirthday=" + empBirthday +
+                ", empIdCard='" + empIdCard + '\'' +
+                ", empAddress='" + empAddress + '\'' +
+                ", empPhone='" + empPhone + '\'' +
+                ", empEmail='" + empEmail + '\'' +
+                ", empDeptId=" + empDeptId +
+                ", empPosition='" + empPosition + '\'' +
+                ", empWages=" + empWages +
+                ", genTime=" + genTime +
+                ", lastLoginTime=" + lastLoginTime +
+                ", loginIp='" + loginIp + '\'' +
+                ", loginTime=" + loginTime +
+                ", valid=" + valid +
+                '}';
     }
 }

@@ -1,7 +1,7 @@
 package com.medicalSaleManagementSystem.core.dao;
 
-import com.medicalSaleManagementSystem.core.bean.POJO.InstockRecord;
-import com.medicalSaleManagementSystem.core.bean.POJO.InstockRecordExample;
+import com.medicalSaleManagementSystem.core.bean.entity.InstockRecord;
+import com.medicalSaleManagementSystem.core.bean.entity.InstockRecordExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

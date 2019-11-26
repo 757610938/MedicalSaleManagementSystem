@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/MedicalSaleManagementSystem.iml" filepath="$PROJECT_DIR$/.idea/MedicalSaleManagementSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MedicalSaleManagementSystem-vue/MedicalSaleManagementSystem-vue.iml" filepath="$PROJECT_DIR$/../MedicalSaleManagementSystem-vue/MedicalSaleManagementSystem-vue.iml" />
     </modules>
   </component>
 </project>

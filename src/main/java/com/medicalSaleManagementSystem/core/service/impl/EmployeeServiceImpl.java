@@ -1,11 +1,12 @@
 package com.medicalSaleManagementSystem.core.service.impl;
 
 import com.medicalSaleManagementSystem.core.bean.DTO.EmployeeDTO;
-import com.medicalSaleManagementSystem.core.bean.DTO.Msg;
-import com.medicalSaleManagementSystem.core.bean.POJO.Employee;
-import com.medicalSaleManagementSystem.core.bean.POJO.EmployeeExample;
+import com.medicalSaleManagementSystem.util.Msg;
+import com.medicalSaleManagementSystem.core.bean.entity.Employee;
+import com.medicalSaleManagementSystem.core.bean.entity.EmployeeExample;
 import com.medicalSaleManagementSystem.core.dao.EmployeeMapper;
 import com.medicalSaleManagementSystem.core.service.EmployeeService;
+import com.medicalSaleManagementSystem.util.BeanUtilEx;
 import com.medicalSaleManagementSystem.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,16 +56,18 @@ public class EmployeeServiceImpl  implements EmployeeService {
      * @author 林贤钦
      */
     @Override
-    public Msg registerEmployee(EmployeeDTO employeeDTO) {
+    public Msg registerEmployee(EmployeeDTO employeeDTO)  {
         Msg msg = findEmployeeByAccount(employeeDTO.getEmpAccount());//查询账户是否存在
         if (msg.getCode() == 100) {
             return Msg.fail("账号已存在");
         } else {
-            Employee employee =employeeDtoToPojo(employeeDTO);//将DTO转换成POJO
-            employee.setEmpPassword(MD5Util.string2MD5(employeeDTO.getEmpPassword()));//md5加密密码
-            employee.setGenTime(new Date(System.currentTimeMillis()));//创建账户时间
-            employee.setValid(1);//将 employee表中的valid状态改为1
-            employeeMapper.insertSelective(employee);//将账户存入数据库中
+                Employee employee = new Employee();
+                BeanUtilEx.copyProperties(employee,employeeDTO);//将DTO转换成POJO
+                employee.setEmpPassword(MD5Util.string2MD5(employeeDTO.getEmpPassword()));//md5加密密码
+                employee.setGenTime(new Date(System.currentTimeMillis()));//创建账户时间
+                employee.setValid(1);//将 employee表中的valid状态改为1
+                System.out.println(employee);
+                employeeMapper.insertSelective(employee);//将账户存入数据库中
             return Msg.success();
         }
     }
@@ -114,7 +117,7 @@ public class EmployeeServiceImpl  implements EmployeeService {
      * @author 林贤钦
      */
     @Override
-    public Msg getEmployee(EmployeeDTO employeeDTO) {
+    public Msg getEmployee(EmployeeDTO employeeDTO)  {
         if (employeeDTO.getEmpId() == null ||employeeDTO.getEmpId() <= 0){
             return Msg.fail("员工id非法");
         }
@@ -123,7 +126,8 @@ public class EmployeeServiceImpl  implements EmployeeService {
         criteria.andEmpIdEqualTo(employeeDTO.getEmpId());
         List<Employee> employeeList = employeeMapper.selectByExample(employeeExample);
         if (employeeList.size() > 0) {
-            EmployeeDTO result = employeePojoToDto(employeeList.get(0));
+            EmployeeDTO result = new EmployeeDTO();
+            BeanUtilEx.copyProperties(employeeDTO,employeeList.get(0));
             return Msg.success().add("result", result);
         }
         return Msg.fail("找不到该员工信息");
@@ -140,8 +144,9 @@ public class EmployeeServiceImpl  implements EmployeeService {
         if (employeeDTO.getEmpId() == null ||employeeDTO.getEmpId() <= 0){
             return Msg.fail("员工id非法");
         }
-        Employee employee = employeeDtoToPojo(employeeDTO);
         try{
+            Employee employee = new Employee();
+            BeanUtilEx.copyProperties(employee,employeeDTO);
             employeeMapper.updateByPrimaryKeySelective(employee);
         }catch (Exception e){
             return Msg.fail("修改失败，请重新修改");
@@ -149,128 +154,5 @@ public class EmployeeServiceImpl  implements EmployeeService {
         return Msg.success();
     }
 
-    /**
-     * DTO转换成POJO
-     *
-     * @param employeeDTO
-     * @return 用户类
-     * @author 林贤钦
-     */
-    private Employee employeeDtoToPojo(EmployeeDTO employeeDTO) {
-        Employee employee = new Employee();
-        if(employeeDTO.getEmpId()!=null&&!"".equals(employeeDTO.getEmpId())){
-            employee.setEmpId(employeeDTO.getEmpId());
-        }
-        if(employeeDTO.getEmpAccount()!=null&&!"".equals(employeeDTO.getEmpAccount())){
-            employee.setEmpAccount(employeeDTO.getEmpAccount());
-        }
-        if(employeeDTO.getEmpPassword()!=null&&!"".equals(employeeDTO.getEmpPassword())){
-            employee.setEmpPassword(employeeDTO.getEmpPassword());
-        }
-        if(employeeDTO.getEmpName()!=null&&!"".equals(employeeDTO.getEmpName())){
-            employee.setEmpName(employeeDTO.getEmpName());
-        }
-        if(employeeDTO.getEmpSex()!=null&&!"".equals(employeeDTO.getEmpSex())){
-            employee.setEmpSex(employeeDTO.getEmpSex());
-        }
-        if(employeeDTO.getEmpBirthday()!=null&&!"".equals(employeeDTO.getEmpBirthday())){
-            employee.setEmpBirthday(employeeDTO.getEmpBirthday());
-        }
-        if(employeeDTO.getEmpIdCard()!=null&&!"".equals(employeeDTO.getEmpIdCard())){
-            employee.setEmpIdCard(employeeDTO.getEmpIdCard());
-        }
-        if(employeeDTO.getEmpPhone()!=null&&!"".equals(employeeDTO.getEmpPhone())){
-            employee.setEmpPhone(employeeDTO.getEmpPhone());
-        }
-        if(employeeDTO.getEmpEmail()!=null&&!"".equals(employeeDTO.getEmpEmail())){
-            employee.setEmpEmail(employeeDTO.getEmpEmail());
-        }
-        if(employeeDTO.getEmpDeptId()!=null&&!"".equals(employeeDTO.getEmpDeptId())){
-            employee.setEmpDeptId(employeeDTO.getEmpDeptId());
-        }
-        if(employeeDTO.getEmpPosition()!=null&&!"".equals(employeeDTO.getEmpPosition())){
-            employee.setEmpPosition(employeeDTO.getEmpPosition());
-        }
-        if(employeeDTO.getEmpWages()!=null&&!"".equals(employeeDTO.getEmpWages())){
-            employee.setEmpWages(employeeDTO.getEmpWages());
-        }
-        if(employeeDTO.getGenTime()!=null&&!"".equals(employeeDTO.getGenTime())){
-            employee.setGenTime(employeeDTO.getGenTime());
-        }
-        if(employeeDTO.getLastLoginTime()!=null&&!"".equals(employeeDTO.getLastLoginTime())){
-            employee.setLastLoginTime(employeeDTO.getLastLoginTime());
-        }
-        if(employeeDTO.getLoginIp()!=null&&!"".equals(employeeDTO.getLoginIp())){
-            employee.setLoginIp(employeeDTO.getLoginIp());
-        }
-        if(employeeDTO.getLoginTime()!=null&&!"".equals(employeeDTO.getLoginTime())){
-            employee.setLoginTime(employeeDTO.getLoginTime());
-        }
-        if(employeeDTO.getValid()!=null&&!"".equals(employeeDTO.getValid())){
-            employee.setValid(employeeDTO.getValid());
-        }
-        return employee;
-    }
-    /**
-     * POJO转换成DTO
-     *
-     * @param employee
-     * @return employeeDTO
-     * @author 林贤钦
-     */
-    private EmployeeDTO employeePojoToDto(Employee employee){
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        if(employee.getEmpId()!=null&&!"".equals(employee.getEmpId())){
-            employeeDTO.setEmpId(employee.getEmpId());
-        }
-        if(employee.getEmpAccount()!=null&&!"".equals(employee.getEmpAccount())){
-            employeeDTO.setEmpAccount(employee.getEmpAccount());
-        }
-        if(employee.getEmpPassword()!=null&&!"".equals(employee.getEmpPassword())){
-            employeeDTO.setEmpPassword(employee.getEmpPassword());
-        }
-        if(employee.getEmpName()!=null&&!"".equals(employee.getEmpName())){
-            employeeDTO.setEmpName(employee.getEmpName());
-        }
-        if(employee.getEmpSex()!=null&&!"".equals(employee.getEmpSex())){
-            employeeDTO.setEmpSex(employee.getEmpSex());
-        }
-        if(employee.getEmpBirthday()!=null&&!"".equals(employee.getEmpBirthday())){
-            employeeDTO.setEmpBirthday(employee.getEmpBirthday());
-        }
-        if(employee.getEmpIdCard()!=null&&!"".equals(employee.getEmpIdCard())){
-            employeeDTO.setEmpIdCard(employee.getEmpIdCard());
-        }
-        if(employee.getEmpPhone()!=null&&!"".equals(employee.getEmpPhone())){
-            employeeDTO.setEmpPhone(employee.getEmpPhone());
-        }
-        if(employee.getEmpEmail()!=null&&!"".equals(employee.getEmpEmail())){
-            employeeDTO.setEmpEmail(employee.getEmpEmail());
-        }
-        if(employee.getEmpDeptId()!=null&&!"".equals(employee.getEmpDeptId())){
-            employeeDTO.setEmpDeptId(employee.getEmpDeptId());
-        }
-        if(employee.getEmpPosition()!=null&&!"".equals(employee.getEmpPosition())){
-            employeeDTO.setEmpPosition(employee.getEmpPosition());
-        }
-        if(employee.getEmpWages()!=null&&!"".equals(employee.getEmpWages())){
-            employeeDTO.setEmpWages(employee.getEmpWages());
-        }
-        if(employee.getGenTime()!=null&&!"".equals(employee.getGenTime())){
-            employeeDTO.setGenTime(employee.getGenTime());
-        }
-        if(employee.getLastLoginTime()!=null&&!"".equals(employee.getLastLoginTime())){
-            employeeDTO.setLastLoginTime(employee.getLastLoginTime());
-        }
-        if(employee.getLoginIp()!=null&&!"".equals(employee.getLoginIp())){
-            employeeDTO.setLoginIp(employee.getLoginIp());
-        }
-        if(employee.getLoginTime()!=null&&!"".equals(employee.getLoginTime())){
-            employeeDTO.setLoginTime(employee.getLoginTime());
-        }
-        if(employee.getValid()!=null&&!"".equals(employee.getValid())){
-            employeeDTO.setValid(employee.getValid());
-        }
-        return employeeDTO;
-    }
+
 }

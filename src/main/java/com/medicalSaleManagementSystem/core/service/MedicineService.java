@@ -1,7 +1,7 @@
 package com.medicalSaleManagementSystem.core.service;
 
 import com.medicalSaleManagementSystem.core.bean.DTO.MedicineDTO;
-import com.medicalSaleManagementSystem.core.bean.DTO.Msg;
+import com.medicalSaleManagementSystem.util.Msg;
 
 public interface MedicineService {
     /**

@@ -6,6 +6,7 @@ import java.util.Date;
  * action 与service层
  */
 public class EmployeeDTO {
+
     private Integer empId;
 
     private String empAccount;
@@ -184,5 +185,29 @@ public class EmployeeDTO {
 
     public void setValid(Integer valid) {
         this.valid = valid;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeDTO{" +
+                "empId=" + empId +
+                ", empAccount='" + empAccount + '\'' +
+                ", empPassword='" + empPassword + '\'' +
+                ", empName='" + empName + '\'' +
+                ", empSex='" + empSex + '\'' +
+                ", empBirthday=" + empBirthday +
+                ", empIdCard='" + empIdCard + '\'' +
+                ", empAddress='" + empAddress + '\'' +
+                ", empPhone='" + empPhone + '\'' +
+                ", empEmail='" + empEmail + '\'' +
+                ", empDeptId=" + empDeptId +
+                ", empPosition='" + empPosition + '\'' +
+                ", empWages=" + empWages +
+                ", genTime=" + genTime +
+                ", lastLoginTime=" + lastLoginTime +
+                ", loginIp='" + loginIp + '\'' +
+                ", loginTime=" + loginTime +
+                ", valid=" + valid +
+                '}';
     }
 }

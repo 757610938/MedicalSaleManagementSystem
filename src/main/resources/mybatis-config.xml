@@ -13,7 +13,7 @@
     <!-- 给包起别名可以在这里起 -->
     <typeAliases>
         <!-- 用于指定要配置别名的包，当指定之后，该包下的实体类都会注册别名，并且类名就是别名，不再区分大小写-->
-        <package name="com.medicalSaleManagementSystem.core.bean.POJO"/>
+        <package name="com.medicalSaleManagementSystem.core.bean.entity"/>
     </typeAliases>
 
     <!-- 这里是mybatis的分页插件，不一定用得上，再说 -->

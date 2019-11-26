@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.EmployeeMapper">
-  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.POJO.Employee">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.Employee">
     <id column="emp_id" jdbcType="INTEGER" property="empId" />
     <result column="emp_Account" jdbcType="VARCHAR" property="empAccount" />
     <result column="emp_Password" jdbcType="VARCHAR" property="empPassword" />
@@ -84,7 +84,7 @@
     emp_Address, emp_Phone, emp_Email, emp_dept_id, emp_Position, emp_Wages, gen_time, 
     last_login_time, login_ip, login_time, valid
   </sql>
-  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.EmployeeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.EmployeeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -108,13 +108,13 @@
     delete from tb_employee
     where emp_id = #{empId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.EmployeeExample">
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.EmployeeExample">
     delete from tb_employee
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Employee">
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Employee">
     insert into tb_employee (emp_id, emp_Account, emp_Password, 
       emp_Name, emp_Sex, emp_Birthday, 
       emp_Id_Card, emp_Address, emp_Phone, 
@@ -130,7 +130,7 @@
       #{loginIp,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, #{valid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Employee">
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Employee">
     insert into tb_employee
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="empId != null">
@@ -245,7 +245,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.EmployeeExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.EmployeeExample" resultType="java.lang.Long">
     select count(*) from tb_employee
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -337,7 +337,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Employee">
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Employee">
     update tb_employee
     <set>
       <if test="empAccount != null">
@@ -394,7 +394,7 @@
     </set>
     where emp_id = #{empId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Employee">
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Employee">
     update tb_employee
     set emp_Account = #{empAccount,jdbcType=VARCHAR},
       emp_Password = #{empPassword,jdbcType=VARCHAR},

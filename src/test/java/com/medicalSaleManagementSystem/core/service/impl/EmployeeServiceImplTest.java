@@ -1,7 +1,7 @@
 package com.medicalSaleManagementSystem.core.service.impl;
 
 import com.medicalSaleManagementSystem.core.bean.DTO.EmployeeDTO;
-import com.medicalSaleManagementSystem.core.bean.DTO.Msg;
+import com.medicalSaleManagementSystem.util.Msg;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,15 +24,15 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void registerUser() {
+    public void registerUser(){
         //1.获取容器
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         //2.获取业务层对象
         EmployeeServiceImpl employeeService = ac.getBean("employeeServiceImpl", EmployeeServiceImpl.class);
         //3.执行方法
         EmployeeDTO  employeeDTO = new EmployeeDTO();
-        employeeDTO.setEmpAccount("admin");
-        employeeDTO.setEmpPassword("123456");
+        employeeDTO.setEmpAccount("1234567");
+        employeeDTO.setEmpPassword("1234567");
         Msg msg = employeeService.registerEmployee(employeeDTO);
         System.out.println(msg.getCode());
         System.out.println(msg.getMsg());

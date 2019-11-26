@@ -7,7 +7,10 @@
   <groupId>medicalSaleManagementSystem</groupId>
   <artifactId>medicalSaleManagementSystem</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
+    <modules>
+        <module>../MedicalSaleManagementSystem-vue</module>
+    </modules>
+    <packaging>pom</packaging>
 
   <name>medicalSaleManagementSystem Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
@@ -75,6 +78,13 @@
       <version>1.3.7</version>
     </dependency>
 
+    <!-- 实体对象间的转换 -->
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>5.1.6.RELEASE</version>
+    </dependency>
 
     <!--************************************************************************************************************-->
 
@@ -92,6 +102,13 @@
       <groupId>jstl</groupId>
       <artifactId>jstl</artifactId>
       <version>1.2</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.5</version>
     </dependency>
 
     <!--************************************************************************************************************-->
@@ -272,7 +289,6 @@
       <artifactId>ant</artifactId>
       <version>1.6.5</version>
     </dependency>
-
 
 
     <dependency>

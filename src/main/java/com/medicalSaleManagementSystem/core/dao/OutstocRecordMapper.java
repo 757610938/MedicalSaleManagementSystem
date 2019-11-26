@@ -1,7 +1,7 @@
 package com.medicalSaleManagementSystem.core.dao;
 
-import com.medicalSaleManagementSystem.core.bean.POJO.OutstocRecord;
-import com.medicalSaleManagementSystem.core.bean.POJO.OutstocRecordExample;
+import com.medicalSaleManagementSystem.core.bean.entity.OutstocRecord;
+import com.medicalSaleManagementSystem.core.bean.entity.OutstocRecordExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

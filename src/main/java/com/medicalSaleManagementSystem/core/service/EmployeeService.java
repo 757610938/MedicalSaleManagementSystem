@@ -1,7 +1,7 @@
 package com.medicalSaleManagementSystem.core.service;
 
 import com.medicalSaleManagementSystem.core.bean.DTO.EmployeeDTO;
-import com.medicalSaleManagementSystem.core.bean.DTO.Msg;
+import com.medicalSaleManagementSystem.util.Msg;
 
 /**
  * 员工信息业务
@@ -25,7 +25,7 @@ public interface EmployeeService {
      * @return 消息类
      * @author 林贤钦
      */
-    Msg registerEmployee(EmployeeDTO employeeDTO);
+    Msg registerEmployee(EmployeeDTO employeeDTO) ;
 
     /**
      * 查找数据库是否存在账号
@@ -50,7 +50,7 @@ public interface EmployeeService {
      * @return 消息类
      * @author 林贤钦
      */
-    Msg getEmployee(EmployeeDTO employeeDTO);
+    Msg getEmployee(EmployeeDTO employeeDTO) ;
 
     /**
      * 更新员工的学生信息
