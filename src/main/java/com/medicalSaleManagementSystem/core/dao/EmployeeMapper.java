@@ -1,7 +1,7 @@
 package com.medicalSaleManagementSystem.core.dao;
 
-import com.medicalSaleManagementSystem.core.bean.entity.Employee;
-import com.medicalSaleManagementSystem.core.bean.entity.EmployeeExample;
+import com.medicalSaleManagementSystem.core.bean.POJO.Employee;
+import com.medicalSaleManagementSystem.core.bean.POJO.EmployeeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

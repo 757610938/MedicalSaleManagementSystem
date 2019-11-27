@@ -1,7 +1,7 @@
 package com.medicalSaleManagementSystem.core.dao;
 
-import com.medicalSaleManagementSystem.core.bean.entity.CustomerSettleRecord;
-import com.medicalSaleManagementSystem.core.bean.entity.CustomerSettleRecordExample;
+import com.medicalSaleManagementSystem.core.bean.POJO.CustomerSettleRecord;
+import com.medicalSaleManagementSystem.core.bean.POJO.CustomerSettleRecordExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

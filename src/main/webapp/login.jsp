@@ -20,7 +20,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">登录系统</p>
 
-        <form action="${pageContext.request.contextPath}/employee/login" method="post">
+        <form action="${pageContext.request.contextPath}/employee/checkLogin" method="post">
             <div class="form-group has-feedback">
                 <input type="text" name="name" class="form-control"
                        placeholder="用户名"> <span
@@ -51,16 +51,7 @@
     </div>
     <!-- /.login-box-body -->
 </div>
-<!-- /.login-box -->
-<!-- jQuery 2.2.3 -->
-<!-- Bootstrap 3.3.6 -->
-<!-- iCheck -->
-<script
-        src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script
-        src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script
-        src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
+
 <script>
     $(function() {
         $('input').iCheck({

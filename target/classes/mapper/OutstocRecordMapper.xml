@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.OutstocRecordMapper">
-  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.OutstocRecord">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.POJO.OutstocRecord">
     <id column="outstock_id" jdbcType="INTEGER" property="outstockId" />
     <result column="outstock_List_Id" jdbcType="VARCHAR" property="outstockListId" />
     <result column="outstock_Category" jdbcType="VARCHAR" property="outstockCategory" />
@@ -73,7 +73,7 @@
     outstock_id, outstock_List_Id, outstock_Category, outstock_Date, medincine_id, outstock_Number, 
     emp_id, outstock_Remark
   </sql>
-  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.OutstocRecordExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.OutstocRecordExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -97,13 +97,13 @@
     delete from tb_outstock_record
     where outstock_id = #{outstockId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.OutstocRecordExample">
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.OutstocRecordExample">
     delete from tb_outstock_record
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.OutstocRecord">
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.OutstocRecord">
     insert into tb_outstock_record (outstock_id, outstock_List_Id, outstock_Category, 
       outstock_Date, medincine_id, outstock_Number, 
       emp_id, outstock_Remark)
@@ -111,7 +111,7 @@
       #{outstockDate,jdbcType=TIMESTAMP}, #{medincineId,jdbcType=INTEGER}, #{outstockNumber,jdbcType=INTEGER}, 
       #{empId,jdbcType=INTEGER}, #{outstockRemark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.OutstocRecord">
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.OutstocRecord">
     insert into tb_outstock_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="outstockId != null">
@@ -166,7 +166,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.OutstocRecordExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.OutstocRecordExample" resultType="java.lang.Long">
     select count(*) from tb_outstock_record
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -218,7 +218,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.OutstocRecord">
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.OutstocRecord">
     update tb_outstock_record
     <set>
       <if test="outstockListId != null">
@@ -245,7 +245,7 @@
     </set>
     where outstock_id = #{outstockId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.OutstocRecord">
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.OutstocRecord">
     update tb_outstock_record
     set outstock_List_Id = #{outstockListId,jdbcType=VARCHAR},
       outstock_Category = #{outstockCategory,jdbcType=VARCHAR},

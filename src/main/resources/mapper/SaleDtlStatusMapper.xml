@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.SaleDtlStatusMapper">
-  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.SaleDtlStatus">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtlStatus">
     <id column="sale_Dtl_status_Id" jdbcType="INTEGER" property="saleDtlStatusId" />
     <result column="sale_Dtl_Status_Name" jdbcType="VARCHAR" property="saleDtlStatusName" />
     <result column="sale_Dtl_OrderId" jdbcType="VARCHAR" property="saleDtlOrderid" />
@@ -73,7 +73,7 @@
     sale_Dtl_status_Id, sale_Dtl_Status_Name, sale_Dtl_OrderId, sale_Dtl_Status_Amount, 
     pur_Dtl_Status_Date, sale_Dtl_Status_Subtotal, whse_id, pur_Dtl_Status_Remark
   </sql>
-  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtlStatusExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtlStatusExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -97,13 +97,13 @@
     delete from tb_sale_dtl_status
     where sale_Dtl_status_Id = #{saleDtlStatusId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtlStatusExample">
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtlStatusExample">
     delete from tb_sale_dtl_status
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtlStatus">
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtlStatus">
     insert into tb_sale_dtl_status (sale_Dtl_status_Id, sale_Dtl_Status_Name, 
       sale_Dtl_OrderId, sale_Dtl_Status_Amount, pur_Dtl_Status_Date, 
       sale_Dtl_Status_Subtotal, whse_id, pur_Dtl_Status_Remark
@@ -113,7 +113,7 @@
       #{saleDtlStatusSubtotal,jdbcType=DOUBLE}, #{whseId,jdbcType=INTEGER}, #{purDtlStatusRemark,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtlStatus">
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtlStatus">
     insert into tb_sale_dtl_status
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="saleDtlStatusId != null">
@@ -168,7 +168,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtlStatusExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtlStatusExample" resultType="java.lang.Long">
     select count(*) from tb_sale_dtl_status
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -220,7 +220,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtlStatus">
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtlStatus">
     update tb_sale_dtl_status
     <set>
       <if test="saleDtlStatusName != null">
@@ -247,7 +247,7 @@
     </set>
     where sale_Dtl_status_Id = #{saleDtlStatusId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SaleDtlStatus">
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.SaleDtlStatus">
     update tb_sale_dtl_status
     set sale_Dtl_Status_Name = #{saleDtlStatusName,jdbcType=VARCHAR},
       sale_Dtl_OrderId = #{saleDtlOrderid,jdbcType=VARCHAR},

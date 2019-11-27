@@ -2,8 +2,8 @@ package com.medicalSaleManagementSystem.core.service.impl;
 
 import com.medicalSaleManagementSystem.core.bean.DTO.EmployeeDTO;
 import com.medicalSaleManagementSystem.util.Msg;
-import com.medicalSaleManagementSystem.core.bean.entity.Employee;
-import com.medicalSaleManagementSystem.core.bean.entity.EmployeeExample;
+import com.medicalSaleManagementSystem.core.bean.POJO.Employee;
+import com.medicalSaleManagementSystem.core.bean.POJO.EmployeeExample;
 import com.medicalSaleManagementSystem.core.dao.EmployeeMapper;
 import com.medicalSaleManagementSystem.core.service.EmployeeService;
 import com.medicalSaleManagementSystem.util.BeanUtilEx;
@@ -58,7 +58,7 @@ public class EmployeeServiceImpl  implements EmployeeService {
     @Override
     public Msg registerEmployee(EmployeeDTO employeeDTO)  {
         Msg msg = findEmployeeByAccount(employeeDTO.getEmpAccount());//查询账户是否存在
-        if (msg.getCode() == 100) {
+        if (msg.getCode() == 400) {
             return Msg.fail("账号已存在");
         } else {
                 Employee employee = new Employee();

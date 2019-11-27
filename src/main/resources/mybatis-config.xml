@@ -1,27 +1,28 @@
-<pre style="background-color:#101020;color:#d0d0d0;font-family:'Consolas';font-size:15.0pt;"><?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="cacheEnabled" value="true" />
+        <!-- 开启mybatis 延迟加载-->
+        <setting name="lazyLoadingEnabled" value="false"/>
+<!--        <setting name="logImpl" value="LOG4J2" />-->
+    </settings>
+    <!-- 给包起别名可以在这里起 -->
+    <typeAliases>
+        <!-- 用于指定要配置别名的包，当指定之后，该包下的实体类都会注册别名，并且类名就是别名，不再区分大小写-->
+        <package name="com.medicalSaleManagementSystem.core.bean.POJO"/>
+    </typeAliases>
 
-    <configuration>
-        <settings>
-            <!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
-            <setting name="mapUnderscoreToCamelCase" value="true" />
-            <!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
-            <setting name="useGeneratedKeys" value="true" />
-            <!--延迟加载（lazyLoadingEnabled）：在用到时再加载
-       按需加载（aggressiveLazyLoading）
-        -->
-            <setting name="lazyLoadingEnabled" value="true"/>
-            <setting name="aggressiveLazyLoading" value="false"/>
-
-            <!--开启二级缓存-->
-            <setting name="cacheEnabled" value="true"/>
-        </settings>
-
-        <!-- 起别名：为实体类起一个别名，便于在使用实体类全类名的时候替代，防止冗余 -->
-        <typeAliases>
-            <package name="com.medicalSaleManagementSystem.core.bean.entity"/>
-        </typeAliases>
-
-
-        <mappers></mappers>
-    </configuration></pre>
+    <!-- 这里是mybatis的分页插件，不一定用得上，再说 -->
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="reasonable" value="true"/>
+            <!-- 使用下面的方式配置参数 -->
+<!--            <property name="param1" value="value1"/>-->
+        </plugin>
+    </plugins>
+</configuration>

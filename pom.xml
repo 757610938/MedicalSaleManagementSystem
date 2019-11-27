@@ -6,11 +6,12 @@
 
   <groupId>medicalSaleManagementSystem</groupId>
   <artifactId>medicalSaleManagementSystem</artifactId>
+  <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>ssm Maven Webapp</name>
-  <url>https://github.com/757610938/MedicalSaleManagementSystem.git</url>
 
+  <name>medicalSaleManagementSystem Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -73,7 +74,12 @@
       <artifactId>mybatis-generator-core</artifactId>
       <version>1.3.7</version>
     </dependency>
-
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.5</version>
+    </dependency>
     <!-- 实体对象间的转换 -->
 
     <dependency>
@@ -98,13 +104,6 @@
       <groupId>jstl</groupId>
       <artifactId>jstl</artifactId>
       <version>1.2</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.8.5</version>
     </dependency>
 
     <!--************************************************************************************************************-->
@@ -219,43 +218,29 @@
     <!-- freemarker + shiro（标签） end -->
     <!-- shiro end -->
 
-    <!-- slf4j日志包 -->
     <!-- log4j begin -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.10.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.10.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-web</artifactId>
+      <version>2.9.1</version>
+    </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-nop</artifactId>
       <version>1.7.2</version>
     </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.21</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.7.21</version>
-    </dependency>
-    <!--Log4j -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>2.8.2</version>
-    </dependency>
-    <!-- log4j-core -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.8.2</version>
-    </dependency>
-    <!-- log4j-web -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-web</artifactId>
-      <version>2.8.2</version>
-    </dependency>
     <!-- log4j end -->
-
     <!-- Spring 升级5+ 依赖的JSON包 -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>

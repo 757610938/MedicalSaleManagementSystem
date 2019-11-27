@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.PurchaseDtlStatusMapper">
-  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.PurchaseDtlStatus">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.POJO.PurchaseDtlStatus">
     <id column="pur_Dtl_Status_id" jdbcType="INTEGER" property="purDtlStatusId" />
     <result column="pur_Dtl_Status_Name" jdbcType="VARCHAR" property="purDtlStatusName" />
     <result column="pur_Dtl_Status_Amount" jdbcType="INTEGER" property="purDtlStatusAmount" />
@@ -73,7 +73,7 @@
     pur_Dtl_Status_id, pur_Dtl_Status_Name, pur_Dtl_Status_Amount, pur_Dtl_OrderId, pur_Dtl_Status_Date, 
     pur_Dtl_Status_Subtotal, whse_id, pur_Dtl_Status_Remark
   </sql>
-  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.PurchaseDtlStatusExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.PurchaseDtlStatusExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -97,13 +97,13 @@
     delete from tb_purchase_dtl_status
     where pur_Dtl_Status_id = #{purDtlStatusId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.PurchaseDtlStatusExample">
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.PurchaseDtlStatusExample">
     delete from tb_purchase_dtl_status
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.PurchaseDtlStatus">
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.PurchaseDtlStatus">
     insert into tb_purchase_dtl_status (pur_Dtl_Status_id, pur_Dtl_Status_Name, 
       pur_Dtl_Status_Amount, pur_Dtl_OrderId, pur_Dtl_Status_Date, 
       pur_Dtl_Status_Subtotal, whse_id, pur_Dtl_Status_Remark
@@ -113,7 +113,7 @@
       #{purDtlStatusSubtotal,jdbcType=DOUBLE}, #{whseId,jdbcType=INTEGER}, #{purDtlStatusRemark,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.PurchaseDtlStatus">
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.PurchaseDtlStatus">
     insert into tb_purchase_dtl_status
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="purDtlStatusId != null">
@@ -168,7 +168,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.PurchaseDtlStatusExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.PurchaseDtlStatusExample" resultType="java.lang.Long">
     select count(*) from tb_purchase_dtl_status
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -220,7 +220,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.PurchaseDtlStatus">
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.PurchaseDtlStatus">
     update tb_purchase_dtl_status
     <set>
       <if test="purDtlStatusName != null">
@@ -247,7 +247,7 @@
     </set>
     where pur_Dtl_Status_id = #{purDtlStatusId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.PurchaseDtlStatus">
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.PurchaseDtlStatus">
     update tb_purchase_dtl_status
     set pur_Dtl_Status_Name = #{purDtlStatusName,jdbcType=VARCHAR},
       pur_Dtl_Status_Amount = #{purDtlStatusAmount,jdbcType=INTEGER},

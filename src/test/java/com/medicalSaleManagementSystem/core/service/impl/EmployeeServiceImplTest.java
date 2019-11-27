@@ -16,10 +16,11 @@ public class EmployeeServiceImplTest {
         EmployeeServiceImpl employeeService = ac.getBean("employeeServiceImpl", EmployeeServiceImpl.class);
         //3.执行方法
         EmployeeDTO  employeeDTO = new EmployeeDTO();
-        employeeDTO.setEmpAccount("linxianqin");
-        employeeDTO.setEmpPassword("12345678");
+        employeeDTO.setEmpAccount("admin");
+        employeeDTO.setEmpPassword("123456");
         Msg msg = employeeService.login(employeeDTO);
         System.out.println(msg.getCode());
+
         System.out.println(msg.getMsg());
     }
 

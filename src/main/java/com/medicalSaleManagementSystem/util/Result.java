@@ -1,8 +1,9 @@
 package com.medicalSaleManagementSystem.util;
+
 import com.google.gson.Gson;
 
 /**
- * @author linxianqin
+ * @author liushiyao
  * 返回结果集对象
  */
 

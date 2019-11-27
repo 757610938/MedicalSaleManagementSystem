@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.WarehouseMapper">
-  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.Warehouse">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.POJO.Warehouse">
     <id column="whse_id" jdbcType="INTEGER" property="whseId" />
     <result column="medicine_id" jdbcType="INTEGER" property="medicineId" />
     <result column="whse_amount" jdbcType="INTEGER" property="whseAmount" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List">
     whse_id, medicine_id, whse_amount
   </sql>
-  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.WarehouseExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.WarehouseExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -91,19 +91,19 @@
     delete from tb_warehouse
     where whse_id = #{whseId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.WarehouseExample">
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.WarehouseExample">
     delete from tb_warehouse
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Warehouse">
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Warehouse">
     insert into tb_warehouse (whse_id, medicine_id, whse_amount
       )
     values (#{whseId,jdbcType=INTEGER}, #{medicineId,jdbcType=INTEGER}, #{whseAmount,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Warehouse">
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Warehouse">
     insert into tb_warehouse
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="whseId != null">
@@ -128,7 +128,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.WarehouseExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.WarehouseExample" resultType="java.lang.Long">
     select count(*) from tb_warehouse
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -160,7 +160,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Warehouse">
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Warehouse">
     update tb_warehouse
     <set>
       <if test="medicineId != null">
@@ -172,7 +172,7 @@
     </set>
     where whse_id = #{whseId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Warehouse">
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Warehouse">
     update tb_warehouse
     set medicine_id = #{medicineId,jdbcType=INTEGER},
       whse_amount = #{whseAmount,jdbcType=INTEGER}

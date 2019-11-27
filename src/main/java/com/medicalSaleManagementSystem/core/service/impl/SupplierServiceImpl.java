@@ -2,8 +2,8 @@ package com.medicalSaleManagementSystem.core.service.impl;
 
 import com.medicalSaleManagementSystem.util.Msg;
 import com.medicalSaleManagementSystem.core.bean.DTO.SupplierDTO;
-import com.medicalSaleManagementSystem.core.bean.entity.Supplier;
-import com.medicalSaleManagementSystem.core.bean.entity.SupplierExample;
+import com.medicalSaleManagementSystem.core.bean.POJO.Supplier;
+import com.medicalSaleManagementSystem.core.bean.POJO.SupplierExample;
 import com.medicalSaleManagementSystem.core.dao.SupplierMapper;
 import com.medicalSaleManagementSystem.core.service.SupplierService;
 import com.medicalSaleManagementSystem.util.BeanUtilEx;

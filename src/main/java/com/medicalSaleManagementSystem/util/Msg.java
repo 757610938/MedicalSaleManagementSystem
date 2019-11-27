@@ -41,7 +41,7 @@ public class Msg implements Serializable {
      */
     public static Msg success(){
         Msg result = new Msg();
-        result.setCode(100);
+        result.setCode(200);
         result.setMsg("处理成功");
         return result;
     }
@@ -55,7 +55,7 @@ public class Msg implements Serializable {
      */
     public static Msg fail(String msg){
         Msg result = new Msg();
-        result.setCode(200);
+        result.setCode(400);
         result.setMsg(msg);
         return result;
     }

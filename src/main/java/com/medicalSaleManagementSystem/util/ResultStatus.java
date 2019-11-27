@@ -1,7 +1,6 @@
 package com.medicalSaleManagementSystem.util;
 
 /**
- * @author linxianqin
  *返回参数错误码枚举
  */
 public enum ResultStatus {
@@ -46,5 +45,6 @@ public enum ResultStatus {
     public String toString() {
         return Integer.toString(value);
     }
+
 
 }
