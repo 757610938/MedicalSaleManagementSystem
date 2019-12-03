@@ -38,7 +38,7 @@
     <!-- 加载spring容器 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext.xml</param-value>
+        <param-value>classpath:applicationContext.xml,classpath:spring-redis.xml</param-value>
     </context-param>
 
     <listener>
@@ -54,7 +54,7 @@
          -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:springMvc.xml</param-value>
+            <param-value>classpath:springmvc.xml</param-value>
         </init-param>
         <!-- 配置服务器启动后立即加载Spring MVC配置文件 -->
         <load-on-startup>1</load-on-startup>

@@ -1,6 +1,8 @@
 package com.medicalSaleManagementSystem.core.service.impl;
 
 import com.medicalSaleManagementSystem.core.bean.DTO.EmployeeDTO;
+import com.medicalSaleManagementSystem.redis.TokenManager;
+import com.medicalSaleManagementSystem.redis.TokenModel;
 import com.medicalSaleManagementSystem.util.Msg;
 import com.medicalSaleManagementSystem.core.bean.POJO.Employee;
 import com.medicalSaleManagementSystem.core.bean.POJO.EmployeeExample;
@@ -18,7 +20,8 @@ import java.util.List;
 public class EmployeeServiceImpl  implements EmployeeService {
     @Autowired
     EmployeeMapper employeeMapper;
-
+    @Autowired
+    private TokenManager tokenManager;
     /**
      * 用户登录，数据使用md5加密，如果登录成功，记录登录时间，将数据库的登录时间移动到上次登录时间，记录登录ip
      * 修改：登录时间 登录IP的获取--byChoKhoOu
@@ -28,21 +31,26 @@ public class EmployeeServiceImpl  implements EmployeeService {
      */
     @Override
     public Msg login(EmployeeDTO employeeDTO) {
+        //Example类指定如何构建一个动态的where子句.
         EmployeeExample employeeExample = new EmployeeExample();
+        //创建SQL语句条件对象
         EmployeeExample.Criteria criteria = employeeExample.createCriteria();
+        //添加SQL语句where子句的条件：
         criteria.andEmpAccountEqualTo(employeeDTO.getEmpAccount());
         criteria.andEmpPasswordEqualTo(MD5Util.string2MD5(employeeDTO.getEmpPassword()));
+        //执行查询，返回结果
         List<Employee> employeeList = employeeMapper.selectByExample(employeeExample);
-        if(employeeList.size()>=1){
+        if(employeeList.size()>0){
             if(employeeList.get(0).getValid()==0){
                 return Msg.fail("帐号已经禁止登录！");
             }
             //登录成功，记录登录时间，将数据库的登录时间移动到上次登录时间，记录登录ip
+            TokenModel token=tokenManager.createToken(employeeList.get(0).getEmpId());//保存token到redis
             employeeList.get(0).setLastLoginTime(employeeList.get(0).getLoginTime());//将登录时间移动到上次登录时间
             employeeList.get(0).setLoginTime(new Date(System.currentTimeMillis()));//记录本次登录时间
             employeeList.get(0).setLoginIp(employeeDTO.getLoginIp());//记录登录ip
             int i = employeeMapper.updateByPrimaryKey(employeeList.get(0));//更新数据库的信息
-            return Msg.success();
+            return Msg.success().add("token",token);
         }else{
             //登录失败，放回失败信息
             return Msg.fail("帐号或密码不正确！");

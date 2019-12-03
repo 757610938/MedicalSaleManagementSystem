@@ -144,7 +144,7 @@
     <dependency>
       <groupId>redis.clients</groupId>
       <artifactId>jedis</artifactId>
-      <version>3.0.1</version>
+      <version>2.9.1</version>
     </dependency>
 
     <!-- spring redis整合 -->
@@ -155,6 +155,24 @@
       <version>2.1.9.RELEASE</version>
     </dependency>
 
+    <!-- 对象序列化依赖 -->
+    <dependency>
+      <groupId>com.dyuproject.protostuff</groupId>
+      <artifactId>protostuff-core</artifactId>
+      <version>1.0.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.dyuproject.protostuff</groupId>
+      <artifactId>protostuff-runtime </artifactId>
+      <version>1.0.8</version>
+    </dependency>
+
+    <!-- Ehcache实现,用于参考 -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-ehcache</artifactId>
+      <version>1.0.0</version>
+    </dependency>
     <!-- mybatis 分页插件 -->
     <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
     <dependency>
@@ -266,8 +284,13 @@
 
     <!-- /Spring 升级4+ 依赖的JSON包 -->
 
-
     <!-- 其他常用包 begin -->
+    <!-- https://mvnrepository.com/artifact/org.apache.directory.server/apacheds-core-constants -->
+    <dependency>
+      <groupId>org.apache.directory.server</groupId>
+      <artifactId>apacheds-core-constants</artifactId>
+      <version>2.0.0.AM25</version>
+    </dependency>
 
     <dependency>
       <groupId>commons-attributes</groupId>
@@ -341,6 +364,16 @@
       <artifactId>json-lib</artifactId>
       <version>2.4</version>
       <classifier>jdk15</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>5.1.8.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>5.1.8.RELEASE</version>
     </dependency>
     <!-- 其他常用包 end'-->
 

@@ -7,11 +7,11 @@ public enum ResultStatus {
 
     SUCCESS(200, "success"), //成功
 
-    ERROR(4000, "Error"),       //程序报错
+    ERROR(400, "Error"),       //程序报错
 
     INVALID_SERVICE(199, "invalid service"),//服务不可用
 
-    SERVICE_EXCEPTION(5000, "service exception"),
+    SERVICE_EXCEPTION(500, "service exception"),
 
     UNKNOWN(999, "unknown"),//未知错误
 
@@ -24,7 +24,6 @@ public enum ResultStatus {
     PARAMETER_ILLEGAL(1501, "parameter illegal");
 
     private final int value;
-
     private final String reasonPhrase;
 
     private ResultStatus(int value, String reasonPhrase) {
@@ -45,6 +44,5 @@ public enum ResultStatus {
     public String toString() {
         return Integer.toString(value);
     }
-
 
 }

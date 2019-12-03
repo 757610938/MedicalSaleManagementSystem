@@ -121,8 +121,9 @@
         </tx:attributes>
     </tx:advice>
     <!-- Spring配置文件的核心点（数据源、与mybatis的整合，事务控制） -->
-
+    <import resource="spring-redis.xml"/>
     <!-- 工具类配置 -->
     <bean id="pictureBase64Util" class="com.medicalSaleManagementSystem.util.PictureBase64Util"/>
+
 
 </beans>

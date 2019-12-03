@@ -3,27 +3,29 @@ package com.medicalSaleManagementSystem.util;
 import com.google.gson.Gson;
 
 /**
- * @author liushiyao
+ * @author
  * 返回结果集对象
  */
 
 public class Result<T> {
 
     //返回错误码
-    private Integer code;
+    private Integer status;
+    //返回token
+    private String token;
     //返回信息
     private String message;
     //返回对象
     private T data;
 
     public Result(){
-        this.code = ResultStatus.SUCCESS.value();
+        this.status = ResultStatus.SUCCESS.value();
         this.message = ResultStatus.SUCCESS.getReasonPhrase();
     }
 
     public Result( ResultStatus resultStatus, T data){
         this.data = data;
-        this.code = resultStatus.value ();
+        this.status = resultStatus.value ();
         this.message = resultStatus.getReasonPhrase ();
 
     }
@@ -32,16 +34,24 @@ public class Result<T> {
     }
 
     public void setResult(ResultStatus resultStatus){
-        this.code = resultStatus.value();
+        this.status = resultStatus.value();
         this.message = resultStatus.getReasonPhrase();
     }
 
-    public Integer getCode ( ) {
-        return code;
+    public String getToken() {
+        return token;
     }
 
-    public void setCode ( Integer code ) {
-        this.code = code;
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Integer getStatus ( ) {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getMessage ( ) {
