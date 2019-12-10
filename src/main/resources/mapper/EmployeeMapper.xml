@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.EmployeeMapper">
-  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.POJO.Employee">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.Employee">
     <id column="emp_id" jdbcType="INTEGER" property="empId" />
     <result column="emp_Account" jdbcType="VARCHAR" property="empAccount" />
     <result column="emp_Password" jdbcType="VARCHAR" property="empPassword" />
@@ -84,7 +84,7 @@
     emp_Address, emp_Phone, emp_Email, emp_dept_id, emp_Position, emp_Wages, gen_time, 
     last_login_time, login_ip, login_time, valid
   </sql>
-  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.EmployeeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.EmployeeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -108,13 +108,13 @@
     delete from tb_employee
     where emp_id = #{empId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.EmployeeExample">
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.EmployeeExample">
     delete from tb_employee
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Employee">
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.Employee">
     insert into tb_employee (emp_id, emp_Account, emp_Password, 
       emp_Name, emp_Sex, emp_Birthday, 
       emp_Id_Card, emp_Address, emp_Phone, 
@@ -130,7 +130,7 @@
       #{loginIp,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, #{valid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Employee">
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.Employee">
     insert into tb_employee
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="empId != null">
@@ -245,7 +245,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.EmployeeExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.EmployeeExample" resultType="java.lang.Long">
     select count(*) from tb_employee
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -337,7 +337,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Employee">
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.Employee">
     update tb_employee
     <set>
       <if test="empAccount != null">
@@ -394,7 +394,7 @@
     </set>
     where emp_id = #{empId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.POJO.Employee">
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.model.entity.Employee">
     update tb_employee
     set emp_Account = #{empAccount,jdbcType=VARCHAR},
       emp_Password = #{empPassword,jdbcType=VARCHAR},
@@ -413,6 +413,198 @@
       login_ip = #{loginIp,jdbcType=VARCHAR},
       login_time = #{loginTime,jdbcType=TIMESTAMP},
       valid = #{valid,jdbcType=INTEGER}
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.Employee">
+    <id column="emp_id" jdbcType="INTEGER" property="empId" />
+    <result column="emp_dept_id" jdbcType="INTEGER" property="empDeptId" />
+    <result column="emp_Position" jdbcType="VARCHAR" property="empPosition" />
+    <result column="emp_Wages" jdbcType="DOUBLE" property="empWages" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    emp_id, emp_dept_id, emp_Position, emp_Wages
+  </sql>
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.EmployeeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_employee
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_employee
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.EmployeeExample">
+    delete from tb_employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.Employee">
+    insert into tb_employee (emp_id, emp_dept_id, emp_Position, 
+      emp_Wages)
+    values (#{empId,jdbcType=INTEGER}, #{empDeptId,jdbcType=INTEGER}, #{empPosition,jdbcType=VARCHAR}, 
+      #{empWages,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.Employee">
+    insert into tb_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="empDeptId != null">
+        emp_dept_id,
+      </if>
+      <if test="empPosition != null">
+        emp_Position,
+      </if>
+      <if test="empWages != null">
+        emp_Wages,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empId != null">
+        #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="empDeptId != null">
+        #{empDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="empPosition != null">
+        #{empPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="empWages != null">
+        #{empWages,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.EmployeeExample" resultType="java.lang.Long">
+    select count(*) from tb_employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_employee
+    <set>
+      <if test="record.empId != null">
+        emp_id = #{record.empId,jdbcType=INTEGER},
+      </if>
+      <if test="record.empDeptId != null">
+        emp_dept_id = #{record.empDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="record.empPosition != null">
+        emp_Position = #{record.empPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empWages != null">
+        emp_Wages = #{record.empWages,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_employee
+    set emp_id = #{record.empId,jdbcType=INTEGER},
+      emp_dept_id = #{record.empDeptId,jdbcType=INTEGER},
+      emp_Position = #{record.empPosition,jdbcType=VARCHAR},
+      emp_Wages = #{record.empWages,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.Employee">
+    update tb_employee
+    <set>
+      <if test="empDeptId != null">
+        emp_dept_id = #{empDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="empPosition != null">
+        emp_Position = #{empPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="empWages != null">
+        emp_Wages = #{empWages,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.model.entity.Employee">
+    update tb_employee
+    set emp_dept_id = #{empDeptId,jdbcType=INTEGER},
+      emp_Position = #{empPosition,jdbcType=VARCHAR},
+      emp_Wages = #{empWages,jdbcType=DOUBLE}
     where emp_id = #{empId,jdbcType=INTEGER}
   </update>
 </mapper>

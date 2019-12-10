@@ -7,15 +7,15 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * 
+ *
  * 开发公司：itboy.net<br/>
  * 版权：itboy.net<br/>
  * <p>
- * 
- * 静态获取Bean 
- * 
+ *
+ * 静态获取Bean
+ *
  * <p>
- * 
+ *
  * 区分　责任人　日期　　　　说明<br/>
  * 创建　周柏成　2016年4月4日 　<br/>
  * <p>
@@ -24,11 +24,11 @@ import org.springframework.stereotype.Component;
  * @author zhou-baicheng
  * @email  i@itboy.net
  * @version 1.0,2016年4月4日 <br/>
- * 
+ *
  */
 @Component
 public class SpringContextUtil implements ApplicationContextAware {
-	private static ApplicationContext applicationContext; 
+	private static ApplicationContext applicationContext;
 
 	// 实现
 	@Override

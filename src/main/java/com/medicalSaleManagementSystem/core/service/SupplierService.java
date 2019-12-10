@@ -1,7 +1,7 @@
 package com.medicalSaleManagementSystem.core.service;
 
-import com.medicalSaleManagementSystem.util.Msg;
-import com.medicalSaleManagementSystem.core.bean.DTO.SupplierDTO;
+import com.medicalSaleManagementSystem.util.message.Msg;
+import com.medicalSaleManagementSystem.core.model.DTO.SupplierDTO;
 
 
 public interface SupplierService {

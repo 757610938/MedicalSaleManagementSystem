@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medicalSaleManagementSystem.core.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.User">
+    <id column="user_Id" jdbcType="INTEGER" property="userId" />
+    <result column="user_Name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="valid" jdbcType="INTEGER" property="valid" />
+    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="last_login_Time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="gen_time" jdbcType="TIMESTAMP" property="genTime" />
+    <result column="user_Sex" jdbcType="VARCHAR" property="userSex" />
+    <result column="user_Birthday" jdbcType="TIMESTAMP" property="userBirthday" />
+    <result column="user_Id_Card" jdbcType="VARCHAR" property="userIdCard" />
+    <result column="user_Address" jdbcType="VARCHAR" property="userAddress" />
+    <result column="user_Phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_Email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_Number" jdbcType="VARCHAR" property="userNumber" />
+    <result column="user_Picture" jdbcType="VARCHAR" property="userPicture" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_Id, user_Name, password, valid, last_login_ip, last_login_Time, gen_time, user_Sex, 
+    user_Birthday, user_Id_Card, user_Address, user_Phone, user_Email, user_Number, user_Picture
+  </sql>
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where user_Id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_user
+    where user_Id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.UserExample">
+    delete from tb_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.User">
+    insert into tb_user (user_Id, user_Name, password, 
+      valid, last_login_ip, last_login_Time, 
+      gen_time, user_Sex, user_Birthday, 
+      user_Id_Card, user_Address, user_Phone, 
+      user_Email, user_Number, user_Picture
+      )
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{valid,jdbcType=INTEGER}, #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{genTime,jdbcType=TIMESTAMP}, #{userSex,jdbcType=VARCHAR}, #{userBirthday,jdbcType=TIMESTAMP}, 
+      #{userIdCard,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userEmail,jdbcType=VARCHAR}, #{userNumber,jdbcType=VARCHAR}, #{userPicture,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.User">
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_Id,
+      </if>
+      <if test="userName != null">
+        user_Name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="valid != null">
+        valid,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_Time,
+      </if>
+      <if test="genTime != null">
+        gen_time,
+      </if>
+      <if test="userSex != null">
+        user_Sex,
+      </if>
+      <if test="userBirthday != null">
+        user_Birthday,
+      </if>
+      <if test="userIdCard != null">
+        user_Id_Card,
+      </if>
+      <if test="userAddress != null">
+        user_Address,
+      </if>
+      <if test="userPhone != null">
+        user_Phone,
+      </if>
+      <if test="userEmail != null">
+        user_Email,
+      </if>
+      <if test="userNumber != null">
+        user_Number,
+      </if>
+      <if test="userPicture != null">
+        user_Picture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="genTime != null">
+        #{genTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userBirthday != null">
+        #{userBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userIdCard != null">
+        #{userIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userNumber != null">
+        #{userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userPicture != null">
+        #{userPicture,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.UserExample" resultType="java.lang.Long">
+    select count(*) from tb_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_user
+    <set>
+      <if test="record.userId != null">
+        user_Id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_Name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.valid != null">
+        valid = #{record.valid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastLoginIp != null">
+        last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLoginTime != null">
+        last_login_Time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.genTime != null">
+        gen_time = #{record.genTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userSex != null">
+        user_Sex = #{record.userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userBirthday != null">
+        user_Birthday = #{record.userBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userIdCard != null">
+        user_Id_Card = #{record.userIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null">
+        user_Address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null">
+        user_Phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null">
+        user_Email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNumber != null">
+        user_Number = #{record.userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPicture != null">
+        user_Picture = #{record.userPicture,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_user
+    set user_Id = #{record.userId,jdbcType=INTEGER},
+      user_Name = #{record.userName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      valid = #{record.valid,jdbcType=INTEGER},
+      last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      last_login_Time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      gen_time = #{record.genTime,jdbcType=TIMESTAMP},
+      user_Sex = #{record.userSex,jdbcType=VARCHAR},
+      user_Birthday = #{record.userBirthday,jdbcType=TIMESTAMP},
+      user_Id_Card = #{record.userIdCard,jdbcType=VARCHAR},
+      user_Address = #{record.userAddress,jdbcType=VARCHAR},
+      user_Phone = #{record.userPhone,jdbcType=VARCHAR},
+      user_Email = #{record.userEmail,jdbcType=VARCHAR},
+      user_Number = #{record.userNumber,jdbcType=VARCHAR},
+      user_Picture = #{record.userPicture,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.User">
+    update tb_user
+    <set>
+      <if test="userName != null">
+        user_Name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_Time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="genTime != null">
+        gen_time = #{genTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userSex != null">
+        user_Sex = #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userBirthday != null">
+        user_Birthday = #{userBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userIdCard != null">
+        user_Id_Card = #{userIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        user_Address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_Phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_Email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userNumber != null">
+        user_Number = #{userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userPicture != null">
+        user_Picture = #{userPicture,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_Id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.model.entity.User">
+    update tb_user
+    set user_Name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      valid = #{valid,jdbcType=INTEGER},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      last_login_Time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      gen_time = #{genTime,jdbcType=TIMESTAMP},
+      user_Sex = #{userSex,jdbcType=VARCHAR},
+      user_Birthday = #{userBirthday,jdbcType=TIMESTAMP},
+      user_Id_Card = #{userIdCard,jdbcType=VARCHAR},
+      user_Address = #{userAddress,jdbcType=VARCHAR},
+      user_Phone = #{userPhone,jdbcType=VARCHAR},
+      user_Email = #{userEmail,jdbcType=VARCHAR},
+      user_Number = #{userNumber,jdbcType=VARCHAR},
+      user_Picture = #{userPicture,jdbcType=VARCHAR}
+    where user_Id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -375,7 +375,13 @@
       <artifactId>spring-core</artifactId>
       <version>5.1.8.RELEASE</version>
     </dependency>
-    <!-- 其他常用包 end'-->
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.12</version>
+          <scope>compile</scope>
+      </dependency>
+      <!-- 其他常用包 end'-->
 
   </dependencies>
 

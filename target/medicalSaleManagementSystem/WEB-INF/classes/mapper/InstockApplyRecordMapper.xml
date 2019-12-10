@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medicalSaleManagementSystem.core.dao.InstockApplyRecordMapper">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.InstockApplyRecord">
+    <id column="instock_Apply_id" jdbcType="INTEGER" property="instockApplyId" />
+    <result column="instock_Apply_Number" jdbcType="VARCHAR" property="instockApplyNumber" />
+    <result column="instock_Dtl_id" jdbcType="INTEGER" property="instockDtlId" />
+    <result column="apply_Time" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="user_Number" jdbcType="VARCHAR" property="userNumber" />
+    <result column="instock_Apply_Category" jdbcType="VARCHAR" property="instockApplyCategory" />
+    <result column="instock_Apply_Remark" jdbcType="VARCHAR" property="instockApplyRemark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    instock_Apply_id, instock_Apply_Number, instock_Dtl_id, apply_Time, user_Number, 
+    instock_Apply_Category, instock_Apply_Remark
+  </sql>
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockApplyRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_instock_apply_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_instock_apply_record
+    where instock_Apply_id = #{instockApplyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_instock_apply_record
+    where instock_Apply_id = #{instockApplyId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockApplyRecordExample">
+    delete from tb_instock_apply_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockApplyRecord">
+    insert into tb_instock_apply_record (instock_Apply_id, instock_Apply_Number, 
+      instock_Dtl_id, apply_Time, user_Number, 
+      instock_Apply_Category, instock_Apply_Remark
+      )
+    values (#{instockApplyId,jdbcType=INTEGER}, #{instockApplyNumber,jdbcType=VARCHAR}, 
+      #{instockDtlId,jdbcType=INTEGER}, #{applyTime,jdbcType=TIMESTAMP}, #{userNumber,jdbcType=VARCHAR}, 
+      #{instockApplyCategory,jdbcType=VARCHAR}, #{instockApplyRemark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockApplyRecord">
+    insert into tb_instock_apply_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="instockApplyId != null">
+        instock_Apply_id,
+      </if>
+      <if test="instockApplyNumber != null">
+        instock_Apply_Number,
+      </if>
+      <if test="instockDtlId != null">
+        instock_Dtl_id,
+      </if>
+      <if test="applyTime != null">
+        apply_Time,
+      </if>
+      <if test="userNumber != null">
+        user_Number,
+      </if>
+      <if test="instockApplyCategory != null">
+        instock_Apply_Category,
+      </if>
+      <if test="instockApplyRemark != null">
+        instock_Apply_Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="instockApplyId != null">
+        #{instockApplyId,jdbcType=INTEGER},
+      </if>
+      <if test="instockApplyNumber != null">
+        #{instockApplyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="instockDtlId != null">
+        #{instockDtlId,jdbcType=INTEGER},
+      </if>
+      <if test="applyTime != null">
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNumber != null">
+        #{userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="instockApplyCategory != null">
+        #{instockApplyCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="instockApplyRemark != null">
+        #{instockApplyRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockApplyRecordExample" resultType="java.lang.Long">
+    select count(*) from tb_instock_apply_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_instock_apply_record
+    <set>
+      <if test="record.instockApplyId != null">
+        instock_Apply_id = #{record.instockApplyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.instockApplyNumber != null">
+        instock_Apply_Number = #{record.instockApplyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instockDtlId != null">
+        instock_Dtl_id = #{record.instockDtlId,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyTime != null">
+        apply_Time = #{record.applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userNumber != null">
+        user_Number = #{record.userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instockApplyCategory != null">
+        instock_Apply_Category = #{record.instockApplyCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instockApplyRemark != null">
+        instock_Apply_Remark = #{record.instockApplyRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_instock_apply_record
+    set instock_Apply_id = #{record.instockApplyId,jdbcType=INTEGER},
+      instock_Apply_Number = #{record.instockApplyNumber,jdbcType=VARCHAR},
+      instock_Dtl_id = #{record.instockDtlId,jdbcType=INTEGER},
+      apply_Time = #{record.applyTime,jdbcType=TIMESTAMP},
+      user_Number = #{record.userNumber,jdbcType=VARCHAR},
+      instock_Apply_Category = #{record.instockApplyCategory,jdbcType=VARCHAR},
+      instock_Apply_Remark = #{record.instockApplyRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockApplyRecord">
+    update tb_instock_apply_record
+    <set>
+      <if test="instockApplyNumber != null">
+        instock_Apply_Number = #{instockApplyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="instockDtlId != null">
+        instock_Dtl_id = #{instockDtlId,jdbcType=INTEGER},
+      </if>
+      <if test="applyTime != null">
+        apply_Time = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNumber != null">
+        user_Number = #{userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="instockApplyCategory != null">
+        instock_Apply_Category = #{instockApplyCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="instockApplyRemark != null">
+        instock_Apply_Remark = #{instockApplyRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where instock_Apply_id = #{instockApplyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockApplyRecord">
+    update tb_instock_apply_record
+    set instock_Apply_Number = #{instockApplyNumber,jdbcType=VARCHAR},
+      instock_Dtl_id = #{instockDtlId,jdbcType=INTEGER},
+      apply_Time = #{applyTime,jdbcType=TIMESTAMP},
+      user_Number = #{userNumber,jdbcType=VARCHAR},
+      instock_Apply_Category = #{instockApplyCategory,jdbcType=VARCHAR},
+      instock_Apply_Remark = #{instockApplyRemark,jdbcType=VARCHAR}
+    where instock_Apply_id = #{instockApplyId,jdbcType=INTEGER}
+  </update>
+</mapper>

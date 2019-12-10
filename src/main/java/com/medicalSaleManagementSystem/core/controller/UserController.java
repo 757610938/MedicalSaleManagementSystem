@@ -1,11 +1,12 @@
 package com.medicalSaleManagementSystem.core.controller;
 
-import com.medicalSaleManagementSystem.core.bean.VO.UserVo;
+import com.medicalSaleManagementSystem.authorization.model.TokenModel;
+import com.medicalSaleManagementSystem.core.model.DTO.UserDTO;
 import com.medicalSaleManagementSystem.core.service.UserService;
-import com.medicalSaleManagementSystem.redis.TokenManager;
-import com.medicalSaleManagementSystem.redis.TokenModel;
-import com.medicalSaleManagementSystem.util.Msg;
-import com.medicalSaleManagementSystem.util.Result;
+import com.medicalSaleManagementSystem.util.BeanUtilEx;
+import com.medicalSaleManagementSystem.util.message.HttpStatus;
+import com.medicalSaleManagementSystem.util.message.Msg;
+import com.medicalSaleManagementSystem.util.message.Resp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,22 +14,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping("v1/users")
 public class UserController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private TokenManager tokenManager;
-    @RequestMapping(value="/token",method= RequestMethod.POST)
-    @ResponseBody
-    public Result login(@RequestBody UserVo userVo){
-        //打印测试接受参数是否正确
-        System.out.println("userVo--->"+userVo);
-        Result result = new Result();
-        //设置返回状态码，200代表成功
-        result.setStatus(200);
-        return result;
-    }
 
+    /**
+     * 登录验证
+     * @return
+     */
+    @RequestMapping (method = RequestMethod.POST )
+    @ResponseBody
+    public Resp checkLogin(@RequestBody UserDTO userVo, HttpServletRequest request){
+        System.out.println(".....");
+        System.out.println(userVo);
+        try{
+            String ip = request.getHeader("X-Forwarded-For");//获取用户登录ip
+            UserDTO userDTO=new UserDTO();
+            BeanUtilEx.copyProperties(userDTO,userVo);//将VO转换成DTO
+            Msg msg = this.userService.login(userDTO);//调用userService查询数据库
+            if (msg.getCode()==200){
+                //200登录成功、返回token
+                TokenModel tokenModel = (TokenModel)msg.getExt().get("token");//获取业务层token
+                String token = tokenModel.getToken();//赋值token
+                Map<String, Object> ext = new HashMap<>();
+                ext.put("token", token);
+                return Resp.httpStatus(HttpStatus.OK,"登录成功！",ext);
+            }
+            //400 登录失败
+            return Resp.httpStatus(HttpStatus.BAD_REQUEST,msg.getMsg());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
 }

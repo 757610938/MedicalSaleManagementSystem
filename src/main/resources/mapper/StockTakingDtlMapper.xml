@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medicalSaleManagementSystem.core.dao.StockTakingDtlMapper">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.StockTakingDtl">
+    <id column="stock_Taking_Dtl_id" jdbcType="INTEGER" property="stockTakingDtlId" />
+    <result column="stock_Taking_Dtl_Number" jdbcType="INTEGER" property="stockTakingDtlNumber" />
+    <result column="medicine_id" jdbcType="INTEGER" property="medicineId" />
+    <result column="taking_Medicine_Amount" jdbcType="INTEGER" property="takingMedicineAmount" />
+    <result column="taking_Update_Amount" jdbcType="INTEGER" property="takingUpdateAmount" />
+    <result column="taking_Reimburse_Amount" jdbcType="INTEGER" property="takingReimburseAmount" />
+    <result column="taking_Remark" jdbcType="VARCHAR" property="takingRemark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    stock_Taking_Dtl_id, stock_Taking_Dtl_Number, medicine_id, taking_Medicine_Amount, 
+    taking_Update_Amount, taking_Reimburse_Amount, taking_Remark
+  </sql>
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.StockTakingDtlExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_stock_taking_dtl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_stock_taking_dtl
+    where stock_Taking_Dtl_id = #{stockTakingDtlId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_stock_taking_dtl
+    where stock_Taking_Dtl_id = #{stockTakingDtlId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.StockTakingDtlExample">
+    delete from tb_stock_taking_dtl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.StockTakingDtl">
+    insert into tb_stock_taking_dtl (stock_Taking_Dtl_id, stock_Taking_Dtl_Number, 
+      medicine_id, taking_Medicine_Amount, taking_Update_Amount, 
+      taking_Reimburse_Amount, taking_Remark)
+    values (#{stockTakingDtlId,jdbcType=INTEGER}, #{stockTakingDtlNumber,jdbcType=INTEGER}, 
+      #{medicineId,jdbcType=INTEGER}, #{takingMedicineAmount,jdbcType=INTEGER}, #{takingUpdateAmount,jdbcType=INTEGER}, 
+      #{takingReimburseAmount,jdbcType=INTEGER}, #{takingRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.StockTakingDtl">
+    insert into tb_stock_taking_dtl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stockTakingDtlId != null">
+        stock_Taking_Dtl_id,
+      </if>
+      <if test="stockTakingDtlNumber != null">
+        stock_Taking_Dtl_Number,
+      </if>
+      <if test="medicineId != null">
+        medicine_id,
+      </if>
+      <if test="takingMedicineAmount != null">
+        taking_Medicine_Amount,
+      </if>
+      <if test="takingUpdateAmount != null">
+        taking_Update_Amount,
+      </if>
+      <if test="takingReimburseAmount != null">
+        taking_Reimburse_Amount,
+      </if>
+      <if test="takingRemark != null">
+        taking_Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stockTakingDtlId != null">
+        #{stockTakingDtlId,jdbcType=INTEGER},
+      </if>
+      <if test="stockTakingDtlNumber != null">
+        #{stockTakingDtlNumber,jdbcType=INTEGER},
+      </if>
+      <if test="medicineId != null">
+        #{medicineId,jdbcType=INTEGER},
+      </if>
+      <if test="takingMedicineAmount != null">
+        #{takingMedicineAmount,jdbcType=INTEGER},
+      </if>
+      <if test="takingUpdateAmount != null">
+        #{takingUpdateAmount,jdbcType=INTEGER},
+      </if>
+      <if test="takingReimburseAmount != null">
+        #{takingReimburseAmount,jdbcType=INTEGER},
+      </if>
+      <if test="takingRemark != null">
+        #{takingRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.StockTakingDtlExample" resultType="java.lang.Long">
+    select count(*) from tb_stock_taking_dtl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_stock_taking_dtl
+    <set>
+      <if test="record.stockTakingDtlId != null">
+        stock_Taking_Dtl_id = #{record.stockTakingDtlId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockTakingDtlNumber != null">
+        stock_Taking_Dtl_Number = #{record.stockTakingDtlNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.medicineId != null">
+        medicine_id = #{record.medicineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.takingMedicineAmount != null">
+        taking_Medicine_Amount = #{record.takingMedicineAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.takingUpdateAmount != null">
+        taking_Update_Amount = #{record.takingUpdateAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.takingReimburseAmount != null">
+        taking_Reimburse_Amount = #{record.takingReimburseAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.takingRemark != null">
+        taking_Remark = #{record.takingRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_stock_taking_dtl
+    set stock_Taking_Dtl_id = #{record.stockTakingDtlId,jdbcType=INTEGER},
+      stock_Taking_Dtl_Number = #{record.stockTakingDtlNumber,jdbcType=INTEGER},
+      medicine_id = #{record.medicineId,jdbcType=INTEGER},
+      taking_Medicine_Amount = #{record.takingMedicineAmount,jdbcType=INTEGER},
+      taking_Update_Amount = #{record.takingUpdateAmount,jdbcType=INTEGER},
+      taking_Reimburse_Amount = #{record.takingReimburseAmount,jdbcType=INTEGER},
+      taking_Remark = #{record.takingRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.StockTakingDtl">
+    update tb_stock_taking_dtl
+    <set>
+      <if test="stockTakingDtlNumber != null">
+        stock_Taking_Dtl_Number = #{stockTakingDtlNumber,jdbcType=INTEGER},
+      </if>
+      <if test="medicineId != null">
+        medicine_id = #{medicineId,jdbcType=INTEGER},
+      </if>
+      <if test="takingMedicineAmount != null">
+        taking_Medicine_Amount = #{takingMedicineAmount,jdbcType=INTEGER},
+      </if>
+      <if test="takingUpdateAmount != null">
+        taking_Update_Amount = #{takingUpdateAmount,jdbcType=INTEGER},
+      </if>
+      <if test="takingReimburseAmount != null">
+        taking_Reimburse_Amount = #{takingReimburseAmount,jdbcType=INTEGER},
+      </if>
+      <if test="takingRemark != null">
+        taking_Remark = #{takingRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stock_Taking_Dtl_id = #{stockTakingDtlId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.model.entity.StockTakingDtl">
+    update tb_stock_taking_dtl
+    set stock_Taking_Dtl_Number = #{stockTakingDtlNumber,jdbcType=INTEGER},
+      medicine_id = #{medicineId,jdbcType=INTEGER},
+      taking_Medicine_Amount = #{takingMedicineAmount,jdbcType=INTEGER},
+      taking_Update_Amount = #{takingUpdateAmount,jdbcType=INTEGER},
+      taking_Reimburse_Amount = #{takingReimburseAmount,jdbcType=INTEGER},
+      taking_Remark = #{takingRemark,jdbcType=VARCHAR}
+    where stock_Taking_Dtl_id = #{stockTakingDtlId,jdbcType=INTEGER}
+  </update>
+</mapper>

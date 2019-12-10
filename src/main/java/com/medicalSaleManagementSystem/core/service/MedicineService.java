@@ -1,7 +1,7 @@
 package com.medicalSaleManagementSystem.core.service;
 
-import com.medicalSaleManagementSystem.core.bean.DTO.MedicineDTO;
-import com.medicalSaleManagementSystem.util.Msg;
+import com.medicalSaleManagementSystem.core.model.DTO.MedicineDTO;
+import com.medicalSaleManagementSystem.util.message.Msg;
 
 public interface MedicineService {
     /**
@@ -48,4 +48,11 @@ public interface MedicineService {
      * @author 林贤钦
      */
     Msg updateMedicine(MedicineDTO medicineDTO);
+
+    /**
+     * 查询所有药品信息
+     * @return msg
+     * @author 林贤钦
+     */
+    Msg findAllMedicine();
 }

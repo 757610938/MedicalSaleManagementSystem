@@ -1,7 +1,7 @@
 package com.medicalSaleManagementSystem.core.service;
 
-import com.medicalSaleManagementSystem.core.bean.DTO.CustomerDTO;
-import com.medicalSaleManagementSystem.util.Msg;
+import com.medicalSaleManagementSystem.core.model.DTO.CustomerDTO;
+import com.medicalSaleManagementSystem.util.message.Msg;
 
 public interface CustomerService {
     /**
@@ -25,7 +25,7 @@ public interface CustomerService {
      * @return Msg
      * @author 林贤钦
      */
-    Msg registerCustomer(CustomerDTO customerDTO);
+    Msg addCustomer(CustomerDTO customerDTO);
     /**
      * 通过客户id删除客户信息
      * @param id
