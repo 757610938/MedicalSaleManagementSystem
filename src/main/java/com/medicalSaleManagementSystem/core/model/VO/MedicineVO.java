@@ -2,7 +2,7 @@ package com.medicalSaleManagementSystem.core.model.VO;
 
 import java.util.Date;
 
-public class MedicineVo {
+public class MedicineVO {
     private Integer medicineId;
 
     private String medicineApprovalNumber;

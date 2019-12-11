@@ -2,6 +2,7 @@ package com.medicalSaleManagementSystem.core.controller;
 
 import com.medicalSaleManagementSystem.authorization.model.TokenModel;
 import com.medicalSaleManagementSystem.core.model.DTO.UserDTO;
+import com.medicalSaleManagementSystem.core.model.VO.UserVO;
 import com.medicalSaleManagementSystem.core.service.UserService;
 import com.medicalSaleManagementSystem.util.BeanUtilEx;
 import com.medicalSaleManagementSystem.util.message.HttpStatus;
@@ -30,7 +31,7 @@ public class UserController {
      */
     @RequestMapping (method = RequestMethod.POST )
     @ResponseBody
-    public Resp checkLogin(@RequestBody UserDTO userVo, HttpServletRequest request){
+    public Resp checkLogin(UserVO userVo, HttpServletRequest request){
         System.out.println(".....");
         System.out.println(userVo);
         try{

@@ -12,7 +12,7 @@ public interface UserService {
     Msg login(UserDTO userDTO);
 
     /**
-     * 通过id查询药品
+     * 通过id查询用户
      * @return userId
      */
     Msg findUserByEmpId(Integer userId);

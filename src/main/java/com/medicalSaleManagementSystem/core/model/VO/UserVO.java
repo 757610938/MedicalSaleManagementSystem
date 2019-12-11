@@ -1,4 +1,4 @@
-package com.medicalSaleManagementSystem.core.model.VO;
+package  com.medicalSaleManagementSystem.core.model.VO;
 
 public class UserVO {
     private String userName;

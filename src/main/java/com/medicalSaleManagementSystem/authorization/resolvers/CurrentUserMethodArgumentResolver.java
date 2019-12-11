@@ -20,12 +20,12 @@ import org.springframework.web.multipart.support.MissingServletRequestPartExcept
  * @author ScienJus
  * @date 2015/7/31.
  */
+
 @Component
 public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Autowired
     private UserService userService;
-
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         //如果参数类型是User并且有CurrentUser注解则支持
