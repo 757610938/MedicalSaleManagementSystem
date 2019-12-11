@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medicalSaleManagementSystem.core.dao.SupplierMapper">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.Supplier">
+    <id column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="supplier_Name" jdbcType="VARCHAR" property="supplierName" />
+    <result column="supplier_Address" jdbcType="VARCHAR" property="supplierAddress" />
+    <result column="supplier_Zipcode" jdbcType="VARCHAR" property="supplierZipcode" />
+    <result column="supplier_Tel" jdbcType="VARCHAR" property="supplierTel" />
+    <result column="supplier_Fax" jdbcType="VARCHAR" property="supplierFax" />
+    <result column="supplier_Opening_bank" jdbcType="VARCHAR" property="supplierOpeningBank" />
+    <result column="supplier_Bank_number" jdbcType="VARCHAR" property="supplierBankNumber" />
+    <result column="supplier_Warehouse" jdbcType="VARCHAR" property="supplierWarehouse" />
+    <result column="supplier_Warehous_Tel" jdbcType="VARCHAR" property="supplierWarehousTel" />
+    <result column="supplier_Contacts_name" jdbcType="VARCHAR" property="supplierContactsName" />
+    <result column="supplier_Contacts_tel" jdbcType="VARCHAR" property="supplierContactsTel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    supplier_id, supplier_Name, supplier_Address, supplier_Zipcode, supplier_Tel, supplier_Fax, 
+    supplier_Opening_bank, supplier_Bank_number, supplier_Warehouse, supplier_Warehous_Tel, 
+    supplier_Contacts_name, supplier_Contacts_tel
+  </sql>
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SupplierExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_supplier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SupplierExample">
+    delete from tb_supplier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Supplier">
+    insert into tb_supplier (supplier_id, supplier_Name, supplier_Address, 
+      supplier_Zipcode, supplier_Tel, supplier_Fax, 
+      supplier_Opening_bank, supplier_Bank_number, 
+      supplier_Warehouse, supplier_Warehous_Tel, 
+      supplier_Contacts_name, supplier_Contacts_tel
+      )
+    values (#{supplierId,jdbcType=INTEGER}, #{supplierName,jdbcType=VARCHAR}, #{supplierAddress,jdbcType=VARCHAR}, 
+      #{supplierZipcode,jdbcType=VARCHAR}, #{supplierTel,jdbcType=VARCHAR}, #{supplierFax,jdbcType=VARCHAR}, 
+      #{supplierOpeningBank,jdbcType=VARCHAR}, #{supplierBankNumber,jdbcType=VARCHAR}, 
+      #{supplierWarehouse,jdbcType=VARCHAR}, #{supplierWarehousTel,jdbcType=VARCHAR}, 
+      #{supplierContactsName,jdbcType=VARCHAR}, #{supplierContactsTel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Supplier">
+    insert into tb_supplier
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="supplierName != null">
+        supplier_Name,
+      </if>
+      <if test="supplierAddress != null">
+        supplier_Address,
+      </if>
+      <if test="supplierZipcode != null">
+        supplier_Zipcode,
+      </if>
+      <if test="supplierTel != null">
+        supplier_Tel,
+      </if>
+      <if test="supplierFax != null">
+        supplier_Fax,
+      </if>
+      <if test="supplierOpeningBank != null">
+        supplier_Opening_bank,
+      </if>
+      <if test="supplierBankNumber != null">
+        supplier_Bank_number,
+      </if>
+      <if test="supplierWarehouse != null">
+        supplier_Warehouse,
+      </if>
+      <if test="supplierWarehousTel != null">
+        supplier_Warehous_Tel,
+      </if>
+      <if test="supplierContactsName != null">
+        supplier_Contacts_name,
+      </if>
+      <if test="supplierContactsTel != null">
+        supplier_Contacts_tel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierName != null">
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierAddress != null">
+        #{supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierZipcode != null">
+        #{supplierZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierTel != null">
+        #{supplierTel,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierFax != null">
+        #{supplierFax,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierOpeningBank != null">
+        #{supplierOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierBankNumber != null">
+        #{supplierBankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierWarehouse != null">
+        #{supplierWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierWarehousTel != null">
+        #{supplierWarehousTel,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierContactsName != null">
+        #{supplierContactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierContactsTel != null">
+        #{supplierContactsTel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SupplierExample" resultType="java.lang.Long">
+    select count(*) from tb_supplier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_supplier
+    <set>
+      <if test="record.supplierId != null">
+        supplier_id = #{record.supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="record.supplierName != null">
+        supplier_Name = #{record.supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierAddress != null">
+        supplier_Address = #{record.supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierZipcode != null">
+        supplier_Zipcode = #{record.supplierZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierTel != null">
+        supplier_Tel = #{record.supplierTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierFax != null">
+        supplier_Fax = #{record.supplierFax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierOpeningBank != null">
+        supplier_Opening_bank = #{record.supplierOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierBankNumber != null">
+        supplier_Bank_number = #{record.supplierBankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierWarehouse != null">
+        supplier_Warehouse = #{record.supplierWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierWarehousTel != null">
+        supplier_Warehous_Tel = #{record.supplierWarehousTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierContactsName != null">
+        supplier_Contacts_name = #{record.supplierContactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierContactsTel != null">
+        supplier_Contacts_tel = #{record.supplierContactsTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_supplier
+    set supplier_id = #{record.supplierId,jdbcType=INTEGER},
+      supplier_Name = #{record.supplierName,jdbcType=VARCHAR},
+      supplier_Address = #{record.supplierAddress,jdbcType=VARCHAR},
+      supplier_Zipcode = #{record.supplierZipcode,jdbcType=VARCHAR},
+      supplier_Tel = #{record.supplierTel,jdbcType=VARCHAR},
+      supplier_Fax = #{record.supplierFax,jdbcType=VARCHAR},
+      supplier_Opening_bank = #{record.supplierOpeningBank,jdbcType=VARCHAR},
+      supplier_Bank_number = #{record.supplierBankNumber,jdbcType=VARCHAR},
+      supplier_Warehouse = #{record.supplierWarehouse,jdbcType=VARCHAR},
+      supplier_Warehous_Tel = #{record.supplierWarehousTel,jdbcType=VARCHAR},
+      supplier_Contacts_name = #{record.supplierContactsName,jdbcType=VARCHAR},
+      supplier_Contacts_tel = #{record.supplierContactsTel,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Supplier">
+    update tb_supplier
+    <set>
+      <if test="supplierName != null">
+        supplier_Name = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierAddress != null">
+        supplier_Address = #{supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierZipcode != null">
+        supplier_Zipcode = #{supplierZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierTel != null">
+        supplier_Tel = #{supplierTel,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierFax != null">
+        supplier_Fax = #{supplierFax,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierOpeningBank != null">
+        supplier_Opening_bank = #{supplierOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierBankNumber != null">
+        supplier_Bank_number = #{supplierBankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierWarehouse != null">
+        supplier_Warehouse = #{supplierWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierWarehousTel != null">
+        supplier_Warehous_Tel = #{supplierWarehousTel,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierContactsName != null">
+        supplier_Contacts_name = #{supplierContactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierContactsTel != null">
+        supplier_Contacts_tel = #{supplierContactsTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Supplier">
+    update tb_supplier
+    set supplier_Name = #{supplierName,jdbcType=VARCHAR},
+      supplier_Address = #{supplierAddress,jdbcType=VARCHAR},
+      supplier_Zipcode = #{supplierZipcode,jdbcType=VARCHAR},
+      supplier_Tel = #{supplierTel,jdbcType=VARCHAR},
+      supplier_Fax = #{supplierFax,jdbcType=VARCHAR},
+      supplier_Opening_bank = #{supplierOpeningBank,jdbcType=VARCHAR},
+      supplier_Bank_number = #{supplierBankNumber,jdbcType=VARCHAR},
+      supplier_Warehouse = #{supplierWarehouse,jdbcType=VARCHAR},
+      supplier_Warehous_Tel = #{supplierWarehousTel,jdbcType=VARCHAR},
+      supplier_Contacts_name = #{supplierContactsName,jdbcType=VARCHAR},
+      supplier_Contacts_tel = #{supplierContactsTel,jdbcType=VARCHAR}
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.Supplier">
+    <id column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="supplier_Name" jdbcType="VARCHAR" property="supplierName" />
+    <result column="supplier_Address" jdbcType="VARCHAR" property="supplierAddress" />
+    <result column="supplier_Zipcode" jdbcType="VARCHAR" property="supplierZipcode" />
+    <result column="supplier_Tel" jdbcType="VARCHAR" property="supplierTel" />
+    <result column="supplier_Fax" jdbcType="VARCHAR" property="supplierFax" />
+    <result column="supplier_Opening_bank" jdbcType="VARCHAR" property="supplierOpeningBank" />
+    <result column="supplier_Banknumber" jdbcType="VARCHAR" property="supplierBanknumber" />
+    <result column="supplier_Warehouse" jdbcType="VARCHAR" property="supplierWarehouse" />
+    <result column="supplier_WarehousTel" jdbcType="VARCHAR" property="supplierWarehoustel" />
+    <result column="supplier_Contactsname" jdbcType="VARCHAR" property="supplierContactsname" />
+    <result column="supplier_Contactstel" jdbcType="VARCHAR" property="supplierContactstel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    supplier_id, supplier_Name, supplier_Address, supplier_Zipcode, supplier_Tel, supplier_Fax, 
+    supplier_Opening_bank, supplier_Banknumber, supplier_Warehouse, supplier_WarehousTel, 
+    supplier_Contactsname, supplier_Contactstel
+  </sql>
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SupplierExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_supplier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SupplierExample">
+    delete from tb_supplier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Supplier">
+    insert into tb_supplier (supplier_id, supplier_Name, supplier_Address, 
+      supplier_Zipcode, supplier_Tel, supplier_Fax, 
+      supplier_Opening_bank, supplier_Banknumber, 
+      supplier_Warehouse, supplier_WarehousTel, 
+      supplier_Contactsname, supplier_Contactstel
+      )
+    values (#{supplierId,jdbcType=INTEGER}, #{supplierName,jdbcType=VARCHAR}, #{supplierAddress,jdbcType=VARCHAR}, 
+      #{supplierZipcode,jdbcType=VARCHAR}, #{supplierTel,jdbcType=VARCHAR}, #{supplierFax,jdbcType=VARCHAR}, 
+      #{supplierOpeningBank,jdbcType=VARCHAR}, #{supplierBanknumber,jdbcType=VARCHAR}, 
+      #{supplierWarehouse,jdbcType=VARCHAR}, #{supplierWarehoustel,jdbcType=VARCHAR}, 
+      #{supplierContactsname,jdbcType=VARCHAR}, #{supplierContactstel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Supplier">
+    insert into tb_supplier
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="supplierName != null">
+        supplier_Name,
+      </if>
+      <if test="supplierAddress != null">
+        supplier_Address,
+      </if>
+      <if test="supplierZipcode != null">
+        supplier_Zipcode,
+      </if>
+      <if test="supplierTel != null">
+        supplier_Tel,
+      </if>
+      <if test="supplierFax != null">
+        supplier_Fax,
+      </if>
+      <if test="supplierOpeningBank != null">
+        supplier_Opening_bank,
+      </if>
+      <if test="supplierBanknumber != null">
+        supplier_Banknumber,
+      </if>
+      <if test="supplierWarehouse != null">
+        supplier_Warehouse,
+      </if>
+      <if test="supplierWarehoustel != null">
+        supplier_WarehousTel,
+      </if>
+      <if test="supplierContactsname != null">
+        supplier_Contactsname,
+      </if>
+      <if test="supplierContactstel != null">
+        supplier_Contactstel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierName != null">
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierAddress != null">
+        #{supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierZipcode != null">
+        #{supplierZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierTel != null">
+        #{supplierTel,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierFax != null">
+        #{supplierFax,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierOpeningBank != null">
+        #{supplierOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierBanknumber != null">
+        #{supplierBanknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierWarehouse != null">
+        #{supplierWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierWarehoustel != null">
+        #{supplierWarehoustel,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierContactsname != null">
+        #{supplierContactsname,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierContactstel != null">
+        #{supplierContactstel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.SupplierExample" resultType="java.lang.Long">
+    select count(*) from tb_supplier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_supplier
+    <set>
+      <if test="record.supplierId != null">
+        supplier_id = #{record.supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="record.supplierName != null">
+        supplier_Name = #{record.supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierAddress != null">
+        supplier_Address = #{record.supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierZipcode != null">
+        supplier_Zipcode = #{record.supplierZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierTel != null">
+        supplier_Tel = #{record.supplierTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierFax != null">
+        supplier_Fax = #{record.supplierFax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierOpeningBank != null">
+        supplier_Opening_bank = #{record.supplierOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierBanknumber != null">
+        supplier_Banknumber = #{record.supplierBanknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierWarehouse != null">
+        supplier_Warehouse = #{record.supplierWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierWarehoustel != null">
+        supplier_WarehousTel = #{record.supplierWarehoustel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierContactsname != null">
+        supplier_Contactsname = #{record.supplierContactsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierContactstel != null">
+        supplier_Contactstel = #{record.supplierContactstel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_supplier
+    set supplier_id = #{record.supplierId,jdbcType=INTEGER},
+      supplier_Name = #{record.supplierName,jdbcType=VARCHAR},
+      supplier_Address = #{record.supplierAddress,jdbcType=VARCHAR},
+      supplier_Zipcode = #{record.supplierZipcode,jdbcType=VARCHAR},
+      supplier_Tel = #{record.supplierTel,jdbcType=VARCHAR},
+      supplier_Fax = #{record.supplierFax,jdbcType=VARCHAR},
+      supplier_Opening_bank = #{record.supplierOpeningBank,jdbcType=VARCHAR},
+      supplier_Banknumber = #{record.supplierBanknumber,jdbcType=VARCHAR},
+      supplier_Warehouse = #{record.supplierWarehouse,jdbcType=VARCHAR},
+      supplier_WarehousTel = #{record.supplierWarehoustel,jdbcType=VARCHAR},
+      supplier_Contactsname = #{record.supplierContactsname,jdbcType=VARCHAR},
+      supplier_Contactstel = #{record.supplierContactstel,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Supplier">
+    update tb_supplier
+    <set>
+      <if test="supplierName != null">
+        supplier_Name = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierAddress != null">
+        supplier_Address = #{supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierZipcode != null">
+        supplier_Zipcode = #{supplierZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierTel != null">
+        supplier_Tel = #{supplierTel,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierFax != null">
+        supplier_Fax = #{supplierFax,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierOpeningBank != null">
+        supplier_Opening_bank = #{supplierOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierBanknumber != null">
+        supplier_Banknumber = #{supplierBanknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierWarehouse != null">
+        supplier_Warehouse = #{supplierWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierWarehoustel != null">
+        supplier_WarehousTel = #{supplierWarehoustel,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierContactsname != null">
+        supplier_Contactsname = #{supplierContactsname,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierContactstel != null">
+        supplier_Contactstel = #{supplierContactstel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Supplier">
+    update tb_supplier
+    set supplier_Name = #{supplierName,jdbcType=VARCHAR},
+      supplier_Address = #{supplierAddress,jdbcType=VARCHAR},
+      supplier_Zipcode = #{supplierZipcode,jdbcType=VARCHAR},
+      supplier_Tel = #{supplierTel,jdbcType=VARCHAR},
+      supplier_Fax = #{supplierFax,jdbcType=VARCHAR},
+      supplier_Opening_bank = #{supplierOpeningBank,jdbcType=VARCHAR},
+      supplier_Banknumber = #{supplierBanknumber,jdbcType=VARCHAR},
+      supplier_Warehouse = #{supplierWarehouse,jdbcType=VARCHAR},
+      supplier_WarehousTel = #{supplierWarehoustel,jdbcType=VARCHAR},
+      supplier_Contactsname = #{supplierContactsname,jdbcType=VARCHAR},
+      supplier_Contactstel = #{supplierContactstel,jdbcType=VARCHAR}
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+</mapper>

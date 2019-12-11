@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medicalSaleManagementSystem.core.dao.MedicineMapper">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
+    <id column="medicine_id" jdbcType="INTEGER" property="medicineId" />
+    <result column="medicine_Approval_Number" jdbcType="VARCHAR" property="medicineApprovalNumber" />
+    <result column="medicine_Name" jdbcType="VARCHAR" property="medicineName" />
+    <result column="medicine_English_Name" jdbcType="VARCHAR" property="medicineEnglishName" />
+    <result column="medicine_Dosageform_Category" jdbcType="VARCHAR" property="medicineDosageformCategory" />
+    <result column="medicine_Manufacturer" jdbcType="VARCHAR" property="medicineManufacturer" />
+    <result column="medicine_Specification" jdbcType="VARCHAR" property="medicineSpecification" />
+    <result column="medicine_Manufacturing_Address" jdbcType="VARCHAR" property="medicineManufacturingAddress" />
+    <result column="medicine_Category" jdbcType="VARCHAR" property="medicineCategory" />
+    <result column="medicine_Approvaldate" jdbcType="TIMESTAMP" property="medicineApprovaldate" />
+    <result column="medicine_Original_Approval_Number" jdbcType="VARCHAR" property="medicineOriginalApprovalNumber" />
+    <result column="medicine_Suppliers_id" jdbcType="INTEGER" property="medicineSuppliersId" />
+    <result column="medicine_Picture" jdbcType="VARCHAR" property="medicinePicture" />
+    <result column="medicine_Stock_Amount" jdbcType="VARCHAR" property="medicineStockAmount" />
+    <result column="medicine_Purchase_Price" jdbcType="DOUBLE" property="medicinePurchasePrice" />
+    <result column="medicine_Retail_Price" jdbcType="DOUBLE" property="medicineRetailPrice" />
+    <result column="medicine_Wholesale_Price" jdbcType="DOUBLE" property="medicineWholesalePrice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    medicine_id, medicine_Approval_Number, medicine_Name, medicine_English_Name, medicine_Dosageform_Category, 
+    medicine_Manufacturer, medicine_Specification, medicine_Manufacturing_Address, medicine_Category, 
+    medicine_Approvaldate, medicine_Original_Approval_Number, medicine_Suppliers_id, 
+    medicine_Picture, medicine_Stock_Amount, medicine_Purchase_Price, medicine_Retail_Price, 
+    medicine_Wholesale_Price
+  </sql>
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.MedicineExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_medicine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_medicine
+    where medicine_id = #{medicineId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_medicine
+    where medicine_id = #{medicineId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.MedicineExample">
+    delete from tb_medicine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
+    insert into tb_medicine (medicine_id, medicine_Approval_Number, 
+      medicine_Name, medicine_English_Name, medicine_Dosageform_Category, 
+      medicine_Manufacturer, medicine_Specification, 
+      medicine_Manufacturing_Address, medicine_Category, 
+      medicine_Approvaldate, medicine_Original_Approval_Number, 
+      medicine_Suppliers_id, medicine_Picture, medicine_Stock_Amount, 
+      medicine_Purchase_Price, medicine_Retail_Price, 
+      medicine_Wholesale_Price)
+    values (#{medicineId,jdbcType=INTEGER}, #{medicineApprovalNumber,jdbcType=VARCHAR}, 
+      #{medicineName,jdbcType=VARCHAR}, #{medicineEnglishName,jdbcType=VARCHAR}, #{medicineDosageformCategory,jdbcType=VARCHAR}, 
+      #{medicineManufacturer,jdbcType=VARCHAR}, #{medicineSpecification,jdbcType=VARCHAR}, 
+      #{medicineManufacturingAddress,jdbcType=VARCHAR}, #{medicineCategory,jdbcType=VARCHAR}, 
+      #{medicineApprovaldate,jdbcType=TIMESTAMP}, #{medicineOriginalApprovalNumber,jdbcType=VARCHAR}, 
+      #{medicineSuppliersId,jdbcType=INTEGER}, #{medicinePicture,jdbcType=VARCHAR}, #{medicineStockAmount,jdbcType=VARCHAR}, 
+      #{medicinePurchasePrice,jdbcType=DOUBLE}, #{medicineRetailPrice,jdbcType=DOUBLE}, 
+      #{medicineWholesalePrice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
+    insert into tb_medicine
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="medicineId != null">
+        medicine_id,
+      </if>
+      <if test="medicineApprovalNumber != null">
+        medicine_Approval_Number,
+      </if>
+      <if test="medicineName != null">
+        medicine_Name,
+      </if>
+      <if test="medicineEnglishName != null">
+        medicine_English_Name,
+      </if>
+      <if test="medicineDosageformCategory != null">
+        medicine_Dosageform_Category,
+      </if>
+      <if test="medicineManufacturer != null">
+        medicine_Manufacturer,
+      </if>
+      <if test="medicineSpecification != null">
+        medicine_Specification,
+      </if>
+      <if test="medicineManufacturingAddress != null">
+        medicine_Manufacturing_Address,
+      </if>
+      <if test="medicineCategory != null">
+        medicine_Category,
+      </if>
+      <if test="medicineApprovaldate != null">
+        medicine_Approvaldate,
+      </if>
+      <if test="medicineOriginalApprovalNumber != null">
+        medicine_Original_Approval_Number,
+      </if>
+      <if test="medicineSuppliersId != null">
+        medicine_Suppliers_id,
+      </if>
+      <if test="medicinePicture != null">
+        medicine_Picture,
+      </if>
+      <if test="medicineStockAmount != null">
+        medicine_Stock_Amount,
+      </if>
+      <if test="medicinePurchasePrice != null">
+        medicine_Purchase_Price,
+      </if>
+      <if test="medicineRetailPrice != null">
+        medicine_Retail_Price,
+      </if>
+      <if test="medicineWholesalePrice != null">
+        medicine_Wholesale_Price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="medicineId != null">
+        #{medicineId,jdbcType=INTEGER},
+      </if>
+      <if test="medicineApprovalNumber != null">
+        #{medicineApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineName != null">
+        #{medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineEnglishName != null">
+        #{medicineEnglishName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineDosageformCategory != null">
+        #{medicineDosageformCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineManufacturer != null">
+        #{medicineManufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineSpecification != null">
+        #{medicineSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineManufacturingAddress != null">
+        #{medicineManufacturingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineCategory != null">
+        #{medicineCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineApprovaldate != null">
+        #{medicineApprovaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="medicineOriginalApprovalNumber != null">
+        #{medicineOriginalApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineSuppliersId != null">
+        #{medicineSuppliersId,jdbcType=INTEGER},
+      </if>
+      <if test="medicinePicture != null">
+        #{medicinePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineStockAmount != null">
+        #{medicineStockAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="medicinePurchasePrice != null">
+        #{medicinePurchasePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="medicineRetailPrice != null">
+        #{medicineRetailPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="medicineWholesalePrice != null">
+        #{medicineWholesalePrice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.MedicineExample" resultType="java.lang.Long">
+    select count(*) from tb_medicine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_medicine
+    <set>
+      <if test="record.medicineId != null">
+        medicine_id = #{record.medicineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.medicineApprovalNumber != null">
+        medicine_Approval_Number = #{record.medicineApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineName != null">
+        medicine_Name = #{record.medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineEnglishName != null">
+        medicine_English_Name = #{record.medicineEnglishName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineDosageformCategory != null">
+        medicine_Dosageform_Category = #{record.medicineDosageformCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineManufacturer != null">
+        medicine_Manufacturer = #{record.medicineManufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineSpecification != null">
+        medicine_Specification = #{record.medicineSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineManufacturingAddress != null">
+        medicine_Manufacturing_Address = #{record.medicineManufacturingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineCategory != null">
+        medicine_Category = #{record.medicineCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineApprovaldate != null">
+        medicine_Approvaldate = #{record.medicineApprovaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.medicineOriginalApprovalNumber != null">
+        medicine_Original_Approval_Number = #{record.medicineOriginalApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineSuppliersId != null">
+        medicine_Suppliers_id = #{record.medicineSuppliersId,jdbcType=INTEGER},
+      </if>
+      <if test="record.medicinePicture != null">
+        medicine_Picture = #{record.medicinePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineStockAmount != null">
+        medicine_Stock_Amount = #{record.medicineStockAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicinePurchasePrice != null">
+        medicine_Purchase_Price = #{record.medicinePurchasePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.medicineRetailPrice != null">
+        medicine_Retail_Price = #{record.medicineRetailPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.medicineWholesalePrice != null">
+        medicine_Wholesale_Price = #{record.medicineWholesalePrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_medicine
+    set medicine_id = #{record.medicineId,jdbcType=INTEGER},
+      medicine_Approval_Number = #{record.medicineApprovalNumber,jdbcType=VARCHAR},
+      medicine_Name = #{record.medicineName,jdbcType=VARCHAR},
+      medicine_English_Name = #{record.medicineEnglishName,jdbcType=VARCHAR},
+      medicine_Dosageform_Category = #{record.medicineDosageformCategory,jdbcType=VARCHAR},
+      medicine_Manufacturer = #{record.medicineManufacturer,jdbcType=VARCHAR},
+      medicine_Specification = #{record.medicineSpecification,jdbcType=VARCHAR},
+      medicine_Manufacturing_Address = #{record.medicineManufacturingAddress,jdbcType=VARCHAR},
+      medicine_Category = #{record.medicineCategory,jdbcType=VARCHAR},
+      medicine_Approvaldate = #{record.medicineApprovaldate,jdbcType=TIMESTAMP},
+      medicine_Original_Approval_Number = #{record.medicineOriginalApprovalNumber,jdbcType=VARCHAR},
+      medicine_Suppliers_id = #{record.medicineSuppliersId,jdbcType=INTEGER},
+      medicine_Picture = #{record.medicinePicture,jdbcType=VARCHAR},
+      medicine_Stock_Amount = #{record.medicineStockAmount,jdbcType=VARCHAR},
+      medicine_Purchase_Price = #{record.medicinePurchasePrice,jdbcType=DOUBLE},
+      medicine_Retail_Price = #{record.medicineRetailPrice,jdbcType=DOUBLE},
+      medicine_Wholesale_Price = #{record.medicineWholesalePrice,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
+    update tb_medicine
+    <set>
+      <if test="medicineApprovalNumber != null">
+        medicine_Approval_Number = #{medicineApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineName != null">
+        medicine_Name = #{medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineEnglishName != null">
+        medicine_English_Name = #{medicineEnglishName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineDosageformCategory != null">
+        medicine_Dosageform_Category = #{medicineDosageformCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineManufacturer != null">
+        medicine_Manufacturer = #{medicineManufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineSpecification != null">
+        medicine_Specification = #{medicineSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineManufacturingAddress != null">
+        medicine_Manufacturing_Address = #{medicineManufacturingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineCategory != null">
+        medicine_Category = #{medicineCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineApprovaldate != null">
+        medicine_Approvaldate = #{medicineApprovaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="medicineOriginalApprovalNumber != null">
+        medicine_Original_Approval_Number = #{medicineOriginalApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineSuppliersId != null">
+        medicine_Suppliers_id = #{medicineSuppliersId,jdbcType=INTEGER},
+      </if>
+      <if test="medicinePicture != null">
+        medicine_Picture = #{medicinePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineStockAmount != null">
+        medicine_Stock_Amount = #{medicineStockAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="medicinePurchasePrice != null">
+        medicine_Purchase_Price = #{medicinePurchasePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="medicineRetailPrice != null">
+        medicine_Retail_Price = #{medicineRetailPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="medicineWholesalePrice != null">
+        medicine_Wholesale_Price = #{medicineWholesalePrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where medicine_id = #{medicineId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
+    update tb_medicine
+    set medicine_Approval_Number = #{medicineApprovalNumber,jdbcType=VARCHAR},
+      medicine_Name = #{medicineName,jdbcType=VARCHAR},
+      medicine_English_Name = #{medicineEnglishName,jdbcType=VARCHAR},
+      medicine_Dosageform_Category = #{medicineDosageformCategory,jdbcType=VARCHAR},
+      medicine_Manufacturer = #{medicineManufacturer,jdbcType=VARCHAR},
+      medicine_Specification = #{medicineSpecification,jdbcType=VARCHAR},
+      medicine_Manufacturing_Address = #{medicineManufacturingAddress,jdbcType=VARCHAR},
+      medicine_Category = #{medicineCategory,jdbcType=VARCHAR},
+      medicine_Approvaldate = #{medicineApprovaldate,jdbcType=TIMESTAMP},
+      medicine_Original_Approval_Number = #{medicineOriginalApprovalNumber,jdbcType=VARCHAR},
+      medicine_Suppliers_id = #{medicineSuppliersId,jdbcType=INTEGER},
+      medicine_Picture = #{medicinePicture,jdbcType=VARCHAR},
+      medicine_Stock_Amount = #{medicineStockAmount,jdbcType=VARCHAR},
+      medicine_Purchase_Price = #{medicinePurchasePrice,jdbcType=DOUBLE},
+      medicine_Retail_Price = #{medicineRetailPrice,jdbcType=DOUBLE},
+      medicine_Wholesale_Price = #{medicineWholesalePrice,jdbcType=DOUBLE}
+    where medicine_id = #{medicineId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
+    <id column="medicine_id" jdbcType="INTEGER" property="medicineId" />
+    <result column="medicine_Approval_Number" jdbcType="VARCHAR" property="medicineApprovalNumber" />
+    <result column="medicine_Name" jdbcType="VARCHAR" property="medicineName" />
+    <result column="medicine_English_Name" jdbcType="VARCHAR" property="medicineEnglishName" />
+    <result column="medicine_Dosageform_Category" jdbcType="VARCHAR" property="medicineDosageformCategory" />
+    <result column="medicine_Manufacturer" jdbcType="VARCHAR" property="medicineManufacturer" />
+    <result column="medicine_Specification" jdbcType="VARCHAR" property="medicineSpecification" />
+    <result column="medicine_Manufacturing_Address" jdbcType="VARCHAR" property="medicineManufacturingAddress" />
+    <result column="medicine_Category" jdbcType="VARCHAR" property="medicineCategory" />
+    <result column="medicine_Approvaldate" jdbcType="TIMESTAMP" property="medicineApprovaldate" />
+    <result column="medicine_Original_Approval_Number" jdbcType="VARCHAR" property="medicineOriginalApprovalNumber" />
+    <result column="medicine_Suppliers_id" jdbcType="INTEGER" property="medicineSuppliersId" />
+    <result column="medicine_country" jdbcType="VARCHAR" property="medicineCountry" />
+    <result column="medicine_Picture" jdbcType="VARCHAR" property="medicinePicture" />
+    <result column="medicine_Purchase_Price" jdbcType="DOUBLE" property="medicinePurchasePrice" />
+    <result column="medicine_Retail_Price" jdbcType="DOUBLE" property="medicineRetailPrice" />
+    <result column="medicine_Wholesale_Price" jdbcType="DOUBLE" property="medicineWholesalePrice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    medicine_id, medicine_Approval_Number, medicine_Name, medicine_English_Name, medicine_Dosageform_Category, 
+    medicine_Manufacturer, medicine_Specification, medicine_Manufacturing_Address, medicine_Category, 
+    medicine_Approvaldate, medicine_Original_Approval_Number, medicine_Suppliers_id, 
+    medicine_country, medicine_Picture, medicine_Purchase_Price, medicine_Retail_Price, 
+    medicine_Wholesale_Price
+  </sql>
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.MedicineExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_medicine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_medicine
+    where medicine_id = #{medicineId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_medicine
+    where medicine_id = #{medicineId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.MedicineExample">
+    delete from tb_medicine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
+    insert into tb_medicine (medicine_id, medicine_Approval_Number, 
+      medicine_Name, medicine_English_Name, medicine_Dosageform_Category, 
+      medicine_Manufacturer, medicine_Specification, 
+      medicine_Manufacturing_Address, medicine_Category, 
+      medicine_Approvaldate, medicine_Original_Approval_Number, 
+      medicine_Suppliers_id, medicine_country, medicine_Picture, 
+      medicine_Purchase_Price, medicine_Retail_Price, 
+      medicine_Wholesale_Price)
+    values (#{medicineId,jdbcType=INTEGER}, #{medicineApprovalNumber,jdbcType=VARCHAR}, 
+      #{medicineName,jdbcType=VARCHAR}, #{medicineEnglishName,jdbcType=VARCHAR}, #{medicineDosageformCategory,jdbcType=VARCHAR}, 
+      #{medicineManufacturer,jdbcType=VARCHAR}, #{medicineSpecification,jdbcType=VARCHAR}, 
+      #{medicineManufacturingAddress,jdbcType=VARCHAR}, #{medicineCategory,jdbcType=VARCHAR}, 
+      #{medicineApprovaldate,jdbcType=TIMESTAMP}, #{medicineOriginalApprovalNumber,jdbcType=VARCHAR}, 
+      #{medicineSuppliersId,jdbcType=INTEGER}, #{medicineCountry,jdbcType=VARCHAR}, #{medicinePicture,jdbcType=VARCHAR}, 
+      #{medicinePurchasePrice,jdbcType=DOUBLE}, #{medicineRetailPrice,jdbcType=DOUBLE}, 
+      #{medicineWholesalePrice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
+    insert into tb_medicine
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="medicineId != null">
+        medicine_id,
+      </if>
+      <if test="medicineApprovalNumber != null">
+        medicine_Approval_Number,
+      </if>
+      <if test="medicineName != null">
+        medicine_Name,
+      </if>
+      <if test="medicineEnglishName != null">
+        medicine_English_Name,
+      </if>
+      <if test="medicineDosageformCategory != null">
+        medicine_Dosageform_Category,
+      </if>
+      <if test="medicineManufacturer != null">
+        medicine_Manufacturer,
+      </if>
+      <if test="medicineSpecification != null">
+        medicine_Specification,
+      </if>
+      <if test="medicineManufacturingAddress != null">
+        medicine_Manufacturing_Address,
+      </if>
+      <if test="medicineCategory != null">
+        medicine_Category,
+      </if>
+      <if test="medicineApprovaldate != null">
+        medicine_Approvaldate,
+      </if>
+      <if test="medicineOriginalApprovalNumber != null">
+        medicine_Original_Approval_Number,
+      </if>
+      <if test="medicineSuppliersId != null">
+        medicine_Suppliers_id,
+      </if>
+      <if test="medicineCountry != null">
+        medicine_country,
+      </if>
+      <if test="medicinePicture != null">
+        medicine_Picture,
+      </if>
+      <if test="medicinePurchasePrice != null">
+        medicine_Purchase_Price,
+      </if>
+      <if test="medicineRetailPrice != null">
+        medicine_Retail_Price,
+      </if>
+      <if test="medicineWholesalePrice != null">
+        medicine_Wholesale_Price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="medicineId != null">
+        #{medicineId,jdbcType=INTEGER},
+      </if>
+      <if test="medicineApprovalNumber != null">
+        #{medicineApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineName != null">
+        #{medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineEnglishName != null">
+        #{medicineEnglishName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineDosageformCategory != null">
+        #{medicineDosageformCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineManufacturer != null">
+        #{medicineManufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineSpecification != null">
+        #{medicineSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineManufacturingAddress != null">
+        #{medicineManufacturingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineCategory != null">
+        #{medicineCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineApprovaldate != null">
+        #{medicineApprovaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="medicineOriginalApprovalNumber != null">
+        #{medicineOriginalApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineSuppliersId != null">
+        #{medicineSuppliersId,jdbcType=INTEGER},
+      </if>
+      <if test="medicineCountry != null">
+        #{medicineCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="medicinePicture != null">
+        #{medicinePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="medicinePurchasePrice != null">
+        #{medicinePurchasePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="medicineRetailPrice != null">
+        #{medicineRetailPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="medicineWholesalePrice != null">
+        #{medicineWholesalePrice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.bean.entity.MedicineExample" resultType="java.lang.Long">
+    select count(*) from tb_medicine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_medicine
+    <set>
+      <if test="record.medicineId != null">
+        medicine_id = #{record.medicineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.medicineApprovalNumber != null">
+        medicine_Approval_Number = #{record.medicineApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineName != null">
+        medicine_Name = #{record.medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineEnglishName != null">
+        medicine_English_Name = #{record.medicineEnglishName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineDosageformCategory != null">
+        medicine_Dosageform_Category = #{record.medicineDosageformCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineManufacturer != null">
+        medicine_Manufacturer = #{record.medicineManufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineSpecification != null">
+        medicine_Specification = #{record.medicineSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineManufacturingAddress != null">
+        medicine_Manufacturing_Address = #{record.medicineManufacturingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineCategory != null">
+        medicine_Category = #{record.medicineCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineApprovaldate != null">
+        medicine_Approvaldate = #{record.medicineApprovaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.medicineOriginalApprovalNumber != null">
+        medicine_Original_Approval_Number = #{record.medicineOriginalApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineSuppliersId != null">
+        medicine_Suppliers_id = #{record.medicineSuppliersId,jdbcType=INTEGER},
+      </if>
+      <if test="record.medicineCountry != null">
+        medicine_country = #{record.medicineCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicinePicture != null">
+        medicine_Picture = #{record.medicinePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicinePurchasePrice != null">
+        medicine_Purchase_Price = #{record.medicinePurchasePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.medicineRetailPrice != null">
+        medicine_Retail_Price = #{record.medicineRetailPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.medicineWholesalePrice != null">
+        medicine_Wholesale_Price = #{record.medicineWholesalePrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_medicine
+    set medicine_id = #{record.medicineId,jdbcType=INTEGER},
+      medicine_Approval_Number = #{record.medicineApprovalNumber,jdbcType=VARCHAR},
+      medicine_Name = #{record.medicineName,jdbcType=VARCHAR},
+      medicine_English_Name = #{record.medicineEnglishName,jdbcType=VARCHAR},
+      medicine_Dosageform_Category = #{record.medicineDosageformCategory,jdbcType=VARCHAR},
+      medicine_Manufacturer = #{record.medicineManufacturer,jdbcType=VARCHAR},
+      medicine_Specification = #{record.medicineSpecification,jdbcType=VARCHAR},
+      medicine_Manufacturing_Address = #{record.medicineManufacturingAddress,jdbcType=VARCHAR},
+      medicine_Category = #{record.medicineCategory,jdbcType=VARCHAR},
+      medicine_Approvaldate = #{record.medicineApprovaldate,jdbcType=TIMESTAMP},
+      medicine_Original_Approval_Number = #{record.medicineOriginalApprovalNumber,jdbcType=VARCHAR},
+      medicine_Suppliers_id = #{record.medicineSuppliersId,jdbcType=INTEGER},
+      medicine_country = #{record.medicineCountry,jdbcType=VARCHAR},
+      medicine_Picture = #{record.medicinePicture,jdbcType=VARCHAR},
+      medicine_Purchase_Price = #{record.medicinePurchasePrice,jdbcType=DOUBLE},
+      medicine_Retail_Price = #{record.medicineRetailPrice,jdbcType=DOUBLE},
+      medicine_Wholesale_Price = #{record.medicineWholesalePrice,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
+    update tb_medicine
+    <set>
+      <if test="medicineApprovalNumber != null">
+        medicine_Approval_Number = #{medicineApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineName != null">
+        medicine_Name = #{medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineEnglishName != null">
+        medicine_English_Name = #{medicineEnglishName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineDosageformCategory != null">
+        medicine_Dosageform_Category = #{medicineDosageformCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineManufacturer != null">
+        medicine_Manufacturer = #{medicineManufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineSpecification != null">
+        medicine_Specification = #{medicineSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineManufacturingAddress != null">
+        medicine_Manufacturing_Address = #{medicineManufacturingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineCategory != null">
+        medicine_Category = #{medicineCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineApprovaldate != null">
+        medicine_Approvaldate = #{medicineApprovaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="medicineOriginalApprovalNumber != null">
+        medicine_Original_Approval_Number = #{medicineOriginalApprovalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineSuppliersId != null">
+        medicine_Suppliers_id = #{medicineSuppliersId,jdbcType=INTEGER},
+      </if>
+      <if test="medicineCountry != null">
+        medicine_country = #{medicineCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="medicinePicture != null">
+        medicine_Picture = #{medicinePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="medicinePurchasePrice != null">
+        medicine_Purchase_Price = #{medicinePurchasePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="medicineRetailPrice != null">
+        medicine_Retail_Price = #{medicineRetailPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="medicineWholesalePrice != null">
+        medicine_Wholesale_Price = #{medicineWholesalePrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where medicine_id = #{medicineId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.bean.entity.Medicine">
+    update tb_medicine
+    set medicine_Approval_Number = #{medicineApprovalNumber,jdbcType=VARCHAR},
+      medicine_Name = #{medicineName,jdbcType=VARCHAR},
+      medicine_English_Name = #{medicineEnglishName,jdbcType=VARCHAR},
+      medicine_Dosageform_Category = #{medicineDosageformCategory,jdbcType=VARCHAR},
+      medicine_Manufacturer = #{medicineManufacturer,jdbcType=VARCHAR},
+      medicine_Specification = #{medicineSpecification,jdbcType=VARCHAR},
+      medicine_Manufacturing_Address = #{medicineManufacturingAddress,jdbcType=VARCHAR},
+      medicine_Category = #{medicineCategory,jdbcType=VARCHAR},
+      medicine_Approvaldate = #{medicineApprovaldate,jdbcType=TIMESTAMP},
+      medicine_Original_Approval_Number = #{medicineOriginalApprovalNumber,jdbcType=VARCHAR},
+      medicine_Suppliers_id = #{medicineSuppliersId,jdbcType=INTEGER},
+      medicine_country = #{medicineCountry,jdbcType=VARCHAR},
+      medicine_Picture = #{medicinePicture,jdbcType=VARCHAR},
+      medicine_Purchase_Price = #{medicinePurchasePrice,jdbcType=DOUBLE},
+      medicine_Retail_Price = #{medicineRetailPrice,jdbcType=DOUBLE},
+      medicine_Wholesale_Price = #{medicineWholesalePrice,jdbcType=DOUBLE}
+    where medicine_id = #{medicineId,jdbcType=INTEGER}
+  </update>
+</mapper>

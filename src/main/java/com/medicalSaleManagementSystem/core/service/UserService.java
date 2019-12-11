@@ -2,6 +2,7 @@ package com.medicalSaleManagementSystem.core.service;
 
 import com.medicalSaleManagementSystem.core.model.DTO.UserDTO;
 import com.medicalSaleManagementSystem.util.message.Msg;
+import com.medicalSaleManagementSystem.util.message.Resp;
 
 public interface UserService {
     /**
@@ -9,11 +10,17 @@ public interface UserService {
      * @return 消息类
      * @author 林贤钦
      */
-    Msg login(UserDTO userDTO);
+    Resp login(UserDTO userDTO);
 
     /**
      * 通过id查询用户
-     * @return userId
+     * @return
      */
-    Msg findUserByEmpId(Integer userId);
+    Resp findUserByEmpId(Integer userId);
+
+    /**
+     *
+     * @return
+     */
+    Resp addUser();
 }
