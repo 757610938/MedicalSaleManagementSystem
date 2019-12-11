@@ -10,8 +10,22 @@ public class WarehouseExample {
 
     protected List<Criteria> oredCriteria;
 
+    protected String whseName;
+
     public WarehouseExample() {
         oredCriteria = new ArrayList<Criteria>();
+    }
+
+    public void setOredCriteria(List<Criteria> oredCriteria) {
+        this.oredCriteria = oredCriteria;
+    }
+
+    public String getWhseName() {
+        return whseName;
+    }
+
+    public void setWhseName(String whseName) {
+        this.whseName = whseName;
     }
 
     public void setOrderByClause(String orderByClause) {

@@ -18,6 +18,8 @@ public interface WarehouseMapper {
 
     List<Warehouse> selectByExample(WarehouseExample example);
 
+    List<Warehouse> selectWhseByWhseName(WarehouseExample warehouseExample);
+
     Warehouse selectByPrimaryKey(Integer whseId);
 
     int updateByExampleSelective(@Param("record") Warehouse record, @Param("example") WarehouseExample example);

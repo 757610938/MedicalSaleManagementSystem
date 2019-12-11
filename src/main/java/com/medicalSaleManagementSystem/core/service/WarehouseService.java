@@ -1,6 +1,9 @@
 package com.medicalSaleManagementSystem.core.service;
 
+import com.medicalSaleManagementSystem.core.model.entity.Warehouse;
 import com.medicalSaleManagementSystem.util.message.Msg;
+
+import java.util.List;
 
 public interface WarehouseService {
 
@@ -9,19 +12,58 @@ public interface WarehouseService {
      * @param whseId
      * @return
      */
-    Msg findWhseByWhseId(Integer whseId);
+    Warehouse findWhseByWhseId(Integer whseId);
+
 
     /**
-     * 通过仓库名查找仓库
-     * @param whseName
+     * 模糊搜索仓库,并分页展示
+     * @param key
+     * @param orderBy
+     * @param page
      * @return
      */
-    Msg findWhseByWhseName(String whseName);
+    Msg findWhseByFuzzySearch(String key,String orderBy,Integer page);
 
     /**
-     * 通过仓库地址查找仓库
-     * @param whseAddress
+     * 查询所有的药品信息，以列表形式展示
      * @return
      */
-    Msg findWhseByWhseAddress(String whseAddress);
+    List<Warehouse> findAllWhse();
+
+    /**
+     * 新增仓库
+     * @param warehouse
+     * @return
+     */
+    Msg addWhse(Warehouse warehouse);
+
+    /**
+     * 根据仓库Id删除仓库
+     * @param warehouse
+     * @return
+     */
+    Msg deleteWhseByWhseId(Warehouse warehouse);
+
+    /**
+     *
+     * @param whseId
+     * @return
+     */
+    int deleteWhseByWhseId(Integer whseId);
+
+    /**
+     *
+     * @param ids
+     */
+    void deleteWhseByWhseIds(List<Integer> ids);
+
+    /**
+     * 更新仓库信息
+     * @param warehouse
+     * @return
+     */
+    Msg updateWhse(Warehouse warehouse);
+
+
+
 }
