@@ -1,7 +1,10 @@
 package com.medicalSaleManagementSystem.core.service;
 
 import com.medicalSaleManagementSystem.core.model.DTO.MedicineDTO;
+import com.medicalSaleManagementSystem.core.model.entity.Medicine;
 import com.medicalSaleManagementSystem.util.message.Msg;
+
+import java.util.List;
 
 public interface MedicineService {
     /**
@@ -10,7 +13,7 @@ public interface MedicineService {
      * @return msg
      * @author 林贤钦
      */
-    Msg findMedicineByName(String name);
+    List<Medicine> selectByPrimaryName(String name);
 
     /**
      * 通过名称模糊查询数据库
@@ -18,7 +21,7 @@ public interface MedicineService {
      * @return msg
      * @author 林贤钦
      */
-    Msg vagueFindMedicineByName(String name);
+    List<Medicine> vagueSelectByPrimaryName(String name);
 
     /**
      * 通过id查找药品信息
@@ -26,33 +29,36 @@ public interface MedicineService {
      * @return msg
      * @author 林贤钦
      */
-    Msg findMedicineById(Integer id);
+    Medicine selectByPrimaryKey(Integer id);
+
     /**
      * 注册药品信息
      * @param medicineDTO
      * @return msg
      * @author 林贤钦
      */
-    Msg registerMedicine(MedicineDTO medicineDTO);
+    int insertSelective(MedicineDTO medicineDTO);
+
     /**
      * 通过客户id删除药品信息
      * @param id
      * @return msg
      * @author 林贤钦
      */
-    Msg deleteMedicineById(Integer id);
+    int deleteByPrimaryKey(Integer id);
+
     /**
      * 更新药品信息
      * @param medicineDTO
      * @return msg
      * @author 林贤钦
      */
-    Msg updateMedicine(MedicineDTO medicineDTO);
+    int updateByPrimaryKeySelective(MedicineDTO medicineDTO);
 
     /**
      * 查询所有药品信息
      * @return msg
      * @author 林贤钦
      */
-    Msg findAllMedicine();
+    List<Medicine> getAll();
 }

@@ -31,6 +31,8 @@ public class MedicineVO {
 
     private String medicineStockAmount;
 
+    private String medicineCountry;
+
     private Double medicinePurchasePrice;
 
     private Double medicineRetailPrice;
@@ -171,5 +173,13 @@ public class MedicineVO {
 
     public void setMedicineWholesalePrice(Double medicineWholesalePrice) {
         this.medicineWholesalePrice = medicineWholesalePrice;
+    }
+
+    public String getMedicineCountry() {
+        return medicineCountry;
+    }
+
+    public void setMedicineCountry(String medicineCountry) {
+        this.medicineCountry = medicineCountry;
     }
 }

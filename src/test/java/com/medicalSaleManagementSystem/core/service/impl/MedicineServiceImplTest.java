@@ -1,7 +1,7 @@
 //package com.medicalSaleManagementSystem.core.service.impl;
 //
 //import com.medicalSaleManagementSystem.core.model.DTO.MedicineDTO;
-//import com.medicalSaleManagementSystem.core.model.POJO.Medicine;
+//import com.medicalSaleManagementSystem.core.model.POJO.MedicineVO;
 //import com.medicalSaleManagementSystem.util.message.Msg;
 //import org.junit.Test;
 //import org.springframework.context.ApplicationContext;
@@ -25,8 +25,8 @@
 //        Msg msg = medicineService.vagueFindMedicineByName("1");
 //        //Msg msg = medicineService.findAllMedicine();
 //        System.out.println(msg);
-//        List<Medicine> medicineList= (List<Medicine>) msg.getExt().get("medicineList");
-//        for (Medicine medicine : medicineList) {
+//        List<MedicineVO> medicineList= (List<MedicineVO>) msg.getExt().get("medicineList");
+//        for (MedicineVO medicine : medicineList) {
 //            System.out.println(medicine.getMedicineName());
 //        }
 //    }

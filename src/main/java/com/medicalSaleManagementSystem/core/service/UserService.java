@@ -1,8 +1,10 @@
 package com.medicalSaleManagementSystem.core.service;
 
 import com.medicalSaleManagementSystem.core.model.DTO.UserDTO;
-import com.medicalSaleManagementSystem.util.message.Msg;
+import com.medicalSaleManagementSystem.core.model.entity.User;
 import com.medicalSaleManagementSystem.util.message.Resp;
+
+import java.util.List;
 
 public interface UserService {
     /**
@@ -10,17 +12,53 @@ public interface UserService {
      * @return 消息类
      * @author 林贤钦
      */
-    Resp login(UserDTO userDTO);
+    Resp loginByUserNameAndPassword(UserDTO userDTO);
 
     /**
      * 通过id查询用户
+     * @author 林贤钦
      * @return
      */
-    Resp findUserByEmpId(Integer userId);
+    User selectByPrimaryKey(Integer id);
+
+    /*
+     * 功能描述: <br>
+     * 〈〉通过userName查询用户
+     * @Param: userName
+     * @Return:  User
+     * @Author: 林贤钦
+     * @Date: 2019/12/12 21:50
+     */
+    List<User>  selectByPrimaryUserName(String  userName);
+    /**
+     * 添加用户信息
+     * @author 林贤钦
+     * @return
+     */
+    int insertSelective(UserDTO record);
 
     /**
-     *
+     * 删除账户，将user表中的valid状态改为0
+     * @param userId
+     * @author 林贤钦
      * @return
      */
-    Resp addUser();
+    int deleteByPrimaryKey(Integer userId);
+
+    /**
+     * 更新user信息
+     * @author 林贤钦
+     * @return
+     */
+    int updateByPrimaryKeySelective(UserDTO record);
+
+    /*
+     * 功能描述: <br>查询所有用户数据
+     * 〈〉
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/12 18:26
+     */
+    List<User> getAll();
 }
