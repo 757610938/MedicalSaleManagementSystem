@@ -120,7 +120,7 @@
 //    }
 //
 //    /**
-//     *  删除账户，将employee表中的valid状态改为1
+//     *  删除账户，将employee表中的valid状态改为0
 //     * @param empId
 //     * @return 消息类
 //     * @author 林贤钦
@@ -135,7 +135,7 @@
 //    }
 //
 //    /**
-//     * 获取员工的学生信息
+//     * 获取员工的信息
 //     *
 //     * @param employeeDTO
 //     * @return 消息类
@@ -158,7 +158,7 @@
 //        return Msg.fail("找不到该员工信息");
 //    }
 //    /**
-//     * 更新员工的学生信息
+//     * 更新员工的信息
 //     *
 //     * @param employeeDTO
 //     * @return 消息类

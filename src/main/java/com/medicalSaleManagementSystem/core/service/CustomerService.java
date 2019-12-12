@@ -1,16 +1,13 @@
 package com.medicalSaleManagementSystem.core.service;
 
 import com.medicalSaleManagementSystem.core.model.DTO.CustomerDTO;
+import com.medicalSaleManagementSystem.core.model.entity.Customer;
+import com.medicalSaleManagementSystem.core.model.entity.Medicine;
 import com.medicalSaleManagementSystem.util.message.Msg;
 
+import java.util.List;
+
 public interface CustomerService {
-    /**
-     * 查找数据库是否存在该客户名字
-     * @param name
-     * @return Msg
-     * @author 林贤钦
-     */
-    Msg findCustomerByName(String name);
 
     /**
      * 通过客户id查找客户信息
@@ -18,26 +15,45 @@ public interface CustomerService {
      * @return Msg
      * @author 林贤钦
      */
-    Msg findCustomerById(Integer id);
+    Customer selectByPrimaryKey(Integer id);
     /**
      * 注册客户信息
-     * @param customerDTO
+     * @param record
      * @return Msg
      * @author 林贤钦
      */
-    Msg addCustomer(CustomerDTO customerDTO);
+    int insertSelective(CustomerDTO record);
     /**
      * 通过客户id删除客户信息
      * @param id
      * @return Msg
      * @author 林贤钦
      */
-    Msg deleteCustomerById(Integer id);
+    int deleteByPrimaryKey(Integer id);
     /**
      * 更新客户信息
-     * @param customerDTO
+     * @param record
      * @return Msg
      * @author 林贤钦
      */
-    Msg updateCustomer(CustomerDTO customerDTO);
+    int updateByPrimaryKeySelective(CustomerDTO record);
+
+    /*
+     * 功能描述: <br>
+     * 〈〉查询所有客户信息
+     * @Param:
+     * @Return: List<Customer>
+     * @Author: 林贤钦
+     * @Date: 2019/12/12 21:08
+     */
+    List<Customer> getAll();
+    /*
+     * 功能描述: <br>
+     * 〈〉通过名称模糊查询数据库
+     * @Param:  name
+     * @Return: List<Customer>
+     * @Author: 林贤钦
+     * @Date: 2019/12/12 21:09
+     */
+    List<Customer> vagueSelectByPrimaryName(String name);
 }

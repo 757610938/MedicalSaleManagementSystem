@@ -1,142 +1,189 @@
-//package com.medicalSaleManagementSystem.core.controller;
-//
-//import com.medicalSaleManagementSystem.core.model.DTO.MedicineDTO;
-//import com.medicalSaleManagementSystem.core.model.POJO.Medicine;
-//import com.medicalSaleManagementSystem.core.model.VO.MedicineVo;
-//import com.medicalSaleManagementSystem.core.service.MedicineService;
-//import com.medicalSaleManagementSystem.util.BeanUtilEx;
-//import com.medicalSaleManagementSystem.util.message.Msg;
-//import com.medicalSaleManagementSystem.util.TypeCastHelper;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import com.medicalSaleManagementSystem.util.message.Result;
-//import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.ResponseBody;
-//
-//import java.util.List;
-//
-//@Controller
-//@RequestMapping(value = "/medicine")
-//public class MedicineController {
-//    @Autowired
-//    private MedicineService medicineService;
-//
-//    /**
-//     * 增加药品信息
-//     * @param medicineVo
-//     * @author 林贤钦
-//     * @return
-//     */
-//    @RequestMapping ( value = "/add", method = RequestMethod.POST )
-//    @ResponseBody
-//    public Result addMedicine(@RequestBody MedicineVo medicineVo){
-//        MedicineDTO medicineDTO=new MedicineDTO();
-//        BeanUtilEx.copyProperties(medicineDTO,medicineVo);//转化实体类
-//        Msg msg = medicineService.registerMedicine(medicineDTO);//调用service方法存入药品信息
-//        Result result = new Result();
-//        result.setStatus(msg.getCode());//设置返回状态码
-//        return result;
-//    }
-//    /**
-//     * 通过id查找药品信息
-//     * @param medicineId
-//     * @author 林贤钦
-//     * @return
-//     */
-//    @RequestMapping ( value = "/findId", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Result findMedicineById(String medicineId){
-//        Msg msg = medicineService.findMedicineById(TypeCastHelper.toInt(medicineId));
-//        Result result = new Result();
-//        result.setStatus(msg.getCode());//设置返回状态码
-//        result.setMessage(msg.getMsg());//设置返回消息
-//        if (msg.getCode()==200){
-//            result.setData(msg.getExt().get("medicine"));
-//        }
-//        return result;
-//    }
-//    /**
-//     * 通过药品名称查找药品信息
-//     * @param medicineName
-//     * @author 林贤钦
-//     * @return
-//     */
-//    @RequestMapping ( value = "/findName", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Result findMedicineByName(String medicineName){
-//        Msg msg = medicineService.findMedicineByName(medicineName);
-//        Result result = new Result();
-//        result.setStatus(msg.getCode());//设置返回状态码
-//        result.setMessage(msg.getMsg());//设置返回消息
-//        if (msg.getCode()==200){
-//            result.setData(msg.getExt().get("medicine"));
-//        }
-//        return result;
-//    }
-//    /**
-//     * 通过药品名称模糊查找药品信息
-//     * @param vagueName
-//     * @author 林贤钦
-//     * @return
-//     */
-//    @RequestMapping ( value = "/vagueFind", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Result vagueFindMedicineByName(String vagueName){
-//        Msg msg = medicineService.vagueFindMedicineByName(vagueName);
-//        Result result = new Result();
-//        result.setStatus(msg.getCode());//设置返回状态码
-//        result.setMessage(msg.getMsg());//设置返回消息
-//        List<Medicine> medicineList= (List<Medicine>) msg.getExt().get("medicineList");
-//        if (msg.getCode()==200){
-//            result.setData(medicineList);//返回药品list集合
-//        }
-//        return result;
-//    }
-//    /**
-//     * 通过id删除药品信息
-//     * @param medicineId
-//     * @author 林贤钦
-//     * @return
-//     */
-//    @RequestMapping ( value = "/deleteMedicineId", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Result deleteMedicineById(String medicineId){
-//        Msg msg = medicineService.deleteMedicineById(TypeCastHelper.toInt(medicineId));
-//        Result result = new Result();
-//        result.setStatus(msg.getCode());//设置返回状态码
-//        result.setMessage(msg.getMsg());//设置返回消息
-//        return result;
-//    }
-//
-//    @RequestMapping ( value = "/update", method = RequestMethod.POST )
-//    @ResponseBody
-//    public Result updateMedicine(@RequestBody MedicineVo medicineVo){
-//        MedicineDTO medicineDTO=new MedicineDTO();
-//        BeanUtilEx.copyProperties(medicineDTO,medicineVo);//转化实体类
-//        Msg msg = medicineService.updateMedicine(medicineDTO);//调用service方法更新药品信息
-//        Result result = new Result();
-//        result.setStatus(msg.getCode());//设置返回状态码
-//        return result;
-//    }
-//    /**
-//     * 查询所有药品信息
-//     * @param
-//     * @author 林贤钦
-//     * @return
-//     */
-//    @RequestMapping ( value = "/findAll", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Result findAllMedicine(){
-//        Msg msg = medicineService.findAllMedicine();
-//        Result result = new Result();
-//        result.setStatus(msg.getCode());//设置返回状态码
-//        result.setMessage(msg.getMsg());//设置返回消息
-//        List<Medicine> medicineList= (List<Medicine>) msg.getExt().get("medicineList");
-//        if (msg.getCode()==200){
-//            result.setData(medicineList);//返回药品list集合
-//        }
-//        return result;
-//    }
-//}
+package com.medicalSaleManagementSystem.core.controller;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.medicalSaleManagementSystem.core.model.DTO.MedicineDTO;
+import com.medicalSaleManagementSystem.core.model.VO.MedicineVO;
+import com.medicalSaleManagementSystem.core.model.entity.Medicine;
+import com.medicalSaleManagementSystem.core.model.entity.User;
+import com.medicalSaleManagementSystem.core.service.MedicineService;
+import com.medicalSaleManagementSystem.util.BeanUtilEx;
+import com.medicalSaleManagementSystem.util.message.HttpStatus;
+import com.medicalSaleManagementSystem.util.message.Msg;
+import com.medicalSaleManagementSystem.util.message.Resp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.ManagedList;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import com.medicalSaleManagementSystem.util.message.Result;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Controller
+@RequestMapping()
+public class MedicineController {
+    @Autowired
+    private MedicineService medicineService;
+
+    /**
+     * 增加药品信息
+     * @param medicineVo
+     * @author 林贤钦
+     * @return
+     */
+    @RequestMapping ( value = "/medicine", method = RequestMethod.POST )
+    @ResponseBody
+    public Resp addMedicine(@RequestBody MedicineVO medicineVo){
+        try{
+            MedicineDTO medicineDTO=new MedicineDTO();
+            BeanUtilEx.copyProperties(medicineDTO,medicineVo);//转化实体类
+            int i = medicineService.insertSelective(medicineDTO);//调用service方法存入药品信息
+            if(i==0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"增加药品信息失败");
+            }
+            return Resp.httpStatus(HttpStatus.OK,"增加药品信息成功！");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /**
+     * 通过id查找药品信息
+     * @param id
+     * @author 林贤钦
+     * @return
+     */
+    @RequestMapping ( value = "/medicine/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Resp findMedicineById(@PathVariable Integer id){
+        System.out.println("传入id--->"+id);
+        try{
+            MedicineDTO medicineDTO = medicineService.selectByPrimaryKey(id);
+            if(medicineDTO==null){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找药品信息失败");
+            }
+            MedicineVO medicineVO = new MedicineVO();
+            BeanUtilEx.copyProperties(medicineVO,medicineDTO);
+            Map<String, Object> ext = new HashMap<>();
+            ext.put("medicineVO", medicineVO);
+            return Resp.httpStatus(HttpStatus.OK,"查找药品信息成功！",ext);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /**
+     * 通过药品名称查找药品信息
+     * @param name
+     * @author 林贤钦
+     * @return
+     */
+    @RequestMapping ( value = "/medicine/findName", method = RequestMethod.GET)
+    @ResponseBody
+    public Resp findMedicineByName(String name){
+        try{
+            List<Medicine> medicineList = medicineService.selectByPrimaryName(name);
+            if(medicineList.size() == 0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找药品信息失败");
+            }
+            Map<String, Object> ext = new HashMap<>();
+            ext.put("medicineList", medicineList);
+            return Resp.httpStatus(HttpStatus.OK,"查找药品信息成功！",ext);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /**
+     * 通过药品名称模糊查找药品信息
+     * @param name
+     * @author 林贤钦
+     * @return
+     */
+    @RequestMapping ( value = "/medicines/{name}", method = RequestMethod.GET)
+    @ResponseBody
+    public Resp vagueFindMedicineByName(@PathVariable String name){
+        System.out.println("传入name--->"+name);
+        try{
+            List<Medicine> medicineList = medicineService.vagueFindMedicineByName(name);
+            if(medicineList.size() == 0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找药品信息失败");
+            }
+            //设置现在的页数为1，显示的条数为5条
+            PageHelper.startPage(1, 5);
+            PageInfo<Medicine> page  = new PageInfo<>(medicineList);
+            Map<String, Object> ext = new HashMap<>();
+            ext.put("page", page);
+            return Resp.httpStatus(HttpStatus.OK,"查找药品信息成功！",ext);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /**
+     * 通过id删除药品信息
+     * @param medicineId
+     * @author 林贤钦
+     * @return
+     */
+    @RequestMapping ( value = "/medicine/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Resp deleteMedicineById(Integer medicineId){
+        try{
+            int i = medicineService.deleteByPrimaryKey(medicineId);
+            if(i==0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"删除药品信息失败");
+            }
+            return Resp.httpStatus(HttpStatus.OK,"删除药品信息成功！");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+
+    @RequestMapping ( value = "/medicine", method = RequestMethod.PUT )
+    @ResponseBody
+    public Resp updateMedicine(@RequestBody MedicineVO medicineVO){
+        try{
+            MedicineDTO medicineDTO=new MedicineDTO();
+            BeanUtilEx.copyProperties(medicineDTO,medicineVO);//转化实体类
+            int i = medicineService.updateByPrimaryKeySelective(medicineDTO);//调用service方法更新药品信息
+            if(i==0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"更新药品信息失败");
+            }
+            return Resp.httpStatus(HttpStatus.OK,"更新药品信息成功！");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /**
+     * 查询所有药品信息
+     * @param
+     * @author 林贤钦
+     * @return
+     */
+    @RequestMapping ( value = "/medicine", method = RequestMethod.GET)
+    @ResponseBody
+    public Resp getAll( ){
+        try{
+            //设置现在的页数为1，显示的条数为5条
+            PageHelper.startPage(1, 5);
+            List<Medicine> medicineList = medicineService.getAll();
+            PageInfo<Medicine> page  = new PageInfo<>(medicineList);
+            return Resp.httpStatus(HttpStatus.OK,"查找药品信息成功！",page);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+}
