@@ -37,6 +37,16 @@ public class Medicine {
 
     private Double medicineWholesalePrice;
 
+    private Integer stockId;
+
+    public Integer getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(Integer stockId) {
+        this.stockId = stockId;
+    }
+
     public Integer getMedicineId() {
         return medicineId;
     }

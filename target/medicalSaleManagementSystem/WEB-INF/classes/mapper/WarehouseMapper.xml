@@ -4,8 +4,12 @@
 
   <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.Warehouse">
     <id column="whse_id" jdbcType="INTEGER" property="whseId" />
-    <result column="medicine_id" jdbcType="INTEGER" property="medicineId" />
-    <result column="whse_amount" jdbcType="INTEGER" property="whseAmount" />
+    <result column="whse_Name" jdbcType="VARCHAR" property="whseName" />
+    <result column="whse_Address" jdbcType="VARCHAR" property="whseAddress" />
+    <result column="whse_Tel" jdbcType="VARCHAR" property="whseTel"/>
+    <result column="whse_Capacity" jdbcType="INTEGER" property="whseCapacity" />
+    <result column="user_Number" jdbcType="VARCHAR" property="userNumber" />
+    <result column="gen_Time" jdbcType="VARCHAR" property="genTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,18 +70,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    whse_id, medicine_id, whse_amount
+    whse_id, whse_Name,whse_Address,whse_Tel,whse_Capacity,user_Number,gen_Time
   </sql>
   <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample" resultMap="BaseResultMap">
     select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
+    *
     from tb_warehouse
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
@@ -88,6 +86,30 @@
     from tb_warehouse
     where whse_id = #{whseId,jdbcType=INTEGER}
   </select>
+
+  <!--根据仓库名模糊查询仓库-->
+  <select id="selectWhseByWhseName" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample"
+          resultMap="BaseResultMap">
+    select
+    whse_id, whse_Name,whse_Address,whse_Tel,whse_Capacity,user_Number,gen_Time
+    from tb_warehouse
+    where whse_Name like #{whseName,jdbcType=VARCHAR}
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <!--查询所有仓库，用于列表展示-->
+  <select id="findAllWarehouse" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample"
+          resultMap="BaseResultMap">
+    select
+    *
+    from tb_warehouse
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_warehouse
     where whse_id = #{whseId,jdbcType=INTEGER}
@@ -110,22 +132,46 @@
       <if test="whseId != null">
         whse_id,
       </if>
-      <if test="medicineId != null">
-        medicine_id,
+      <if test="whseName != null">
+        whse_Name,
       </if>
-      <if test="whseAmount != null">
-        whse_amount,
+      <if test="whseAddress != null">
+        whse_Address,
+      </if>
+      <if test="whseTel != null">
+        whse_Tel,
+      </if>
+      <if test="whseCapacity != null">
+        whse_Capacity,
+      </if>
+      <if test="userNumber != null">
+        user_Number,
+      </if>
+      <if test="genTime != null">
+        gen_Time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="whseId != null">
         #{whseId,jdbcType=INTEGER},
       </if>
-      <if test="medicineId != null">
-        #{medicineId,jdbcType=INTEGER},
+      <if test="whseName != null">
+        #{whseName,jdbcType=VARCHAR},
       </if>
-      <if test="whseAmount != null">
-        #{whseAmount,jdbcType=INTEGER},
+      <if test="whseAddress != null">
+        #{whseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="whseTel != null">
+        #{whseTel,jdbcType=VARCHAR},
+      </if>
+      <if test="whseCapacity != null">
+        #{whseCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="userNumber != null">
+        #{userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="genTime != null">
+        #{genTime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

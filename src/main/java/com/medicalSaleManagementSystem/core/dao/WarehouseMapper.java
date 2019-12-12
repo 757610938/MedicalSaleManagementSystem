@@ -18,9 +18,23 @@ public interface WarehouseMapper {
 
     List<Warehouse> selectByExample(WarehouseExample example);
 
+    /**
+     * 通过仓库名查找仓库
+     * @param warehouseExample
+     * @return
+     */
     List<Warehouse> selectWhseByWhseName(WarehouseExample warehouseExample);
 
     Warehouse selectByPrimaryKey(Integer whseId);
+
+    /**
+     * 查询所有仓库信息并且作为首页列表展示
+     * @param warehouseExample
+     * @return
+     */
+    List<Warehouse> findAllWarehouse(WarehouseExample warehouseExample);
+
+
 
     int updateByExampleSelective(@Param("record") Warehouse record, @Param("example") WarehouseExample example);
 

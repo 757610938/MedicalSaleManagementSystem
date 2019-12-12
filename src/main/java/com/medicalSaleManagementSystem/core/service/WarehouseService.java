@@ -2,6 +2,7 @@ package com.medicalSaleManagementSystem.core.service;
 
 import com.medicalSaleManagementSystem.core.model.entity.Warehouse;
 import com.medicalSaleManagementSystem.util.message.Msg;
+import com.medicalSaleManagementSystem.util.message.Resp;
 
 import java.util.List;
 
@@ -22,20 +23,22 @@ public interface WarehouseService {
      * @param page
      * @return
      */
-    Msg findWhseByFuzzySearch(String key,String orderBy,Integer page);
+    Resp findWhseByFuzzySearch(String key, String orderBy, Integer page);
+
+    List<Warehouse> findAllWarehouse();
 
     /**
      * 查询所有的药品信息，以列表形式展示
      * @return
      */
-    List<Warehouse> findAllWhse();
+    Msg WarehouseList(String orderby, Integer page);
 
     /**
      * 新增仓库
      * @param warehouse
      * @return
      */
-    Msg addWhse(Warehouse warehouse);
+    void addWhse(Warehouse warehouse);
 
     /**
      * 根据仓库Id删除仓库
@@ -52,7 +55,7 @@ public interface WarehouseService {
     int deleteWhseByWhseId(Integer whseId);
 
     /**
-     *
+     * 批量删除仓库
      * @param ids
      */
     void deleteWhseByWhseIds(List<Integer> ids);

@@ -1,5 +1,9 @@
 package com.medicalSaleManagementSystem.core.model.entity;
 
+import com.alibaba.fastjson.JSON;
+
+import java.util.Date;
+
 public class Warehouse {
     private Integer whseId;
 
@@ -12,6 +16,16 @@ public class Warehouse {
     private Integer whseCapacity;
 
     private String userNumber;
+
+    private Date genTime;
+
+    public Date getGenTime() {
+        return genTime;
+    }
+
+    public void setGenTime(Date genTime) {
+        this.genTime = genTime;
+    }
 
     public Integer getWhseId() {
         return whseId;
@@ -59,5 +73,9 @@ public class Warehouse {
 
     public void setUserNumber(String userNumber) {
         this.userNumber = userNumber == null ? null : userNumber.trim();
+    }
+
+    public String toString(){
+        return JSON.toJSONString(this);
     }
 }
