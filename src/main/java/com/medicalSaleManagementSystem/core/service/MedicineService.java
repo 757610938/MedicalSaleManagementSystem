@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.service;
 
+import com.medicalSaleManagementSystem.core.model.BO.MedicineBO;
 import com.medicalSaleManagementSystem.core.model.DTO.MedicineDTO;
 import com.medicalSaleManagementSystem.core.model.entity.Medicine;
 import com.medicalSaleManagementSystem.util.message.Msg;
@@ -60,5 +61,5 @@ public interface MedicineService {
      * @return msg
      * @author 林贤钦
      */
-    List<Medicine> getAll();
+    List<MedicineBO> getAll();
 }

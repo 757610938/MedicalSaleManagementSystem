@@ -19,7 +19,9 @@
     <result column="medicine_Purchase_Price" jdbcType="DOUBLE" property="medicinePurchasePrice" />
     <result column="medicine_Retail_Price" jdbcType="DOUBLE" property="medicineRetailPrice" />
     <result column="medicine_Wholesale_Price" jdbcType="DOUBLE" property="medicineWholesalePrice" />
+    <result column="stock_id" jdbcType="INTEGER" property="stockId" />
   </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -83,7 +85,7 @@
     medicine_Manufacturer, medicine_Specification, medicine_Manufacturing_Address, medicine_Category, 
     medicine_Approvaldate, medicine_Original_Approval_Number, medicine_Suppliers_id, 
     medicine_country, medicine_Picture, medicine_Purchase_Price, medicine_Retail_Price, 
-    medicine_Wholesale_Price
+    medicine_Wholesale_Price,stock_id
   </sql>
   <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.MedicineExample" resultMap="BaseResultMap">
     select
@@ -99,6 +101,39 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <select id="getAll"  resultType="com.medicalSaleManagementSystem.core.model.BO.MedicineBO">
+    SELECT
+        tb_supplier.supplier_Name,
+        tb_supplier.supplier_Warehouse,
+        tb_supplier.supplier_Warehous_Tel,
+        tb_supplier.supplier_Contacts_name,
+        tb_supplier.supplier_Contacts_tel,
+        tb_medicine.medicine_id,
+        tb_medicine.medicine_Approval_Number,
+        tb_medicine.medicine_Name,
+        tb_medicine.medicine_English_Name,
+        tb_medicine.medicine_Dosageform_Category,
+        tb_medicine.medicine_Manufacturer,
+        tb_medicine.medicine_Specification,
+        tb_medicine.medicine_Manufacturing_Address,
+        tb_medicine.medicine_Category,
+        tb_medicine.medicine_Approvaldate,
+        tb_medicine.medicine_Original_Approval_Number,
+        tb_medicine.medicine_country,
+        tb_medicine.medicine_Picture,
+        tb_medicine.medicine_Purchase_Price,
+        tb_medicine.medicine_Retail_Price,
+        tb_medicine.medicine_Wholesale_Price,
+        tb_stock.stock_Amount,
+        tb_warehouse.whse_Name
+        FROM
+        tb_medicine
+        LEFT JOIN tb_stock ON tb_stock.medicine_id = tb_medicine.medicine_id AND tb_medicine.stock_id = tb_stock.stock_id
+        LEFT JOIN tb_warehouse ON tb_stock.whse_id = tb_warehouse.whse_id
+        LEFT JOIN tb_supplier ON tb_medicine.medicine_Suppliers_id = tb_supplier.supplier_id
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -123,7 +158,7 @@
       medicine_Approvaldate, medicine_Original_Approval_Number, 
       medicine_Suppliers_id, medicine_country, medicine_Picture, 
       medicine_Purchase_Price, medicine_Retail_Price, 
-      medicine_Wholesale_Price)
+      medicine_Wholesale_Price,stock_id)
     values (#{medicineId,jdbcType=INTEGER}, #{medicineApprovalNumber,jdbcType=VARCHAR}, 
       #{medicineName,jdbcType=VARCHAR}, #{medicineEnglishName,jdbcType=VARCHAR}, #{medicineDosageformCategory,jdbcType=VARCHAR}, 
       #{medicineManufacturer,jdbcType=VARCHAR}, #{medicineSpecification,jdbcType=VARCHAR}, 
@@ -131,7 +166,7 @@
       #{medicineApprovaldate,jdbcType=TIMESTAMP}, #{medicineOriginalApprovalNumber,jdbcType=VARCHAR}, 
       #{medicineSuppliersId,jdbcType=INTEGER}, #{medicineCountry,jdbcType=VARCHAR}, #{medicinePicture,jdbcType=VARCHAR}, 
       #{medicinePurchasePrice,jdbcType=DOUBLE}, #{medicineRetailPrice,jdbcType=DOUBLE}, 
-      #{medicineWholesalePrice,jdbcType=DOUBLE})
+      #{medicineWholesalePrice,jdbcType=DOUBLE},#{stockId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.Medicine">
     insert into tb_medicine
@@ -187,6 +222,9 @@
       <if test="medicineWholesalePrice != null">
         medicine_Wholesale_Price,
       </if>
+      <if test="stockId != null">
+        stock_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="medicineId != null">
@@ -239,6 +277,9 @@
       </if>
       <if test="medicineWholesalePrice != null">
         #{medicineWholesalePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="stockId != null">
+        #{stockId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -302,6 +343,9 @@
       <if test="record.medicineWholesalePrice != null">
         medicine_Wholesale_Price = #{record.medicineWholesalePrice,jdbcType=DOUBLE},
       </if>
+      <if test="record.stockId != null">
+        stock_id = #{record.stockId,jdbcType=Integer},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -325,7 +369,8 @@
       medicine_Picture = #{record.medicinePicture,jdbcType=VARCHAR},
       medicine_Purchase_Price = #{record.medicinePurchasePrice,jdbcType=DOUBLE},
       medicine_Retail_Price = #{record.medicineRetailPrice,jdbcType=DOUBLE},
-      medicine_Wholesale_Price = #{record.medicineWholesalePrice,jdbcType=DOUBLE}
+      medicine_Wholesale_Price = #{record.medicineWholesalePrice,jdbcType=DOUBLE},
+    stock_id = #{record.stockId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -381,6 +426,9 @@
       <if test="medicineWholesalePrice != null">
         medicine_Wholesale_Price = #{medicineWholesalePrice,jdbcType=DOUBLE},
       </if>
+      <if test="stockId != null">
+        stock_id = #{stockId,jdbcType=Integer},
+      </if>
     </set>
     where medicine_id = #{medicineId,jdbcType=INTEGER}
   </update>
@@ -401,7 +449,8 @@
       medicine_Picture = #{medicinePicture,jdbcType=VARCHAR},
       medicine_Purchase_Price = #{medicinePurchasePrice,jdbcType=DOUBLE},
       medicine_Retail_Price = #{medicineRetailPrice,jdbcType=DOUBLE},
-      medicine_Wholesale_Price = #{medicineWholesalePrice,jdbcType=DOUBLE}
+      medicine_Wholesale_Price = #{medicineWholesalePrice,jdbcType=DOUBLE},
+      stock_id = #{stockId,jdbcType=INTEGER}
     where medicine_id = #{medicineId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.dao;
 
+import com.medicalSaleManagementSystem.core.model.BO.MedicineBO;
 import com.medicalSaleManagementSystem.core.model.entity.Medicine;
 import com.medicalSaleManagementSystem.core.model.entity.MedicineExample;
 import java.util.List;
@@ -27,4 +28,7 @@ public interface MedicineMapper {
     int updateByPrimaryKeySelective(Medicine record);
 
     int updateByPrimaryKey(Medicine record);
+
+    List<MedicineBO> getAll();
+
 }

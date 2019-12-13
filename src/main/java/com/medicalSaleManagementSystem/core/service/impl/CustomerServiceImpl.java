@@ -58,7 +58,9 @@ public class CustomerServiceImpl  implements CustomerService {
     @Override
     public int deleteByPrimaryKey(Integer id) {
         try {
-            return customerMapper.deleteByPrimaryKey(id);
+            int i = customerMapper.deleteByPrimaryKey(id);
+            System.out.println("deleteByPrimaryKey--->"+i);
+            return i;
         }catch (Exception e){
             e.printStackTrace();
         }

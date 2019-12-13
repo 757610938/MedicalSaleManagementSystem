@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.service.impl;
 
+import com.medicalSaleManagementSystem.core.model.BO.MedicineBO;
 import com.medicalSaleManagementSystem.core.model.DTO.MedicineDTO;
 import com.medicalSaleManagementSystem.core.model.entity.Medicine;
 import com.medicalSaleManagementSystem.core.model.entity.MedicineExample;
@@ -113,7 +114,7 @@ public class MedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public  List<Medicine> getAll() {
-        return medicineMapper.selectByExample(null);
+    public  List<MedicineBO> getAll() {
+        return medicineMapper.getAll();
     }
 }

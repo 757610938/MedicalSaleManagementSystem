@@ -114,6 +114,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int openValidByPrimaryKey(Integer userId) {
+        try{
+            User user = new User();
+            user.setUserId(userId);
+            user.setValid(1);//将user状态改为0
+            return userMapper.updateByPrimaryKeySelective(user);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return  0;
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(UserDTO record){
         if ("".equals(record.getUserName()) || "".equals(record.getPassword())) {
             //400 (Bad Request) 如：密码不符合要求，昵称不允许为空，等等；
