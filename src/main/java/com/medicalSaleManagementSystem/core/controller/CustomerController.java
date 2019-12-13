@@ -66,6 +66,7 @@ public class CustomerController {
     @ResponseBody
     public Resp selectByPrimaryKey(@PathVariable("id")Integer id){
         try{
+            System.out.println("selectByPrimaryKey");
             Customer customer = customerService.selectByPrimaryKey(id);
             if (customer==null){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找客户信息失败");
