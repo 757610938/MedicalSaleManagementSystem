@@ -43,6 +43,7 @@ public class CustomerController {
     @ResponseBody
     public Resp<Void> insertSelective(@RequestBody CustomerVO customerVO){
         try{
+            System.out.println(customerVO);
             CustomerDTO customerDTO = new CustomerDTO();
             BeanUtilEx.copyProperties(customerDTO,customerVO);
             int i = customerService.insertSelective(customerDTO);
@@ -121,6 +122,7 @@ public class CustomerController {
             if(i==0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"更新客户信息失败");
             }
+            System.out.println(customerVO);
             return Resp.httpStatus(HttpStatus.OK,"更新客户信息成功！");
         }catch (Exception e){
             e.printStackTrace();
