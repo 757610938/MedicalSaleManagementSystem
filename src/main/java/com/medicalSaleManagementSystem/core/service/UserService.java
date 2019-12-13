@@ -38,13 +38,20 @@ public interface UserService {
     int insertSelective(UserDTO record);
 
     /**
-     * 删除账户，将user表中的valid状态改为0
+     * 关闭账户，将user表中的valid状态改为0
      * @param userId
      * @author 林贤钦
      * @return
      */
     int deleteByPrimaryKey(Integer userId);
 
+    /**
+     * 开启账户状态，将user表中的valid状态改为1
+     * @param userId
+     * @author 林贤钦
+     * @return
+     */
+    int openValidByPrimaryKey(Integer userId);
     /**
      * 更新user信息
      * @author 林贤钦

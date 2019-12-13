@@ -1,4 +1,175 @@
-//package com.medicalSaleManagementSystem.core.controller;
-//
-//public class SupplierController {
-//}
+package com.medicalSaleManagementSystem.core.controller;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.medicalSaleManagementSystem.core.model.DTO.SupplierDTO;
+import com.medicalSaleManagementSystem.core.model.VO.SupplierVO;
+import com.medicalSaleManagementSystem.core.model.entity.Supplier;
+import com.medicalSaleManagementSystem.core.service.SupplierService;
+import com.medicalSaleManagementSystem.util.BeanUtilEx;
+import com.medicalSaleManagementSystem.util.message.HttpStatus;
+import com.medicalSaleManagementSystem.util.message.Resp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Controller
+@Scope(value = "prototype")
+public class SupplierController {
+    @Autowired
+    private SupplierService supplierService;
+    @RequestMapping("/supplier")
+    public String index() {
+        return "/supplierManagement/supplier";
+    }
+    @RequestMapping("/suppliers")
+    public String indexs() {
+        return "/supplierManagement/suppliers";
+    }
+    /*
+     * 功能描述: <br>
+     * 〈〉添加供应商信息
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/13 1:05
+     */
+    @RequestMapping ( value = "/supplier", method = RequestMethod.POST)
+    @ResponseBody
+    public Resp insertSelective(@RequestBody SupplierVO supplierVO){
+        try{
+            SupplierDTO supplierDTO=new SupplierDTO();
+            BeanUtilEx.copyProperties(supplierDTO,supplierVO);//转化实体类
+            int i = supplierService.insertSelective(supplierDTO);//调用service方法存入药品信息
+            if(i==0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"增加供应商信息失败");
+            }
+            return Resp.httpStatus(HttpStatus.OK,"增加供应商信息成功！");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /*
+     * 功能描述: <br>
+     * 〈〉通过id查找供应商信息
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/13 1:07
+     */
+    @RequestMapping ( value = "/supplier/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Resp selectByPrimaryKey(@PathVariable Integer id){
+        try{
+            Supplier supplier = supplierService.selectByPrimaryKey(id);
+            if(supplier==null){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找供应商信息失败");
+            }
+            SupplierVO supplierVO = new SupplierVO();
+            BeanUtilEx.copyProperties(supplierVO,supplier);
+            Map<String, Object> ext = new HashMap<>();
+            ext.put("supplierVO", supplierVO);
+            return Resp.httpStatus(HttpStatus.OK,"查找供应商信息成功！",ext);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /*
+     * 功能描述: <br>
+     * 〈〉通过id删除供应商信息
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/13 1:11
+     */
+    @RequestMapping ( value = "/supplier/{id}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public Resp deleteByPrimaryKey(@PathVariable Integer id){
+        try{
+            int i = supplierService.deleteByPrimaryKey(id);
+            if(i==0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"删除供应商信息失败");
+            }
+            return Resp.httpStatus(HttpStatus.OK,"删除供应商信息成功！");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /*
+     * 功能描述: <br>
+     * 〈〉更新供应商信息
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/13 1:12
+     */
+    @RequestMapping ( value = "/supplier", method = RequestMethod.PUT )
+    @ResponseBody
+    public Resp updateByPrimaryKeySelective(@RequestBody SupplierVO supplierVO){
+        try{
+            SupplierDTO supplierDTO=new SupplierDTO();
+            BeanUtilEx.copyProperties(supplierDTO,supplierVO);//转化实体类
+            int i = supplierService.updateByPrimaryKeySelective(supplierDTO);//调用service方法更新药品信息
+            if(i==0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"更新供应商信息失败");
+            }
+            return Resp.httpStatus(HttpStatus.OK,"更新供应商信息成功！");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /*
+     * 功能描述: <br>
+     * 〈〉分页查询供应商信息
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/13 1:16
+     */
+    @RequestMapping ( value = "/suppliers", method = RequestMethod.GET)
+    @ResponseBody
+    public Resp getAll(@RequestParam(value = "pn", defaultValue = "1") int pn){
+        try{
+            List<Supplier> supplierList = supplierService.getAll();
+            //设置现在的页数为1，显示的条数为5条
+            PageHelper.startPage(pn, 5);
+            PageInfo<Supplier> pageInfo  = new PageInfo<>(supplierList);
+            return Resp.httpStatus(HttpStatus.OK,"查找供应商信息成功！",pageInfo);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+
+    @RequestMapping ( value = "/suppliers/{name}", method = RequestMethod.GET)
+    @ResponseBody
+    public Resp vagueSelectByPrimaryName(@RequestParam(value = "pn", defaultValue = "1") int pn ,@PathVariable String name){
+        try{
+            List<Supplier> supplierList = supplierService.vagueSelectByPrimaryName(name);
+            if(supplierList.size() == 0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找供应商信息失败");
+            }
+            //设置现在的页数为1，显示的条数为5条
+            PageHelper.startPage(1, 5);
+            PageInfo<Supplier> pageInfo  = new PageInfo<>(supplierList);
+            return Resp.httpStatus(HttpStatus.OK,"查找供应商信息成功！",pageInfo);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+}

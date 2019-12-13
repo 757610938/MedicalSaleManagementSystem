@@ -1,7 +1,7 @@
 package com.medicalSaleManagementSystem.core.service;
 
-import com.medicalSaleManagementSystem.core.model.entity.Supplier;
 import com.medicalSaleManagementSystem.core.model.DTO.SupplierDTO;
+import com.medicalSaleManagementSystem.core.model.entity.Supplier;
 
 import java.util.List;
 

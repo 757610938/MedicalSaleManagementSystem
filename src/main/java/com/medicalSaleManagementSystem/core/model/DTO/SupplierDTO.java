@@ -15,15 +15,15 @@ public class SupplierDTO {
 
     private String supplierOpeningBank;
 
-    private String supplierBanknumber;
+    private String supplierBankNumber;
 
     private String supplierWarehouse;
 
-    private String supplierWarehoustel;
+    private String supplierWarehousTel;
 
-    private String supplierContactsname;
+    private String supplierContactsName;
 
-    private String supplierContactstel;
+    private String supplierContactsTel;
 
     public Integer getSupplierId() {
         return supplierId;
@@ -81,12 +81,12 @@ public class SupplierDTO {
         this.supplierOpeningBank = supplierOpeningBank == null ? null : supplierOpeningBank.trim();
     }
 
-    public String getSupplierBanknumber() {
-        return supplierBanknumber;
+    public String getSupplierBankNumber() {
+        return supplierBankNumber;
     }
 
-    public void setSupplierBanknumber(String supplierBanknumber) {
-        this.supplierBanknumber = supplierBanknumber == null ? null : supplierBanknumber.trim();
+    public void setSupplierBankNumber(String supplierBankNumber) {
+        this.supplierBankNumber = supplierBankNumber == null ? null : supplierBankNumber.trim();
     }
 
     public String getSupplierWarehouse() {
@@ -97,27 +97,27 @@ public class SupplierDTO {
         this.supplierWarehouse = supplierWarehouse == null ? null : supplierWarehouse.trim();
     }
 
-    public String getSupplierWarehoustel() {
-        return supplierWarehoustel;
+    public String getSupplierWarehousTel() {
+        return supplierWarehousTel;
     }
 
-    public void setSupplierWarehoustel(String supplierWarehoustel) {
-        this.supplierWarehoustel = supplierWarehoustel == null ? null : supplierWarehoustel.trim();
+    public void setSupplierWarehousTel(String supplierWarehousTel) {
+        this.supplierWarehousTel = supplierWarehousTel == null ? null : supplierWarehousTel.trim();
     }
 
-    public String getSupplierContactsname() {
-        return supplierContactsname;
+    public String getSupplierContactsName() {
+        return supplierContactsName;
     }
 
-    public void setSupplierContactsname(String supplierContactsname) {
-        this.supplierContactsname = supplierContactsname == null ? null : supplierContactsname.trim();
+    public void setSupplierContactsName(String supplierContactsName) {
+        this.supplierContactsName = supplierContactsName == null ? null : supplierContactsName.trim();
     }
 
-    public String getSupplierContactstel() {
-        return supplierContactstel;
+    public String getSupplierContactsTel() {
+        return supplierContactsTel;
     }
 
-    public void setSupplierContactstel(String supplierContactstel) {
-        this.supplierContactstel = supplierContactstel == null ? null : supplierContactstel.trim();
+    public void setSupplierContactsTel(String supplierContactsTel) {
+        this.supplierContactsTel = supplierContactsTel == null ? null : supplierContactsTel.trim();
     }
 }
