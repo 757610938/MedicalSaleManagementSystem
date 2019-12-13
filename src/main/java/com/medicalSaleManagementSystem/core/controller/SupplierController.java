@@ -138,13 +138,13 @@ public class SupplierController {
      * @Author: 林贤钦
      * @Date: 2019/12/13 1:16
      */
-    @RequestMapping ( value = "/suppliers", method = RequestMethod.GET)
+    @RequestMapping ( value = "/suppliers/{pageNum}/{pageSize}", method = RequestMethod.GET)
     @ResponseBody
-    public Resp getAll(@RequestParam(value = "pn", defaultValue = "1") int pn){
+    public Resp getAll(@PathVariable int pageNum ,@PathVariable int pageSize){
         try{
+            //设置现在的页数为pageNum，显示的条数为pageSize条
+            PageHelper.startPage(pageNum, pageSize);
             List<Supplier> supplierList = supplierService.getAll();
-            //设置现在的页数为1，显示的条数为5条
-            PageHelper.startPage(pn, 5);
             PageInfo<Supplier> pageInfo  = new PageInfo<>(supplierList);
             return Resp.httpStatus(HttpStatus.OK,"查找供应商信息成功！",pageInfo);
         }catch (Exception e){
@@ -154,16 +154,15 @@ public class SupplierController {
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
 
-    @RequestMapping ( value = "/suppliers/{name}", method = RequestMethod.GET)
+    @RequestMapping ( value = "/suppliers/{pageNum}/{pageSize}/{name}", method = RequestMethod.GET)
     @ResponseBody
-    public Resp vagueSelectByPrimaryName(@RequestParam(value = "pn", defaultValue = "1") int pn ,@PathVariable String name){
+    public Resp vagueSelectByPrimaryName(@PathVariable String name,@PathVariable int pageNum ,@PathVariable int pageSize){
         try{
+            PageHelper.startPage(pageNum, pageSize);  //设置现在的页数为pageNum，显示的条数为pageSize条
             List<Supplier> supplierList = supplierService.vagueSelectByPrimaryName(name);
             if(supplierList.size() == 0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找供应商信息失败");
             }
-            //设置现在的页数为1，显示的条数为5条
-            PageHelper.startPage(1, 5);
             PageInfo<Supplier> pageInfo  = new PageInfo<>(supplierList);
             return Resp.httpStatus(HttpStatus.OK,"查找供应商信息成功！",pageInfo);
         }catch (Exception e){
