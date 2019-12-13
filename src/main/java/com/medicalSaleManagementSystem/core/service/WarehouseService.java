@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.service;
 
+import com.medicalSaleManagementSystem.core.model.VO.WarehouseVO;
 import com.medicalSaleManagementSystem.core.model.entity.Warehouse;
 import com.medicalSaleManagementSystem.util.message.Msg;
 import com.medicalSaleManagementSystem.util.message.Resp;
@@ -62,10 +63,10 @@ public interface WarehouseService {
 
     /**
      * 更新仓库信息
-     * @param warehouse
+     * @param warehouseVO
      * @return
      */
-    Msg updateWhse(Warehouse warehouse);
+    Resp updateWhse(WarehouseVO warehouseVO);
 
 
 

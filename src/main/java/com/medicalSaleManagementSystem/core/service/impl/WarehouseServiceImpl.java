@@ -59,7 +59,7 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     public List<Warehouse> findAllWarehouse() {
-        return warehouseMapper.selectByExample(null);
+        return warehouseMapper.selectAll(null);
     }
 
     @Override
@@ -108,14 +108,23 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public Msg updateWhse(Warehouse warehouse) {
+    public Resp updateWhse(WarehouseVO warehouseVO) {
         try {
-            warehouseMapper.updateByPrimaryKey(warehouse);
-            return Msg.success();
+            if (warehouseVO.getWhseId() == null || warehouseVO.getWhseId() <= 0) {
+                return Resp.fail("当前仓库ID为非法ID");
+            }
+            Warehouse warehouse = warehouseVOToEntity(warehouseVO);
+            WarehouseExample warehouseExample = new WarehouseExample();
+            WarehouseExample.Criteria criteria = warehouseExample.createCriteria();
+            criteria.andWhseIdEqualTo(warehouse.getWhseId());
+            List<Warehouse> warehouseList = warehouseMapper.selectByExample(warehouseExample);
+            warehouse.setWhseId(warehouseList.get(0).getWhseId());
+            warehouseMapper.updateByPrimaryKeySelective(warehouse);
         } catch (Exception e) {
-            LoggerUtils.error(WarehouseServiceImpl.class, "更新失败", e);
-            return Msg.fail("更新失败");
+            e.printStackTrace();
+            return Resp.fail("修改失败，请重新再试一次");
         }
+        return Resp.success("更新成功");
     }
 
     private WarehouseVO entityToVO(Warehouse warehouse) {
@@ -127,5 +136,28 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouseVO.setWhseName(warehouse.getWhseName());
         warehouseVO.setWhseTel(warehouse.getWhseTel());
         return warehouseVO;
+    }
+
+    private Warehouse warehouseVOToEntity(WarehouseVO warehouseVO) {
+        Warehouse warehouse = new Warehouse();
+        if (warehouseVO.getWhseId() != null) {
+            warehouse.setWhseId(warehouseVO.getWhseId());
+        }
+        if (warehouseVO.getUserNumber() != null && !"".equals(warehouseVO.getUserNumber())) {
+            warehouse.setUserNumber(warehouseVO.getUserNumber());
+        }
+        if (warehouseVO.getWhseAddress() != null && !"".equals(warehouseVO.getWhseAddress())) {
+            warehouse.setWhseAddress(warehouseVO.getWhseAddress());
+        }
+        if (warehouseVO.getWhseCapacity() != null && !"".equals(warehouseVO.getWhseCapacity())) {
+            warehouse.setWhseCapacity(warehouseVO.getWhseCapacity());
+        }
+        if (warehouseVO.getWhseName() != null && !"".equals(warehouseVO.getWhseName())) {
+            warehouse.setWhseName(warehouseVO.getWhseName());
+        }
+        if (warehouseVO.getWhseTel() != null && !"".equals(warehouseVO.getWhseTel())) {
+            warehouse.setWhseTel(warehouseVO.getWhseTel());
+        }
+        return warehouse;
     }
 }
