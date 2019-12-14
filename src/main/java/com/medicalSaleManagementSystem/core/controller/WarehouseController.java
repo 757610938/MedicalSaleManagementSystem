@@ -21,15 +21,15 @@ import java.util.*;
 public class WarehouseController {
 
     @Autowired
-    WarehouseService warehouseService;
+    private WarehouseService warehouseService;
 
     @RequestMapping("/warehouse")
     public String index() {
-        return "/warehouseManagement/warehouse";
+        return "/warehouseManage/warehouse";
     }
 
     @ResponseBody
-    @RequestMapping("/warehouseManagement/jsonWarehouseList")
+    @RequestMapping("/warehouseManage/jsonWarehouseList")
     public Resp warehouseList(@RequestParam(value = "pn", defaultValue = "1") int pn) {
         PageHelper.startPage(pn, 5);
         List<Warehouse> warehouseList = warehouseService.findAllWarehouse();
@@ -38,13 +38,13 @@ public class WarehouseController {
     }
 
     @ResponseBody
-    @RequestMapping("/warehouseManagement/selectWarehouse")
+    @RequestMapping("/warehouseManage/selectWarehouse")
     public Resp findWarehouseByFuzzySearch(Integer page, String orderBy, String key) {
         return warehouseService.findWhseByFuzzySearch(key, orderBy, page);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/warehouseManagement/warehouse", method = RequestMethod.POST)
+    @RequestMapping(value = "/warehouseManage/warehouse", method = RequestMethod.POST)
     public Resp addWarehouse(Warehouse warehouse) {
         try {
             warehouse.setGenTime(new Date(System.currentTimeMillis()));
@@ -57,7 +57,7 @@ public class WarehouseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/warehouseManagement/warehouse/{ids}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/warehouseManage/warehouse/{ids}", method = RequestMethod.DELETE)
     public Resp deleteWarehouse(@PathVariable("ids") String ids) {
         try {
             if (ids.contains("-")) {
@@ -79,13 +79,13 @@ public class WarehouseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/warehouseManagement/warehouse", method = RequestMethod.PUT)
+    @RequestMapping(value = "/warehouseManage/warehouse", method = RequestMethod.PUT)
     public Resp updateWarehouse(@Valid WarehouseVO warehouseVO) {
         return warehouseService.updateWhse(warehouseVO);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/warehouseManagement/warehouse", method = RequestMethod.GET)
+    @RequestMapping(value = "/warehouseManage/warehouse", method = RequestMethod.GET)
     public Resp findWarehouse(WarehouseVO warehouseVO) {
         return warehouseService.findWhseById(warehouseVO);
     }

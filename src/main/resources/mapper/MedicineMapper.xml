@@ -102,7 +102,7 @@
     </if>
   </select>
 
-  <select id="selectById" resultMap="goods">
+  <select id="selectById" resultMap="BaseResultMap">
 		select
 			medicine_id, medicine_Approval_Number, medicine_Name, medicine_English_Name, medicine_Dosageform_Category,
     medicine_Manufacturer, medicine_Specification, medicine_Manufacturing_Address, medicine_Category,

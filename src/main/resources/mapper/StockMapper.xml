@@ -98,12 +98,12 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.Stock">
+  <!--<insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.Stock">
     insert into tb_stock (stock_id, medicine_id, whse_id, 
       stock_Amount)
     values (#{stockId,jdbcType=INTEGER}, #{medicineId,jdbcType=INTEGER}, #{whseId,jdbcType=INTEGER}, 
       #{stockAmount,jdbcType=INTEGER})
-  </insert>
+  </insert>-->
   <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.Stock">
     insert into tb_stock
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -194,6 +194,7 @@
     where stock_id = #{stockId,jdbcType=INTEGER}
   </update>
 
+
   <select id="selectAllAndWhseId" resultMap="BaseResultMap">
     select
     w.whse_Address as whseAddress,
@@ -269,7 +270,7 @@
     </if>
   </select>
 
-  <update id="update">
+  <update id="update" parameterType="com.medicalSaleManagementSystem.core.model.entity.Stock">
 		update
 			tb_stock
 		set
@@ -281,7 +282,7 @@
 			whse_id = #{whseId}
 	</update>
 
-  <insert id="insert">
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.Stock">
 		insert into tb_stock
 		(
 			medicine_id,
@@ -296,23 +297,23 @@
 		)
 	</insert>
 
-  <insert id="insertBatch">
+  <!--<insert id="insertBatch">
     insert into tb_stock(medicine_id,whse_id,stock_Amount)
     values
     <foreach collection="list" item="BaseResultMap" separator=",">
       (
       #{stock.medicineId},#{stock.whseId},#{stock.stockAmount})
     </foreach>
-  </insert>
+  </insert>-->
 
-  <delete id="deleteByMedicineId">
+  <delete id="deleteByMedicineId" parameterType="java.lang.Integer">
 		delete from
 			tb_stock
 		where
 			medicine_id = #{medicineId}
 	</delete>
 
-  <delete id="deleteByWhseId">
+  <delete id="deleteByWhseId" parameterType="java.lang.Integer">
 		delete from
 			tb_stock
 		where

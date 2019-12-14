@@ -130,6 +130,15 @@
         </if>
     </select>
 
+    <select id="selectByID" resultMap="BaseResultMap">
+		select
+			whse_id, whse_Name,whse_Address,whse_Tel,whse_Capacity,user_Number,gen_Time
+		from
+			tb_warehouse w
+		where
+			w.whse_id = #{whseId}
+	</select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_warehouse
     where whse_id = #{whseId,jdbcType=INTEGER}
