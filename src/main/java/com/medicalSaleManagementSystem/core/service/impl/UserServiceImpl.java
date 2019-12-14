@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,7 +102,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int deleteByPrimaryKey(Integer userId){
+    public int deleteByPrimaryKey(Integer id) {
+        try {
+            return userMapper.deleteByPrimaryKey(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public int updateValidByPrimaryKey(Integer userId,Integer valid) {
+        if (valid==1){
+            //valid ==1 ---->状态正常
+            //改成正常状态
+            return openValidByPrimaryKey(userId);
+        }
+        else if (valid==0){
+            //valid ==0 ---->状态禁用
+            //改成禁用状态
+            return closeValidByPrimaryKey(userId);
+        }
+        return 0;
+    }
+
+
+    private int closeValidByPrimaryKey(Integer userId){
         try{
             User user = new User();
             user.setUserId(userId);
@@ -113,8 +139,8 @@ public class UserServiceImpl implements UserService {
         return  0;
     }
 
-    @Override
-    public int openValidByPrimaryKey(Integer userId) {
+
+    private int openValidByPrimaryKey(Integer userId) {
         try{
             User user = new User();
             user.setUserId(userId);
@@ -145,5 +171,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return userMapper.selectByExample(null);
+    }
+
+    @Override
+    public List<User> vagueSelectByPrimaryName(String name) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUserNameLike("%"+name+"%");
+        return userMapper.selectByExample(userExample);
     }
 }

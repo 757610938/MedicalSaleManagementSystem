@@ -16,13 +16,7 @@ public interface MedicineService {
      */
     List<Medicine> selectByPrimaryName(String name);
 
-    /**
-     * 通过名称模糊查询数据库
-     * @param name
-     * @return msg
-     * @author 林贤钦
-     */
-    List<Medicine> vagueSelectByPrimaryName(String name);
+
 
     /**
      * 通过id查找药品信息
@@ -62,4 +56,11 @@ public interface MedicineService {
      * @author 林贤钦
      */
     List<MedicineBO> getAll();
+    /**
+     * 通过名称模糊查询数据库
+     * @param keyword
+     * @return msg
+     * @author 林贤钦
+     */
+    List<MedicineBO> vagueSelectByPrimaryName(String keyword);
 }

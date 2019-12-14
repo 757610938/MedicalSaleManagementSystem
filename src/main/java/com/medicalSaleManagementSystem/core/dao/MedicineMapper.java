@@ -31,4 +31,6 @@ public interface MedicineMapper {
 
     List<MedicineBO> getAll();
 
+    List<MedicineBO> vagueSelectByPrimaryName(String keyword);
+
 }

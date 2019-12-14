@@ -19,7 +19,7 @@ public class SupplierDTO {
 
     private String supplierWarehouse;
 
-    private String supplierWarehousTel;
+    private String supplierWarehouseTel;
 
     private String supplierContactsName;
 
@@ -97,12 +97,12 @@ public class SupplierDTO {
         this.supplierWarehouse = supplierWarehouse == null ? null : supplierWarehouse.trim();
     }
 
-    public String getSupplierWarehousTel() {
-        return supplierWarehousTel;
+    public String getSupplierWarehouseTel() {
+        return supplierWarehouseTel;
     }
 
-    public void setSupplierWarehousTel(String supplierWarehousTel) {
-        this.supplierWarehousTel = supplierWarehousTel == null ? null : supplierWarehousTel.trim();
+    public void setSupplierWarehouseTel(String supplierWarehouseTel) {
+        this.supplierWarehouseTel = supplierWarehouseTel == null ? null : supplierWarehouseTel.trim();
     }
 
     public String getSupplierContactsName() {

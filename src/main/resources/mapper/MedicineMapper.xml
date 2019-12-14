@@ -106,7 +106,7 @@
     SELECT
         tb_supplier.supplier_Name,
         tb_supplier.supplier_Warehouse,
-        tb_supplier.supplier_Warehous_Tel,
+        tb_supplier.supplier_Warehouse_Tel,
         tb_supplier.supplier_Contacts_name,
         tb_supplier.supplier_Contacts_tel,
         tb_medicine.medicine_id,
@@ -133,7 +133,38 @@
         LEFT JOIN tb_warehouse ON tb_stock.whse_id = tb_warehouse.whse_id
         LEFT JOIN tb_supplier ON tb_medicine.medicine_Suppliers_id = tb_supplier.supplier_id
   </select>
-
+  <select id="vagueSelectByPrimaryName"  parameterType="java.lang.String" resultType="com.medicalSaleManagementSystem.core.model.BO.MedicineBO">
+    SELECT
+        tb_supplier.supplier_Name,
+        tb_supplier.supplier_Warehouse,
+        tb_supplier.supplier_Warehouse_Tel,
+        tb_supplier.supplier_Contacts_name,
+        tb_supplier.supplier_Contacts_tel,
+        tb_medicine.medicine_id,
+        tb_medicine.medicine_Approval_Number,
+        tb_medicine.medicine_Name,
+        tb_medicine.medicine_English_Name,
+        tb_medicine.medicine_Dosageform_Category,
+        tb_medicine.medicine_Manufacturer,
+        tb_medicine.medicine_Specification,
+        tb_medicine.medicine_Manufacturing_Address,
+        tb_medicine.medicine_Category,
+        tb_medicine.medicine_Approvaldate,
+        tb_medicine.medicine_Original_Approval_Number,
+        tb_medicine.medicine_country,
+        tb_medicine.medicine_Picture,
+        tb_medicine.medicine_Purchase_Price,
+        tb_medicine.medicine_Retail_Price,
+        tb_medicine.medicine_Wholesale_Price,
+        tb_stock.stock_Amount,
+        tb_warehouse.whse_Name
+        FROM
+        tb_medicine
+        LEFT JOIN tb_stock ON tb_stock.medicine_id = tb_medicine.medicine_id AND tb_medicine.stock_id = tb_stock.stock_id
+        LEFT JOIN tb_warehouse ON tb_stock.whse_id = tb_warehouse.whse_id
+        LEFT JOIN tb_supplier ON tb_medicine.medicine_Suppliers_id = tb_supplier.supplier_id
+        where medicine_name like #{keyword,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

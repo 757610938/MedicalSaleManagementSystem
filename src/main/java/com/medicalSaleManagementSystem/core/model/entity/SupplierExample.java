@@ -724,73 +724,73 @@ public class SupplierExample {
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelIsNull() {
-            addCriterion("supplier_Warehous_Tel is null");
+        public Criteria andSupplierWarehouseTelIsNull() {
+            addCriterion("supplier_Warehouse_Tel is null");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelIsNotNull() {
-            addCriterion("supplier_Warehous_Tel is not null");
+        public Criteria andSupplierWarehouseTelIsNotNull() {
+            addCriterion("supplier_Warehouse_Tel is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelEqualTo(String value) {
-            addCriterion("supplier_Warehous_Tel =", value, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelEqualTo(String value) {
+            addCriterion("supplier_Warehouse_Tel =", value, "supplierWarehouseTel");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelNotEqualTo(String value) {
-            addCriterion("supplier_Warehous_Tel <>", value, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelNotEqualTo(String value) {
+            addCriterion("supplier_Warehouse_Tel <>", value, "supplierWarehouseTel");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelGreaterThan(String value) {
-            addCriterion("supplier_Warehous_Tel >", value, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelGreaterThan(String value) {
+            addCriterion("supplier_Warehouse_Tel >", value, "supplierWarehouseTel");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelGreaterThanOrEqualTo(String value) {
-            addCriterion("supplier_Warehous_Tel >=", value, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelGreaterThanOrEqualTo(String value) {
+            addCriterion("supplier_Warehouse_Tel >=", value, "supplierWarehouseTel");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelLessThan(String value) {
-            addCriterion("supplier_Warehous_Tel <", value, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelLessThan(String value) {
+            addCriterion("supplier_Warehouse_Tel <", value, "supplierWarehouseTel");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelLessThanOrEqualTo(String value) {
-            addCriterion("supplier_Warehous_Tel <=", value, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelLessThanOrEqualTo(String value) {
+            addCriterion("supplier_Warehouse_Tel <=", value, "supplierWarehouseTel");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelLike(String value) {
-            addCriterion("supplier_Warehous_Tel like", value, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelLike(String value) {
+            addCriterion("supplier_Warehouse_Tel like", value, "supplierWarehouseTel");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelNotLike(String value) {
-            addCriterion("supplier_Warehous_Tel not like", value, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelNotLike(String value) {
+            addCriterion("supplier_Warehouse_Tel not like", value, "supplierWarehouseTel");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelIn(List<String> values) {
-            addCriterion("supplier_Warehous_Tel in", values, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelIn(List<String> values) {
+            addCriterion("supplier_Warehouse_Tel in", values, "supplierWarehouseTel");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelNotIn(List<String> values) {
-            addCriterion("supplier_Warehous_Tel not in", values, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelNotIn(List<String> values) {
+            addCriterion("supplier_Warehouse_Tel not in", values, "supplierWarehouseTel");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelBetween(String value1, String value2) {
-            addCriterion("supplier_Warehous_Tel between", value1, value2, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelBetween(String value1, String value2) {
+            addCriterion("supplier_Warehouse_Tel between", value1, value2, "supplierWarehouseTel");
             return (Criteria) this;
         }
 
-        public Criteria andSupplierWarehousTelNotBetween(String value1, String value2) {
-            addCriterion("supplier_Warehous_Tel not between", value1, value2, "supplierWarehousTel");
+        public Criteria andSupplierWarehouseTelNotBetween(String value1, String value2) {
+            addCriterion("supplier_Warehouse_Tel not between", value1, value2, "supplierWarehouseTel");
             return (Criteria) this;
         }
 

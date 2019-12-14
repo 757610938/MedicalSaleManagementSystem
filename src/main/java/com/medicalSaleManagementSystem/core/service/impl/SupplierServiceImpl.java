@@ -1,9 +1,9 @@
 package com.medicalSaleManagementSystem.core.service.impl;
 
+import com.medicalSaleManagementSystem.core.dao.SupplierMapper;
 import com.medicalSaleManagementSystem.core.model.DTO.SupplierDTO;
 import com.medicalSaleManagementSystem.core.model.entity.Supplier;
 import com.medicalSaleManagementSystem.core.model.entity.SupplierExample;
-import com.medicalSaleManagementSystem.core.dao.SupplierMapper;
 import com.medicalSaleManagementSystem.core.service.SupplierService;
 import com.medicalSaleManagementSystem.util.BeanUtilEx;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class SupplierServiceImpl implements SupplierService {
     SupplierMapper supplierMapper;
 
     @Override
-    public  Supplier selectByPrimaryKey(Integer id) {
+    public Supplier selectByPrimaryKey(Integer id) {
         try {
             return supplierMapper.selectByPrimaryKey(id);
         } catch (Exception e) {

@@ -1,9 +1,12 @@
 package com.medicalSaleManagementSystem.core.dao;
 
+
+
 import com.medicalSaleManagementSystem.core.model.entity.Supplier;
 import com.medicalSaleManagementSystem.core.model.entity.SupplierExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SupplierMapper {
     long countByExample(SupplierExample example);

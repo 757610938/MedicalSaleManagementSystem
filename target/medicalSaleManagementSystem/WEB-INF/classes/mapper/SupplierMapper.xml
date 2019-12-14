@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.SupplierMapper">
-
   <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.Supplier">
     <id column="supplier_id" jdbcType="INTEGER" property="supplierId" />
     <result column="supplier_Name" jdbcType="VARCHAR" property="supplierName" />
@@ -10,11 +9,11 @@
     <result column="supplier_Tel" jdbcType="VARCHAR" property="supplierTel" />
     <result column="supplier_Fax" jdbcType="VARCHAR" property="supplierFax" />
     <result column="supplier_Opening_bank" jdbcType="VARCHAR" property="supplierOpeningBank" />
-    <result column="supplier_Banknumber" jdbcType="VARCHAR" property="supplierBanknumber" />
+    <result column="supplier_Bank_number" jdbcType="VARCHAR" property="supplierBankNumber" />
     <result column="supplier_Warehouse" jdbcType="VARCHAR" property="supplierWarehouse" />
-    <result column="supplier_WarehousTel" jdbcType="VARCHAR" property="supplierWarehoustel" />
-    <result column="supplier_Contactsname" jdbcType="VARCHAR" property="supplierContactsname" />
-    <result column="supplier_Contactstel" jdbcType="VARCHAR" property="supplierContactstel" />
+    <result column="supplier_Warehouse_Tel" jdbcType="VARCHAR" property="supplierWarehouseTel" />
+    <result column="supplier_Contacts_name" jdbcType="VARCHAR" property="supplierContactsName" />
+    <result column="supplier_Contacts_tel" jdbcType="VARCHAR" property="supplierContactsTel" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,8 +75,8 @@
   </sql>
   <sql id="Base_Column_List">
     supplier_id, supplier_Name, supplier_Address, supplier_Zipcode, supplier_Tel, supplier_Fax, 
-    supplier_Opening_bank, supplier_Banknumber, supplier_Warehouse, supplier_WarehousTel, 
-    supplier_Contactsname, supplier_Contactstel
+    supplier_Opening_bank, supplier_Bank_number, supplier_Warehouse, supplier_Warehouse_Tel, 
+    supplier_Contacts_name, supplier_Contacts_tel
   </sql>
   <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.SupplierExample" resultMap="BaseResultMap">
     select
@@ -112,15 +111,15 @@
   <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.Supplier">
     insert into tb_supplier (supplier_id, supplier_Name, supplier_Address, 
       supplier_Zipcode, supplier_Tel, supplier_Fax, 
-      supplier_Opening_bank, supplier_Banknumber, 
-      supplier_Warehouse, supplier_WarehousTel, 
-      supplier_Contactsname, supplier_Contactstel
+      supplier_Opening_bank, supplier_Bank_number, 
+      supplier_Warehouse, supplier_Warehouse_Tel, 
+      supplier_Contacts_name, supplier_Contacts_tel
       )
     values (#{supplierId,jdbcType=INTEGER}, #{supplierName,jdbcType=VARCHAR}, #{supplierAddress,jdbcType=VARCHAR}, 
       #{supplierZipcode,jdbcType=VARCHAR}, #{supplierTel,jdbcType=VARCHAR}, #{supplierFax,jdbcType=VARCHAR}, 
-      #{supplierOpeningBank,jdbcType=VARCHAR}, #{supplierBanknumber,jdbcType=VARCHAR}, 
-      #{supplierWarehouse,jdbcType=VARCHAR}, #{supplierWarehoustel,jdbcType=VARCHAR}, 
-      #{supplierContactsname,jdbcType=VARCHAR}, #{supplierContactstel,jdbcType=VARCHAR}
+      #{supplierOpeningBank,jdbcType=VARCHAR}, #{supplierBankNumber,jdbcType=VARCHAR}, 
+      #{supplierWarehouse,jdbcType=VARCHAR}, #{supplierWarehouseTel,jdbcType=VARCHAR}, 
+      #{supplierContactsName,jdbcType=VARCHAR}, #{supplierContactsTel,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.Supplier">
@@ -147,20 +146,20 @@
       <if test="supplierOpeningBank != null">
         supplier_Opening_bank,
       </if>
-      <if test="supplierBanknumber != null">
-        supplier_Banknumber,
+      <if test="supplierBankNumber != null">
+        supplier_Bank_number,
       </if>
       <if test="supplierWarehouse != null">
         supplier_Warehouse,
       </if>
-      <if test="supplierWarehoustel != null">
-        supplier_WarehousTel,
+      <if test="supplierWarehouseTel != null">
+        supplier_Warehouse_Tel,
       </if>
-      <if test="supplierContactsname != null">
-        supplier_Contactsname,
+      <if test="supplierContactsName != null">
+        supplier_Contacts_name,
       </if>
-      <if test="supplierContactstel != null">
-        supplier_Contactstel,
+      <if test="supplierContactsTel != null">
+        supplier_Contacts_tel,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -185,20 +184,20 @@
       <if test="supplierOpeningBank != null">
         #{supplierOpeningBank,jdbcType=VARCHAR},
       </if>
-      <if test="supplierBanknumber != null">
-        #{supplierBanknumber,jdbcType=VARCHAR},
+      <if test="supplierBankNumber != null">
+        #{supplierBankNumber,jdbcType=VARCHAR},
       </if>
       <if test="supplierWarehouse != null">
         #{supplierWarehouse,jdbcType=VARCHAR},
       </if>
-      <if test="supplierWarehoustel != null">
-        #{supplierWarehoustel,jdbcType=VARCHAR},
+      <if test="supplierWarehouseTel != null">
+        #{supplierWarehouseTel,jdbcType=VARCHAR},
       </if>
-      <if test="supplierContactsname != null">
-        #{supplierContactsname,jdbcType=VARCHAR},
+      <if test="supplierContactsName != null">
+        #{supplierContactsName,jdbcType=VARCHAR},
       </if>
-      <if test="supplierContactstel != null">
-        #{supplierContactstel,jdbcType=VARCHAR},
+      <if test="supplierContactsTel != null">
+        #{supplierContactsTel,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -232,20 +231,20 @@
       <if test="record.supplierOpeningBank != null">
         supplier_Opening_bank = #{record.supplierOpeningBank,jdbcType=VARCHAR},
       </if>
-      <if test="record.supplierBanknumber != null">
-        supplier_Banknumber = #{record.supplierBanknumber,jdbcType=VARCHAR},
+      <if test="record.supplierBankNumber != null">
+        supplier_Bank_number = #{record.supplierBankNumber,jdbcType=VARCHAR},
       </if>
       <if test="record.supplierWarehouse != null">
         supplier_Warehouse = #{record.supplierWarehouse,jdbcType=VARCHAR},
       </if>
-      <if test="record.supplierWarehoustel != null">
-        supplier_WarehousTel = #{record.supplierWarehoustel,jdbcType=VARCHAR},
+      <if test="record.supplierWarehouseTel != null">
+        supplier_Warehouse_Tel = #{record.supplierWarehouseTel,jdbcType=VARCHAR},
       </if>
-      <if test="record.supplierContactsname != null">
-        supplier_Contactsname = #{record.supplierContactsname,jdbcType=VARCHAR},
+      <if test="record.supplierContactsName != null">
+        supplier_Contacts_name = #{record.supplierContactsName,jdbcType=VARCHAR},
       </if>
-      <if test="record.supplierContactstel != null">
-        supplier_Contactstel = #{record.supplierContactstel,jdbcType=VARCHAR},
+      <if test="record.supplierContactsTel != null">
+        supplier_Contacts_tel = #{record.supplierContactsTel,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -261,11 +260,11 @@
       supplier_Tel = #{record.supplierTel,jdbcType=VARCHAR},
       supplier_Fax = #{record.supplierFax,jdbcType=VARCHAR},
       supplier_Opening_bank = #{record.supplierOpeningBank,jdbcType=VARCHAR},
-      supplier_Banknumber = #{record.supplierBanknumber,jdbcType=VARCHAR},
+      supplier_Bank_number = #{record.supplierBankNumber,jdbcType=VARCHAR},
       supplier_Warehouse = #{record.supplierWarehouse,jdbcType=VARCHAR},
-      supplier_WarehousTel = #{record.supplierWarehoustel,jdbcType=VARCHAR},
-      supplier_Contactsname = #{record.supplierContactsname,jdbcType=VARCHAR},
-      supplier_Contactstel = #{record.supplierContactstel,jdbcType=VARCHAR}
+      supplier_Warehouse_Tel = #{record.supplierWarehouseTel,jdbcType=VARCHAR},
+      supplier_Contacts_name = #{record.supplierContactsName,jdbcType=VARCHAR},
+      supplier_Contacts_tel = #{record.supplierContactsTel,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -291,20 +290,20 @@
       <if test="supplierOpeningBank != null">
         supplier_Opening_bank = #{supplierOpeningBank,jdbcType=VARCHAR},
       </if>
-      <if test="supplierBanknumber != null">
-        supplier_Banknumber = #{supplierBanknumber,jdbcType=VARCHAR},
+      <if test="supplierBankNumber != null">
+        supplier_Bank_number = #{supplierBankNumber,jdbcType=VARCHAR},
       </if>
       <if test="supplierWarehouse != null">
         supplier_Warehouse = #{supplierWarehouse,jdbcType=VARCHAR},
       </if>
-      <if test="supplierWarehoustel != null">
-        supplier_WarehousTel = #{supplierWarehoustel,jdbcType=VARCHAR},
+      <if test="supplierWarehouseTel != null">
+        supplier_Warehouse_Tel = #{supplierWarehouseTel,jdbcType=VARCHAR},
       </if>
-      <if test="supplierContactsname != null">
-        supplier_Contactsname = #{supplierContactsname,jdbcType=VARCHAR},
+      <if test="supplierContactsName != null">
+        supplier_Contacts_name = #{supplierContactsName,jdbcType=VARCHAR},
       </if>
-      <if test="supplierContactstel != null">
-        supplier_Contactstel = #{supplierContactstel,jdbcType=VARCHAR},
+      <if test="supplierContactsTel != null">
+        supplier_Contacts_tel = #{supplierContactsTel,jdbcType=VARCHAR},
       </if>
     </set>
     where supplier_id = #{supplierId,jdbcType=INTEGER}
@@ -317,11 +316,11 @@
       supplier_Tel = #{supplierTel,jdbcType=VARCHAR},
       supplier_Fax = #{supplierFax,jdbcType=VARCHAR},
       supplier_Opening_bank = #{supplierOpeningBank,jdbcType=VARCHAR},
-      supplier_Banknumber = #{supplierBanknumber,jdbcType=VARCHAR},
+      supplier_Bank_number = #{supplierBankNumber,jdbcType=VARCHAR},
       supplier_Warehouse = #{supplierWarehouse,jdbcType=VARCHAR},
-      supplier_WarehousTel = #{supplierWarehoustel,jdbcType=VARCHAR},
-      supplier_Contactsname = #{supplierContactsname,jdbcType=VARCHAR},
-      supplier_Contactstel = #{supplierContactstel,jdbcType=VARCHAR}
+      supplier_Warehouse_Tel = #{supplierWarehouseTel,jdbcType=VARCHAR},
+      supplier_Contacts_name = #{supplierContactsName,jdbcType=VARCHAR},
+      supplier_Contacts_tel = #{supplierContactsTel,jdbcType=VARCHAR}
     where supplier_id = #{supplierId,jdbcType=INTEGER}
   </update>
 </mapper>

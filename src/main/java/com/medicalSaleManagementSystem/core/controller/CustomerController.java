@@ -133,7 +133,6 @@ public class CustomerController {
             if(i==0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"更新客户信息失败");
             }
-            System.out.println(customerVO);
             return Resp.httpStatus(HttpStatus.OK,"更新客户信息成功！");
         }catch (Exception e){
             e.printStackTrace();
@@ -166,6 +165,14 @@ public class CustomerController {
         //500
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
+    /*
+     * 功能描述: <br>
+     * 〈〉〉分页模糊查询客户信息
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 16:43
+     */
     @RequestMapping ( value = "/customers/{pageNum}/{pageSize}/{name}", method = RequestMethod.GET)
     @ResponseBody
     public Resp vagueSelectByPrimaryName(@PathVariable String name,@PathVariable int pageNum ,@PathVariable int pageSize){

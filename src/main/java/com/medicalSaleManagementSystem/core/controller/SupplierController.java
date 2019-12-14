@@ -22,14 +22,6 @@ import java.util.Map;
 public class SupplierController {
     @Autowired
     private SupplierService supplierService;
-    @RequestMapping("/supplier")
-    public String index() {
-        return "/supplierManagement/supplier";
-    }
-    @RequestMapping("/suppliers")
-    public String indexs() {
-        return "/supplierManagement/suppliers";
-    }
     /*
      * 功能描述: <br>
      * 〈〉添加供应商信息
