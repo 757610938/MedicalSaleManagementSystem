@@ -33,4 +33,11 @@ public interface MedicineMapper {
 
     List<MedicineBO> vagueSelectByPrimaryName(String keyword);
 
+    /**
+     * 选择指定 id 的 medicine
+     * @param medicineId 药品的ID
+     * @return 返回执行ID对应的medicine
+     */
+    Medicine selectById(Integer medicineId);
+
 }
