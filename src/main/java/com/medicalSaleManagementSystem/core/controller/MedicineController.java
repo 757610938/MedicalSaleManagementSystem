@@ -24,15 +24,13 @@ public class MedicineController {
     @Autowired
     private MedicineService medicineService;
 
-    @RequestMapping("/medicine")
-    public String index() {
-        return "/medicineManagement/medicine";
-    }
-    /**
-     * 增加药品信息
-     * @param medicineVo
-     * @author 林贤钦
-     * @return
+    /*
+     * 功能描述: <br>
+     * 〈〉增加药品信息
+     * @Param: [medicineVo]
+     * @Return: com.medicalSaleManagementSystem.util.message.Resp
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 15:24
      */
     @RequestMapping ( value = "/medicine", method = RequestMethod.POST )
     @ResponseBody
@@ -51,16 +49,19 @@ public class MedicineController {
         //500
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
-    /**
-     * 通过id查找药品信息
-     * @param id
-     * @author 林贤钦
-     * @return
+
+    /*
+     * 功能描述: <br>
+     * 〈〉通过id查找药品信息
+     * @Param: [id]
+     * @Return: com.medicalSaleManagementSystem.util.message.Resp
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 15:24
      */
     @RequestMapping ( value = "/medicine/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Resp selectByPrimaryKey(@PathVariable Integer id){
-        System.out.println("传入id--->"+id);
+        System.out.println("/medicine/{id}---->"+id);
         try{
             Medicine medicine = medicineService.selectByPrimaryKey(id);
             if(medicine==null){
@@ -74,38 +75,16 @@ public class MedicineController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        //500
-        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
-    }
-    /**
-     * 通过药品名称查找药品信息
-     * @param name
-     * @author 林贤钦
-     * @return
-     */
-    @RequestMapping ( value = "/medicine/{name}", method = RequestMethod.GET)
-    @ResponseBody
-    public Resp selectByPrimaryName(@PathVariable("name")String name){
-        try{
-            List<Medicine> medicineList = medicineService.selectByPrimaryName(name);
-            if(medicineList.size() == 0){
-                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找药品信息失败");
-            }
-            Map<String, Object> ext = new HashMap<>();
-            ext.put("medicineList", medicineList);
-            return Resp.httpStatus(HttpStatus.OK,"查找药品信息成功！",ext);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        //500
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
 
-    /**
-     * 通过id删除药品信息
-     * @param id
-     * @author 林贤钦
-     * @return
+    /*
+     * 功能描述: <br>
+     * 〈〉通过id删除药品信息
+     * @Param: [id]
+     * @Return: com.medicalSaleManagementSystem.util.message.Resp
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 15:24
      */
     @RequestMapping ( value = "/medicine/{id}", method = RequestMethod.DELETE)
     @ResponseBody
@@ -124,11 +103,11 @@ public class MedicineController {
     }
     /*
      * 功能描述: <br>
-     * 〈〉更新客户信息
-     * @Param:
-     * @Return:
+     * 〈〉更新药品信息
+     * @Param: [medicineVO]
+     * @Return: com.medicalSaleManagementSystem.util.message.Resp
      * @Author: 林贤钦
-     * @Date: 2019/12/13 14:12
+     * @Date: 2019/12/14 15:25
      */
     @RequestMapping ( value = "/medicine", method = RequestMethod.PUT )
     @ResponseBody
@@ -148,18 +127,45 @@ public class MedicineController {
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
 
-    /**
-     * 查询所有药品信息
-     * @param
-     * @author 林贤钦
-     * @return
+    /*
+     * 功能描述: <br>
+     * 〈〉通过药品名称查找药品信息
+     * @Param: [name]
+     * @Return: com.medicalSaleManagementSystem.util.message.Resp
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 15:25
      */
-    @RequestMapping ( value = "/medicines", method = RequestMethod.GET)
+    @RequestMapping ( value = "/medicines/{name}", method = RequestMethod.GET)
     @ResponseBody
-    public Resp getAll(@RequestParam(value = "pn", defaultValue = "1") int pn ){
+    public Resp selectByPrimaryName(@PathVariable("name")String name){
         try{
-            //设置现在的页数为1，显示的条数为5条
-            PageHelper.startPage(pn, 5);
+            List<Medicine> medicineList = medicineService.selectByPrimaryName(name);
+            if(medicineList.size() == 0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找药品信息失败");
+            }
+            Map<String, Object> ext = new HashMap<>();
+            ext.put("medicineList", medicineList);
+            return Resp.httpStatus(HttpStatus.OK,"查找药品信息成功！",ext);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /*
+     * 功能描述: <br>
+     * 〈〉分页查询所有药品信息
+     * @Param: [pageNum, pageSize]
+     * @Return: com.medicalSaleManagementSystem.util.message.Resp
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 15:25
+     */
+    @RequestMapping ( value = "/medicines/{pageNum}/{pageSize}", method = RequestMethod.GET)
+    @ResponseBody
+    public Resp getAll(@PathVariable int pageNum ,@PathVariable int pageSize){
+        try{
+            //设置现在的页数为pageNum，显示的条数为pageSize条
+            PageHelper.startPage(pageNum, pageSize);
             List<MedicineBO> medicineList = medicineService.getAll();
             PageInfo<MedicineBO> pageInfo  = new PageInfo<>(medicineList);
             return Resp.httpStatus(HttpStatus.OK,"查找药品信息成功！",pageInfo);
@@ -170,23 +176,27 @@ public class MedicineController {
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
 
-    /**
-     * 通过药品名称模糊查找药品信息
-     * @param name
-     * @author 林贤钦
-     * @return
+    /*
+     * 功能描述: <br>
+     * 〈〉通过药品名称模糊查找药品信息
+     * @Param: [name, pageNum, pageSize]
+     * @Return: com.medicalSaleManagementSystem.util.message.Resp
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 15:26
      */
-    @RequestMapping ( value = "/medicines/{name}", method = RequestMethod.GET)
+    @RequestMapping ( value = "/medicines/{pageNum}/{pageSize}/{name}", method = RequestMethod.GET)
     @ResponseBody
-    public Resp vagueSelectByPrimaryName(@RequestParam(value = "pn", defaultValue = "1") int pn ,@PathVariable String name ){
+    public Resp vagueSelectByPrimaryName(@PathVariable String name,@PathVariable int pageNum ,@PathVariable int pageSize ){
         try{
-            List<Medicine> medicineList = medicineService.vagueSelectByPrimaryName(name);
+            PageHelper.startPage(pageNum, pageSize);  //设置现在的页数为pageNum，显示的条数为pageSize条
+            List<MedicineBO> medicineList = medicineService.vagueSelectByPrimaryName(name);
+            for (MedicineBO medicineBO : medicineList) {
+                System.out.println(medicineBO);
+            }
             if(medicineList.size() == 0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找药品信息失败");
             }
-            //设置现在的页数为1，显示的条数为5条
-            PageHelper.startPage(pn, 5);
-            PageInfo<Medicine> pageInfo  = new PageInfo<>(medicineList);
+            PageInfo<MedicineBO> pageInfo  = new PageInfo<>(medicineList);
             return Resp.httpStatus(HttpStatus.OK,"查找药品信息成功！",pageInfo);
         }catch (Exception e){
             e.printStackTrace();

@@ -30,42 +30,62 @@ public interface UserService {
      * @Date: 2019/12/12 21:50
      */
     List<User>  selectByPrimaryUserName(String  userName);
-    /**
-     * 添加用户信息
-     * @author 林贤钦
-     * @return
+    /*
+     * 功能描述: <br>
+     * 〈〉添加用户信息
+     * @Param: [record]
+     * @Return: int
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 16:37
      */
     int insertSelective(UserDTO record);
 
-    /**
-     * 关闭账户，将user表中的valid状态改为0
-     * @param userId
-     * @author 林贤钦
-     * @return
+    /*
+     * 功能描述: <br>
+     * 〈〉通过id删除用户信息
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 16:37
      */
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(Integer id);
 
-    /**
-     * 开启账户状态，将user表中的valid状态改为1
-     * @param userId
-     * @author 林贤钦
-     * @return
+    /*
+     * 功能描述: <br>
+     * 〈〉更改账户状态，禁用账户则将user表中的valid状态改为0，否则改成1
+     * @Param: userId,valid
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 15:33
      */
-    int openValidByPrimaryKey(Integer userId);
-    /**
-     * 更新user信息
-     * @author 林贤钦
-     * @return
+    int updateValidByPrimaryKey(Integer userId,Integer valid);
+
+    /*
+     * 功能描述: <br>
+     * 〈〉更新user信息
+     * @Param: [record]
+     * @Return: int
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 16:47
      */
     int updateByPrimaryKeySelective(UserDTO record);
 
     /*
-     * 功能描述: <br>查询所有用户数据
-     * 〈〉
+     * 功能描述: <br>
+     * 〈〉查询所有用户数据
      * @Param:
-     * @Return:
+     * @Return: List<User>
      * @Author: 林贤钦
      * @Date: 2019/12/12 18:26
      */
     List<User> getAll();
+    /*
+     * 功能描述: <br>
+     * 〈〉模糊查询用户信息
+     * @Param: name
+     * @Return: List<User>
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 16:47
+     */
+    List<User> vagueSelectByPrimaryName(String name);
 }

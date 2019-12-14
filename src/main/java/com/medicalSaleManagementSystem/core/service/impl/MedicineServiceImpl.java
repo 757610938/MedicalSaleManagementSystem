@@ -30,19 +30,7 @@ public class MedicineServiceImpl implements MedicineService {
         return medicineMapper.selectByExample(medicineExample);
     }
 
-    /**
-     * 通过名称模糊查询数据库
-     * @param name
-     * @return msg
-     * @author 林贤钦
-     */
-    @Override
-    public List<Medicine> vagueSelectByPrimaryName(String name) {
-        MedicineExample medicineExample = new MedicineExample();
-        MedicineExample.Criteria criteria = medicineExample.createCriteria();
-        criteria.andMedicineNameLike("%"+name+"%");
-        return medicineMapper.selectByExample(medicineExample);
-    }
+
 
     /**
      * 通过id查找药品信息
@@ -116,5 +104,20 @@ public class MedicineServiceImpl implements MedicineService {
     @Override
     public  List<MedicineBO> getAll() {
         return medicineMapper.getAll();
+    }
+
+    /**
+     * 通过名称模糊查询数据库
+     * @param keyword
+     * @return msg
+     * @author 林贤钦
+     */
+    @Override
+    public List<MedicineBO> vagueSelectByPrimaryName(String keyword) {
+        return medicineMapper.vagueSelectByPrimaryName("%"+keyword+"%");
+//        MedicineExample medicineExample = new MedicineExample();
+//        MedicineExample.Criteria criteria = medicineExample.createCriteria();
+//        criteria.andMedicineNameLike("%"+name+"%");
+//        return medicineMapper.selectByExample(medicineExample);
     }
 }

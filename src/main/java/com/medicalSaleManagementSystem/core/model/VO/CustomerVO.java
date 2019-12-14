@@ -120,4 +120,22 @@ public class CustomerVO {
     public void setCustContactsTel(String custContactsTel) {
         this.custContactsTel = custContactsTel == null ? null : custContactsTel.trim();
     }
+
+    @Override
+    public String toString() {
+        return "CustomerVO{" +
+                "custId=" + custId +
+                ", custCategory='" + custCategory + '\'' +
+                ", custName='" + custName + '\'' +
+                ", custAddress='" + custAddress + '\'' +
+                ", custShippingAddress='" + custShippingAddress + '\'' +
+                ", custTel='" + custTel + '\'' +
+                ", custZipCode='" + custZipCode + '\'' +
+                ", custFax='" + custFax + '\'' +
+                ", custOpeningBank='" + custOpeningBank + '\'' +
+                ", custBankNumber='" + custBankNumber + '\'' +
+                ", custContactsName='" + custContactsName + '\'' +
+                ", custContactsTel='" + custContactsTel + '\'' +
+                '}';
+    }
 }

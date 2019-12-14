@@ -31,6 +31,10 @@ public class CustomerController {
     public String index() {
         return "/customerManagement/customer";
     }
+    @RequestMapping("/customers")
+    public String indexs() {
+        return "/customerManagement/customers";
+    }
     /*
      * 功能描述: <br>
      * 〈〉添加客户信息
@@ -56,11 +60,14 @@ public class CustomerController {
         //500
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
-    /**
-     * 通过id查找客户信息
-     * @param id
-     * @author 林贤钦
-     * @return
+
+    /*
+     * 功能描述: <br>
+     * 〈〉通过id查找客户信息
+     * @Param: [id]
+     * @Return: com.medicalSaleManagementSystem.util.message.Resp
+     * @Author: 林贤钦
+     * @Date: 2019/12/13 23:29
      */
     @RequestMapping ( value = "/customer/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -84,18 +91,19 @@ public class CustomerController {
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
 
-    /**
-     * 通过id删除客户信息
-     * @param id
-     * @return
+    /*
+     * 功能描述: <br>
+     * 〈〉通过id删除客户信息
+     * @Param: [id]
+     * @Return: com.medicalSaleManagementSystem.util.message.Resp
+     * @Author: 林贤钦
+     * @Date: 2019/12/13 23:29
      */
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public  Resp deleteByPrimaryKey(@PathVariable Integer id)  {
-        System.out.println("deleteId---->"+id);
         try{
             int i = customerService.deleteByPrimaryKey(id);
-            System.out.println("i---->"+i);
             if(i==0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"删除客户信息失败");
             }
@@ -107,9 +115,13 @@ public class CustomerController {
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
 
-    /**
-     *
-     * @return
+    /*
+     * 功能描述: <br>
+     * 〈〉更新客户信息
+     * @Param: customerVO
+     * @Return: Resp
+     * @Author: 林贤钦
+     * @Date: 2019/12/13 23:30
      */
     @RequestMapping(value = "/customer",method = RequestMethod.PUT)
     @ResponseBody
@@ -140,9 +152,9 @@ public class CustomerController {
     @RequestMapping ( value = "/customers/{pageNum}/{pageSize}", method = RequestMethod.GET)
     @ResponseBody
     public Resp getAll(@PathVariable int pageNum ,@PathVariable int pageSize){
-//        System.out.println("执行CustomerController的getAll方法");
+        // System.out.println("执行CustomerController的getAll方法");
         try{
-            //设置现在的页数为1，显示的条数为5条
+            //设置现在的页数为pageNum，显示的条数为pageSize条
             PageHelper.startPage(pageNum, pageSize);
             List<Customer> customerList = customerService.getAll();
             PageInfo<Customer> pageInfo  = new PageInfo<Customer>(customerList);
@@ -153,10 +165,18 @@ public class CustomerController {
         //500
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
+    /*
+     * 功能描述: <br>
+     * 〈〉〉分页模糊查询客户信息
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 16:43
+     */
     @RequestMapping ( value = "/customers/{pageNum}/{pageSize}/{name}", method = RequestMethod.GET)
     @ResponseBody
     public Resp vagueSelectByPrimaryName(@PathVariable String name,@PathVariable int pageNum ,@PathVariable int pageSize){
-//        System.out.println("执行CustomerController的vagueSelectByPrimaryName方法");
+        // System.out.println("执行CustomerController的vagueSelectByPrimaryName方法");
         try{
             PageHelper.startPage(pageNum, pageSize);  //设置现在的页数为pageNum，显示的条数为pageSize条
             List<Customer> customerList= customerService.vagueSelectByPrimaryName(name);
