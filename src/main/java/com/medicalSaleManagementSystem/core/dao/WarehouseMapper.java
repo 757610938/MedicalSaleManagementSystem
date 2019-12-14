@@ -48,4 +48,11 @@ public interface WarehouseMapper {
     int updateByPrimaryKeySelective(Warehouse record);
 
     int updateByPrimaryKey(Warehouse record);
+
+    /**
+     * 选择指定 warehouse ID 的 Warehouse 记录
+     * @param whseId 仓库ID
+     * @return 返回指定的Warehouse
+     */
+    Warehouse selectByID(Integer whseId);
 }

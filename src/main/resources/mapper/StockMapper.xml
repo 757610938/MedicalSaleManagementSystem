@@ -193,4 +193,137 @@
       stock_Amount = #{stockAmount,jdbcType=INTEGER}
     where stock_id = #{stockId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectAllAndWhseId" resultMap="BaseResultMap">
+    select
+    w.whse_Address as whseAddress,
+    w.whse_id as whseId,
+    s.stock_Amount as stockAmount,
+    m.medicine_id as medicineId,
+    m.medicine_Name as medicineName,
+    m.medicine_Category as medicineCatagory
+    from
+    tb_stock s,tb_warehouse w, tb_medicine m
+    where
+    s.medicine_id = m.medicine_id
+    and
+    s.whse_id = w.whse_id
+    <if test="whseId != null">
+      and w.whse_id = #{whseId}
+    </if>
+  </select>
+
+  <select id="selectByMedicineIdAndWhseId" resultMap="BaseResultMap">
+    SELECT
+    tb_warehouse.whse_id,
+    tb_stock.stock_Amount,
+    tb_medicine.medicine_id,
+    tb_medicine.medicine_Name,
+    tb_medicine.medicine_Category
+    FROM
+    tb_stock
+    INNER JOIN tb_warehouse ON tb_stock.whse_id = tb_warehouse.whse_id
+    INNER JOIN tb_medicine ON tb_medicine.stock_id = tb_stock.stock_id AND tb_stock.medicine_id = tb_medicine.medicine_id
+    WHERE
+    tb_stock.medicine_id = tb_medicine.medicine_id AND
+    tb_stock.whse_id = tb_warehouse.whse_id AND
+    tb_medicine.medicine_id= #{medicineId}
+    <if test="whseId != null">
+      and w.whse_id = #{whseId}
+    </if>
+  </select>
+
+  <select id="selectByMedicineNameAndWhseId" resultMap="BaseResultMap">
+    SELECT
+    tb_warehouse.whse_id,
+    tb_stock.stock_Amount,
+    tb_medicine.medicine_id,
+    tb_medicine.medicine_Name,
+    tb_medicine.medicine_Category
+    FROM
+    tb_stock,tb_stock,tb_medicine,tb_warehouse
+    WHERE
+    tb_stock.medicine_id = tb_medicine.medicine_id AND
+    tb_stock.whse_id = tb_warehouse.whse_id AND
+    tb_medicine.medicine_Name like concat("%",concat(#{medicineName},"%"))
+    <if test="whseId != null">
+      and tb_warehouse.whse_id = #{whseId}
+    </if>
+  </select>
+
+  <select id="selectByMedicineCategoryAndWhseId" resultMap="BaseResultMap">
+    SELECT
+    tb_warehouse.whse_id,
+    tb_stock.stock_Amount,
+    tb_medicine.medicine_id,
+    tb_medicine.medicine_Name,
+    tb_medicine.medicine_Category
+    FROM
+    tb_stock,tb_stock,tb_medicine,tb_warehouse
+    WHERE
+    tb_stock.medicine_id = tb_medicine.medicine_id AND
+    tb_stock.whse_id = tb_warehouse.whse_id AND
+    tb_medicine.medicine_Category like concat("%",concat(#{medicineCategory},"%"))
+    <if test="whseId != null">
+      and tb_warehouse.whse_id = #{whseId}
+    </if>
+  </select>
+
+  <update id="update">
+		update
+			tb_stock
+		set
+			medicine_id = #{medicineId},
+			whse_id = #{whseId},
+			stock_Amount = #{stockAmount}
+		where
+			medicine_id = #{medicineId} and
+			whse_id = #{whseId}
+	</update>
+
+  <insert id="insert">
+		insert into tb_stock
+		(
+			medicine_id,
+			whse_id,
+			stock_Amount
+		)
+		values
+		(
+			#{medicineId},
+			#{whseId},
+			#{stockAmount}
+		)
+	</insert>
+
+  <insert id="insertBatch">
+    insert into tb_stock(medicine_id,whse_id,stock_Amount)
+    values
+    <foreach collection="list" item="BaseResultMap" separator=",">
+      (
+      #{stock.medicineId},#{stock.whseId},#{stock.stockAmount})
+    </foreach>
+  </insert>
+
+  <delete id="deleteByMedicineId">
+		delete from
+			tb_stock
+		where
+			medicine_id = #{medicineId}
+	</delete>
+
+  <delete id="deleteByWhseId">
+		delete from
+			tb_stock
+		where
+			tb_stock.whse_id = #{whseId}
+	</delete>
+
+  <delete id="deleteByWhseIdAndMedicineId">
+		delete from
+			tb_stock
+		where
+			medicine_id = #{medicineId} and
+			tb_stock.whse_id = #{whseId}
+	</delete>
 </mapper>

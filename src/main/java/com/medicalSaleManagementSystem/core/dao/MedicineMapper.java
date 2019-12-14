@@ -31,4 +31,11 @@ public interface MedicineMapper {
 
     List<MedicineBO> getAll();
 
+    /**
+     * 选择指定 id 的 medicine
+     * @param id 药品的ID
+     * @return medicine
+     */
+    Medicine selectById(Integer id);
+
 }

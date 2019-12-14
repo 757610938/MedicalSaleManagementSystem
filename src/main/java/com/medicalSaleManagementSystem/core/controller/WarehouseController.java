@@ -84,5 +84,11 @@ public class WarehouseController {
         return warehouseService.updateWhse(warehouseVO);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/warehouseManagement/warehouse", method = RequestMethod.GET)
+    public Resp findWarehouse(WarehouseVO warehouseVO) {
+        return warehouseService.findWhseById(warehouseVO);
+    }
+
 
 }

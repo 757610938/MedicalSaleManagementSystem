@@ -23,7 +23,7 @@ import java.util.Map;
 public class WarehouseServiceImpl implements WarehouseService {
 
     @Autowired
-    WarehouseMapper warehouseMapper;
+    private WarehouseMapper warehouseMapper;
 
     @Override
     public Warehouse findWhseByWhseId(Integer whseId) {
@@ -33,6 +33,20 @@ public class WarehouseServiceImpl implements WarehouseService {
             LoggerUtils.error(WarehouseServiceImpl.class, "查询失败", e);
             return null;
         }
+    }
+
+    @Override
+    public Resp findWhseById(WarehouseVO warehouseVO) {
+        if(warehouseVO.getWhseId()!=null) {
+            Warehouse warehouse = warehouseMapper.selectByPrimaryKey(warehouseVO.getWhseId());
+            if(warehouse.getWhseId()!=null){
+                WarehouseVO result = entityToVO(warehouse);
+                Map<String,Object> ext=new HashMap<>();
+                ext.put("result",result);
+                return Resp.httpStatus(HttpStatus.OK,"查询仓库信息成功",ext);
+            }
+        }
+        return Resp.fail("找不到该仓库");
     }
 
     @Override

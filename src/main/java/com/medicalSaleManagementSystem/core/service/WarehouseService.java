@@ -16,6 +16,8 @@ public interface WarehouseService {
      */
     Warehouse findWhseByWhseId(Integer whseId);
 
+    Resp findWhseById(WarehouseVO warehouseVO);
+
 
     /**
      * 模糊搜索仓库,并分页展示
