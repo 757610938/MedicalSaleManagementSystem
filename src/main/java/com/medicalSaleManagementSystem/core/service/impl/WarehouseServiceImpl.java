@@ -50,6 +50,12 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
+    public Resp findWhseById(Integer whseId) {
+
+        return null;
+    }
+
+    @Override
     public Resp findWhseByFuzzySearch(String key, Integer pageNum,Integer pageSize) {
         WarehouseExample warehouseExample = new WarehouseExample();
 

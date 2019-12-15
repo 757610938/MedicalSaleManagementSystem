@@ -191,7 +191,7 @@ public class StockController {
     /**
      * 删除一条库存信息
      *
-     * @param medicineId      药品ID
+     * @param medicineId   药品ID
      * @param whseId 仓库ID
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */

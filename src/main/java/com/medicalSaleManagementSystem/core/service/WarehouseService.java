@@ -28,6 +28,8 @@ public interface WarehouseService {
      */
     Resp findWhseByFuzzySearch(String key, Integer pageNum,Integer pageSize);
 
+    Resp findWhseById(Integer whseId);
+
     List<Warehouse> findAllWarehouse();
 
     /**
