@@ -23,7 +23,7 @@ import java.util.Map;
 public class WarehouseServiceImpl implements WarehouseService {
 
     @Autowired
-    WarehouseMapper warehouseMapper;
+    private WarehouseMapper warehouseMapper;
 
     @Override
     public Warehouse findWhseByWhseId(Integer whseId) {
@@ -36,12 +36,24 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public Resp findWhseByFuzzySearch(String key, String orderBy, Integer page) {
-        WarehouseExample warehouseExample = new WarehouseExample();
-        if (orderBy != null && !"".equals(orderBy)) {
-            warehouseExample.setOrderByClause(orderBy.replace("-", " "));
+    public Resp findWhseById(WarehouseVO warehouseVO) {
+        if(warehouseVO.getWhseId()!=null) {
+            Warehouse warehouse = warehouseMapper.selectByPrimaryKey(warehouseVO.getWhseId());
+            if(warehouse.getWhseId()!=null){
+                WarehouseVO result = entityToVO(warehouse);
+                Map<String,Object> ext=new HashMap<>();
+                ext.put("result",result);
+                return Resp.httpStatus(HttpStatus.OK,"查询仓库信息成功",ext);
+            }
         }
-        PageHelper.startPage(page, 10);
+        return Resp.fail("找不到该仓库");
+    }
+
+    @Override
+    public Resp findWhseByFuzzySearch(String key, Integer pageNum,Integer pageSize) {
+        WarehouseExample warehouseExample = new WarehouseExample();
+
+        PageHelper.startPage(pageNum, pageSize);
         key = "%" + key + "%";
         warehouseExample.setWhseName(key);
         List<Warehouse> warehouseList = warehouseMapper.selectWhseByWhseName(warehouseExample);
@@ -59,7 +71,7 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     public List<Warehouse> findAllWarehouse() {
-        return warehouseMapper.selectByExample(null);
+        return warehouseMapper.selectAll(null);
     }
 
     @Override
@@ -108,14 +120,23 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public Msg updateWhse(Warehouse warehouse) {
+    public Resp updateWhse(WarehouseVO warehouseVO) {
         try {
-            warehouseMapper.updateByPrimaryKey(warehouse);
-            return Msg.success();
+            if (warehouseVO.getWhseId() == null || warehouseVO.getWhseId() <= 0) {
+                return Resp.fail("当前仓库ID为非法ID");
+            }
+            Warehouse warehouse = warehouseVOToEntity(warehouseVO);
+            WarehouseExample warehouseExample = new WarehouseExample();
+            WarehouseExample.Criteria criteria = warehouseExample.createCriteria();
+            criteria.andWhseIdEqualTo(warehouse.getWhseId());
+            List<Warehouse> warehouseList = warehouseMapper.selectByExample(warehouseExample);
+            warehouse.setWhseId(warehouseList.get(0).getWhseId());
+            warehouseMapper.updateByPrimaryKeySelective(warehouse);
         } catch (Exception e) {
-            LoggerUtils.error(WarehouseServiceImpl.class, "更新失败", e);
-            return Msg.fail("更新失败");
+            e.printStackTrace();
+            return Resp.fail("修改失败，请重新再试一次");
         }
+        return Resp.success("更新成功");
     }
 
     private WarehouseVO entityToVO(Warehouse warehouse) {
@@ -127,5 +148,28 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouseVO.setWhseName(warehouse.getWhseName());
         warehouseVO.setWhseTel(warehouse.getWhseTel());
         return warehouseVO;
+    }
+
+    private Warehouse warehouseVOToEntity(WarehouseVO warehouseVO) {
+        Warehouse warehouse = new Warehouse();
+        if (warehouseVO.getWhseId() != null) {
+            warehouse.setWhseId(warehouseVO.getWhseId());
+        }
+        if (warehouseVO.getUserNumber() != null && !"".equals(warehouseVO.getUserNumber())) {
+            warehouse.setUserNumber(warehouseVO.getUserNumber());
+        }
+        if (warehouseVO.getWhseAddress() != null && !"".equals(warehouseVO.getWhseAddress())) {
+            warehouse.setWhseAddress(warehouseVO.getWhseAddress());
+        }
+        if (warehouseVO.getWhseCapacity() != null && !"".equals(warehouseVO.getWhseCapacity())) {
+            warehouse.setWhseCapacity(warehouseVO.getWhseCapacity());
+        }
+        if (warehouseVO.getWhseName() != null && !"".equals(warehouseVO.getWhseName())) {
+            warehouse.setWhseName(warehouseVO.getWhseName());
+        }
+        if (warehouseVO.getWhseTel() != null && !"".equals(warehouseVO.getWhseTel())) {
+            warehouse.setWhseTel(warehouseVO.getWhseTel());
+        }
+        return warehouse;
     }
 }

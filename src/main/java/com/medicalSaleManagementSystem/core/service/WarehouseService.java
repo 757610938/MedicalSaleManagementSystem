@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.service;
 
+import com.medicalSaleManagementSystem.core.model.VO.WarehouseVO;
 import com.medicalSaleManagementSystem.core.model.entity.Warehouse;
 import com.medicalSaleManagementSystem.util.message.Msg;
 import com.medicalSaleManagementSystem.util.message.Resp;
@@ -15,15 +16,17 @@ public interface WarehouseService {
      */
     Warehouse findWhseByWhseId(Integer whseId);
 
+    Resp findWhseById(WarehouseVO warehouseVO);
+
 
     /**
      * 模糊搜索仓库,并分页展示
      * @param key
-     * @param orderBy
-     * @param page
+     * @param pageNum
+     * @param pageSize
      * @return
      */
-    Resp findWhseByFuzzySearch(String key, String orderBy, Integer page);
+    Resp findWhseByFuzzySearch(String key, Integer pageNum,Integer pageSize);
 
     List<Warehouse> findAllWarehouse();
 
@@ -62,10 +65,10 @@ public interface WarehouseService {
 
     /**
      * 更新仓库信息
-     * @param warehouse
+     * @param warehouseVO
      * @return
      */
-    Msg updateWhse(Warehouse warehouse);
+    Resp updateWhse(WarehouseVO warehouseVO);
 
 
 

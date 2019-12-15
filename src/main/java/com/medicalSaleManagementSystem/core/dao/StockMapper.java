@@ -12,7 +12,7 @@ public interface StockMapper {
 
     int deleteByPrimaryKey(Integer stockId);
 
-    int insert(Stock record);
+    //int insert(Stock record);
 
     int insertSelective(Stock record);
 
@@ -27,4 +27,74 @@ public interface StockMapper {
     int updateByPrimaryKeySelective(Stock record);
 
     int updateByPrimaryKey(Stock record);
+
+
+    /**
+     * 选择所有的库存信息
+     * @return 返回所有的库存信息
+     */
+    List<Stock> selectAllAndWhseId(@Param("whseId") Integer whseId);
+
+    /**
+     * 选择指定药品ID和仓库ID的库存信息
+     * @param medicineId 药品ID
+     * @param whseId 库存ID
+     * @return 返回所有指定药品ID和仓库ID的库存信息
+     */
+    List<Stock> selectByMedicineIdAndWhseId(@Param("medicineId") Integer medicineId,
+                                                 @Param("whseId") Integer whseId);
+
+    /**
+     * 选择指定药品名的库存信息
+     * @param medicineName 药品名称
+     * @return 返回所有指定药品名称的库存信息
+     */
+    List<Stock> selectByMedicineNameAndWhseId(@Param("medicineName") String medicineName,
+                                                   @Param("whseId") Integer whseId);
+
+    /**
+     * 选择指定药品种类的库存信息
+     * @param medicineCategory 药品种类
+     * @return 返回所有指定货物类型的库存信息
+     */
+    List<Stock> selectByMedicineCategoryAndWhseId(@Param("medicineType") String medicineCategory,
+                                                   @Param("whseId") Integer whseId);
+
+    /**
+     * 更新库存信息
+     * 该库存信息必需已经存在于数据库当中，否则更新无效
+     * @param stock 库存信息
+     */
+    void update(Stock stock);
+
+    /**
+     * 插入新的库存信息
+     * @param stock 库存信息
+     */
+    void insert(Stock stock);
+
+    /**
+     * 批量导入库存信息
+     * @param stock 若干条库存信息
+     */
+    void insertBatch(List<Stock> stock);
+
+    /**
+     * 删除指定药品ID的库存信息
+     * @param medicineId 药品ID
+     */
+    void deleteByMedicineId(Integer medicineId);
+
+    /**
+     * 删除指定仓库的库存信息
+     * @param whseId 仓库ID
+     */
+    void deleteByWhseId(Integer whseId);
+
+    /**
+     * 删除指定仓库中的指定药品的库存信息
+     * @param medicineId 药品ID
+     * @param whseId 仓库ID
+     */
+    void deleteByWhseIdAndMedicineId(@Param("medicineId") Integer medicineId, @Param("whseId") Integer whseId);
 }

@@ -2,224 +2,264 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.WarehouseMapper">
 
-  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.Warehouse">
-    <id column="whse_id" jdbcType="INTEGER" property="whseId" />
-    <result column="whse_Name" jdbcType="VARCHAR" property="whseName" />
-    <result column="whse_Address" jdbcType="VARCHAR" property="whseAddress" />
-    <result column="whse_Tel" jdbcType="VARCHAR" property="whseTel"/>
-    <result column="whse_Capacity" jdbcType="INTEGER" property="whseCapacity" />
-    <result column="user_Number" jdbcType="VARCHAR" property="userNumber" />
-    <result column="gen_Time" jdbcType="VARCHAR" property="genTime" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.Warehouse">
+        <id column="whse_id" jdbcType="INTEGER" property="whseId"/>
+        <result column="whse_Name" jdbcType="VARCHAR" property="whseName"/>
+        <result column="whse_Address" jdbcType="VARCHAR" property="whseAddress"/>
+        <result column="whse_Tel" jdbcType="VARCHAR" property="whseTel"/>
+        <result column="whse_Capacity" jdbcType="INTEGER" property="whseCapacity"/>
+        <result column="user_Number" jdbcType="VARCHAR" property="userNumber"/>
+        <result column="gen_Time" jdbcType="VARCHAR" property="genTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     whse_id, whse_Name,whse_Address,whse_Tel,whse_Capacity,user_Number,gen_Time
   </sql>
-  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample" resultMap="BaseResultMap">
-    select
-    *
-    from tb_warehouse
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from tb_warehouse
-    where whse_id = #{whseId,jdbcType=INTEGER}
-  </select>
+    <select id="selectAll" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample"
+            resultMap="BaseResultMap">
+        select
+        *
+        from tb_warehouse
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
 
-  <!--根据仓库名模糊查询仓库-->
-  <select id="selectWhseByWhseName" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample"
-          resultMap="BaseResultMap">
-    select
-    whse_id, whse_Name,whse_Address,whse_Tel,whse_Capacity,user_Number,gen_Time
-    from tb_warehouse
-    where whse_Name like #{whseName,jdbcType=VARCHAR}
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
+    <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from tb_warehouse
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
 
-  <!--查询所有仓库，用于列表展示-->
-  <select id="findAllWarehouse" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample"
-          resultMap="BaseResultMap">
-    select
-    *
-    from tb_warehouse
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_warehouse
+        where whse_id = #{whseId,jdbcType=INTEGER}
+    </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--根据仓库名模糊查询仓库-->
+    <select id="selectWhseByWhseName" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample"
+            resultMap="BaseResultMap">
+        select
+        whse_id, whse_Name,whse_Address,whse_Tel,whse_Capacity,user_Number,gen_Time
+        from tb_warehouse
+        where whse_Name like #{whseName,jdbcType=VARCHAR}
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <!--查询所有仓库，用于列表展示-->
+    <select id="findAllWarehouse" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample"
+            resultMap="BaseResultMap">
+        select
+        *
+        from tb_warehouse
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByID" resultMap="BaseResultMap">
+		select
+			whse_id, whse_Name,whse_Address,whse_Tel,whse_Capacity,user_Number,gen_Time
+		from
+			tb_warehouse w
+		where
+			w.whse_id = #{whseId}
+	</select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_warehouse
     where whse_id = #{whseId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample">
-    delete from tb_warehouse
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.Warehouse">
+    <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample">
+        delete from tb_warehouse
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.Warehouse">
     insert into tb_warehouse (whse_id, medicine_id, whse_amount
       )
     values (#{whseId,jdbcType=INTEGER}, #{medicineId,jdbcType=INTEGER}, #{whseAmount,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.Warehouse">
-    insert into tb_warehouse
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="whseId != null">
-        whse_id,
-      </if>
-      <if test="whseName != null">
-        whse_Name,
-      </if>
-      <if test="whseAddress != null">
-        whse_Address,
-      </if>
-      <if test="whseTel != null">
-        whse_Tel,
-      </if>
-      <if test="whseCapacity != null">
-        whse_Capacity,
-      </if>
-      <if test="userNumber != null">
-        user_Number,
-      </if>
-      <if test="genTime != null">
-        gen_Time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="whseId != null">
-        #{whseId,jdbcType=INTEGER},
-      </if>
-      <if test="whseName != null">
-        #{whseName,jdbcType=VARCHAR},
-      </if>
-      <if test="whseAddress != null">
-        #{whseAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="whseTel != null">
-        #{whseTel,jdbcType=VARCHAR},
-      </if>
-      <if test="whseCapacity != null">
-        #{whseCapacity,jdbcType=VARCHAR},
-      </if>
-      <if test="userNumber != null">
-        #{userNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="genTime != null">
-        #{genTime,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample" resultType="java.lang.Long">
-    select count(*) from tb_warehouse
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update tb_warehouse
-    <set>
-      <if test="record.whseId != null">
-        whse_id = #{record.whseId,jdbcType=INTEGER},
-      </if>
-      <if test="record.medicineId != null">
+    <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.Warehouse">
+        insert into tb_warehouse
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="whseId != null">
+                whse_id,
+            </if>
+            <if test="whseName != null">
+                whse_Name,
+            </if>
+            <if test="whseAddress != null">
+                whse_Address,
+            </if>
+            <if test="whseTel != null">
+                whse_Tel,
+            </if>
+            <if test="whseCapacity != null">
+                whse_Capacity,
+            </if>
+            <if test="userNumber != null">
+                user_Number,
+            </if>
+            <if test="genTime != null">
+                gen_Time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="whseId != null">
+                #{whseId,jdbcType=INTEGER},
+            </if>
+            <if test="whseName != null">
+                #{whseName,jdbcType=VARCHAR},
+            </if>
+            <if test="whseAddress != null">
+                #{whseAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="whseTel != null">
+                #{whseTel,jdbcType=VARCHAR},
+            </if>
+            <if test="whseCapacity != null">
+                #{whseCapacity,jdbcType=VARCHAR},
+            </if>
+            <if test="userNumber != null">
+                #{userNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="genTime != null">
+                #{genTime,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.WarehouseExample"
+            resultType="java.lang.Long">
+        select count(*) from tb_warehouse
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update tb_warehouse
+        <set>
+            <if test="record.whseId != null">
+                whse_id = #{record.whseId,jdbcType=INTEGER},
+            </if>
+            <if test="record.medicineId != null">
+                medicine_id = #{record.medicineId,jdbcType=INTEGER},
+            </if>
+            <if test="record.whseAmount != null">
+                whse_amount = #{record.whseAmount,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update tb_warehouse
+        set whse_id = #{record.whseId,jdbcType=INTEGER},
         medicine_id = #{record.medicineId,jdbcType=INTEGER},
-      </if>
-      <if test="record.whseAmount != null">
-        whse_amount = #{record.whseAmount,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tb_warehouse
-    set whse_id = #{record.whseId,jdbcType=INTEGER},
-      medicine_id = #{record.medicineId,jdbcType=INTEGER},
-      whse_amount = #{record.whseAmount,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.Warehouse">
-    update tb_warehouse
-    <set>
-      <if test="medicineId != null">
-        medicine_id = #{medicineId,jdbcType=INTEGER},
-      </if>
-      <if test="whseAmount != null">
-        whse_amount = #{whseAmount,jdbcType=INTEGER},
-      </if>
-    </set>
-    where whse_id = #{whseId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.model.entity.Warehouse">
+        whse_amount = #{record.whseAmount,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.medicalSaleManagementSystem.core.model.entity.Warehouse">
+        update tb_warehouse
+        <set>
+            <if test="whseName != null">
+                whse_Name=#{whseName,jdbcType=VARCHAR},
+            </if>
+            <if test="whseAddress != null">
+                whse_Address=#{whseAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="whseTel != null">
+                whse_Tel=#{whseTel,jdbcType=VARCHAR},
+            </if>
+            <if test="whseCapacity != null">
+                whse_Capcity=#{whseCapacity,jdbcType=VARCHAR},
+            </if>
+            <if test="userNumber != null">
+                user_Number=#{userNumber,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where whse_id = #{whseId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.model.entity.Warehouse">
     update tb_warehouse
     set medicine_id = #{medicineId,jdbcType=INTEGER},
       whse_amount = #{whseAmount,jdbcType=INTEGER}

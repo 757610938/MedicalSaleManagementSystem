@@ -102,6 +102,19 @@
     </if>
   </select>
 
+  <select id="selectById" resultMap="BaseResultMap">
+		select
+			medicine_id, medicine_Approval_Number, medicine_Name, medicine_English_Name, medicine_Dosageform_Category,
+    medicine_Manufacturer, medicine_Specification, medicine_Manufacturing_Address, medicine_Category,
+    medicine_Approvaldate, medicine_Original_Approval_Number, medicine_Suppliers_id,
+    medicine_country, medicine_Picture, medicine_Purchase_Price, medicine_Retail_Price,
+    medicine_Wholesale_Price,stock_id
+		from
+			tb_medicine m
+		where
+			m.medicine_id = #{medicineId}
+	</select>
+
   <select id="getAll"  resultType="com.medicalSaleManagementSystem.core.model.BO.MedicineBO">
     SELECT
         tb_supplier.supplier_Name,

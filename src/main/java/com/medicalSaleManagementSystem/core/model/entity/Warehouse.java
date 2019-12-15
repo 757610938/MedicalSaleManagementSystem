@@ -75,7 +75,7 @@ public class Warehouse {
         this.userNumber = userNumber == null ? null : userNumber.trim();
     }
 
-    public String toString(){
+    public String toString() {
         return JSON.toJSONString(this);
     }
 }
