@@ -305,63 +305,63 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andValidIsNull() {
-            addCriterion("valid is null");
+        public Criteria andUserValidIsNull() {
+            addCriterion("user_valid is null");
             return (Criteria) this;
         }
 
-        public Criteria andValidIsNotNull() {
-            addCriterion("valid is not null");
+        public Criteria andUserValidIsNotNull() {
+            addCriterion("user_valid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andValidEqualTo(Integer value) {
-            addCriterion("valid =", value, "valid");
+        public Criteria andUserValidEqualTo(Integer value) {
+            addCriterion("user_valid =", value, "userValid");
             return (Criteria) this;
         }
 
-        public Criteria andValidNotEqualTo(Integer value) {
-            addCriterion("valid <>", value, "valid");
+        public Criteria andUserValidNotEqualTo(Integer value) {
+            addCriterion("user_valid <>", value, "userValid");
             return (Criteria) this;
         }
 
-        public Criteria andValidGreaterThan(Integer value) {
-            addCriterion("valid >", value, "valid");
+        public Criteria andUserValidGreaterThan(Integer value) {
+            addCriterion("user_valid >", value, "userValid");
             return (Criteria) this;
         }
 
-        public Criteria andValidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("valid >=", value, "valid");
+        public Criteria andUserValidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("user_valid >=", value, "userValid");
             return (Criteria) this;
         }
 
-        public Criteria andValidLessThan(Integer value) {
-            addCriterion("valid <", value, "valid");
+        public Criteria andUserValidLessThan(Integer value) {
+            addCriterion("user_valid <", value, "userValid");
             return (Criteria) this;
         }
 
-        public Criteria andValidLessThanOrEqualTo(Integer value) {
-            addCriterion("valid <=", value, "valid");
+        public Criteria andUserValidLessThanOrEqualTo(Integer value) {
+            addCriterion("user_valid <=", value, "userValid");
             return (Criteria) this;
         }
 
-        public Criteria andValidIn(List<Integer> values) {
-            addCriterion("valid in", values, "valid");
+        public Criteria andUserValidIn(List<Integer> values) {
+            addCriterion("user_valid in", values, "userValid");
             return (Criteria) this;
         }
 
-        public Criteria andValidNotIn(List<Integer> values) {
-            addCriterion("valid not in", values, "valid");
+        public Criteria andUserValidNotIn(List<Integer> values) {
+            addCriterion("user_valid not in", values, "userValid");
             return (Criteria) this;
         }
 
-        public Criteria andValidBetween(Integer value1, Integer value2) {
-            addCriterion("valid between", value1, value2, "valid");
+        public Criteria andUserValidBetween(Integer value1, Integer value2) {
+            addCriterion("user_valid between", value1, value2, "userValid");
             return (Criteria) this;
         }
 
-        public Criteria andValidNotBetween(Integer value1, Integer value2) {
-            addCriterion("valid not between", value1, value2, "valid");
+        public Criteria andUserValidNotBetween(Integer value1, Integer value2) {
+            addCriterion("user_valid not between", value1, value2, "userValid");
             return (Criteria) this;
         }
 

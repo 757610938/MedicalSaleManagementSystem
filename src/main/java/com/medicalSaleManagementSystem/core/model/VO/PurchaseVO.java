@@ -1,8 +1,13 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.VO;
+
+import com.medicalSaleManagementSystem.core.model.BO.PurchaseDtlBO;
 
 import java.util.Date;
+import java.util.List;
 
-public class Purchase {
+public class PurchaseVO {
+    private List<PurchaseDtlVO> putDtlList;
+
     private Integer purId;
 
     private String purOrderId;
@@ -101,5 +106,30 @@ public class Purchase {
 
     public void setPurRemark(String purRemark) {
         this.purRemark = purRemark == null ? null : purRemark.trim();
+    }
+
+    public List<PurchaseDtlVO> getPutDtlList() {
+        return putDtlList;
+    }
+
+    public void setPutDtlList(List<PurchaseDtlVO> putDtlList) {
+        this.putDtlList = putDtlList;
+    }
+
+    @Override
+    public String toString() {
+        return "PurchaseVO{" +
+                " purId=" + purId +
+                ", purOrderId='" + purOrderId + '\'' +
+                ", purName='" + purName + '\'' +
+                ", supplierId=" + supplierId +
+                ", userNumber='" + userNumber + '\'' +
+                ", purTotalMoney=" + purTotalMoney +
+                ", purStatus='" + purStatus + '\'' +
+                ", warehouseId=" + warehouseId +
+                ", purDate=" + purDate +
+                ", purRemark='" + purRemark + '\'' +
+                ", putDtlList=" + putDtlList +
+                '}';
     }
 }

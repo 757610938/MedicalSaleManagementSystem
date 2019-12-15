@@ -29,7 +29,8 @@ public interface UserService {
      * @Author: 林贤钦
      * @Date: 2019/12/12 21:50
      */
-    List<User>  selectByPrimaryUserName(String  userName);
+    List<User>  selectByPrimaryUserName(String userName);
+
     /*
      * 功能描述: <br>
      * 〈〉添加用户信息
@@ -69,7 +70,15 @@ public interface UserService {
      * @Date: 2019/12/14 16:47
      */
     int updateByPrimaryKeySelective(UserDTO record);
-
+    /*
+     * 功能描述: <br>
+     * 〈〉查询所有员工工号
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/15 16:26
+     */
+    List<String> selectAllUserNumber();
     /*
      * 功能描述: <br>
      * 〈〉查询所有用户数据
@@ -88,4 +97,13 @@ public interface UserService {
      * @Date: 2019/12/14 16:47
      */
     List<User> vagueSelectByPrimaryName(String name);
+    /*
+     * 功能描述: <br>
+     * 〈〉查询校验员工工号
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/15 20:07
+     */
+    List<User>checkUserNumber(String userNumber);
 }

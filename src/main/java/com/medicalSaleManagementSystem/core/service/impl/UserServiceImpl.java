@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         //执行查询，返回结果
         List<User> userList = userMapper.selectByExample(userExample);
         if(userList.size()>0){
-            if(userList.get(0).getValid()==0){
+            if(userList.get(0).getUserValid()==0){
                 return  Resp.httpStatus(HttpStatus.BAD_REQUEST,"帐号已经禁止登录！");
             }
             //登录成功，记录登录时间，将数据库的登录时间移动到上次登录时间，记录登录ip
@@ -79,22 +79,35 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public  List<User> selectByPrimaryUserName(String userName) {
-        UserExample userExample = new UserExample();
-        UserExample.Criteria criteria = userExample.createCriteria();
-        criteria.andUserNameEqualTo(userName);
-        return userMapper.selectByExample(userExample);
+        System.out.println("selectByPrimaryUserName"+userName);
+        try{
+            if ("".equals(userName) ||userName==null) {
+                return null;
+            }
+            UserExample userExample = new UserExample();
+            UserExample.Criteria criteria = userExample.createCriteria();
+            criteria.andUserNameEqualTo(userName);
+            return userMapper.selectByExample(userExample);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public int insertSelective(UserDTO record) {
         try {
-            List<User> userList = selectByPrimaryUserName(record.getUserName());
+            List<User> userList = selectByPrimaryUserName(record.getUserName());//查询账户是否存在
+            System.out.println(userList);
+            System.out.println(userList.size());
             if (userList.size()<=0){
-                return 0;
+                User user=new User();
+                BeanUtilEx.copyProperties(user,record);
+                user.setUserValid(1);//将 valid状态改为1
+                user.setPassword(MD5Util.string2MD5("123456"));//设置默认密码123456，md5加密
+                return userMapper.insertSelective(user);//将账户存入数据库中
             }
-            User user=new User();
-            BeanUtilEx.copyProperties(user,record);
-            return userMapper.insertSelective(user);
+            return 0;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -131,7 +144,7 @@ public class UserServiceImpl implements UserService {
         try{
             User user = new User();
             user.setUserId(userId);
-            user.setValid(0);//将user状态改为0
+            user.setUserValid(0);//将user状态改为0
             return userMapper.updateByPrimaryKeySelective(user);
         } catch (Exception e){
             e.printStackTrace();
@@ -144,7 +157,7 @@ public class UserServiceImpl implements UserService {
         try{
             User user = new User();
             user.setUserId(userId);
-            user.setValid(1);//将user状态改为0
+            user.setUserValid(1);//将user状态改为0
             return userMapper.updateByPrimaryKeySelective(user);
         } catch (Exception e){
             e.printStackTrace();
@@ -169,6 +182,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<String> selectAllUserNumber() {
+        return userMapper.selectAllUserNumber();
+    }
+
+    @Override
     public List<User> getAll() {
         return userMapper.selectByExample(null);
     }
@@ -178,6 +196,14 @@ public class UserServiceImpl implements UserService {
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
         criteria.andUserNameLike("%"+name+"%");
+        return userMapper.selectByExample(userExample);
+    }
+
+    @Override
+    public List<User> checkUserNumber(String userNumber) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUserNumberEqualTo(userNumber);
         return userMapper.selectByExample(userExample);
     }
 }

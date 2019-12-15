@@ -50,10 +50,10 @@ public interface CustomerService {
     /*
      * 功能描述: <br>
      * 〈〉通过名称模糊查询数据库
-     * @Param:  name
+     * @Param:  keyword
      * @Return: List<Customer>
      * @Author: 林贤钦
      * @Date: 2019/12/12 21:09
      */
-    List<Customer> vagueSelectByPrimaryName(String name);
+    List<Customer> vagueSelectByPrimaryName(String keyword);
 }

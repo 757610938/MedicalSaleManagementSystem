@@ -1,8 +1,8 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.DTO;
 
 import java.util.Date;
 
-public class PurchaseDtlStatus {
+public class PurchaseDtlStatusDTO {
     private Integer purDtlStatusId;
 
     private String purDtlStatusName;

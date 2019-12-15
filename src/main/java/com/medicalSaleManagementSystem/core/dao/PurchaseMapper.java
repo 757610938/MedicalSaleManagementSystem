@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.dao;
 
+import com.medicalSaleManagementSystem.core.model.BO.PurchaseBO;
 import com.medicalSaleManagementSystem.core.model.entity.Purchase;
 import com.medicalSaleManagementSystem.core.model.entity.PurchaseExample;
 import java.util.List;
@@ -27,4 +28,12 @@ public interface PurchaseMapper {
     int updateByPrimaryKeySelective(Purchase record);
 
     int updateByPrimaryKey(Purchase record);
+
+    List<Integer> getAllPurOrderId();
+
+    List<PurchaseBO> getAll();
+
+    List<PurchaseBO> getAllByUserNumber(String userNumber);
+
+    PurchaseBO selectBPurOrderId(String purOrderId);
 }

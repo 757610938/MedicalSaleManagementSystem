@@ -1,6 +1,6 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.VO;
 
-public class PurchaseDtl {
+public class PurchaseDtlVO {
     private Integer purDtlId;
 
     private String purDtlOrderId;
@@ -89,5 +89,20 @@ public class PurchaseDtl {
 
     public void setPurDtlRemark(String purDtlRemark) {
         this.purDtlRemark = purDtlRemark == null ? null : purDtlRemark.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "PurchaseDtlVO{" +
+                "purDtlId=" + purDtlId +
+                ", purDtlOrderId='" + purDtlOrderId + '\'' +
+                ", purOrderId='" + purOrderId + '\'' +
+                ", medicineId=" + medicineId +
+                ", medicineName='" + medicineName + '\'' +
+                ", purDtlAmount=" + purDtlAmount +
+                ", purDtlPrice=" + purDtlPrice +
+                ", purDtlStatus='" + purDtlStatus + '\'' +
+                ", purDtlRemark='" + purDtlRemark + '\'' +
+                '}';
     }
 }

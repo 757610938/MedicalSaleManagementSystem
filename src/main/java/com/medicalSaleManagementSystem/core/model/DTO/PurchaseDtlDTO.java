@@ -1,6 +1,11 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.DTO;
 
-public class PurchaseDtl {
+import com.medicalSaleManagementSystem.core.model.BO.PurchaseDtlBO;
+
+import java.util.Date;
+import java.util.List;
+
+public class PurchaseDtlDTO {
     private Integer purDtlId;
 
     private String purDtlOrderId;

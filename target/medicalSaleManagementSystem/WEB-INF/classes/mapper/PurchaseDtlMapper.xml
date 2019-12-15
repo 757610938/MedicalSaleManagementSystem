@@ -3,10 +3,13 @@
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.PurchaseDtlMapper">
   <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.PurchaseDtl">
     <id column="pur_Dtl_id" jdbcType="INTEGER" property="purDtlId" />
-    <result column="pur_Dtl_OrderId" jdbcType="VARCHAR" property="purDtlOrderid" />
-    <result column="pur_OrderId" jdbcType="VARCHAR" property="purOrderid" />
+    <result column="pur_Dtl_Order_Id" jdbcType="VARCHAR" property="purDtlOrderId" />
+    <result column="pur_Order_Id" jdbcType="VARCHAR" property="purOrderId" />
     <result column="medicine_id" jdbcType="INTEGER" property="medicineId" />
-    <result column="pur_Dtl_Total_Amount" jdbcType="INTEGER" property="purDtlTotalAmount" />
+    <result column="medicine_Name" jdbcType="VARCHAR" property="medicineName" />
+    <result column="pur_Dtl_Amount" jdbcType="INTEGER" property="purDtlAmount" />
+    <result column="pur_Dtl_Price" jdbcType="DOUBLE" property="purDtlPrice" />
+    <result column="pur_Dtl_Status" jdbcType="VARCHAR" property="purDtlStatus" />
     <result column="pur_Dtl_Remark" jdbcType="VARCHAR" property="purDtlRemark" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    pur_Dtl_id, pur_Dtl_OrderId, pur_OrderId, medicine_id, pur_Dtl_Total_Amount, pur_Dtl_Remark
+    pur_Dtl_id, pur_Dtl_Order_Id, pur_Order_Id, medicine_id, medicine_Name, pur_Dtl_Amount,
+    pur_Dtl_Price, pur_Dtl_Status, pur_Dtl_Remark
   </sql>
   <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.PurchaseDtlExample" resultMap="BaseResultMap">
     select
@@ -85,7 +89,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from tb_purchase_dtl
     where pur_Dtl_id = #{purDtlId,jdbcType=INTEGER}
@@ -101,11 +105,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.PurchaseDtl">
-    insert into tb_purchase_dtl (pur_Dtl_id, pur_Dtl_OrderId, pur_OrderId, 
-      medicine_id, pur_Dtl_Total_Amount, pur_Dtl_Remark
+    insert into tb_purchase_dtl (pur_Dtl_id, pur_Dtl_Order_Id, pur_Order_Id,
+      medicine_id, medicine_Name, pur_Dtl_Amount,
+      pur_Dtl_Price, pur_Dtl_Status, pur_Dtl_Remark
       )
-    values (#{purDtlId,jdbcType=INTEGER}, #{purDtlOrderid,jdbcType=VARCHAR}, #{purOrderid,jdbcType=VARCHAR}, 
-      #{medicineId,jdbcType=INTEGER}, #{purDtlTotalAmount,jdbcType=INTEGER}, #{purDtlRemark,jdbcType=VARCHAR}
+    values (#{purDtlId,jdbcType=INTEGER}, #{purDtlOrderId,jdbcType=VARCHAR}, #{purOrderId,jdbcType=VARCHAR},
+      #{medicineId,jdbcType=INTEGER}, #{medicineName,jdbcType=VARCHAR}, #{purDtlAmount,jdbcType=INTEGER},
+      #{purDtlPrice,jdbcType=DOUBLE}, #{purDtlStatus,jdbcType=VARCHAR}, #{purDtlRemark,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.PurchaseDtl">
@@ -114,17 +120,26 @@
       <if test="purDtlId != null">
         pur_Dtl_id,
       </if>
-      <if test="purDtlOrderid != null">
-        pur_Dtl_OrderId,
+      <if test="purDtlOrderId != null">
+        pur_Dtl_Order_Id,
       </if>
-      <if test="purOrderid != null">
-        pur_OrderId,
+      <if test="purOrderId != null">
+        pur_Order_Id,
       </if>
       <if test="medicineId != null">
         medicine_id,
       </if>
-      <if test="purDtlTotalAmount != null">
-        pur_Dtl_Total_Amount,
+      <if test="medicineName != null">
+        medicine_Name,
+      </if>
+      <if test="purDtlAmount != null">
+        pur_Dtl_Amount,
+      </if>
+      <if test="purDtlPrice != null">
+        pur_Dtl_Price,
+      </if>
+      <if test="purDtlStatus != null">
+        pur_Dtl_Status,
       </if>
       <if test="purDtlRemark != null">
         pur_Dtl_Remark,
@@ -134,17 +149,26 @@
       <if test="purDtlId != null">
         #{purDtlId,jdbcType=INTEGER},
       </if>
-      <if test="purDtlOrderid != null">
-        #{purDtlOrderid,jdbcType=VARCHAR},
+      <if test="purDtlOrderId != null">
+        #{purDtlOrderId,jdbcType=VARCHAR},
       </if>
-      <if test="purOrderid != null">
-        #{purOrderid,jdbcType=VARCHAR},
+      <if test="purOrderId != null">
+        #{purOrderId,jdbcType=VARCHAR},
       </if>
       <if test="medicineId != null">
         #{medicineId,jdbcType=INTEGER},
       </if>
-      <if test="purDtlTotalAmount != null">
-        #{purDtlTotalAmount,jdbcType=INTEGER},
+      <if test="medicineName != null">
+        #{medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="purDtlAmount != null">
+        #{purDtlAmount,jdbcType=INTEGER},
+      </if>
+      <if test="purDtlPrice != null">
+        #{purDtlPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="purDtlStatus != null">
+        #{purDtlStatus,jdbcType=VARCHAR},
       </if>
       <if test="purDtlRemark != null">
         #{purDtlRemark,jdbcType=VARCHAR},
@@ -163,17 +187,26 @@
       <if test="record.purDtlId != null">
         pur_Dtl_id = #{record.purDtlId,jdbcType=INTEGER},
       </if>
-      <if test="record.purDtlOrderid != null">
-        pur_Dtl_OrderId = #{record.purDtlOrderid,jdbcType=VARCHAR},
+      <if test="record.purDtlOrderId != null">
+        pur_Dtl_Order_Id = #{record.purDtlOrderId,jdbcType=VARCHAR},
       </if>
-      <if test="record.purOrderid != null">
-        pur_OrderId = #{record.purOrderid,jdbcType=VARCHAR},
+      <if test="record.purOrderId != null">
+        pur_Order_Id = #{record.purOrderId,jdbcType=VARCHAR},
       </if>
       <if test="record.medicineId != null">
         medicine_id = #{record.medicineId,jdbcType=INTEGER},
       </if>
-      <if test="record.purDtlTotalAmount != null">
-        pur_Dtl_Total_Amount = #{record.purDtlTotalAmount,jdbcType=INTEGER},
+      <if test="record.medicineName != null">
+        medicine_Name = #{record.medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purDtlAmount != null">
+        pur_Dtl_Amount = #{record.purDtlAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.purDtlPrice != null">
+        pur_Dtl_Price = #{record.purDtlPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.purDtlStatus != null">
+        pur_Dtl_Status = #{record.purDtlStatus,jdbcType=VARCHAR},
       </if>
       <if test="record.purDtlRemark != null">
         pur_Dtl_Remark = #{record.purDtlRemark,jdbcType=VARCHAR},
@@ -186,11 +219,14 @@
   <update id="updateByExample" parameterType="map">
     update tb_purchase_dtl
     set pur_Dtl_id = #{record.purDtlId,jdbcType=INTEGER},
-      pur_Dtl_OrderId = #{record.purDtlOrderid,jdbcType=VARCHAR},
-      pur_OrderId = #{record.purOrderid,jdbcType=VARCHAR},
-      medicine_id = #{record.medicineId,jdbcType=INTEGER},
-      pur_Dtl_Total_Amount = #{record.purDtlTotalAmount,jdbcType=INTEGER},
-      pur_Dtl_Remark = #{record.purDtlRemark,jdbcType=VARCHAR}
+    pur_Dtl_Order_Id = #{record.purDtlOrderId,jdbcType=VARCHAR},
+    pur_Order_Id = #{record.purOrderId,jdbcType=VARCHAR},
+    medicine_id = #{record.medicineId,jdbcType=INTEGER},
+    medicine_Name = #{record.medicineName,jdbcType=VARCHAR},
+    pur_Dtl_Amount = #{record.purDtlAmount,jdbcType=INTEGER},
+    pur_Dtl_Price = #{record.purDtlPrice,jdbcType=DOUBLE},
+    pur_Dtl_Status = #{record.purDtlStatus,jdbcType=VARCHAR},
+    pur_Dtl_Remark = #{record.purDtlRemark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -198,17 +234,26 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.PurchaseDtl">
     update tb_purchase_dtl
     <set>
-      <if test="purDtlOrderid != null">
-        pur_Dtl_OrderId = #{purDtlOrderid,jdbcType=VARCHAR},
+      <if test="purDtlOrderId != null">
+        pur_Dtl_Order_Id = #{purDtlOrderId,jdbcType=VARCHAR},
       </if>
-      <if test="purOrderid != null">
-        pur_OrderId = #{purOrderid,jdbcType=VARCHAR},
+      <if test="purOrderId != null">
+        pur_Order_Id = #{purOrderId,jdbcType=VARCHAR},
       </if>
       <if test="medicineId != null">
         medicine_id = #{medicineId,jdbcType=INTEGER},
       </if>
-      <if test="purDtlTotalAmount != null">
-        pur_Dtl_Total_Amount = #{purDtlTotalAmount,jdbcType=INTEGER},
+      <if test="medicineName != null">
+        medicine_Name = #{medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="purDtlAmount != null">
+        pur_Dtl_Amount = #{purDtlAmount,jdbcType=INTEGER},
+      </if>
+      <if test="purDtlPrice != null">
+        pur_Dtl_Price = #{purDtlPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="purDtlStatus != null">
+        pur_Dtl_Status = #{purDtlStatus,jdbcType=VARCHAR},
       </if>
       <if test="purDtlRemark != null">
         pur_Dtl_Remark = #{purDtlRemark,jdbcType=VARCHAR},
@@ -218,10 +263,13 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.model.entity.PurchaseDtl">
     update tb_purchase_dtl
-    set pur_Dtl_OrderId = #{purDtlOrderid,jdbcType=VARCHAR},
-      pur_OrderId = #{purOrderid,jdbcType=VARCHAR},
+    set pur_Dtl_Order_Id = #{purDtlOrderId,jdbcType=VARCHAR},
+      pur_Order_Id = #{purOrderId,jdbcType=VARCHAR},
       medicine_id = #{medicineId,jdbcType=INTEGER},
-      pur_Dtl_Total_Amount = #{purDtlTotalAmount,jdbcType=INTEGER},
+      medicine_Name = #{medicineName,jdbcType=VARCHAR},
+      pur_Dtl_Amount = #{purDtlAmount,jdbcType=INTEGER},
+      pur_Dtl_Price = #{purDtlPrice,jdbcType=DOUBLE},
+      pur_Dtl_Status = #{purDtlStatus,jdbcType=VARCHAR},
       pur_Dtl_Remark = #{purDtlRemark,jdbcType=VARCHAR}
     where pur_Dtl_id = #{purDtlId,jdbcType=INTEGER}
   </update>
