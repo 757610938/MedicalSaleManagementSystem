@@ -10,6 +10,7 @@ import com.medicalSaleManagementSystem.util.BeanUtilEx;
 import com.medicalSaleManagementSystem.util.OrderCodeFactory;
 import com.medicalSaleManagementSystem.util.TypeCastHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * FileName: PurchaseDtlServiceImpl.java
@@ -18,13 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @version 1.00
  * @Date 2019/12/14
  */
+@Service
 public class PurchaseDtlServiceImpl implements PurchaseDtlService {
     @Autowired
     private PurchaseDtlMapper purchaseDtlMapper;
-    @Autowired
-    private PurchaseDtlStatusMapper purchaseDtlStatusMapper;
-    @Autowired
-    private MedicineService medicineService;
 
     @Override
     public int insertSelective(PurchaseDtlDTO record) {

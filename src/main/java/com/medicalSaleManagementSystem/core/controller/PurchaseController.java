@@ -102,7 +102,7 @@ public class PurchaseController {
      */
     @RequestMapping ( value = "/purchase/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Resp deleteByPrimaryKey(@PathVariable("id")Integer id){
+    public Resp deleteByPrimaryKey(@PathVariable("id") Integer id){
         try{
             int i = purchaseService.deleteByPrimaryKey(id);
             if(i==0){
@@ -143,7 +143,7 @@ public class PurchaseController {
 
     /*
      * 功能描述: <br>
-     * 〈〉获取所有采购单编号
+     * 〈〉获取所有采购单和采购项
      * @Param:
      * @Return:
      * @Author: 林贤钦
@@ -164,21 +164,7 @@ public class PurchaseController {
         //500
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
-    @RequestMapping ( value = "/purchases/{userNumber}", method = RequestMethod.GET )
-    @ResponseBody
-    public Resp getAllByUserNumber(@PathVariable String userNumber){
-        try{
-            List<PurchaseBO> list = purchaseService.getAllByUserNumber(userNumber);
-            if (list.size()<=0){
-                return  Resp.httpStatus(HttpStatus.BAD_REQUEST,"获取该员工的采购单编号失败");
-            }
-            return Resp.httpStatus(HttpStatus.OK,"获取该员工的采购单编号成功！",list);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        //500
-        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
-    }
+
     /*
      * 功能描述: <br>
      * 〈〉分页查询所有采购单信息
@@ -193,8 +179,8 @@ public class PurchaseController {
         try{
             //设置现在的页数为pageNum，显示的条数为pageSize条
             PageHelper.startPage(pageNum, pageSize);
-            List<PurchaseBO> purchaseList = purchaseService.getAll();
-            PageInfo<PurchaseBO> pageInfo  = new PageInfo<>(purchaseList);
+            List<Purchase> purchaseList = purchaseService.getAll();
+            PageInfo<Purchase> pageInfo  = new PageInfo<>(purchaseList);
             return Resp.httpStatus(HttpStatus.OK,"查找采购单信息成功！",pageInfo);
         }catch (Exception e){
             e.printStackTrace();
@@ -202,5 +188,30 @@ public class PurchaseController {
         //500
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
-
+    /*
+     * 功能描述: <br>
+     * 〈〉获取该员工的采购单编号
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/15 22:18
+     */
+    @RequestMapping ( value = "/purchases/{pageNum}/{pageSize}/{userNumber}", method = RequestMethod.GET )
+    @ResponseBody
+    public Resp getAllByUserNumber(@PathVariable String userNumber,@PathVariable int pageNum ,@PathVariable int pageSize){
+        try{
+            //设置现在的页数为pageNum，显示的条数为pageSize条
+            PageHelper.startPage(pageNum, pageSize);
+            List<PurchaseBO> purchaseList = purchaseService.getAllByUserNumber(userNumber);
+            if (purchaseList.size()<=0){
+                return  Resp.httpStatus(HttpStatus.BAD_REQUEST,"获取该员工的采购单编号失败");
+            }
+            PageInfo<PurchaseBO> pageInfo  = new PageInfo<>(purchaseList);
+            return Resp.httpStatus(HttpStatus.OK,"获取该员工的采购单编号成功！",pageInfo);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
 }

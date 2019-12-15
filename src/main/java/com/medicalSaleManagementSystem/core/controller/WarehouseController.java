@@ -50,10 +50,13 @@ public class WarehouseController {
 
     @ResponseBody
     @RequestMapping(value = "/warehouseManage/warehouse", method = RequestMethod.POST)
-    public Resp addWarehouse(Warehouse warehouse) {
+    public Resp addWarehouse(@RequestBody Warehouse warehouse) {
         try {
             warehouse.setGenTime(new Date(System.currentTimeMillis()));
+
+            System.out.println(warehouse);
             warehouseService.addWhse(warehouse);
+
             return Resp.httpStatus(HttpStatus.OK, "新增仓库成功");
         } catch (Exception e) {
             e.printStackTrace();

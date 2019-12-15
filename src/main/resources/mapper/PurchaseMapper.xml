@@ -141,7 +141,7 @@
         INNER JOIN tb_purchase_dtl ON tb_purchase_dtl.pur_Order_Id = tb_purchase.pur_Order_Id
          where tb_purchase.pur_Order_Id = #{purOrderId,jdbcType=VARCHAR}
     </select>
-    <select id="getAll"  resultMap="purchaseAndDtl">
+    <select id="getAllAndDtl"  resultMap="purchaseAndDtl">
        SELECT
         tb_purchase.pur_id,
         tb_purchase.pur_Order_Id,
@@ -165,6 +165,21 @@
     FROM
         tb_purchase
     INNER JOIN tb_purchase_dtl ON tb_purchase_dtl.pur_Order_Id = tb_purchase.pur_Order_Id
+    </select>
+    <select id="getAll"  resultMap="BaseResultMap">
+     SELECT
+        tb_purchase.pur_id,
+        tb_purchase.pur_Order_Id,
+        tb_purchase.pur__Name,
+        tb_purchase.supplier_id,
+        tb_purchase.user_Number,
+        tb_purchase.pur_Total_Money,
+        tb_purchase.pur_Status,
+        tb_purchase.Warehouse_id,
+        tb_purchase.pur_Date,
+        tb_purchase.pur__Remark
+     FROM
+        tb_purchase
     </select>
     <select id="getAllByUserNumber"  parameterType="java.lang.String" resultMap="purchaseAndDtl">
         SELECT

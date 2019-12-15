@@ -36,6 +36,16 @@ public interface PurchaseService {
     int deleteByPrimaryKey(Integer id);
     /*
      * 功能描述: <br>
+     * 〈〉删除采购单
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/15 22:48
+     */
+    int deleteByPurOrderId(String purOrderId);
+
+    /*
+     * 功能描述: <br>
      * 〈通过purOrderId查找采购单信息〉
      * @Param:
      * @Return:
@@ -61,7 +71,7 @@ public interface PurchaseService {
      * @Author: 林贤钦
      * @Date: 2019/12/14 20:51
      */
-    List<PurchaseBO>  getAll();
+    List<Purchase>  getAll();
     /*
      * 功能描述: <br>
      * 〈通过编号模糊查询数据库〉

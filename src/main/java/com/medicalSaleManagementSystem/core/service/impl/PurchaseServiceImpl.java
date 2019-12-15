@@ -2,8 +2,10 @@ package com.medicalSaleManagementSystem.core.service.impl;
 
 import com.medicalSaleManagementSystem.core.dao.PurchaseMapper;
 import com.medicalSaleManagementSystem.core.model.BO.PurchaseBO;
+import com.medicalSaleManagementSystem.core.model.BO.PurchaseDtlBO;
 import com.medicalSaleManagementSystem.core.model.DTO.PurchaseDTO;
 import com.medicalSaleManagementSystem.core.model.entity.Purchase;
+import com.medicalSaleManagementSystem.core.service.PurchaseDtlService;
 import com.medicalSaleManagementSystem.core.service.PurchaseService;
 import com.medicalSaleManagementSystem.util.BeanUtilEx;
 import com.medicalSaleManagementSystem.util.OrderCodeFactory;
@@ -24,7 +26,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Autowired
     private PurchaseMapper purchaseMapper;
 
-
+    @Autowired
+    private PurchaseDtlService purchaseDtlService;
     /*
      * 功能描述: <br>
      * 〈〉
@@ -52,8 +55,26 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public int deleteByPrimaryKey(Integer id) {
         try {
-            int i = purchaseMapper.deleteByPrimaryKey(id);
-            return i;
+            return purchaseMapper.deleteByPrimaryKey(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public int deleteByPurOrderId(String purOrderId) {
+        try {
+            PurchaseBO purchaseBO = selectBPurOrderId(purOrderId);//查询数据库是否存在该采购单
+            if (purchaseBO==null){
+                return 0;
+            }
+            for (PurchaseDtlBO purchaseDtlBO : purchaseBO.getPutDtlList()) {
+                //调用方法删除每一项
+                purchaseDtlService.deleteByPrimaryKey(purchaseDtlBO.getPurDtlId());
+            }
+            //再删除采购单
+            return deleteByPrimaryKey(purchaseBO.getPurId());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -86,7 +107,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public List<PurchaseBO> getAll() {
+    public List<Purchase> getAll() {
         return purchaseMapper.getAll();
     }
 

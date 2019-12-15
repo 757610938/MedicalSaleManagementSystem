@@ -31,7 +31,9 @@ public interface PurchaseMapper {
 
     List<Integer> getAllPurOrderId();
 
-    List<PurchaseBO> getAll();
+    List<PurchaseBO> getAllAndDtl();
+    
+    List<Purchase> getAll();
 
     List<PurchaseBO> getAllByUserNumber(String userNumber);
 
