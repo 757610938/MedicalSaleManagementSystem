@@ -9,7 +9,7 @@ public class UserDTO {
 
     private String password;
 
-    private Integer valid;
+    private Integer userValid;
 
     private String lastLoginIp;
 
@@ -57,12 +57,12 @@ public class UserDTO {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getValid() {
-        return valid;
+    public Integer getUserValid() {
+        return userValid;
     }
 
-    public void setValid(Integer valid) {
-        this.valid = valid;
+    public void setUserValid(Integer userValid) {
+        this.userValid = userValid;
     }
 
     public String getLastLoginIp() {

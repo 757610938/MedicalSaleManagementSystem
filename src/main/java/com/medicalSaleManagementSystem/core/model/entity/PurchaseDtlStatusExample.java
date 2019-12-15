@@ -614,6 +614,66 @@ public class PurchaseDtlStatusExample {
             addCriterion("pur_Dtl_Status_Remark not between", value1, value2, "purDtlStatusRemark");
             return (Criteria) this;
         }
+
+        public Criteria andPurDtlStatusPriceIsNull() {
+            addCriterion("pur_Dtl_Status_Price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusPriceIsNotNull() {
+            addCriterion("pur_Dtl_Status_Price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusPriceEqualTo(Double value) {
+            addCriterion("pur_Dtl_Status_Price =", value, "purDtlStatusPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusPriceNotEqualTo(Double value) {
+            addCriterion("pur_Dtl_Status_Price <>", value, "purDtlStatusPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusPriceGreaterThan(Double value) {
+            addCriterion("pur_Dtl_Status_Price >", value, "purDtlStatusPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("pur_Dtl_Status_Price >=", value, "purDtlStatusPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusPriceLessThan(Double value) {
+            addCriterion("pur_Dtl_Status_Price <", value, "purDtlStatusPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusPriceLessThanOrEqualTo(Double value) {
+            addCriterion("pur_Dtl_Status_Price <=", value, "purDtlStatusPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusPriceIn(List<Double> values) {
+            addCriterion("pur_Dtl_Status_Price in", values, "purDtlStatusPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusPriceNotIn(List<Double> values) {
+            addCriterion("pur_Dtl_Status_Price not in", values, "purDtlStatusPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusPriceBetween(Double value1, Double value2) {
+            addCriterion("pur_Dtl_Status_Price between", value1, value2, "purDtlStatusPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusPriceNotBetween(Double value1, Double value2) {
+            addCriterion("pur_Dtl_Status_Price not between", value1, value2, "purDtlStatusPrice");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -164,143 +164,143 @@ public class PurchaseDtlExample {
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidIsNull() {
-            addCriterion("pur_Dtl_OrderId is null");
+        public Criteria andPurDtlOrderIdIsNull() {
+            addCriterion("pur_Dtl_Order_Id is null");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidIsNotNull() {
-            addCriterion("pur_Dtl_OrderId is not null");
+        public Criteria andPurDtlOrderIdIsNotNull() {
+            addCriterion("pur_Dtl_Order_Id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidEqualTo(String value) {
-            addCriterion("pur_Dtl_OrderId =", value, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdEqualTo(String value) {
+            addCriterion("pur_Dtl_Order_Id =", value, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidNotEqualTo(String value) {
-            addCriterion("pur_Dtl_OrderId <>", value, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdNotEqualTo(String value) {
+            addCriterion("pur_Dtl_Order_Id <>", value, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidGreaterThan(String value) {
-            addCriterion("pur_Dtl_OrderId >", value, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdGreaterThan(String value) {
+            addCriterion("pur_Dtl_Order_Id >", value, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidGreaterThanOrEqualTo(String value) {
-            addCriterion("pur_Dtl_OrderId >=", value, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdGreaterThanOrEqualTo(String value) {
+            addCriterion("pur_Dtl_Order_Id >=", value, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidLessThan(String value) {
-            addCriterion("pur_Dtl_OrderId <", value, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdLessThan(String value) {
+            addCriterion("pur_Dtl_Order_Id <", value, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidLessThanOrEqualTo(String value) {
-            addCriterion("pur_Dtl_OrderId <=", value, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdLessThanOrEqualTo(String value) {
+            addCriterion("pur_Dtl_Order_Id <=", value, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidLike(String value) {
-            addCriterion("pur_Dtl_OrderId like", value, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdLike(String value) {
+            addCriterion("pur_Dtl_Order_Id like", value, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidNotLike(String value) {
-            addCriterion("pur_Dtl_OrderId not like", value, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdNotLike(String value) {
+            addCriterion("pur_Dtl_Order_Id not like", value, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidIn(List<String> values) {
-            addCriterion("pur_Dtl_OrderId in", values, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdIn(List<String> values) {
+            addCriterion("pur_Dtl_Order_Id in", values, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidNotIn(List<String> values) {
-            addCriterion("pur_Dtl_OrderId not in", values, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdNotIn(List<String> values) {
+            addCriterion("pur_Dtl_Order_Id not in", values, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidBetween(String value1, String value2) {
-            addCriterion("pur_Dtl_OrderId between", value1, value2, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdBetween(String value1, String value2) {
+            addCriterion("pur_Dtl_Order_Id between", value1, value2, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlOrderidNotBetween(String value1, String value2) {
-            addCriterion("pur_Dtl_OrderId not between", value1, value2, "purDtlOrderid");
+        public Criteria andPurDtlOrderIdNotBetween(String value1, String value2) {
+            addCriterion("pur_Dtl_Order_Id not between", value1, value2, "purDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidIsNull() {
-            addCriterion("pur_OrderId is null");
+        public Criteria andPurOrderIdIsNull() {
+            addCriterion("pur_Order_Id is null");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidIsNotNull() {
-            addCriterion("pur_OrderId is not null");
+        public Criteria andPurOrderIdIsNotNull() {
+            addCriterion("pur_Order_Id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidEqualTo(String value) {
-            addCriterion("pur_OrderId =", value, "purOrderid");
+        public Criteria andPurOrderIdEqualTo(String value) {
+            addCriterion("pur_Order_Id =", value, "purOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidNotEqualTo(String value) {
-            addCriterion("pur_OrderId <>", value, "purOrderid");
+        public Criteria andPurOrderIdNotEqualTo(String value) {
+            addCriterion("pur_Order_Id <>", value, "purOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidGreaterThan(String value) {
-            addCriterion("pur_OrderId >", value, "purOrderid");
+        public Criteria andPurOrderIdGreaterThan(String value) {
+            addCriterion("pur_Order_Id >", value, "purOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidGreaterThanOrEqualTo(String value) {
-            addCriterion("pur_OrderId >=", value, "purOrderid");
+        public Criteria andPurOrderIdGreaterThanOrEqualTo(String value) {
+            addCriterion("pur_Order_Id >=", value, "purOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidLessThan(String value) {
-            addCriterion("pur_OrderId <", value, "purOrderid");
+        public Criteria andPurOrderIdLessThan(String value) {
+            addCriterion("pur_Order_Id <", value, "purOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidLessThanOrEqualTo(String value) {
-            addCriterion("pur_OrderId <=", value, "purOrderid");
+        public Criteria andPurOrderIdLessThanOrEqualTo(String value) {
+            addCriterion("pur_Order_Id <=", value, "purOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidLike(String value) {
-            addCriterion("pur_OrderId like", value, "purOrderid");
+        public Criteria andPurOrderIdLike(String value) {
+            addCriterion("pur_Order_Id like", value, "purOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidNotLike(String value) {
-            addCriterion("pur_OrderId not like", value, "purOrderid");
+        public Criteria andPurOrderIdNotLike(String value) {
+            addCriterion("pur_Order_Id not like", value, "purOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidIn(List<String> values) {
-            addCriterion("pur_OrderId in", values, "purOrderid");
+        public Criteria andPurOrderIdIn(List<String> values) {
+            addCriterion("pur_Order_Id in", values, "purOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidNotIn(List<String> values) {
-            addCriterion("pur_OrderId not in", values, "purOrderid");
+        public Criteria andPurOrderIdNotIn(List<String> values) {
+            addCriterion("pur_Order_Id not in", values, "purOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidBetween(String value1, String value2) {
-            addCriterion("pur_OrderId between", value1, value2, "purOrderid");
+        public Criteria andPurOrderIdBetween(String value1, String value2) {
+            addCriterion("pur_Order_Id between", value1, value2, "purOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andPurOrderidNotBetween(String value1, String value2) {
-            addCriterion("pur_OrderId not between", value1, value2, "purOrderid");
+        public Criteria andPurOrderIdNotBetween(String value1, String value2) {
+            addCriterion("pur_Order_Id not between", value1, value2, "purOrderId");
             return (Criteria) this;
         }
 
@@ -364,63 +364,263 @@ public class PurchaseDtlExample {
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountIsNull() {
-            addCriterion("pur_Dtl_Total_Amount is null");
+        public Criteria andMedicineNameIsNull() {
+            addCriterion("medicine_Name is null");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountIsNotNull() {
-            addCriterion("pur_Dtl_Total_Amount is not null");
+        public Criteria andMedicineNameIsNotNull() {
+            addCriterion("medicine_Name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountEqualTo(Integer value) {
-            addCriterion("pur_Dtl_Total_Amount =", value, "purDtlTotalAmount");
+        public Criteria andMedicineNameEqualTo(String value) {
+            addCriterion("medicine_Name =", value, "medicineName");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountNotEqualTo(Integer value) {
-            addCriterion("pur_Dtl_Total_Amount <>", value, "purDtlTotalAmount");
+        public Criteria andMedicineNameNotEqualTo(String value) {
+            addCriterion("medicine_Name <>", value, "medicineName");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountGreaterThan(Integer value) {
-            addCriterion("pur_Dtl_Total_Amount >", value, "purDtlTotalAmount");
+        public Criteria andMedicineNameGreaterThan(String value) {
+            addCriterion("medicine_Name >", value, "medicineName");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("pur_Dtl_Total_Amount >=", value, "purDtlTotalAmount");
+        public Criteria andMedicineNameGreaterThanOrEqualTo(String value) {
+            addCriterion("medicine_Name >=", value, "medicineName");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountLessThan(Integer value) {
-            addCriterion("pur_Dtl_Total_Amount <", value, "purDtlTotalAmount");
+        public Criteria andMedicineNameLessThan(String value) {
+            addCriterion("medicine_Name <", value, "medicineName");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountLessThanOrEqualTo(Integer value) {
-            addCriterion("pur_Dtl_Total_Amount <=", value, "purDtlTotalAmount");
+        public Criteria andMedicineNameLessThanOrEqualTo(String value) {
+            addCriterion("medicine_Name <=", value, "medicineName");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountIn(List<Integer> values) {
-            addCriterion("pur_Dtl_Total_Amount in", values, "purDtlTotalAmount");
+        public Criteria andMedicineNameLike(String value) {
+            addCriterion("medicine_Name like", value, "medicineName");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountNotIn(List<Integer> values) {
-            addCriterion("pur_Dtl_Total_Amount not in", values, "purDtlTotalAmount");
+        public Criteria andMedicineNameNotLike(String value) {
+            addCriterion("medicine_Name not like", value, "medicineName");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountBetween(Integer value1, Integer value2) {
-            addCriterion("pur_Dtl_Total_Amount between", value1, value2, "purDtlTotalAmount");
+        public Criteria andMedicineNameIn(List<String> values) {
+            addCriterion("medicine_Name in", values, "medicineName");
             return (Criteria) this;
         }
 
-        public Criteria andPurDtlTotalAmountNotBetween(Integer value1, Integer value2) {
-            addCriterion("pur_Dtl_Total_Amount not between", value1, value2, "purDtlTotalAmount");
+        public Criteria andMedicineNameNotIn(List<String> values) {
+            addCriterion("medicine_Name not in", values, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameBetween(String value1, String value2) {
+            addCriterion("medicine_Name between", value1, value2, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameNotBetween(String value1, String value2) {
+            addCriterion("medicine_Name not between", value1, value2, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountIsNull() {
+            addCriterion("pur_Dtl_Amount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountIsNotNull() {
+            addCriterion("pur_Dtl_Amount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountEqualTo(Integer value) {
+            addCriterion("pur_Dtl_Amount =", value, "purDtlAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountNotEqualTo(Integer value) {
+            addCriterion("pur_Dtl_Amount <>", value, "purDtlAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountGreaterThan(Integer value) {
+            addCriterion("pur_Dtl_Amount >", value, "purDtlAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pur_Dtl_Amount >=", value, "purDtlAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountLessThan(Integer value) {
+            addCriterion("pur_Dtl_Amount <", value, "purDtlAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountLessThanOrEqualTo(Integer value) {
+            addCriterion("pur_Dtl_Amount <=", value, "purDtlAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountIn(List<Integer> values) {
+            addCriterion("pur_Dtl_Amount in", values, "purDtlAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountNotIn(List<Integer> values) {
+            addCriterion("pur_Dtl_Amount not in", values, "purDtlAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountBetween(Integer value1, Integer value2) {
+            addCriterion("pur_Dtl_Amount between", value1, value2, "purDtlAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlAmountNotBetween(Integer value1, Integer value2) {
+            addCriterion("pur_Dtl_Amount not between", value1, value2, "purDtlAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceIsNull() {
+            addCriterion("pur_Dtl_Price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceIsNotNull() {
+            addCriterion("pur_Dtl_Price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceEqualTo(Double value) {
+            addCriterion("pur_Dtl_Price =", value, "purDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceNotEqualTo(Double value) {
+            addCriterion("pur_Dtl_Price <>", value, "purDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceGreaterThan(Double value) {
+            addCriterion("pur_Dtl_Price >", value, "purDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("pur_Dtl_Price >=", value, "purDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceLessThan(Double value) {
+            addCriterion("pur_Dtl_Price <", value, "purDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceLessThanOrEqualTo(Double value) {
+            addCriterion("pur_Dtl_Price <=", value, "purDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceIn(List<Double> values) {
+            addCriterion("pur_Dtl_Price in", values, "purDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceNotIn(List<Double> values) {
+            addCriterion("pur_Dtl_Price not in", values, "purDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceBetween(Double value1, Double value2) {
+            addCriterion("pur_Dtl_Price between", value1, value2, "purDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlPriceNotBetween(Double value1, Double value2) {
+            addCriterion("pur_Dtl_Price not between", value1, value2, "purDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusIsNull() {
+            addCriterion("pur_Dtl_Status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusIsNotNull() {
+            addCriterion("pur_Dtl_Status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusEqualTo(String value) {
+            addCriterion("pur_Dtl_Status =", value, "purDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusNotEqualTo(String value) {
+            addCriterion("pur_Dtl_Status <>", value, "purDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusGreaterThan(String value) {
+            addCriterion("pur_Dtl_Status >", value, "purDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("pur_Dtl_Status >=", value, "purDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusLessThan(String value) {
+            addCriterion("pur_Dtl_Status <", value, "purDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusLessThanOrEqualTo(String value) {
+            addCriterion("pur_Dtl_Status <=", value, "purDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusLike(String value) {
+            addCriterion("pur_Dtl_Status like", value, "purDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusNotLike(String value) {
+            addCriterion("pur_Dtl_Status not like", value, "purDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusIn(List<String> values) {
+            addCriterion("pur_Dtl_Status in", values, "purDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusNotIn(List<String> values) {
+            addCriterion("pur_Dtl_Status not in", values, "purDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusBetween(String value1, String value2) {
+            addCriterion("pur_Dtl_Status between", value1, value2, "purDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurDtlStatusNotBetween(String value1, String value2) {
+            addCriterion("pur_Dtl_Status not between", value1, value2, "purDtlStatus");
             return (Criteria) this;
         }
 

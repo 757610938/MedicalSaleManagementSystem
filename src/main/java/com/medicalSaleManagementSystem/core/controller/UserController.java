@@ -48,23 +48,30 @@ public class UserController {
         //500
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
-
-    @RequestMapping ( value = "/user/{userId}/{valid}", method = RequestMethod.GET)
+    /*
+     * 功能描述: <br>
+     * 〈〉更改用户状态
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/15 20:00
+     */
+    @RequestMapping ( value = "/user/{userId}/{userValid}", method = RequestMethod.PUT)
     @ResponseBody
-    public Resp updateValidByPrimaryKey(@PathVariable Integer userId ,@PathVariable Integer valid){
+    public Resp updateValidByPrimaryKey(@PathVariable Integer userId ,@PathVariable Integer userValid){
         try{
             String message;
-            if (valid==1){
+            if (userValid==1){
                 //改成正常状态
                 message="开启";
-            }else if (valid==0){
+            }else if (userValid==0){
                 //改成禁用状态
                 message="禁用";
             }else{
                 //非法状态
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"非法状态码");
             }
-            int i = userService.updateValidByPrimaryKey(userId, valid);
+            int i = userService.updateValidByPrimaryKey(userId, userValid);
             if(i==0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,message+"用户状态失败");
             }
@@ -85,7 +92,7 @@ public class UserController {
      */
     @RequestMapping ( value = "/user", method = RequestMethod.POST )
     @ResponseBody
-    public Resp insertSelective(@RequestBody UserVO userVO){
+    public Resp insertSelective( @RequestBody UserVO userVO){
         try{
             UserDTO userDTO = new UserDTO();
             BeanUtilEx.copyProperties(userDTO,userVO);
@@ -102,7 +109,7 @@ public class UserController {
     }
     /*
      * 功能描述: <br>
-     * 〈〉
+     * 〈〉查找用户信息
      * @Param: id
      * @Return:
      * @Author: 林贤钦
@@ -148,7 +155,14 @@ public class UserController {
         }
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
-
+    /*
+     * 功能描述: <br>
+     * 〈〉更新用户数据
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/15 16:31
+     */
     @RequestMapping(value = "/user",method = RequestMethod.PUT)
     @ResponseBody
     public Resp<Void> updateByPrimaryKeySelective(@RequestBody UserVO userVO){
@@ -164,6 +178,50 @@ public class UserController {
             e.printStackTrace();
         }
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /*
+     * 功能描述: <br>
+     * 〈〉查询校验工号是否存在数据库
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/15 16:32
+     */
+    @RequestMapping(value = "/user/UserNumber/{userNumber}",method = RequestMethod.GET)
+    @ResponseBody
+    public Resp checkUserNumber(@PathVariable String userNumber){
+        try {
+            List<User> list = userService.checkUserNumber(userNumber);
+            if(list.size() <= 0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"该员工工号不存在");
+            }
+            return Resp.httpStatus(HttpStatus.OK,"该员工工号存在！",list);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /*
+     * 功能描述: <br>
+     * 〈〉查询所有员工工号
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/15 16:32
+     */
+    @RequestMapping(value = "/user/UserNumber",method = RequestMethod.GET)
+    @ResponseBody
+    public Resp selectUserName(){
+        try {
+            List<String> list = userService.selectAllUserNumber();
+            if(list.size() == 0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找员工工号失败");
+            }
+            return Resp.httpStatus(HttpStatus.OK,"查找员工工号成功！",list);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
     /*
      * 功能描述: <br>

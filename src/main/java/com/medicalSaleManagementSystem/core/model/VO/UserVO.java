@@ -9,6 +9,8 @@ public class UserVO {
 
     private String password;
 
+    private Integer userValid;
+
     private String lastLoginIp;
 
     private Date lastLoginTime;
@@ -55,6 +57,13 @@ public class UserVO {
         this.password = password == null ? null : password.trim();
     }
 
+    public Integer getUserValid() {
+        return userValid;
+    }
+
+    public void setUserValid(Integer userValid) {
+        this.userValid = userValid;
+    }
 
     public String getLastLoginIp() {
         return lastLoginIp;

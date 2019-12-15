@@ -66,7 +66,7 @@
 //     */
 //    @Override
 //    public Msg registerEmployee(EmployeeDTO employeeDTO)  {
-//        Msg msg = findEmployeeByAccount(employeeDTO.getEmpAccount());//查询账户是否存在
+//        Msg msg = findEmployeeByAccount(employeeDTO.getEmpAccount());
 //        if (msg.getCode() == 400) {
 //            return Msg.fail("账号已存在");
 //        } else {

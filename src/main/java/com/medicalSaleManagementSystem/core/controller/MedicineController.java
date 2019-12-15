@@ -190,10 +190,7 @@ public class MedicineController {
         try{
             PageHelper.startPage(pageNum, pageSize);  //设置现在的页数为pageNum，显示的条数为pageSize条
             List<MedicineBO> medicineList = medicineService.vagueSelectByPrimaryName(name);
-            for (MedicineBO medicineBO : medicineList) {
-                System.out.println(medicineBO);
-            }
-            if(medicineList.size() == 0){
+            if(medicineList.size() <= 0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找药品信息失败");
             }
             PageInfo<MedicineBO> pageInfo  = new PageInfo<>(medicineList);

@@ -10,6 +10,7 @@
     <result column="pur_Dtl_Status_Subtotal" jdbcType="DOUBLE" property="purDtlStatusSubtotal" />
     <result column="whse_id" jdbcType="INTEGER" property="whseId" />
     <result column="pur_Dtl_Status_Remark" jdbcType="VARCHAR" property="purDtlStatusRemark" />
+    <result column="pur_Dtl_Status_Price" jdbcType="DOUBLE" property="purDtlStatusPrice" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,8 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    pur_Dtl_Status_id, pur_Dtl_Status_Name, pur_Dtl_Status_Amount, pur_Dtl_OrderId, pur_Dtl_Status_Date, 
-    pur_Dtl_Status_Subtotal, whse_id, pur_Dtl_Status_Remark
+    pur_Dtl_Status_id, pur_Dtl_Status_Name, pur_Dtl_Status_Amount, pur_Dtl_OrderId, pur_Dtl_Status_Date,
+    pur_Dtl_Status_Subtotal, whse_id, pur_Dtl_Status_Remark, pur_Dtl_Status_Price
   </sql>
   <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.PurchaseDtlStatusExample" resultMap="BaseResultMap">
     select
@@ -88,7 +89,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from tb_purchase_dtl_status
     where pur_Dtl_Status_id = #{purDtlStatusId,jdbcType=INTEGER}
@@ -104,14 +105,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.PurchaseDtlStatus">
-    insert into tb_purchase_dtl_status (pur_Dtl_Status_id, pur_Dtl_Status_Name, 
-      pur_Dtl_Status_Amount, pur_Dtl_OrderId, pur_Dtl_Status_Date, 
-      pur_Dtl_Status_Subtotal, whse_id, pur_Dtl_Status_Remark
-      )
-    values (#{purDtlStatusId,jdbcType=INTEGER}, #{purDtlStatusName,jdbcType=VARCHAR}, 
-      #{purDtlStatusAmount,jdbcType=INTEGER}, #{purDtlOrderid,jdbcType=VARCHAR}, #{purDtlStatusDate,jdbcType=TIMESTAMP}, 
-      #{purDtlStatusSubtotal,jdbcType=DOUBLE}, #{whseId,jdbcType=INTEGER}, #{purDtlStatusRemark,jdbcType=VARCHAR}
-      )
+    insert into tb_purchase_dtl_status (pur_Dtl_Status_id, pur_Dtl_Status_Name,
+      pur_Dtl_Status_Amount, pur_Dtl_OrderId, pur_Dtl_Status_Date,
+      pur_Dtl_Status_Subtotal, whse_id, pur_Dtl_Status_Remark,
+      pur_Dtl_Status_Price)
+    values (#{purDtlStatusId,jdbcType=INTEGER}, #{purDtlStatusName,jdbcType=VARCHAR},
+      #{purDtlStatusAmount,jdbcType=INTEGER}, #{purDtlOrderid,jdbcType=VARCHAR}, #{purDtlStatusDate,jdbcType=TIMESTAMP},
+      #{purDtlStatusSubtotal,jdbcType=DOUBLE}, #{whseId,jdbcType=INTEGER}, #{purDtlStatusRemark,jdbcType=VARCHAR},
+      #{purDtlStatusPrice,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.PurchaseDtlStatus">
     insert into tb_purchase_dtl_status
@@ -140,6 +141,9 @@
       <if test="purDtlStatusRemark != null">
         pur_Dtl_Status_Remark,
       </if>
+      <if test="purDtlStatusPrice != null">
+        pur_Dtl_Status_Price,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="purDtlStatusId != null">
@@ -165,6 +169,9 @@
       </if>
       <if test="purDtlStatusRemark != null">
         #{purDtlStatusRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="purDtlStatusPrice != null">
+        #{purDtlStatusPrice,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -201,6 +208,9 @@
       <if test="record.purDtlStatusRemark != null">
         pur_Dtl_Status_Remark = #{record.purDtlStatusRemark,jdbcType=VARCHAR},
       </if>
+      <if test="record.purDtlStatusPrice != null">
+        pur_Dtl_Status_Price = #{record.purDtlStatusPrice,jdbcType=DOUBLE},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -209,13 +219,14 @@
   <update id="updateByExample" parameterType="map">
     update tb_purchase_dtl_status
     set pur_Dtl_Status_id = #{record.purDtlStatusId,jdbcType=INTEGER},
-      pur_Dtl_Status_Name = #{record.purDtlStatusName,jdbcType=VARCHAR},
-      pur_Dtl_Status_Amount = #{record.purDtlStatusAmount,jdbcType=INTEGER},
-      pur_Dtl_OrderId = #{record.purDtlOrderid,jdbcType=VARCHAR},
-      pur_Dtl_Status_Date = #{record.purDtlStatusDate,jdbcType=TIMESTAMP},
-      pur_Dtl_Status_Subtotal = #{record.purDtlStatusSubtotal,jdbcType=DOUBLE},
-      whse_id = #{record.whseId,jdbcType=INTEGER},
-      pur_Dtl_Status_Remark = #{record.purDtlStatusRemark,jdbcType=VARCHAR}
+    pur_Dtl_Status_Name = #{record.purDtlStatusName,jdbcType=VARCHAR},
+    pur_Dtl_Status_Amount = #{record.purDtlStatusAmount,jdbcType=INTEGER},
+    pur_Dtl_OrderId = #{record.purDtlOrderid,jdbcType=VARCHAR},
+    pur_Dtl_Status_Date = #{record.purDtlStatusDate,jdbcType=TIMESTAMP},
+    pur_Dtl_Status_Subtotal = #{record.purDtlStatusSubtotal,jdbcType=DOUBLE},
+    whse_id = #{record.whseId,jdbcType=INTEGER},
+    pur_Dtl_Status_Remark = #{record.purDtlStatusRemark,jdbcType=VARCHAR},
+    pur_Dtl_Status_Price = #{record.purDtlStatusPrice,jdbcType=DOUBLE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -244,6 +255,9 @@
       <if test="purDtlStatusRemark != null">
         pur_Dtl_Status_Remark = #{purDtlStatusRemark,jdbcType=VARCHAR},
       </if>
+      <if test="purDtlStatusPrice != null">
+        pur_Dtl_Status_Price = #{purDtlStatusPrice,jdbcType=DOUBLE},
+      </if>
     </set>
     where pur_Dtl_Status_id = #{purDtlStatusId,jdbcType=INTEGER}
   </update>
@@ -255,7 +269,8 @@
       pur_Dtl_Status_Date = #{purDtlStatusDate,jdbcType=TIMESTAMP},
       pur_Dtl_Status_Subtotal = #{purDtlStatusSubtotal,jdbcType=DOUBLE},
       whse_id = #{whseId,jdbcType=INTEGER},
-      pur_Dtl_Status_Remark = #{purDtlStatusRemark,jdbcType=VARCHAR}
+      pur_Dtl_Status_Remark = #{purDtlStatusRemark,jdbcType=VARCHAR},
+      pur_Dtl_Status_Price = #{purDtlStatusPrice,jdbcType=DOUBLE}
     where pur_Dtl_Status_id = #{purDtlStatusId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,8 +1,11 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.BO;
 
 import java.util.Date;
+import java.util.List;
 
-public class Purchase {
+public class PurchaseBO {
+    private List<PurchaseDtlBO> putDtlList;
+
     private Integer purId;
 
     private String purOrderId;
@@ -101,5 +104,13 @@ public class Purchase {
 
     public void setPurRemark(String purRemark) {
         this.purRemark = purRemark == null ? null : purRemark.trim();
+    }
+
+    public List<PurchaseDtlBO> getPutDtlList() {
+        return putDtlList;
+    }
+
+    public void setPutDtlList(List<PurchaseDtlBO> putDtlList) {
+        this.putDtlList = putDtlList;
     }
 }

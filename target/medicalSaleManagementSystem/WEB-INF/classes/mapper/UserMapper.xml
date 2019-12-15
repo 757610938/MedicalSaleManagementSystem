@@ -5,7 +5,7 @@
     <id column="user_Id" jdbcType="INTEGER" property="userId" />
     <result column="user_Name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="valid" jdbcType="INTEGER" property="valid" />
+    <result column="user_valid" jdbcType="INTEGER" property="userValid" />
     <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
     <result column="last_login_Time" jdbcType="TIMESTAMP" property="lastLoginTime" />
     <result column="gen_time" jdbcType="TIMESTAMP" property="genTime" />
@@ -77,8 +77,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_Id, user_Name, password, valid, last_login_ip, last_login_Time, gen_time, user_Sex, 
-    user_Birthday, user_Id_Card, user_Address, user_Phone, user_Email, user_Number, user_Picture
+    user_Id, user_Name, password, user_valid, last_login_ip, last_login_Time, gen_time,
+    user_Sex, user_Birthday, user_Id_Card, user_Address, user_Phone, user_Email, user_Number,
+    user_Picture
   </sql>
   <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -95,10 +96,16 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from tb_user
     where user_Id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllUserNumber"  resultType="java.lang.String">
+   SELECT
+    tb_user.user_Number
+   FROM
+    tb_user
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_user
@@ -111,16 +118,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.User">
-    insert into tb_user (user_Id, user_Name, password, 
-      valid, last_login_ip, last_login_Time, 
-      gen_time, user_Sex, user_Birthday, 
-      user_Id_Card, user_Address, user_Phone, 
+    insert into tb_user (user_Id, user_Name, password,
+      user_valid, last_login_ip, last_login_Time,
+      gen_time, user_Sex, user_Birthday,
+      user_Id_Card, user_Address, user_Phone,
       user_Email, user_Number, user_Picture
       )
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{valid,jdbcType=INTEGER}, #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
-      #{genTime,jdbcType=TIMESTAMP}, #{userSex,jdbcType=VARCHAR}, #{userBirthday,jdbcType=TIMESTAMP}, 
-      #{userIdCard,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{userValid,jdbcType=INTEGER}, #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP},
+      #{genTime,jdbcType=TIMESTAMP}, #{userSex,jdbcType=VARCHAR}, #{userBirthday,jdbcType=TIMESTAMP},
+      #{userIdCard,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR},
       #{userEmail,jdbcType=VARCHAR}, #{userNumber,jdbcType=VARCHAR}, #{userPicture,jdbcType=VARCHAR}
       )
   </insert>
@@ -136,8 +143,8 @@
       <if test="password != null">
         password,
       </if>
-      <if test="valid != null">
-        valid,
+      <if test="userValid != null">
+        user_valid,
       </if>
       <if test="lastLoginIp != null">
         last_login_ip,
@@ -183,8 +190,8 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="valid != null">
-        #{valid,jdbcType=INTEGER},
+      <if test="userValid != null">
+        #{userValid,jdbcType=INTEGER},
       </if>
       <if test="lastLoginIp != null">
         #{lastLoginIp,jdbcType=VARCHAR},
@@ -239,8 +246,8 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.valid != null">
-        valid = #{record.valid,jdbcType=INTEGER},
+      <if test="record.userValid != null">
+        user_valid = #{record.userValid,jdbcType=INTEGER},
       </if>
       <if test="record.lastLoginIp != null">
         last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
@@ -283,20 +290,20 @@
   <update id="updateByExample" parameterType="map">
     update tb_user
     set user_Id = #{record.userId,jdbcType=INTEGER},
-      user_Name = #{record.userName,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      valid = #{record.valid,jdbcType=INTEGER},
-      last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
-      last_login_Time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
-      gen_time = #{record.genTime,jdbcType=TIMESTAMP},
-      user_Sex = #{record.userSex,jdbcType=VARCHAR},
-      user_Birthday = #{record.userBirthday,jdbcType=TIMESTAMP},
-      user_Id_Card = #{record.userIdCard,jdbcType=VARCHAR},
-      user_Address = #{record.userAddress,jdbcType=VARCHAR},
-      user_Phone = #{record.userPhone,jdbcType=VARCHAR},
-      user_Email = #{record.userEmail,jdbcType=VARCHAR},
-      user_Number = #{record.userNumber,jdbcType=VARCHAR},
-      user_Picture = #{record.userPicture,jdbcType=VARCHAR}
+    user_Name = #{record.userName,jdbcType=VARCHAR},
+    password = #{record.password,jdbcType=VARCHAR},
+    user_valid = #{record.userValid,jdbcType=INTEGER},
+    last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+    last_login_Time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+    gen_time = #{record.genTime,jdbcType=TIMESTAMP},
+    user_Sex = #{record.userSex,jdbcType=VARCHAR},
+    user_Birthday = #{record.userBirthday,jdbcType=TIMESTAMP},
+    user_Id_Card = #{record.userIdCard,jdbcType=VARCHAR},
+    user_Address = #{record.userAddress,jdbcType=VARCHAR},
+    user_Phone = #{record.userPhone,jdbcType=VARCHAR},
+    user_Email = #{record.userEmail,jdbcType=VARCHAR},
+    user_Number = #{record.userNumber,jdbcType=VARCHAR},
+    user_Picture = #{record.userPicture,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -310,8 +317,8 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="valid != null">
-        valid = #{valid,jdbcType=INTEGER},
+      <if test="userValid != null">
+        user_valid = #{userValid,jdbcType=INTEGER},
       </if>
       <if test="lastLoginIp != null">
         last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
@@ -353,7 +360,7 @@
     update tb_user
     set user_Name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      valid = #{valid,jdbcType=INTEGER},
+      user_valid = #{userValid,jdbcType=INTEGER},
       last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
       last_login_Time = #{lastLoginTime,jdbcType=TIMESTAMP},
       gen_time = #{genTime,jdbcType=TIMESTAMP},
