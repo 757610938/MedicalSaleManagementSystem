@@ -29,17 +29,22 @@ public class WarehouseController {
     }
 
     @ResponseBody
-    @RequestMapping("/warehouseManage/jsonWarehouseList")
-    public Resp warehouseList(@RequestParam(value = "pn", defaultValue = "1") int pn) {
-        PageHelper.startPage(pn, 5);
-        List<Warehouse> warehouseList = warehouseService.findAllWarehouse();
-        PageInfo pageInfo = new PageInfo(warehouseList, 5);
-        return Resp.httpStatus(HttpStatus.OK, "仓库列表更新成功", pageInfo);
+    @RequestMapping(value = "/warehouseManage/jsonWarehouseList/{pageNum}", method = RequestMethod.GET)
+    public Resp warehouseList(@PathVariable(value = "pageNum") int pageNum) {
+        try {
+            PageHelper.startPage(pageNum, 5);
+            List<Warehouse> warehouseList = warehouseService.findAllWarehouse();
+            PageInfo pageInfo = new PageInfo(warehouseList, 5);
+            return Resp.httpStatus(HttpStatus.OK, "仓库列表更新成功", pageInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Resp.httpStatus(HttpStatus.BAD_REQUEST, "仓库列表更新失败");
+        }
     }
 
     @ResponseBody
-    @RequestMapping("/warehouseManage/selectWarehouse")
-    public Resp findWarehouseByFuzzySearch(Integer page, String orderBy, String key) {
+    @RequestMapping(value = "/warehouseManage/warehouse/{page}/{orderBy}/{key}", method = RequestMethod.GET)
+    public Resp findWarehouseByFuzzySearch(@PathVariable(value = "page") Integer page, @PathVariable(value = "orderBy") String orderBy, @PathVariable(value = "key") String key) {
         return warehouseService.findWhseByFuzzySearch(key, orderBy, page);
     }
 
@@ -58,7 +63,7 @@ public class WarehouseController {
 
     @ResponseBody
     @RequestMapping(value = "/warehouseManage/warehouse/{ids}", method = RequestMethod.DELETE)
-    public Resp deleteWarehouse(@PathVariable("ids") String ids) {
+    public Resp deleteWarehouse(@PathVariable(value = "ids") String ids) {
         try {
             if (ids.contains("-")) {
                 String[] str_ids = ids.split("-");

@@ -191,14 +191,13 @@ public class StockController {
     /**
      * 删除一条库存信息
      *
-     * @param medicineId      货物ID
+     * @param medicineId      药品ID
      * @param whseId 仓库ID
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
-    @RequestMapping(value = "deleteStockRecord", method = RequestMethod.GET)
-    public
     @ResponseBody
-    Map<String, Object> deleteStockRecord(@RequestParam("medicineId") String medicineId,
+    @RequestMapping(value = "deleteStockRecord", method = RequestMethod.GET)
+    public Map<String, Object> deleteStockRecord(@RequestParam("medicineId") String medicineId,
                                             @RequestParam("whseId") String whseId)  {
         // 初始化 Response
         Response responseContent = ResponseUtil.newResponseInstance();
@@ -232,10 +231,9 @@ public class StockController {
      * @return 结果的一个Map，其中： key为 rows 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @SuppressWarnings("unchecked")
-    @RequestMapping(value = "getStockList", method = RequestMethod.GET)
-    public
     @ResponseBody
-    Map<String, Object> getStorageList(@RequestParam("keyword") String keyword,
+    @RequestMapping(value = "getStockList", method = RequestMethod.GET)
+    public Map<String, Object> getStorageList(@RequestParam("keyword") String keyword,
                                        @RequestParam("searchType") String searchType, @RequestParam("offset") int offset,
                                        @RequestParam("limit") int limit, HttpServletRequest request) {
         // 初始化 Response
@@ -245,9 +243,9 @@ public class StockController {
         long total = 0;
 
         HttpSession session = request.getSession();
-        Integer repositoryID = (Integer) session.getAttribute("repositoryBelong");
-        if (repositoryID != null) {
-            Map<String, Object> queryResult = query(searchType, keyword, repositoryID.toString(), offset, limit);
+        Integer whseId = (Integer) session.getAttribute("warehouseBelong");
+        if (whseId != null) {
+            Map<String, Object> queryResult = query(searchType, keyword, whseId.toString(), offset, limit);
             if (queryResult != null) {
                 rows = (List<Stock>) queryResult.get("data");
                 total = (long) queryResult.get("total");
