@@ -22,11 +22,11 @@ public interface WarehouseService {
     /**
      * 模糊搜索仓库,并分页展示
      * @param key
-     * @param orderBy
-     * @param page
+     * @param pageNum
+     * @param pageSize
      * @return
      */
-    Resp findWhseByFuzzySearch(String key, String orderBy, Integer page);
+    Resp findWhseByFuzzySearch(String key, Integer pageNum,Integer pageSize);
 
     List<Warehouse> findAllWarehouse();
 

@@ -29,10 +29,10 @@ public class WarehouseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/warehouseManage/jsonWarehouseList/{pageNum}", method = RequestMethod.GET)
-    public Resp warehouseList(@PathVariable(value = "pageNum") int pageNum) {
+    @RequestMapping(value = "/warehouseManage/warehouse/{pageNum}/{pageSize}", method = RequestMethod.GET)
+    public Resp warehouseList(@PathVariable(value = "pageNum") int pageNum,@PathVariable(value = "pageSize") int pageSize) {
         try {
-            PageHelper.startPage(pageNum, 5);
+            PageHelper.startPage(pageNum, pageSize);
             List<Warehouse> warehouseList = warehouseService.findAllWarehouse();
             PageInfo pageInfo = new PageInfo(warehouseList, 5);
             return Resp.httpStatus(HttpStatus.OK, "仓库列表更新成功", pageInfo);
@@ -43,9 +43,9 @@ public class WarehouseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/warehouseManage/warehouse/{page}/{orderBy}/{key}", method = RequestMethod.GET)
-    public Resp findWarehouseByFuzzySearch(@PathVariable(value = "page") Integer page, @PathVariable(value = "orderBy") String orderBy, @PathVariable(value = "key") String key) {
-        return warehouseService.findWhseByFuzzySearch(key, orderBy, page);
+    @RequestMapping(value = "/warehouseManage/warehouse/{key}/{pageNum}/{pageSize}", method = RequestMethod.GET)
+    public Resp findWarehouseByFuzzySearch(@PathVariable(value = "key") String key, @PathVariable(value = "pageNum") Integer pageNum, @PathVariable(value = "pageSize") Integer pageSize) {
+        return warehouseService.findWhseByFuzzySearch(key, pageNum, pageSize);
     }
 
     @ResponseBody

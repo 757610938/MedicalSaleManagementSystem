@@ -50,12 +50,10 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public Resp findWhseByFuzzySearch(String key, String orderBy, Integer page) {
+    public Resp findWhseByFuzzySearch(String key, Integer pageNum,Integer pageSize) {
         WarehouseExample warehouseExample = new WarehouseExample();
-        if (orderBy != null && !"".equals(orderBy)) {
-            warehouseExample.setOrderByClause(orderBy.replace("-", " "));
-        }
-        PageHelper.startPage(page, 10);
+
+        PageHelper.startPage(pageNum, pageSize);
         key = "%" + key + "%";
         warehouseExample.setWhseName(key);
         List<Warehouse> warehouseList = warehouseMapper.selectWhseByWhseName(warehouseExample);
