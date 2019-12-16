@@ -52,7 +52,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public Map<String, Object> selectAll(Integer whseId, int offset, int limit) {
         // 初始化结果集
-        Map<String, Object> resultSet = new HashMap<>();
+        Map<String, Object> ext = new HashMap<>();
         List<Stock> stockList= new ArrayList<>();
         long total = 0;
         boolean isPagination = true;
@@ -82,9 +82,9 @@ public class StockServiceImpl implements StockService {
             e.printStackTrace();
         }
 
-        resultSet.put("data", stockList);
-        resultSet.put("total", total);
-        return resultSet;
+        ext.put("data", stockList);
+        ext.put("total", total);
+        return ext;
     }
 
     /**
@@ -109,7 +109,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public Map<String, Object> selectByMedicineID(Integer medicineId, Integer whseId, int offset, int limit) {
         // 初始化结果集
-        Map<String, Object> resultSet = new HashMap<>();
+        Map<String, Object> ext = new HashMap<>();
         List<Stock> stockList=new ArrayList<>();
         long total = 0;
         boolean isPagination = true;
@@ -139,9 +139,9 @@ public class StockServiceImpl implements StockService {
             e.printStackTrace();
         }
 
-        resultSet.put("data", stockList);
-        resultSet.put("total", total);
-        return resultSet;
+        ext.put("data", stockList);
+        ext.put("total", total);
+        return ext;
     }
 
     /**
@@ -166,7 +166,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public Map<String, Object> selectByMedicineName(String medicineName, Integer whseId, int offset, int limit) {
         // 初始化结果集
-        Map<String, Object> resultSet = new HashMap<>();
+        Map<String, Object> ext = new HashMap<>();
         List<Stock> stockList=new ArrayList<>();
         long total = 0;
         boolean isPagination = true;
@@ -196,9 +196,9 @@ public class StockServiceImpl implements StockService {
             e.printStackTrace();
         }
 
-        resultSet.put("data", stockList);
-        resultSet.put("total", total);
-        return resultSet;
+        ext.put("data", stockList);
+        ext.put("total", total);
+        return ext;
     }
 
     /**
@@ -223,7 +223,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public Map<String, Object> selectByMedicineCategory(String medicineCategory, Integer whseId, int offset, int limit) {
         // 初始化结果集
-        Map<String, Object> resultSet = new HashMap<>();
+        Map<String, Object> ext = new HashMap<>();
         List<Stock> stockList=new ArrayList<>();
         long total = 0;
         boolean isPaginatin = true;
@@ -253,9 +253,9 @@ public class StockServiceImpl implements StockService {
             e.printStackTrace();
         }
 
-        resultSet.put("data", stockList);
-        resultSet.put("total", total);
-        return resultSet;
+        ext.put("data", stockList);
+        ext.put("total", total);
+        return ext;
     }
 
     /**

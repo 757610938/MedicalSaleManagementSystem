@@ -1,12 +1,14 @@
 package com.medicalSaleManagementSystem.core.service.impl;
 
 
+import com.medicalSaleManagementSystem.core.model.entity.Stock;
 import com.medicalSaleManagementSystem.util.message.Msg;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -22,6 +24,11 @@ public class StockServiceImplTest {
        StockServiceImpl stockService = ac.getBean("stockServiceImpl", StockServiceImpl.class);
         Map<String, Object> stringObjectMap = stockService.selectAll(52002, 1, 1);
         System.out.println(stringObjectMap);
+        List<Stock> rows = (List<Stock>) stringObjectMap.get("data");
+
+            System.out.println(rows.toString());
+
+
     }
 
     @Test
