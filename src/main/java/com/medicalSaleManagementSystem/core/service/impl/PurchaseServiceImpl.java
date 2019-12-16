@@ -67,15 +67,21 @@ public class PurchaseServiceImpl implements PurchaseService {
         try {
             //1.创建采购单。
             String result = insertSelective(record);
+            Double purTotalMoney=0.0;
+            for (PurchaseDtlDTO purchaseDtlDTO : record.getPutDtlList()) {
+                //累加金额
+                purTotalMoney= purTotalMoney+purchaseDtlDTO.getPurDtlAmount()*purchaseDtlDTO.getPurDtlPrice();
+            }
+            record.setPurTotalMoney(purTotalMoney);//计算采购金额
             if (result==null||"".equals(result)||result=="400"||result=="500"){
                 return  result;//采购单存入错误
             }
             System.out.println(result);
             //遍历record.getPutDtlList()
             for (PurchaseDtlDTO purchaseDtlDTO : record.getPutDtlList()) {
-                //2. 每一项设置采购单编号
+                //3. 每一项设置采购单编号
                 purchaseDtlDTO.setPurOrderId(result);
-                //3. 添加采购项
+                //4. 添加采购项
                 int i = purchaseDtlService.insertSelective(purchaseDtlDTO);
                 if (i==0){
                     return "400";
@@ -101,7 +107,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public int deleteByPurOrderId(String purOrderId) {
         try {
-            PurchaseBO purchaseBO = selectByPurOrderId(purOrderId);//查询数据库是否存在该采购单
+            PurchaseBO purchaseBO = selectPurAndDtlByPurOrderId(purOrderId);//查询数据库是否存在该采购单
             if (purchaseBO==null){
                 return 0;
             }
@@ -118,15 +124,30 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public PurchaseBO selectByPurOrderId(String purOrderId) {
+    public PurchaseBO selectPurAndDtlByPurOrderId(String purOrderId) {
         try{
-            return purchaseMapper.selectByPurOrderId(purOrderId);
+            PurchaseBO purchaseBO = purchaseMapper.selectPurAndDtlByPurOrderId(purOrderId);
+            if (purchaseBO==null){
+                return selectPurByPurOrderId(purOrderId);
+            }
+            return purchaseBO;
         }catch (Exception e){
             e.printStackTrace();
         }
         return null;
     }
-     /**
+
+    @Override
+    public PurchaseBO selectPurByPurOrderId(String purOrderId) {
+        try{
+            return purchaseMapper.selectPurByPurOrderId(purOrderId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
 
      *@描述 更新订单状态
 
@@ -147,7 +168,7 @@ public class PurchaseServiceImpl implements PurchaseService {
             if ("".equals(purOrderId)||purOrderId==null){
                 return "400";//编号不存在
             }
-            PurchaseBO purchaseBO = selectByPurOrderId(purOrderId);
+            PurchaseBO purchaseBO = selectPurAndDtlByPurOrderId(purOrderId);//查询采购单
             purchaseBO.setPurStatus(purStatus);
             Purchase purchase = new Purchase();
             BeanUtilEx.copyProperties(purchase,purchaseBO);

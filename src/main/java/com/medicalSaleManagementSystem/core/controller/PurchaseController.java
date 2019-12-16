@@ -79,8 +79,7 @@ public class PurchaseController {
     @ResponseBody
     public Resp selectByPrimaryKey(@PathVariable String purOrderId){
         try{
-            System.out.println(purOrderId);
-            PurchaseBO purchaseBO = purchaseService.selectByPurOrderId(purOrderId);
+            PurchaseBO purchaseBO = purchaseService.selectPurAndDtlByPurOrderId(purOrderId);
             if(purchaseBO==null){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找采购单信息失败");
             }
@@ -105,9 +104,9 @@ public class PurchaseController {
      */
     @RequestMapping ( value = "/purchase/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Resp deleteByPrimaryKey(@PathVariable("id") Integer id){
+    public Resp deleteByPrimaryKey(@PathVariable("id") String id){
         try{
-            int i = purchaseService.deleteByPrimaryKey(id);
+            int i = purchaseService.deleteByPurOrderId(id);
             if(i==0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"删除采购单信息失败");
             }
@@ -230,10 +229,10 @@ public class PurchaseController {
             PageHelper.startPage(pageNum, pageSize);
             List<PurchaseBO> purchaseList = purchaseService.getAllByUserNumber(userNumber);
             if (purchaseList.size()<=0){
-                return  Resp.httpStatus(HttpStatus.BAD_REQUEST,"获取该员工的采购单编号失败");
+                return  Resp.httpStatus(HttpStatus.BAD_REQUEST,"查询失败");
             }
             PageInfo<PurchaseBO> pageInfo  = new PageInfo<>(purchaseList);
-            return Resp.httpStatus(HttpStatus.OK,"获取该员工的采购单编号成功！",pageInfo);
+            return Resp.httpStatus(HttpStatus.OK,"查询成功！",pageInfo);
         }catch (Exception e){
             e.printStackTrace();
         }

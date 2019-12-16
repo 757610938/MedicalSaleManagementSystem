@@ -55,13 +55,22 @@ public interface PurchaseService {
 
     /*
      * 功能描述: <br>
-     * 〈通过purOrderId查找采购单信息〉
+     * 〈通过purOrderId查找采购单信息，包含采购项〉
      * @Param:
      * @Return:
      * @Author: 林贤钦
      * @Date: 2019/12/14 20:43
      */
-    PurchaseBO selectByPurOrderId(String purOrderId);
+    PurchaseBO selectPurAndDtlByPurOrderId(String purOrderId);
+    /*
+     * 功能描述: <br>
+     * 〈通过purOrderId查找采购单信息，不包含采购项〉
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/16 23:07
+     */
+    PurchaseBO selectPurByPurOrderId(String purOrderId);
     /**
 
      *@描述  更新订单状态
