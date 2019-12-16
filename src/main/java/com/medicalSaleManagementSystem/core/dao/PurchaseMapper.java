@@ -37,5 +37,5 @@ public interface PurchaseMapper {
 
     List<PurchaseBO> getAllByUserNumber(String userNumber);
 
-    PurchaseBO selectBPurOrderId(String purOrderId);
+    PurchaseBO selectByPurOrderId(String purOrderId);
 }

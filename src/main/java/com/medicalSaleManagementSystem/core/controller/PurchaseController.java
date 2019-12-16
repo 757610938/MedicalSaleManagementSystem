@@ -13,6 +13,8 @@ import com.medicalSaleManagementSystem.core.model.entity.Medicine;
 import com.medicalSaleManagementSystem.core.model.entity.Purchase;
 import com.medicalSaleManagementSystem.core.service.PurchaseService;
 import com.medicalSaleManagementSystem.util.BeanUtilEx;
+import com.medicalSaleManagementSystem.util.OrderCodeFactory;
+import com.medicalSaleManagementSystem.util.TypeCastHelper;
 import com.medicalSaleManagementSystem.util.message.HttpStatus;
 import com.medicalSaleManagementSystem.util.message.Resp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +79,7 @@ public class PurchaseController {
     @ResponseBody
     public Resp selectByPrimaryKey(@PathVariable String purOrderId){
         try{
-            PurchaseBO purchaseBO = purchaseService.selectBPurOrderId(purOrderId);
+            PurchaseBO purchaseBO = purchaseService.selectByPurOrderId(purOrderId);
             if(purchaseBO==null){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找采购单信息失败");
             }

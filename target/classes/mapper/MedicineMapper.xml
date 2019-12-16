@@ -176,7 +176,12 @@
         LEFT JOIN tb_stock ON tb_stock.medicine_id = tb_medicine.medicine_id AND tb_medicine.stock_id = tb_stock.stock_id
         LEFT JOIN tb_warehouse ON tb_stock.whse_id = tb_warehouse.whse_id
         LEFT JOIN tb_supplier ON tb_medicine.medicine_Suppliers_id = tb_supplier.supplier_id
-        where medicine_name like #{keyword,jdbcType=VARCHAR}
+        where tb_medicine.medicine_Name like #{keyword,jdbcType=VARCHAR}
+        or tb_medicine.medicine_English_Name like #{keyword,jdbcType=VARCHAR}
+        or tb_medicine.medicine_Dosageform_Category like #{keyword,jdbcType=VARCHAR}
+        or tb_medicine.medicine_Specification like #{keyword,jdbcType=VARCHAR}
+        or tb_medicine.medicine_Category like #{keyword,jdbcType=VARCHAR}
+        or tb_medicine.medicine_country like #{keyword,jdbcType=VARCHAR}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

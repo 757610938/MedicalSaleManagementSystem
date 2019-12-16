@@ -118,7 +118,7 @@
         from tb_purchase
         where pur_id = #{purId,jdbcType=INTEGER}
     </select>
-    <select id="selectBPurOrderId" parameterType="java.lang.String" resultMap="purchaseAndDtl">
+    <select id="selectByPurOrderId" parameterType="java.lang.String" resultMap="purchaseAndDtl">
         SELECT
             tb_purchase.pur_id,
             tb_purchase.pur_Order_Id,
@@ -186,8 +186,12 @@
             *
         FROM
         tb_purchase
-        where user_Number = #{userNumber,jdbcType=VARCHAR}
+        where user_Number like #{userNumber,jdbcType=VARCHAR}
+        or pur__Name like #{userNumber,jdbcType=VARCHAR}
+        or pur_Order_Id like #{userNumber,jdbcType=VARCHAR}
+        or pur_Status like #{userNumber,jdbcType=VARCHAR}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_purchase
     where pur_id = #{purId,jdbcType=INTEGER}
