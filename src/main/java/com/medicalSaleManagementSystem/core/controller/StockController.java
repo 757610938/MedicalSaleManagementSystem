@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.controller;
 
+import com.medicalSaleManagementSystem.core.model.BO.StockBo;
 import com.medicalSaleManagementSystem.core.model.entity.Stock;
 import com.medicalSaleManagementSystem.core.service.StockService;
 import com.medicalSaleManagementSystem.util.Response;
@@ -45,18 +46,23 @@ public class StockController {
      */
     private Map<String, Object> query(String searchType, String keyword, String warehouseBelong, int offset,
                                       int limit) {
+        System.out.println("111111111111111");
+        System.out.println(searchType);
         Map<String, Object> queryResult = null;
 
         switch (searchType) {
-            case SEARCH_ALL:
+            case "SEARCH_ALL":
+                System.out.println("222222222");
                 if (StringUtils.isNumeric(warehouseBelong)) {
                     Integer whseId = Integer.valueOf(warehouseBelong);
                     queryResult = stockService.selectAll(whseId, offset, limit);
+                    System.out.println("等哈技术的哈哈镜...");
                 } else {
                     queryResult = stockService.selectAll(null, offset, limit);
+                    System.out.println("sbdasbhbsabh");
                 }
                 break;
-            case SEARCH_BY_MEDICINE_ID:
+            case "SEARCH_BY_MEDICINE_ID":
                 if (StringUtils.isNumeric(keyword)) {
                     Integer medicineId = Integer.valueOf(keyword);
                     if (StringUtils.isNumeric(warehouseBelong)) {
@@ -66,14 +72,14 @@ public class StockController {
                         queryResult = stockService.selectByMedicineID(medicineId, null, offset, limit);
                 }
                 break;
-            case SEARCH_BY_MEDICINE_CATEGORY:
+            case "SEARCH_BY_MEDICINE_CATEGORY":
                 if (StringUtils.isNumeric(warehouseBelong)) {
                     Integer whseId = Integer.valueOf(warehouseBelong);
                     queryResult = stockService.selectByMedicineCategory(keyword, whseId, offset, limit);
                 } else
                     queryResult = stockService.selectByMedicineCategory(keyword, null, offset, limit);
                 break;
-            case SEARCH_BY_MEDICINE_NAME:
+            case "SEARCH_BY_MEDICINE_NAME":
                 if (StringUtils.isNumeric(warehouseBelong)) {
                     Integer whseId = Integer.valueOf(warehouseBelong);
                     queryResult = stockService.selectByMedicineName(keyword, whseId, offset, limit);
@@ -100,11 +106,11 @@ public class StockController {
      */
     @SuppressWarnings("unchecked")
     @ResponseBody
-    @RequestMapping(value = "/stockManage/stock/{keyword}/{searchType}/{warehouseBelong}/{offset}/{limit}", method = RequestMethod.GET)
-    public Map<String, Object> getStockListWithWarehouseId(@PathVariable(value = "keyword") String keyword,
-                                                           @PathVariable(value = "searchType") String searchType, @PathVariable(value = "warehouseBelong") String warehouseBelong,
-                                                           @PathVariable(value = "offset") int offset, @PathVariable(value = "limit") int limit) {
-
+    @RequestMapping(value = "/stockManage/stock", method = RequestMethod.GET)
+    public Map<String, Object> getStockListWithWarehouseId(@RequestParam(value = "keyword") String keyword,
+                                                           @RequestParam(value = "searchType") String searchType, @RequestParam(value = "warehouseBelong") String warehouseBelong,
+                                                           @RequestParam(value = "offset") int offset, @RequestParam(value = "limit") int limit) {
+        /*/{keyword}/{searchType}/{warehouseBelong}/{offset}/{limit}*/
 
         System.out.println("我在这里了你呢...");
         System.out.println("key="+keyword);
@@ -116,20 +122,20 @@ public class StockController {
         // 初始化 Response
         Response responseContent = ResponseUtil.newResponseInstance();
 
-        List<Stock> rows;
+        List<StockBo> rows;
         long total = 0;
 
         // query
         Map<String, Object> queryResult = query(searchType, keyword, warehouseBelong, offset, limit);
 
-        System.out.println("我到这里了呵呵呵和...");
+        //System.out.println("我到这里了呵呵呵和...");
         if (queryResult != null) {
-            rows = (List<Stock>) queryResult.get("data");
+            rows = (List<StockBo>) queryResult.get("data");
             total = (long) queryResult.get("total");
-            System.out.println("我到这里了...");
+            //System.out.println("我到这里了...");
         } else {
             rows = new ArrayList<>();
-            System.out.println("我到这里了哈哈哈哈...");
+            //System.out.println("我到这里了哈哈哈哈...");
         }
         responseContent.setCustomerInfo("rows", rows);
         responseContent.setResponseTotal(total);
@@ -251,10 +257,12 @@ public class StockController {
      */
     @SuppressWarnings("unchecked")
     @ResponseBody
-    @RequestMapping(value = "/stockManage/stock/{keyword}/{searchType}/{offset}/{limit}", method = RequestMethod.GET)
-    public Map<String, Object> getStockList(@PathVariable(value = "keyword") String keyword,
-                                              @PathVariable(value = "searchType") String searchType, @PathVariable(value = "offset") int offset,
-                                              @PathVariable(value = "limit") int limit, @RequestBody HttpServletRequest request) {
+    @RequestMapping(value = "/stockManage/stockList", method = RequestMethod.GET)
+    public Map<String, Object> getStockList(@RequestParam(value = "keyword") String keyword,
+                                              @RequestParam(value = "searchType") String searchType, @RequestParam(value = "offset") int offset,
+                                              @RequestParam(value = "limit") int limit, @RequestBody HttpServletRequest request) {
+
+        /*/{keyword}/{searchType}/{offset}/{limit}*/
         // 初始化 Response
         Response responseContent = ResponseUtil.newResponseInstance();
 
@@ -262,7 +270,9 @@ public class StockController {
         long total = 0;
 
         HttpSession session = request.getSession();
-        Integer whseId = (Integer) session.getAttribute("warehouseBelong");
+        //Integer whseId = (Integer) session.getAttribute("warehouseBelong");
+        Integer whseId=52002;
+
         if (whseId != null) {
             Map<String, Object> queryResult = query(searchType, keyword, whseId.toString(), offset, limit);
             if (queryResult != null) {
