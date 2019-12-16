@@ -4,6 +4,9 @@ import com.medicalSaleManagementSystem.core.model.BO.StockBo;
 import com.medicalSaleManagementSystem.core.model.entity.Stock;
 import com.medicalSaleManagementSystem.core.model.entity.StockExample;
 import java.util.List;
+
+import com.medicalSaleManagementSystem.core.model.entity.Warehouse;
+import com.medicalSaleManagementSystem.util.message.Msg;
 import org.apache.ibatis.annotations.Param;
 
 public interface StockMapper {
@@ -58,7 +61,7 @@ public interface StockMapper {
      * @param medicineCategory 药品种类
      * @return 返回所有指定货物类型的库存信息
      */
-    List<StockBo> selectByMedicineCategoryAndWhseId(@Param("medicineType") String medicineCategory,
+    List<StockBo> selectByMedicineCategoryAndWhseId(@Param("medicineCategory") String medicineCategory,
                                                    @Param("whseId") Integer whseId);
 
     /**
@@ -98,4 +101,6 @@ public interface StockMapper {
      * @param whseId 仓库ID
      */
     void deleteByWhseIdAndMedicineId(@Param("medicineId") Integer medicineId, @Param("whseId") Integer whseId);
+
+
 }

@@ -226,7 +226,7 @@
     </if>
   </select>
 
-  <select id="selectByMedicineIdAndWhseId" resultMap="StockBo">
+  <select id="selectByMedicineIdAndWhseId" resultType="com.medicalSaleManagementSystem.core.model.BO.StockBo"  parameterType="java.lang.Integer">
     SELECT
     tb_warehouse.whse_id,
     tb_stock.stock_Amount,
@@ -246,7 +246,7 @@
     </if>
   </select>
 
-  <select id="selectByMedicineNameAndWhseId" resultMap="StockBo">
+  <select id="selectByMedicineNameAndWhseId" resultType="com.medicalSaleManagementSystem.core.model.BO.StockBo"  parameterType="java.lang.Integer">
     SELECT
     tb_warehouse.whse_id,
     tb_stock.stock_Amount,
@@ -264,7 +264,7 @@
     </if>
   </select>
 
-  <select id="selectByMedicineCategoryAndWhseId" resultMap="StockBo">
+  <select id="selectByMedicineCategoryAndWhseId" resultType="com.medicalSaleManagementSystem.core.model.BO.StockBo"  parameterType="java.lang.Integer">
     SELECT
     tb_warehouse.whse_id,
     tb_stock.stock_Amount,
