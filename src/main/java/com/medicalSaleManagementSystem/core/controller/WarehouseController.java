@@ -44,7 +44,7 @@ public class WarehouseController {
     }
 
 
-    @RequestMapping(value = "/warehouseManage/warehouse/{pageNum}/{pageSize}/{kery}", method = RequestMethod.GET)
+    @RequestMapping(value = "/warehouseManage/warehouse/{pageNum}/{pageSize}/{key}", method = RequestMethod.GET)
     @ResponseBody
     public Resp findWarehouseByFuzzySearch(@PathVariable(value = "key") String key, @PathVariable(value = "pageNum") Integer pageNum, @PathVariable(value = "pageSize") Integer pageSize) {
         try {
