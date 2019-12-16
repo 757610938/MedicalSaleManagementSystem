@@ -1,6 +1,8 @@
 package com.medicalSaleManagementSystem.core.service;
 
 import com.hazelcast.map.impl.recordstore.Storage;
+import com.medicalSaleManagementSystem.core.model.entity.Stock;
+import com.medicalSaleManagementSystem.util.message.Msg;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -144,5 +146,11 @@ public interface StockService {
      * @return excel 文件
      */
     File exportStorage(List<Storage> storages);
+
+    Msg deleteStockByStockId(Stock stock);
+
+    int deleteStockByStockId(Integer stockId);
+
+    void deleteStockByStockIds(List<Integer> ids);
 
 }

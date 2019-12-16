@@ -24,7 +24,13 @@ public class StockServiceImplTest {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
        //2.获取业务层对象
        StockServiceImpl stockService = ac.getBean("stockServiceImpl", StockServiceImpl.class);
-        Map<String, Object> stringObjectMap = stockService.selectAll(52002, 1, 6);
+        Map<String, Object> stringObjectMap5 = stockService.selectAll(52002, 1, 5);
+        System.out.println("23123131312");
+        Map<String, Object> stringObjectMap = stockService.selectByMedicineID(1000002, 52002, 1,2);
+        System.out.println("1111111111111111111111");
+        Map<String, Object> stringObjectMap2 = stockService.selectByMedicineCategory("药", 52002, 1,2);
+        System.out.println("2222222222222");
+        Map<String, Object> stringObjectMap3 = stockService.selectByMedicineName("龟", 52002, 1,2);
 
     }
 

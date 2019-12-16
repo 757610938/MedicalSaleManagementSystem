@@ -8,10 +8,10 @@ import com.medicalSaleManagementSystem.core.dao.MedicineMapper;
 import com.medicalSaleManagementSystem.core.dao.StockMapper;
 import com.medicalSaleManagementSystem.core.dao.WarehouseMapper;
 import com.medicalSaleManagementSystem.core.model.BO.StockBo;
-import com.medicalSaleManagementSystem.core.model.entity.Medicine;
-import com.medicalSaleManagementSystem.core.model.entity.Stock;
-import com.medicalSaleManagementSystem.core.model.entity.Warehouse;
+import com.medicalSaleManagementSystem.core.model.entity.*;
 import com.medicalSaleManagementSystem.core.service.StockService;
+import com.medicalSaleManagementSystem.util.LoggerUtils;
+import com.medicalSaleManagementSystem.util.message.Msg;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -130,6 +130,9 @@ public class StockServiceImpl implements StockService {
                 if (stockBoList != null) {
                     PageInfo<StockBo> pageInfo = new PageInfo<>(stockBoList);
                     total = pageInfo.getTotal();
+                    for (StockBo stock : stockBoList) {
+                        System.out.println(stock);
+                    }
                 } else
                     stockBoList = new ArrayList<>();
             } else {
@@ -187,6 +190,9 @@ public class StockServiceImpl implements StockService {
                 if (stockList != null) {
                     PageInfo<StockBo> pageInfo = new PageInfo<>(stockList);
                     total = pageInfo.getTotal();
+                    for (StockBo stock : stockList) {
+                        System.out.println(stock);
+                    }
                 } else
                     stockList = new ArrayList<>();
             } else {
@@ -244,6 +250,9 @@ public class StockServiceImpl implements StockService {
                 if (stockList != null) {
                     PageInfo<StockBo> pageInfo = new PageInfo<>(stockList);
                     total = pageInfo.getTotal();
+                    for (StockBo stock : stockList) {
+                        System.out.println(stock);
+                    }
                 } else
                     stockList = new ArrayList<>();
             } else {
@@ -384,5 +393,31 @@ public class StockServiceImpl implements StockService {
     @Override
     public File exportStorage(List<Storage> storages) {
         return null;
+    }
+
+    @Override
+    public Msg deleteStockByStockId(Stock stock) {
+        stockMapper.deleteByPrimaryKey(stock.getStockId());
+        try {
+            return Msg.success();
+        } catch (Exception e) {
+            LoggerUtils.error(StockServiceImpl.class, "删除成功", e);
+            return Msg.fail("删除失败");
+        }
+    }
+
+    @Override
+    public int deleteStockByStockId(Integer stockId) {
+        return stockMapper.deleteByPrimaryKey(stockId);
+    }
+
+    @Override
+    public void deleteStockByStockIds(List<Integer> ids) {
+
+        StockExample stockExample =new StockExample();
+        StockExample.Criteria criteria =stockExample.createCriteria();
+        criteria.andStockIdIn(ids);
+        stockMapper.deleteByExample(stockExample);
+
     }
 }
