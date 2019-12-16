@@ -8,10 +8,10 @@ import com.medicalSaleManagementSystem.core.dao.MedicineMapper;
 import com.medicalSaleManagementSystem.core.dao.StockMapper;
 import com.medicalSaleManagementSystem.core.dao.WarehouseMapper;
 import com.medicalSaleManagementSystem.core.model.BO.StockBo;
-import com.medicalSaleManagementSystem.core.model.entity.*;
+import com.medicalSaleManagementSystem.core.model.entity.Medicine;
+import com.medicalSaleManagementSystem.core.model.entity.Stock;
+import com.medicalSaleManagementSystem.core.model.entity.Warehouse;
 import com.medicalSaleManagementSystem.core.service.StockService;
-import com.medicalSaleManagementSystem.util.LoggerUtils;
-import com.medicalSaleManagementSystem.util.message.Msg;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,43 +52,62 @@ public class StockServiceImpl implements StockService {
      */
     @Override
     public Map<String, Object> selectAll(Integer whseId, int offset, int limit) {
+        List<StockBo> stocks = stockMapper.selectAllAndWhseId(whseId);
+        System.out.println("whseId--->" + whseId);
+        System.out.println("stockList.size()--->" + stocks.size());
+        if (stocks.size() <= 0) {
+            System.out.println("查询为空");
+        }
+        //System.out.println(stocks);
+        for (StockBo stock : stocks) {
+            System.out.println(stock);
+        }
 
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
-
+        List<Stock> stockList = new ArrayList<>();
         long total = 0;
         boolean isPagination = true;
-        List<StockBo> stockBoList = new ArrayList<>();
+
         // validate
         if (offset < 0 || limit < 0)
             isPagination = false;
 
         // query
-
         try {
             if (isPagination) {
                 PageHelper.offsetPage(offset, limit);
-                stockBoList = stockMapper.selectAllAndWhseId(whseId);
-                if (stockBoList != null) {
-                    PageInfo<StockBo> pageInfo = new PageInfo<>(stockBoList);
-                    total = pageInfo.getTotal();
-                    for (StockBo stock : stockBoList) {
+                //stockList = stockMapper.selectAllAndWhseId(whseId);
+                System.out.println("whseId--->" + whseId);
+                System.out.println("stockList.size()--->" + stockList.size());
+                if (stockList.size() <= 0) {
+                    System.out.println("查询为空");
+                    for (Stock stock : stockList) {
                         System.out.println(stock);
                     }
                 }
+                if (stockList != null) {
+                    PageInfo<Stock> pageInfo = new PageInfo<>(stockList);
+                    total = pageInfo.getTotal();
+                    for (Stock stock : stockList) {System.out.println(stock);
+                    }
+                } else
+                    stockList = new ArrayList<>();
             } else {
-                stockBoList = stockMapper.selectAllAndWhseId(whseId);
-                if (stockBoList != null)
-                    total = stockBoList.size();
+                    stockList = new ArrayList<>();
             }
-        } catch (Exception e) {
+        } catch (PersistenceException e) {
             e.printStackTrace();
         }
-        resultSet.put("data", stockBoList);
+
+        resultSet.put("data", stockList);
         resultSet.put("total", total);
-        System.out.println(resultSet);
         return resultSet;
+
     }
+
+
+
 
 
     /**
@@ -106,15 +125,15 @@ public class StockServiceImpl implements StockService {
      * 分页返回指定的药品库存记录
      *
      * @param medicineId 指定的药品ID
-     * @param offset     分页偏移值
-     * @param limit      分页大小
+     * @param offset  分页偏移值
+     * @param limit   分页大小
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
     public Map<String, Object> selectByMedicineID(Integer medicineId, Integer whseId, int offset, int limit) {
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
-        List<StockBo> stockBoList = new ArrayList<>();
+        List<Stock> stockList=new ArrayList<>();
         long total = 0;
         boolean isPagination = true;
 
@@ -126,27 +145,25 @@ public class StockServiceImpl implements StockService {
         try {
             if (isPagination) {
                 PageHelper.offsetPage(offset, limit);
-                stockBoList = stockMapper.selectByMedicineIdAndWhseId(medicineId, whseId);
-                if (stockBoList != null) {
-                    PageInfo<StockBo> pageInfo = new PageInfo<>(stockBoList);
+                stockList = stockMapper.selectByMedicineIdAndWhseId(medicineId, whseId);
+                if (stockList != null) {
+                    PageInfo<Stock> pageInfo = new PageInfo<>(stockList);
                     total = pageInfo.getTotal();
-                    for (StockBo stock : stockBoList) {
-                        System.out.println(stock);
-                    }
                 } else
-                    stockBoList = new ArrayList<>();
+                    stockList = new ArrayList<>();
             } else {
-                stockBoList = stockMapper.selectByMedicineIdAndWhseId(medicineId, whseId);
-                if (stockBoList != null)
-                    total = stockBoList.size();
+                stockList = stockMapper.selectByMedicineIdAndWhseId(medicineId, whseId);
+                System.out.println(423121212);
+                if (stockList != null)
+                    total = stockList.size();
                 else
-                    stockBoList = new ArrayList<>();
+                    stockList = new ArrayList<>();
             }
         } catch (PersistenceException e) {
             e.printStackTrace();
         }
 
-        resultSet.put("data", stockBoList);
+        resultSet.put("data", stockList);
         resultSet.put("total", total);
         return resultSet;
     }
@@ -166,15 +183,15 @@ public class StockServiceImpl implements StockService {
      * 分页返回指定药品名称的库存记录
      *
      * @param medicineName 药品名称
-     * @param offset       分页偏移值
-     * @param limit        分页大小
+     * @param offset    分页偏移值
+     * @param limit     分页大小
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
     public Map<String, Object> selectByMedicineName(String medicineName, Integer whseId, int offset, int limit) {
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
-        List<StockBo> stockList = new ArrayList<>();
+        List<Stock> stockList=new ArrayList<>();
         long total = 0;
         boolean isPagination = true;
 
@@ -188,11 +205,8 @@ public class StockServiceImpl implements StockService {
                 PageHelper.offsetPage(offset, limit);
                 stockList = stockMapper.selectByMedicineNameAndWhseId(medicineName, whseId);
                 if (stockList != null) {
-                    PageInfo<StockBo> pageInfo = new PageInfo<>(stockList);
+                    PageInfo<Stock> pageInfo = new PageInfo<>(stockList);
                     total = pageInfo.getTotal();
-                    for (StockBo stock : stockList) {
-                        System.out.println(stock);
-                    }
                 } else
                     stockList = new ArrayList<>();
             } else {
@@ -226,15 +240,15 @@ public class StockServiceImpl implements StockService {
      * 分页返回指定药品种类的库存记录
      *
      * @param medicineCategory 指定的药品种类
-     * @param offset           分页偏移值
-     * @param limit            分页大小
+     * @param offset    分页偏移值
+     * @param limit     分页大小
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
     public Map<String, Object> selectByMedicineCategory(String medicineCategory, Integer whseId, int offset, int limit) {
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
-        List<StockBo> stockList = new ArrayList<>();
+        List<Stock> stockList=new ArrayList<>();
         long total = 0;
         boolean isPaginatin = true;
 
@@ -248,11 +262,8 @@ public class StockServiceImpl implements StockService {
                 PageHelper.offsetPage(offset, limit);
                 stockList = stockMapper.selectByMedicineCategoryAndWhseId(medicineCategory, whseId);
                 if (stockList != null) {
-                    PageInfo<StockBo> pageInfo = new PageInfo<>(stockList);
+                    PageInfo<Stock> pageInfo = new PageInfo<>(stockList);
                     total = pageInfo.getTotal();
-                    for (StockBo stock : stockList) {
-                        System.out.println(stock);
-                    }
                 } else
                     stockList = new ArrayList<>();
             } else {
@@ -274,9 +285,9 @@ public class StockServiceImpl implements StockService {
     /**
      * 添加一条库存记录
      *
-     * @param medicineId  指定的药品ID
-     * @param whseId      指定的仓库ID
-     * @param stockAmount 库存数量
+     * @param medicineId      指定的药品ID
+     * @param whseId 指定的仓库ID
+     * @param stockAmount       库存数量
      * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
      */
     @Override
@@ -293,7 +304,7 @@ public class StockServiceImpl implements StockService {
                 isAvailable = false;
             if (stockAmount < 0)
                 isAvailable = false;
-            List<StockBo> stockList = stockMapper.selectByMedicineIdAndWhseId(medicineId, whseId);
+            List<Stock> stockList = stockMapper.selectByMedicineIdAndWhseId(medicineId, whseId);
             if (!(stockList != null && stockList.isEmpty()))
                 isAvailable = false;
 
@@ -317,9 +328,9 @@ public class StockServiceImpl implements StockService {
     /**
      * 更新一条库存记录
      *
-     * @param medicineId  指定的药品ID
-     * @param whseId      指定的仓库ID
-     * @param stockAmount 更新的库存数量
+     * @param medicineId      指定的药品ID
+     * @param whseId 指定的仓库ID
+     * @param stockAmount       更新的库存数量
      * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
      */
     @Override
@@ -328,11 +339,11 @@ public class StockServiceImpl implements StockService {
             boolean isUpdate = false;
 
             // validate
-            List<StockBo> stockList = stockMapper.selectByMedicineIdAndWhseId(medicineId, whseId);
+            List<Stock> stockList = stockMapper.selectByMedicineIdAndWhseId(medicineId, whseId);
             if (stockList != null && !stockList.isEmpty()) {
                 if (stockAmount >= 0) {
                     // update
-                    StockBo stock = stockList.get(0);
+                    Stock stock = stockList.get(0);
                     stock.setStockAmount(stockAmount);
                     stockMapper.update(stock);
                     isUpdate = true;
@@ -341,8 +352,8 @@ public class StockServiceImpl implements StockService {
 
             return isUpdate;
         } catch (PersistenceException e) {
-            e.printStackTrace();
-            return false;
+           e.printStackTrace();
+           return false;
         }
     }
 
@@ -362,8 +373,8 @@ public class StockServiceImpl implements StockService {
      * 删除一条库存记录
      * 药品ID与仓库ID可唯一确定一条库存记录
      *
-     * @param medicineId 指定的药品ID
-     * @param whseId     指定的仓库ID
+     * @param medicineId      指定的药品ID
+     * @param whseId 指定的仓库ID
      * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
      */
     @Override
@@ -372,7 +383,7 @@ public class StockServiceImpl implements StockService {
             boolean isDelete = false;
 
             // validate
-            List<StockBo> stockList = stockMapper.selectByMedicineIdAndWhseId(medicineId, whseId);
+            List<Stock> stockList = stockMapper.selectByMedicineIdAndWhseId(medicineId, whseId);
             if (stockList != null && !stockList.isEmpty()) {
                 // delete
                 stockMapper.deleteByWhseIdAndMedicineId(medicineId, whseId);
@@ -393,31 +404,5 @@ public class StockServiceImpl implements StockService {
     @Override
     public File exportStorage(List<Storage> storages) {
         return null;
-    }
-
-    @Override
-    public Msg deleteStockByStockId(Stock stock) {
-        stockMapper.deleteByPrimaryKey(stock.getStockId());
-        try {
-            return Msg.success();
-        } catch (Exception e) {
-            LoggerUtils.error(StockServiceImpl.class, "删除成功", e);
-            return Msg.fail("删除失败");
-        }
-    }
-
-    @Override
-    public int deleteStockByStockId(Integer stockId) {
-        return stockMapper.deleteByPrimaryKey(stockId);
-    }
-
-    @Override
-    public void deleteStockByStockIds(List<Integer> ids) {
-
-        StockExample stockExample =new StockExample();
-        StockExample.Criteria criteria =stockExample.createCriteria();
-        criteria.andStockIdIn(ids);
-        stockMapper.deleteByExample(stockExample);
-
     }
 }
