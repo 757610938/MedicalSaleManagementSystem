@@ -49,7 +49,7 @@ public class PurchaseController {
     @ResponseBody
     public Resp insertSelective(@RequestParam PurchaseVO purchaseVO){
         try{
-            System.out.println("测试打印"+purchaseVO);
+            System.out.println("测试打印----》"+purchaseVO);
             if (purchaseVO.getPutDtlList().size()<= 0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"采购项不能为空");
             }
@@ -79,6 +79,7 @@ public class PurchaseController {
     @ResponseBody
     public Resp selectByPrimaryKey(@PathVariable String purOrderId){
         try{
+            System.out.println(purOrderId);
             PurchaseBO purchaseBO = purchaseService.selectByPurOrderId(purOrderId);
             if(purchaseBO==null){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找采购单信息失败");
@@ -136,6 +137,29 @@ public class PurchaseController {
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"更新采购单信息失败");
             }
             return Resp.httpStatus(HttpStatus.OK,"更新采购单信息成功！");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    /*
+     * 功能描述: <br>
+     * 〈〉提交审核订单
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 22:34
+     */
+    @RequestMapping ( value = "/purchases/submitAuditOrder/{purOrderId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Resp submitAuditOrderByPurOrderIdAndPurStatus(@PathVariable String purOrderId){
+        try{
+            String status = purchaseService.updateOrderByPurOrderIdAndPurStatus(purOrderId, "审核中");
+            if (status != "200"){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"提交审核订单失败");
+            }
+            return Resp.httpStatus(HttpStatus.OK,"提交审核订单成功！");
         }catch (Exception e){
             e.printStackTrace();
         }

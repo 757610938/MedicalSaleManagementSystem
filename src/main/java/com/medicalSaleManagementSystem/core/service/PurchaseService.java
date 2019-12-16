@@ -62,7 +62,22 @@ public interface PurchaseService {
      * @Date: 2019/12/14 20:43
      */
     PurchaseBO selectByPurOrderId(String purOrderId);
+    /**
 
+     *@描述  更新订单状态
+
+     *@参数  PurchaseDTO record，,String purStatus
+
+     *@返回值  String
+
+     *@创建人  林贤钦
+
+     *@创建时间  2019/12/16
+
+     *@修改人和其它信息
+
+     */
+    String updateOrderByPurOrderIdAndPurStatus(String purOrderId,String purStatus);
     /*
      * 功能描述: <br>
      * 〈更新采购单〉

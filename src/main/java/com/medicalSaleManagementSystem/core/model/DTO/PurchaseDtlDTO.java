@@ -95,4 +95,19 @@ public class PurchaseDtlDTO {
     public void setPurDtlRemark(String purDtlRemark) {
         this.purDtlRemark = purDtlRemark == null ? null : purDtlRemark.trim();
     }
+
+    @Override
+    public String toString() {
+        return "PurchaseDtlDTO{" +
+                "purDtlId=" + purDtlId +
+                ", purDtlOrderId='" + purDtlOrderId + '\'' +
+                ", purOrderId='" + purOrderId + '\'' +
+                ", medicineId=" + medicineId +
+                ", medicineName='" + medicineName + '\'' +
+                ", purDtlAmount=" + purDtlAmount +
+                ", purDtlPrice=" + purDtlPrice +
+                ", purDtlStatus='" + purDtlStatus + '\'' +
+                ", purDtlRemark='" + purDtlRemark + '\'' +
+                '}';
+    }
 }

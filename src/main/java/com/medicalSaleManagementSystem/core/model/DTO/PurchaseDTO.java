@@ -115,4 +115,21 @@ public class PurchaseDTO {
     public void setPutDtlList(List<PurchaseDtlDTO> putDtlList) {
         this.putDtlList = putDtlList;
     }
+
+    @Override
+    public String toString() {
+        return "PurchaseDTO{" +
+                "putDtlList=" + putDtlList +
+                ", purId=" + purId +
+                ", purOrderId='" + purOrderId + '\'' +
+                ", purName='" + purName + '\'' +
+                ", supplierId=" + supplierId +
+                ", userNumber='" + userNumber + '\'' +
+                ", purTotalMoney=" + purTotalMoney +
+                ", purStatus='" + purStatus + '\'' +
+                ", warehouseId=" + warehouseId +
+                ", purDate=" + purDate +
+                ", purRemark='" + purRemark + '\'' +
+                '}';
+    }
 }
