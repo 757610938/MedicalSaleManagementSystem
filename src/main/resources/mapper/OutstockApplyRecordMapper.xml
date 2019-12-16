@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medicalSaleManagementSystem.core.dao.OutstockApplyRecordMapper">
+  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecord">
+    <id column="outstock_apply_id" jdbcType="INTEGER" property="outstockApplyId" />
+    <result column="outstock_Dtl_Number" jdbcType="VARCHAR" property="outstockDtlNumber" />
+    <result column="outstock_time" jdbcType="TIMESTAMP" property="outstockTime" />
+    <result column="user_Number" jdbcType="INTEGER" property="userNumber" />
+    <result column="outstock_Apply_Category" jdbcType="VARCHAR" property="outstockApplyCategory" />
+    <result column="outstock_Apply_Remark" jdbcType="VARCHAR" property="outstockApplyRemark" />
+    <result column="medicine_id" jdbcType="INTEGER" property="medicineId" />
+    <result column="outstock_Amount" jdbcType="INTEGER" property="outstockAmount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    outstock_apply_id, outstock_Dtl_Number, outstock_time, user_Number, outstock_Apply_Category, 
+    outstock_Apply_Remark, medicine_id, outstock_Amount
+  </sql>
+  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_outstock_apply_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_outstock_apply_record
+    where outstock_apply_id = #{outstockApplyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_outstock_apply_record
+    where outstock_apply_id = #{outstockApplyId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecordExample">
+    delete from tb_outstock_apply_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecord">
+    insert into tb_outstock_apply_record (outstock_apply_id, outstock_Dtl_Number, 
+      outstock_time, user_Number, outstock_Apply_Category, 
+      outstock_Apply_Remark, medicine_id, outstock_Amount
+      )
+    values (#{outstockApplyId,jdbcType=INTEGER}, #{outstockDtlNumber,jdbcType=VARCHAR}, 
+      #{outstockTime,jdbcType=TIMESTAMP}, #{userNumber,jdbcType=INTEGER}, #{outstockApplyCategory,jdbcType=VARCHAR}, 
+      #{outstockApplyRemark,jdbcType=VARCHAR}, #{medicineId,jdbcType=INTEGER}, #{outstockAmount,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecord">
+    insert into tb_outstock_apply_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="outstockApplyId != null">
+        outstock_apply_id,
+      </if>
+      <if test="outstockDtlNumber != null">
+        outstock_Dtl_Number,
+      </if>
+      <if test="outstockTime != null">
+        outstock_time,
+      </if>
+      <if test="userNumber != null">
+        user_Number,
+      </if>
+      <if test="outstockApplyCategory != null">
+        outstock_Apply_Category,
+      </if>
+      <if test="outstockApplyRemark != null">
+        outstock_Apply_Remark,
+      </if>
+      <if test="medicineId != null">
+        medicine_id,
+      </if>
+      <if test="outstockAmount != null">
+        outstock_Amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="outstockApplyId != null">
+        #{outstockApplyId,jdbcType=INTEGER},
+      </if>
+      <if test="outstockDtlNumber != null">
+        #{outstockDtlNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="outstockTime != null">
+        #{outstockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNumber != null">
+        #{userNumber,jdbcType=INTEGER},
+      </if>
+      <if test="outstockApplyCategory != null">
+        #{outstockApplyCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="outstockApplyRemark != null">
+        #{outstockApplyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineId != null">
+        #{medicineId,jdbcType=INTEGER},
+      </if>
+      <if test="outstockAmount != null">
+        #{outstockAmount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecordExample" resultType="java.lang.Long">
+    select count(*) from tb_outstock_apply_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_outstock_apply_record
+    <set>
+      <if test="record.outstockApplyId != null">
+        outstock_apply_id = #{record.outstockApplyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.outstockDtlNumber != null">
+        outstock_Dtl_Number = #{record.outstockDtlNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outstockTime != null">
+        outstock_time = #{record.outstockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userNumber != null">
+        user_Number = #{record.userNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.outstockApplyCategory != null">
+        outstock_Apply_Category = #{record.outstockApplyCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outstockApplyRemark != null">
+        outstock_Apply_Remark = #{record.outstockApplyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medicineId != null">
+        medicine_id = #{record.medicineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.outstockAmount != null">
+        outstock_Amount = #{record.outstockAmount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_outstock_apply_record
+    set outstock_apply_id = #{record.outstockApplyId,jdbcType=INTEGER},
+      outstock_Dtl_Number = #{record.outstockDtlNumber,jdbcType=VARCHAR},
+      outstock_time = #{record.outstockTime,jdbcType=TIMESTAMP},
+      user_Number = #{record.userNumber,jdbcType=INTEGER},
+      outstock_Apply_Category = #{record.outstockApplyCategory,jdbcType=VARCHAR},
+      outstock_Apply_Remark = #{record.outstockApplyRemark,jdbcType=VARCHAR},
+      medicine_id = #{record.medicineId,jdbcType=INTEGER},
+      outstock_Amount = #{record.outstockAmount,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecord">
+    update tb_outstock_apply_record
+    <set>
+      <if test="outstockDtlNumber != null">
+        outstock_Dtl_Number = #{outstockDtlNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="outstockTime != null">
+        outstock_time = #{outstockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNumber != null">
+        user_Number = #{userNumber,jdbcType=INTEGER},
+      </if>
+      <if test="outstockApplyCategory != null">
+        outstock_Apply_Category = #{outstockApplyCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="outstockApplyRemark != null">
+        outstock_Apply_Remark = #{outstockApplyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineId != null">
+        medicine_id = #{medicineId,jdbcType=INTEGER},
+      </if>
+      <if test="outstockAmount != null">
+        outstock_Amount = #{outstockAmount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where outstock_apply_id = #{outstockApplyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecord">
+    update tb_outstock_apply_record
+    set outstock_Dtl_Number = #{outstockDtlNumber,jdbcType=VARCHAR},
+      outstock_time = #{outstockTime,jdbcType=TIMESTAMP},
+      user_Number = #{userNumber,jdbcType=INTEGER},
+      outstock_Apply_Category = #{outstockApplyCategory,jdbcType=VARCHAR},
+      outstock_Apply_Remark = #{outstockApplyRemark,jdbcType=VARCHAR},
+      medicine_id = #{medicineId,jdbcType=INTEGER},
+      outstock_Amount = #{outstockAmount,jdbcType=INTEGER}
+    where outstock_apply_id = #{outstockApplyId,jdbcType=INTEGER}
+  </update>
+</mapper>
