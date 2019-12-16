@@ -53,12 +53,12 @@ public class PurchaseController {
             if (purchaseVO.getPutDtlList().size()<= 0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"采购项不能为空");
             }
-//            PurchaseDTO purchaseDTO=new PurchaseDTO();
-//            BeanUtilEx.copyProperties(purchaseDTO,purchaseVO);//转化实体类
-//            int i = purchaseService.insertSelective(purchaseDTO);//调用service方法存入药品信息
-//            if(i==0){
-//                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"增加采购单失败");
-//            }
+            PurchaseDTO purchaseDTO=new PurchaseDTO();
+            BeanUtilEx.copyProperties(purchaseDTO,purchaseVO);//转化实体类
+            String result = purchaseService.makePurchaseOrder(purchaseDTO);//调用service方法存入采购单
+            if (result!="200"){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"增加采购单失败");
+            }
             return Resp.httpStatus(HttpStatus.OK,"增加采购单成功！");
         }catch (Exception e){
             e.printStackTrace();

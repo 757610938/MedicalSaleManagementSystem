@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.dao;
 
+import com.medicalSaleManagementSystem.core.model.BO.StockBo;
 import com.medicalSaleManagementSystem.core.model.entity.Stock;
 import com.medicalSaleManagementSystem.core.model.entity.StockExample;
 import java.util.List;
@@ -33,7 +34,7 @@ public interface StockMapper {
      * 选择所有的库存信息
      * @return 返回所有的库存信息
      */
-    List<Stock> selectAllAndWhseId(@Param("whseId") Integer whseId);
+    List<StockBo> selectAllAndWhseId(@Param("whseId") Integer whseId);
 
     /**
      * 选择指定药品ID和仓库ID的库存信息
@@ -41,7 +42,7 @@ public interface StockMapper {
      * @param whseId 库存ID
      * @return 返回所有指定药品ID和仓库ID的库存信息
      */
-    List<Stock> selectByMedicineIdAndWhseId(@Param("medicineId") Integer medicineId,
+    List<StockBo> selectByMedicineIdAndWhseId(@Param("medicineId") Integer medicineId,
                                                  @Param("whseId") Integer whseId);
 
     /**
@@ -49,7 +50,7 @@ public interface StockMapper {
      * @param medicineName 药品名称
      * @return 返回所有指定药品名称的库存信息
      */
-    List<Stock> selectByMedicineNameAndWhseId(@Param("medicineName") String medicineName,
+    List<StockBo> selectByMedicineNameAndWhseId(@Param("medicineName") String medicineName,
                                                    @Param("whseId") Integer whseId);
 
     /**
@@ -57,7 +58,7 @@ public interface StockMapper {
      * @param medicineCategory 药品种类
      * @return 返回所有指定货物类型的库存信息
      */
-    List<Stock> selectByMedicineCategoryAndWhseId(@Param("medicineType") String medicineCategory,
+    List<StockBo> selectByMedicineCategoryAndWhseId(@Param("medicineType") String medicineCategory,
                                                    @Param("whseId") Integer whseId);
 
     /**
@@ -65,7 +66,7 @@ public interface StockMapper {
      * 该库存信息必需已经存在于数据库当中，否则更新无效
      * @param stock 库存信息
      */
-    void update(Stock stock);
+    void update(StockBo stock);
 
     /**
      * 插入新的库存信息
@@ -77,7 +78,7 @@ public interface StockMapper {
      * 批量导入库存信息
      * @param stock 若干条库存信息
      */
-    void insertBatch(List<Stock> stock);
+    void insertBatch(List<StockBo> stock);
 
     /**
      * 删除指定药品ID的库存信息
