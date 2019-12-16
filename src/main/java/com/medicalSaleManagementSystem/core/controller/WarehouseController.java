@@ -29,7 +29,6 @@ public class WarehouseController {
         return "/warehouseManage/warehouse";
     }
 
-
     @RequestMapping(value = "/warehouseManage/warehouse/{pageNum}/{pageSize}", method = RequestMethod.GET)
     @ResponseBody
     public Resp warehouseList(@PathVariable(value = "pageNum") int pageNum,@PathVariable(value = "pageSize") int pageSize) {

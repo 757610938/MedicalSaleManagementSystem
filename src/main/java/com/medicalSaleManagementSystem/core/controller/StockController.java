@@ -6,6 +6,7 @@ import com.medicalSaleManagementSystem.util.Response;
 import com.medicalSaleManagementSystem.util.ResponseUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,16 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/**/stockManage")
+@Scope(value = "prototype")
 public class StockController {
 
     @Autowired
     private StockService stockService;
+
+    @RequestMapping("/stock")
+    public String index() {
+        return "/stockManage/stock";
+    }
 
     private static final String SEARCH_BY_MEDICINE_ID = "searchByMedicineId";
     private static final String SEARCH_BY_MEDICINE_NAME = "searchByMedicineName";
@@ -85,19 +91,19 @@ public class StockController {
     /**
      * 可指定仓库对库存信息查询
      *
-     * @param keyword          查询关键字
-     * @param searchType       查询类型
+     * @param keyword         查询关键字
+     * @param searchType      查询类型
      * @param warehouseBelong 查询所属的仓库
-     * @param offset           分页偏移值
-     * @param limit            分页大小
+     * @param offset          分页偏移值
+     * @param limit           分页大小
      * @return 结果的一个Map，其中： key为 rows 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @SuppressWarnings("unchecked")
     @ResponseBody
-    @RequestMapping(value = "getStockListWithWarehouse", method = RequestMethod.GET)
+    @RequestMapping(value = "/stockManage/stock", method = RequestMethod.GET)
     public Map<String, Object> getStockListWithWarehouseId(@RequestParam("keyword") String keyword,
-                                                 @RequestParam("searchType") String searchType, @RequestParam("warehouseBelong") String warehouseBelong,
-                                                 @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
+                                                           @RequestParam("searchType") String searchType, @RequestParam("warehouseBelong") String warehouseBelong,
+                                                           @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
         // 初始化 Response
         Response responseContent = ResponseUtil.newResponseInstance();
 
@@ -123,7 +129,7 @@ public class StockController {
      *
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
-    @RequestMapping(value = "addStockRecord", method = RequestMethod.POST)
+    @RequestMapping(value = "/stockManage/stock", method = RequestMethod.POST)
     public
     @ResponseBody
     Map<String, Object> addStockRecord(@RequestBody Map<String, Object> params) {
@@ -158,7 +164,7 @@ public class StockController {
      *
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
-    @RequestMapping(value = "updateStockRecord", method = RequestMethod.POST)
+    @RequestMapping(value = "/stockManage/stock", method = RequestMethod.PUT)
     public
     @ResponseBody
     Map<String, Object> updateStockRecord(@RequestBody Map<String, Object> params) {
@@ -191,14 +197,14 @@ public class StockController {
     /**
      * 删除一条库存信息
      *
-     * @param medicineId   药品ID
-     * @param whseId 仓库ID
+     * @param medicineId 药品ID
+     * @param whseId     仓库ID
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
     @ResponseBody
-    @RequestMapping(value = "deleteStockRecord", method = RequestMethod.GET)
+    @RequestMapping(value = "/stockManage/stock", method = RequestMethod.DELETE)
     public Map<String, Object> deleteStockRecord(@RequestParam("medicineId") String medicineId,
-                                            @RequestParam("whseId") String whseId)  {
+                                                 @RequestParam("whseId") String whseId) {
         // 初始化 Response
         Response responseContent = ResponseUtil.newResponseInstance();
 
@@ -232,10 +238,10 @@ public class StockController {
      */
     @SuppressWarnings("unchecked")
     @ResponseBody
-    @RequestMapping(value = "getStockList", method = RequestMethod.GET)
+    @RequestMapping(value = "stockList", method = RequestMethod.GET)
     public Map<String, Object> getStorageList(@RequestParam("keyword") String keyword,
-                                       @RequestParam("searchType") String searchType, @RequestParam("offset") int offset,
-                                       @RequestParam("limit") int limit, HttpServletRequest request) {
+                                              @RequestParam("searchType") String searchType, @RequestParam("offset") int offset,
+                                              @RequestParam("limit") int limit, HttpServletRequest request) {
         // 初始化 Response
         Response responseContent = ResponseUtil.newResponseInstance();
 
