@@ -1,12 +1,14 @@
 package com.medicalSaleManagementSystem.core.service.impl;
 
 
+import com.medicalSaleManagementSystem.core.model.entity.Stock;
 import com.medicalSaleManagementSystem.util.message.Msg;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.awt.*;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -20,8 +22,8 @@ public class StockServiceImplTest {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
        //2.获取业务层对象
        StockServiceImpl stockService = ac.getBean("stockServiceImpl", StockServiceImpl.class);
-        Map<String, Object> stringObjectMap = stockService.selectAll(52002, 1, 1);
-        System.out.println(stringObjectMap);
+        Map<String, Object> stringObjectMap = stockService.selectAll(52002, 1, 6);
+
     }
 
     @Test

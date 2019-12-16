@@ -9,6 +9,16 @@ public class Stock {
 
     private Integer stockAmount;
 
+    @Override
+    public String toString() {
+        return "Stock{" +
+                "stockId=" + stockId +
+                ", medicineId=" + medicineId +
+                ", whseId=" + whseId +
+                ", stockAmount=" + stockAmount +
+                '}';
+    }
+
     public Integer getStockId() {
         return stockId;
     }
