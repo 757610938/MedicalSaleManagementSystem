@@ -63,52 +63,51 @@ public class StockServiceImpl implements StockService {
             System.out.println(stock);
         }
 
-//        // 初始化结果集
-//        Map<String, Object> resultSet = new HashMap<>();
-//        List<Stock> stockList= new ArrayList<>();
-//        long total = 0;
-//        boolean isPagination = true;
-//
-//        // validate
-//        if (offset < 0 || limit < 0)
-//            isPagination = false;
-//
-//        // query
-//        try {
-//            if (isPagination) {
-//                PageHelper.offsetPage(offset, limit);
-//                stockList = stockMapper.selectAllAndWhseId(whseId);
-//                System.out.println("whseId--->"+whseId);
-//                System.out.println("stockList.size()--->"+stockList.size());
-//                if (stockList.size()<=0){
-//                    System.out.println("查询为空");
-//                    for (Stock stock : stockList) {
-//                        System.out.println(stock);
-//                    }
-//                }
-//                if (stockList != null) {
-//                    PageInfo<Stock> pageInfo = new PageInfo<>(stockList);
-//                    total = pageInfo.getTotal();
-//                    for (Stock stock : stockList) {
-//                        System.out.println(stock);
-//                    }
-//                } else
-//                    stockList = new ArrayList<>();
-//            } else {
-//                stockList = stockMapper.selectAllAndWhseId(whseId);
-//                if (stockList != null)
-//                    total = stockList.size();
-//                else
-//                    stockList = new ArrayList<>();
-//            }
-//        } catch (PersistenceException e) {
-//            e.printStackTrace();
-//        }
-//
-//        resultSet.put("data", stockList);
-//        resultSet.put("total", total);
-  //      return resultSet;
-        return null;
+        // 初始化结果集
+        Map<String, Object> resultSet = new HashMap<>();
+        List<Stock> stockList= new ArrayList<>();
+        long total = 0;
+        boolean isPagination = true;
+
+        // validate
+       if (offset < 0 || limit < 0)
+            isPagination = false;
+
+        // query
+        try {
+            if (isPagination) {
+                PageHelper.offsetPage(offset, limit);
+                //stockList = stockMapper.selectAllAndWhseId(whseId);
+                System.out.println("whseId--->"+whseId);
+                System.out.println("stockList.size()--->"+stockList.size());
+                if (stockList.size()<=0){
+                    System.out.println("查询为空");
+                    for (Stock stock : stockList) {
+                        System.out.println(stock);
+                    }
+                }
+                if (stockList != null) {
+                    PageInfo<Stock> pageInfo = new PageInfo<>(stockList);
+                    total = pageInfo.getTotal();
+                    for (Stock stock : stockList) {/                        System.out.println(stock);
+                    }
+                } else
+                    stockList = new ArrayList<>();
+            } else {
+                //stockList = stockMapper.selectAllAndWhseId(whseId);
+                if (stockList != null)
+                    total = stockList.size();
+                else
+                    stockList = new ArrayList<>();
+            }
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+        }
+
+        resultSet.put("data", stockList);
+        resultSet.put("total", total);
+        return resultSet;
+
     }
 
 
