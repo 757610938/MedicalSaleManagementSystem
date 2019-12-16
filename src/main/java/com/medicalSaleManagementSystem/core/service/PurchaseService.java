@@ -18,13 +18,22 @@ public interface PurchaseService {
 
     /*
      * 功能描述: <br>
-     * 〈创建采购单〉
+     * 〈创建采购单〉<不包含采购项>
      * @Param:
      * @Return:
      * @Author: 林贤钦
      * @Date: 2019/12/14 20:45
      */
-    int insertSelective(PurchaseDTO record);
+    String insertSelective(PurchaseDTO record);
+    /*
+     * 功能描述: <br>
+     * 〈〈创建采购单〉<包含采购项>〉
+     * @Param:  PurchaseDTO record
+     * @Return:  int
+     * @Author: 林贤钦
+     * @Date: 2019/12/16 9:41
+     */
+    String makePurchaseOrder(PurchaseDTO record);
     /*
      * 功能描述: <br>
      * 〈删除采购单〉
@@ -52,7 +61,7 @@ public interface PurchaseService {
      * @Author: 林贤钦
      * @Date: 2019/12/14 20:43
      */
-    PurchaseBO selectBPurOrderId(String purOrderId);
+    PurchaseBO selectByPurOrderId(String purOrderId);
 
     /*
      * 功能描述: <br>
