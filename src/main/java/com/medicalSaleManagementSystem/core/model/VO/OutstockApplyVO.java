@@ -1,8 +1,8 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.VO;
 
 import java.util.Date;
 
-public class OutstockApplyRecord {
+public class OutstockApplyVO {
     private Integer outstockApplyId;
 
     private String outstockDtlNumber;
@@ -23,7 +23,7 @@ public class OutstockApplyRecord {
 
     @Override
     public String toString() {
-        return "OutstockApplyRecord{" +
+        return "OutstockApplyVO{" +
                 "outstockApplyId=" + outstockApplyId +
                 ", outstockDtlNumber='" + outstockDtlNumber + '\'' +
                 ", outstockTime=" + outstockTime +
@@ -34,14 +34,6 @@ public class OutstockApplyRecord {
                 ", outstockAmount=" + outstockAmount +
                 ", valid=" + valid +
                 '}';
-    }
-
-    public Integer getValid() {
-        return valid;
-    }
-
-    public void setValid(Integer valid) {
-        this.valid = valid;
     }
 
     public Integer getOutstockApplyId() {
@@ -57,7 +49,7 @@ public class OutstockApplyRecord {
     }
 
     public void setOutstockDtlNumber(String outstockDtlNumber) {
-        this.outstockDtlNumber = outstockDtlNumber == null ? null : outstockDtlNumber.trim();
+        this.outstockDtlNumber = outstockDtlNumber;
     }
 
     public Date getOutstockTime() {
@@ -81,7 +73,7 @@ public class OutstockApplyRecord {
     }
 
     public void setOutstockApplyCategory(String outstockApplyCategory) {
-        this.outstockApplyCategory = outstockApplyCategory == null ? null : outstockApplyCategory.trim();
+        this.outstockApplyCategory = outstockApplyCategory;
     }
 
     public String getOutstockApplyRemark() {
@@ -89,7 +81,7 @@ public class OutstockApplyRecord {
     }
 
     public void setOutstockApplyRemark(String outstockApplyRemark) {
-        this.outstockApplyRemark = outstockApplyRemark == null ? null : outstockApplyRemark.trim();
+        this.outstockApplyRemark = outstockApplyRemark;
     }
 
     public Integer getMedicineId() {
@@ -106,5 +98,13 @@ public class OutstockApplyRecord {
 
     public void setOutstockAmount(Integer outstockAmount) {
         this.outstockAmount = outstockAmount;
+    }
+
+    public Integer getValid() {
+        return valid;
+    }
+
+    public void setValid(Integer valid) {
+        this.valid = valid;
     }
 }

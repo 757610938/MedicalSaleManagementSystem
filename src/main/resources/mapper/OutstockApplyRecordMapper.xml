@@ -10,6 +10,7 @@
     <result column="outstock_Apply_Remark" jdbcType="VARCHAR" property="outstockApplyRemark" />
     <result column="medicine_id" jdbcType="INTEGER" property="medicineId" />
     <result column="outstock_Amount" jdbcType="INTEGER" property="outstockAmount" />
+    <result column="valid" jdbcType="INTEGER" property="valid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -258,4 +259,15 @@
       outstock_Amount = #{outstockAmount,jdbcType=INTEGER}
     where outstock_apply_id = #{outstockApplyId,jdbcType=INTEGER}
   </update>
+
+
+  <select id="selectAll" parameterType="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecordExample"
+          resultMap="BaseResultMap">
+    select
+    *
+    from tb_outstock_apply_record
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
 </mapper>

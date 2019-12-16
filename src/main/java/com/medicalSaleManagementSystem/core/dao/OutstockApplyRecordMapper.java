@@ -27,4 +27,8 @@ public interface OutstockApplyRecordMapper {
     int updateByPrimaryKeySelective(OutstockApplyRecord record);
 
     int updateByPrimaryKey(OutstockApplyRecord record);
+
+    List<OutstockApplyRecord> selectAll(OutstockApplyRecordExample outstockApplyRecordExample);
+
+
 }
