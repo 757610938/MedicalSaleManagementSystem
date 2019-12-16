@@ -5,6 +5,8 @@ import com.medicalSaleManagementSystem.core.model.entity.Stock;
 import com.medicalSaleManagementSystem.core.service.StockService;
 import com.medicalSaleManagementSystem.util.Response;
 import com.medicalSaleManagementSystem.util.ResponseUtil;
+import com.medicalSaleManagementSystem.util.message.HttpStatus;
+import com.medicalSaleManagementSystem.util.message.Resp;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -62,6 +64,7 @@ public class StockController {
                 }
                 break;
             case "SEARCH_BY_MEDICINE_ID":
+
                 if (StringUtils.isNumeric(keyword)) {
                     Integer medicineId = Integer.valueOf(keyword);
                     if (StringUtils.isNumeric(warehouseBelong)) {
@@ -79,11 +82,14 @@ public class StockController {
                     queryResult = stockService.selectByMedicineCategory(keyword, null, offset, limit);
                 break;
             case "SEARCH_BY_MEDICINE_NAME":
+                System.out.println("242343434534");
                 if (StringUtils.isNumeric(warehouseBelong)) {
                     Integer whseId = Integer.valueOf(warehouseBelong);
                     queryResult = stockService.selectByMedicineName(keyword, whseId, offset, limit);
-                } else
+                    System.out.println("111111111");
+                } else{
                     queryResult = stockService.selectByMedicineName(keyword, null, offset, limit);
+                    System.out.println("2222222222");}
                 break;
             default:
                 // do other thing
@@ -214,33 +220,28 @@ public class StockController {
     /**
      * 删除一条库存信息
      *
-     * @param medicineId 药品ID
-     * @param whseId     仓库ID
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
     @ResponseBody
-    @RequestMapping(value = "/stockManage/stock/{medicineId}/{whseId}", method = RequestMethod.DELETE)
-    public Map<String, Object> deleteStockRecord(@PathVariable("medicineId") String medicineId,
-                                                 @PathVariable("whseId") String whseId) {
-        // 初始化 Response
-        Response responseContent = ResponseUtil.newResponseInstance();
-
-        String result = Response.RESPONSE_RESULT_ERROR;
-        boolean isAvailable = true;
-
-        if (StringUtils.isBlank(medicineId) || !StringUtils.isNumeric(medicineId))
-            isAvailable = false;
-        if (StringUtils.isBlank(whseId) || !StringUtils.isNumeric(whseId))
-            isAvailable = false;
-
-        if (isAvailable) {
-            result = stockService.deleteStock(Integer.valueOf(medicineId), Integer.valueOf(whseId))
-                    ? Response.RESPONSE_RESULT_SUCCESS : Response.RESPONSE_RESULT_ERROR;
+    @RequestMapping(value = "/stockManage/stock/{ids}", method = RequestMethod.DELETE)
+    public Resp deleteStockRecord(@PathVariable(value = "ids") String ids) {
+        try {
+            if (ids.contains("-")) {
+                String[] str_ids = ids.split("-");
+                List<Integer> int_ids = new ArrayList<Integer>();
+                for (String id : str_ids) {
+                    int_ids.add(Integer.parseInt(id));
+                }
+                stockService.deleteStockByStockIds(int_ids);
+            } else {
+                Integer id = Integer.parseInt(ids);
+                stockService.deleteStockByStockId(id);
+            }
+            return Resp.httpStatus(HttpStatus.OK, "删除库存信息成功");
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return Resp.httpStatus(HttpStatus.OK, "删除库存信息成功");
         }
-
-        // 设置 Response
-        responseContent.setResponseResult(result);
-        return responseContent.generateResponse();
     }
 
     /**
