@@ -27,9 +27,14 @@ public class PurchaseDtlServiceImpl implements PurchaseDtlService {
     @Override
     public int insertSelective(PurchaseDtlDTO record) {
         try {
+            if ("".equals(record.getPurOrderId())||record.getPurOrderId()==null){
+                return 0;//如果采购单的编号为空，返回0
+            }
             PurchaseDtl purchaseDtl = new PurchaseDtl();
             BeanUtilEx.copyProperties(purchaseDtl,record);
-            purchaseDtl.setPurDtlOrderId(OrderCodeFactory.getPurchaseDtlCode(TypeCastHelper.toLong(80000)));
+            //生成采购项编号
+            String PurDtlOrderId = OrderCodeFactory.getPurchaseDtlCode(TypeCastHelper.toLong(80000));
+            purchaseDtl.setPurDtlOrderId(PurDtlOrderId);
             return purchaseDtlMapper.insertSelective(purchaseDtl);//生成采购项
         }catch (Exception e){
             e.printStackTrace();

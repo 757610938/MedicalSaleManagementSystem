@@ -6,6 +6,7 @@ import com.medicalSaleManagementSystem.core.model.BO.PurchaseDtlBO;
 import com.medicalSaleManagementSystem.core.model.DTO.PurchaseDTO;
 import com.medicalSaleManagementSystem.core.model.DTO.PurchaseDtlDTO;
 import com.medicalSaleManagementSystem.core.model.entity.Purchase;
+import com.medicalSaleManagementSystem.core.model.entity.PurchaseExample;
 import com.medicalSaleManagementSystem.core.service.PurchaseDtlService;
 import com.medicalSaleManagementSystem.core.service.PurchaseService;
 import com.medicalSaleManagementSystem.util.BeanUtilEx;
@@ -45,15 +46,16 @@ public class PurchaseServiceImpl implements PurchaseService {
             }
             Purchase purchase = new Purchase();
             BeanUtilEx.copyProperties(purchase,record);
-            purchase.setPurOrderId(OrderCodeFactory.getPurchaseCode(TypeCastHelper.toLong(70000)));//生成单号
+            String purOrderId= OrderCodeFactory.getPurchaseCode(TypeCastHelper.toLong(70000));
+            purchase.setPurOrderId(purOrderId);//生成单号
             if ("".equals(purchase.getPurStatus())||purchase.getPurStatus()==null){
-                purchase.setPurStatus("未审核");//设置默认状态
+                purchase.setPurStatus("未审核");//如果为空，则设置默认状态
             }
             int i = purchaseMapper.insertSelective(purchase);
             if (i==0){
                 return  "400";
             }
-            return "200";
+            return purOrderId;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -68,9 +70,12 @@ public class PurchaseServiceImpl implements PurchaseService {
             if (result==null||"".equals(result)||result=="400"||result=="500"){
                 return  result;//采购单存入错误
             }
+            System.out.println(result);
             //遍历record.getPutDtlList()
             for (PurchaseDtlDTO purchaseDtlDTO : record.getPutDtlList()) {
-                //2. 添加采购项
+                //2. 每一项设置采购单编号
+                purchaseDtlDTO.setPurOrderId(result);
+                //3. 添加采购项
                 int i = purchaseDtlService.insertSelective(purchaseDtlDTO);
                 if (i==0){
                     return "400";
@@ -121,13 +126,50 @@ public class PurchaseServiceImpl implements PurchaseService {
         }
         return null;
     }
+     /**
+
+     *@描述 更新订单状态
+
+     *@参数  PurchaseDTO record
+
+     *@返回值  String
+
+     *@创建人  林贤钦
+
+     *@创建时间  2019/12/16
+
+     *@修改人和其它信息
+
+     */
+    @Override
+    public String updateOrderByPurOrderIdAndPurStatus(String purOrderId,String purStatus) {
+        try{
+            if ("".equals(purOrderId)||purOrderId==null){
+                return "400";//编号不存在
+            }
+            PurchaseBO purchaseBO = selectByPurOrderId(purOrderId);
+            purchaseBO.setPurStatus(purStatus);
+            Purchase purchase = new Purchase();
+            BeanUtilEx.copyProperties(purchase,purchaseBO);
+            PurchaseExample purchaseExample = new PurchaseExample();
+            PurchaseExample.Criteria criteria= purchaseExample.createCriteria();
+            int i = purchaseMapper.updateByPrimaryKey(purchase);
+            if ( i == 0){
+                return "400";
+            }
+            return "200";
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "500";
+    }
 
     @Override
     public int updateByPrimaryKeySelective(PurchaseDTO record) {
-        if (record.getPurId() == null ||record.getPurId() <= 0){
-            return 0;
-        }
         try{
+            if (record.getPurId() == null ||record.getPurId() <= 0){
+                return 0;
+            }
             Purchase purchase = new Purchase();
             BeanUtilEx.copyProperties(purchase,record);
             return purchaseMapper.updateByPrimaryKeySelective(purchase);
