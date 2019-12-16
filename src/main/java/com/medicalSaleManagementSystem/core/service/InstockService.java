@@ -4,6 +4,8 @@ import com.medicalSaleManagementSystem.core.model.entity.InstockApplyRecord;
 import com.medicalSaleManagementSystem.core.model.entity.InstockCheckRecord;
 import com.medicalSaleManagementSystem.core.model.entity.InstockRecord;
 
+import java.util.List;
+
 public interface InstockService {
 
     /**
@@ -23,4 +25,22 @@ public interface InstockService {
      * @param instockRecord
      */
     void addInstock(InstockRecord instockRecord);
+
+    /**
+     * 查找所有入库申请记录
+     * @return
+     */
+    List<InstockApplyRecord> findAllInstockApply();
+
+    /**
+     * 查找所有入库审核记录
+     * @return
+     */
+    List<InstockCheckRecord> findAllInstockCheck();
+
+    /**
+     * 查找所有入库记录
+     * @return
+     */
+    List<InstockRecord> findAllInstock();
 }

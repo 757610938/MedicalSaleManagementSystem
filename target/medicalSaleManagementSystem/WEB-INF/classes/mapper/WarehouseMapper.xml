@@ -114,9 +114,6 @@
         whse_id, whse_Name,whse_Address,whse_Tel,whse_Capacity,user_Number,gen_Time
         from tb_warehouse
         where whse_Name like #{whseName,jdbcType=VARCHAR}
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
     </select>
 
     <!--查询所有仓库，用于列表展示-->
@@ -251,7 +248,7 @@
                 whse_Tel=#{whseTel,jdbcType=VARCHAR},
             </if>
             <if test="whseCapacity != null">
-                whse_Capcity=#{whseCapacity,jdbcType=VARCHAR},
+                whse_Capacity=#{whseCapacity,jdbcType=VARCHAR},
             </if>
             <if test="userNumber != null">
                 user_Number=#{userNumber,jdbcType=VARCHAR},

@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.medicalSaleManagementSystem.core.model.VO.WarehouseVO;
 import com.medicalSaleManagementSystem.core.model.entity.Warehouse;
 import com.medicalSaleManagementSystem.core.service.WarehouseService;
+import com.medicalSaleManagementSystem.util.BeanUtilEx;
 import com.medicalSaleManagementSystem.util.message.HttpStatus;
 import com.medicalSaleManagementSystem.util.message.Resp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,9 @@ public class WarehouseController {
         return "/warehouseManage/warehouse";
     }
 
-    @ResponseBody
+
     @RequestMapping(value = "/warehouseManage/warehouse/{pageNum}/{pageSize}", method = RequestMethod.GET)
+    @ResponseBody
     public Resp warehouseList(@PathVariable(value = "pageNum") int pageNum,@PathVariable(value = "pageSize") int pageSize) {
         try {
             PageHelper.startPage(pageNum, pageSize);
@@ -42,21 +44,24 @@ public class WarehouseController {
         }
     }
 
+
+    @RequestMapping(value = "/warehouseManage/warehouse/{pageNum}/{pageSize}/{kery}", method = RequestMethod.GET)
     @ResponseBody
-    @RequestMapping(value = "/warehouseManage/warehouse/{key}/{pageNum}/{pageSize}", method = RequestMethod.GET)
     public Resp findWarehouseByFuzzySearch(@PathVariable(value = "key") String key, @PathVariable(value = "pageNum") Integer pageNum, @PathVariable(value = "pageSize") Integer pageSize) {
-        return warehouseService.findWhseByFuzzySearch(key, pageNum, pageSize);
+        try {
+            return warehouseService.findWhseByFuzzySearch(key, pageNum, pageSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
 
-    @ResponseBody
     @RequestMapping(value = "/warehouseManage/warehouse", method = RequestMethod.POST)
+    @ResponseBody
     public Resp addWarehouse(@RequestBody Warehouse warehouse) {
         try {
             warehouse.setGenTime(new Date(System.currentTimeMillis()));
-
-            System.out.println(warehouse);
             warehouseService.addWhse(warehouse);
-
             return Resp.httpStatus(HttpStatus.OK, "新增仓库成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,8 +69,8 @@ public class WarehouseController {
         }
     }
 
-    @ResponseBody
     @RequestMapping(value = "/warehouseManage/warehouse/{ids}", method = RequestMethod.DELETE)
+    @ResponseBody
     public Resp deleteWarehouse(@PathVariable(value = "ids") String ids) {
         try {
             if (ids.contains("-")) {
@@ -86,16 +91,31 @@ public class WarehouseController {
         }
     }
 
-    @ResponseBody
     @RequestMapping(value = "/warehouseManage/warehouse", method = RequestMethod.PUT)
-    public Resp updateWarehouse(@Valid WarehouseVO warehouseVO) {
+    @ResponseBody
+    public Resp updateWarehouse(@RequestBody WarehouseVO warehouseVO) {
+
         return warehouseService.updateWhse(warehouseVO);
     }
 
+    @RequestMapping(value = "/warehouseManage/warehouse/{id}", method = RequestMethod.GET)
     @ResponseBody
-    @RequestMapping(value = "/warehouseManage/warehouse", method = RequestMethod.GET)
-    public Resp findWarehouse(WarehouseVO warehouseVO) {
-        return warehouseService.findWhseById(warehouseVO);
+    public Resp findWarehouse(@PathVariable("id")Integer id) {
+
+        try {
+            Warehouse warehouse =warehouseService.findWhseByWhseId(id);
+            if(warehouse==null){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"查找仓库信息失败");
+            }
+            WarehouseVO warehouseVO = new WarehouseVO();
+            BeanUtilEx.copyProperties(warehouseVO,warehouse);
+            Map<String, Object> ext = new HashMap<>();
+            ext.put("warehouseVO", warehouseVO);
+            return Resp.httpStatus(HttpStatus.OK,"查找仓库信息成功！",ext);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"查找仓库信息失败");
     }
 
 
