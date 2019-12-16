@@ -104,6 +104,15 @@ public class StockController {
     public Map<String, Object> getStockListWithWarehouseId(@RequestParam("keyword") String keyword,
                                                            @RequestParam("searchType") String searchType, @RequestParam("warehouseBelong") String warehouseBelong,
                                                            @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
+
+
+        System.out.println("我在这里了你呢...");
+        System.out.println("key="+keyword);
+        System.out.println("searchType="+searchType);
+        System.out.println("warehouseBelong="+warehouseBelong);
+        System.out.println("offset="+offset);
+        System.out.println("limit="+limit);
+
         // 初始化 Response
         Response responseContent = ResponseUtil.newResponseInstance();
 
@@ -112,12 +121,15 @@ public class StockController {
 
         // query
         Map<String, Object> queryResult = query(searchType, keyword, warehouseBelong, offset, limit);
+        System.out.println("我到这里了呵呵呵和...");
         if (queryResult != null) {
             rows = (List<Stock>) queryResult.get("data");
             total = (long) queryResult.get("total");
-        } else
+            System.out.println("我到这里了...");
+        } else {
             rows = new ArrayList<>();
-
+            System.out.println("我到这里了哈哈哈哈...");
+        }
         responseContent.setCustomerInfo("rows", rows);
         responseContent.setResponseTotal(total);
         return responseContent.generateResponse();
