@@ -100,10 +100,10 @@ public class StockController {
      */
     @SuppressWarnings("unchecked")
     @ResponseBody
-    @RequestMapping(value = "/stockManage/stock", method = RequestMethod.GET)
-    public Map<String, Object> getStockListWithWarehouseId(@RequestParam("keyword") String keyword,
-                                                           @RequestParam("searchType") String searchType, @RequestParam("warehouseBelong") String warehouseBelong,
-                                                           @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
+    @RequestMapping(value = "/stockManage/stock/{keyword}/{searchType}/{warehouseBelong}/{offset}/{limit}", method = RequestMethod.GET)
+    public Map<String, Object> getStockListWithWarehouseId(@PathVariable(value = "keyword") String keyword,
+                                                           @PathVariable(value = "searchType") String searchType, @PathVariable(value = "warehouseBelong") String warehouseBelong,
+                                                           @PathVariable(value = "offset") int offset, @PathVariable(value = "limit") int limit) {
 
 
         System.out.println("我在这里了你呢...");
@@ -121,6 +121,7 @@ public class StockController {
 
         // query
         Map<String, Object> queryResult = query(searchType, keyword, warehouseBelong, offset, limit);
+
         System.out.println("我到这里了呵呵呵和...");
         if (queryResult != null) {
             rows = (List<Stock>) queryResult.get("data");
@@ -214,9 +215,9 @@ public class StockController {
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
     @ResponseBody
-    @RequestMapping(value = "/stockManage/stock", method = RequestMethod.DELETE)
-    public Map<String, Object> deleteStockRecord(@RequestParam("medicineId") String medicineId,
-                                                 @RequestParam("whseId") String whseId) {
+    @RequestMapping(value = "/stockManage/stock/{medicineId}/{whseId}", method = RequestMethod.DELETE)
+    public Map<String, Object> deleteStockRecord(@PathVariable("medicineId") String medicineId,
+                                                 @PathVariable("whseId") String whseId) {
         // 初始化 Response
         Response responseContent = ResponseUtil.newResponseInstance();
 
@@ -250,10 +251,10 @@ public class StockController {
      */
     @SuppressWarnings("unchecked")
     @ResponseBody
-    @RequestMapping(value = "stockList", method = RequestMethod.GET)
-    public Map<String, Object> getStorageList(@RequestParam("keyword") String keyword,
-                                              @RequestParam("searchType") String searchType, @RequestParam("offset") int offset,
-                                              @RequestParam("limit") int limit, HttpServletRequest request) {
+    @RequestMapping(value = "/stockManage/stock/{keyword}/{searchType}/{offset}/{limit}", method = RequestMethod.GET)
+    public Map<String, Object> getStockList(@PathVariable(value = "keyword") String keyword,
+                                              @PathVariable(value = "searchType") String searchType, @PathVariable(value = "offset") int offset,
+                                              @PathVariable(value = "limit") int limit, @RequestBody HttpServletRequest request) {
         // 初始化 Response
         Response responseContent = ResponseUtil.newResponseInstance();
 
