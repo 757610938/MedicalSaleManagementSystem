@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.List;
+import java.awt.*;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -22,12 +22,7 @@ public class StockServiceImplTest {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
        //2.获取业务层对象
        StockServiceImpl stockService = ac.getBean("stockServiceImpl", StockServiceImpl.class);
-        Map<String, Object> stringObjectMap = stockService.selectAll(52002, 1, 1);
-        System.out.println(stringObjectMap);
-        List<Stock> rows = (List<Stock>) stringObjectMap.get("data");
-
-            System.out.println(rows.toString());
-
+        Map<String, Object> stringObjectMap = stockService.selectAll(52002, 1, 6);
 
     }
 

@@ -7,6 +7,18 @@
     <result column="whse_id" jdbcType="INTEGER" property="whseId" />
     <result column="stock_Amount" jdbcType="INTEGER" property="stockAmount" />
   </resultMap>
+
+  <resultMap id="StockBo" type="com.medicalSaleManagementSystem.core.model.BO.StockBo">
+    <id column="stock_id" jdbcType="INTEGER" property="stockId" />
+    <result column="medicine_id" jdbcType="INTEGER" property="medicineId"/>
+    <result column="whse_id" jdbcType="INTEGER" property="whseId"/>
+    <result column="stock_Amount" jdbcType="INTEGER" property="stockAmount"/>
+    <result column="whse_Name" jdbcType="VARCHAR" property="whseName"/>
+    <result column="whse_Address" jdbcType="VARCHAR" property="whseAddress"/>
+    <result column="user_Number" jdbcType="VARCHAR" property="userNumber"/>
+    <result column="medicine_Name" jdbcType="VARCHAR" property="medicineName"/>
+    <result column="medicine_Category" jdbcType="VARCHAR" property="medicineCategory"/>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -195,14 +207,14 @@
   </update>
 
 
-  <select id="selectAllAndWhseId" resultMap="BaseResultMap">
+  <select id="selectAllAndWhseId" resultType="com.medicalSaleManagementSystem.core.model.BO.StockBo"  parameterType="java.lang.Integer">
     select
-    w.whse_Address as whseAddress,
-    w.whse_id as whseId,
-    s.stock_Amount as stockAmount,
-    m.medicine_id as medicineId,
-    m.medicine_Name as medicineName,
-    m.medicine_Category as medicineCatagory
+      w.whse_Address as whseAddress,
+      w.whse_id as whseId,
+      s.stock_Amount as stockAmount,
+      m.medicine_id as medicineId,
+      m.medicine_Name as medicineName,
+      m.medicine_Category as medicineCatagory
     from
     tb_stock s,tb_warehouse w, tb_medicine m
     where
@@ -210,11 +222,11 @@
     and
     s.whse_id = w.whse_id
     <if test="whseId != null">
-      and w.whse_id = #{whseId}
+      and w.whse_id = #{whseId,jdbcType=INTEGER}
     </if>
   </select>
 
-  <select id="selectByMedicineIdAndWhseId" resultMap="BaseResultMap">
+  <select id="selectByMedicineIdAndWhseId" resultMap="StockBo">
     SELECT
     tb_warehouse.whse_id,
     tb_stock.stock_Amount,
@@ -234,7 +246,7 @@
     </if>
   </select>
 
-  <select id="selectByMedicineNameAndWhseId" resultMap="BaseResultMap">
+  <select id="selectByMedicineNameAndWhseId" resultMap="StockBo">
     SELECT
     tb_warehouse.whse_id,
     tb_stock.stock_Amount,
@@ -252,7 +264,7 @@
     </if>
   </select>
 
-  <select id="selectByMedicineCategoryAndWhseId" resultMap="BaseResultMap">
+  <select id="selectByMedicineCategoryAndWhseId" resultMap="StockBo">
     SELECT
     tb_warehouse.whse_id,
     tb_stock.stock_Amount,
@@ -320,7 +332,7 @@
 			tb_stock.whse_id = #{whseId}
 	</delete>
 
-  <delete id="deleteByWhseIdAndMedicineId">
+  <delete id="deleteByWhseIdAndMedicineId" parameterType="java.lang.Integer">
 		delete from
 			tb_stock
 		where

@@ -7,6 +7,7 @@ import com.hazelcast.map.impl.recordstore.Storage;
 import com.medicalSaleManagementSystem.core.dao.MedicineMapper;
 import com.medicalSaleManagementSystem.core.dao.StockMapper;
 import com.medicalSaleManagementSystem.core.dao.WarehouseMapper;
+import com.medicalSaleManagementSystem.core.model.BO.StockBo;
 import com.medicalSaleManagementSystem.core.model.entity.Medicine;
 import com.medicalSaleManagementSystem.core.model.entity.Stock;
 import com.medicalSaleManagementSystem.core.model.entity.Warehouse;
@@ -51,41 +52,65 @@ public class StockServiceImpl implements StockService {
      */
     @Override
     public Map<String, Object> selectAll(Integer whseId, int offset, int limit) {
-        // 初始化结果集
-        Map<String, Object> ext = new HashMap<>();
-        List<Stock> stockList= new ArrayList<>();
-        long total = 0;
-        boolean isPagination = true;
-
-        // validate
-        if (offset < 0 || limit < 0)
-            isPagination = false;
-
-        // query
-        try {
-            if (isPagination) {
-                PageHelper.offsetPage(offset, limit);
-                stockList = stockMapper.selectAllAndWhseId(whseId);
-                if (stockList != null) {
-                    PageInfo<Stock> pageInfo = new PageInfo<>(stockList);
-                    total = pageInfo.getTotal();
-                } else
-                    stockList = new ArrayList<>();
-            } else {
-                stockList = stockMapper.selectAllAndWhseId(whseId);
-                if (stockList != null)
-                    total = stockList.size();
-                else
-                    stockList = new ArrayList<>();
-            }
-        } catch (PersistenceException e) {
-            e.printStackTrace();
+        List<StockBo> stocks = stockMapper.selectAllAndWhseId(whseId);
+        System.out.println("whseId--->"+whseId);
+        System.out.println("stockList.size()--->"+stocks.size());
+        if (stocks.size()<=0){
+            System.out.println("查询为空");
+        }
+        //System.out.println(stocks);
+        for (StockBo stock : stocks) {
+            System.out.println(stock);
         }
 
-        ext.put("data", stockList);
-        ext.put("total", total);
-        return ext;
+//        // 初始化结果集
+//        Map<String, Object> resultSet = new HashMap<>();
+//        List<Stock> stockList= new ArrayList<>();
+//        long total = 0;
+//        boolean isPagination = true;
+//
+//        // validate
+//        if (offset < 0 || limit < 0)
+//            isPagination = false;
+//
+//        // query
+//        try {
+//            if (isPagination) {
+//                PageHelper.offsetPage(offset, limit);
+//                stockList = stockMapper.selectAllAndWhseId(whseId);
+//                System.out.println("whseId--->"+whseId);
+//                System.out.println("stockList.size()--->"+stockList.size());
+//                if (stockList.size()<=0){
+//                    System.out.println("查询为空");
+//                    for (Stock stock : stockList) {
+//                        System.out.println(stock);
+//                    }
+//                }
+//                if (stockList != null) {
+//                    PageInfo<Stock> pageInfo = new PageInfo<>(stockList);
+//                    total = pageInfo.getTotal();
+//                    for (Stock stock : stockList) {
+//                        System.out.println(stock);
+//                    }
+//                } else
+//                    stockList = new ArrayList<>();
+//            } else {
+//                stockList = stockMapper.selectAllAndWhseId(whseId);
+//                if (stockList != null)
+//                    total = stockList.size();
+//                else
+//                    stockList = new ArrayList<>();
+//            }
+//        } catch (PersistenceException e) {
+//            e.printStackTrace();
+//        }
+//
+//        resultSet.put("data", stockList);
+//        resultSet.put("total", total);
+  //      return resultSet;
+        return null;
     }
+
 
     /**
      * 返回指定药品ID的库存记录
@@ -109,7 +134,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public Map<String, Object> selectByMedicineID(Integer medicineId, Integer whseId, int offset, int limit) {
         // 初始化结果集
-        Map<String, Object> ext = new HashMap<>();
+        Map<String, Object> resultSet = new HashMap<>();
         List<Stock> stockList=new ArrayList<>();
         long total = 0;
         boolean isPagination = true;
@@ -139,9 +164,9 @@ public class StockServiceImpl implements StockService {
             e.printStackTrace();
         }
 
-        ext.put("data", stockList);
-        ext.put("total", total);
-        return ext;
+        resultSet.put("data", stockList);
+        resultSet.put("total", total);
+        return resultSet;
     }
 
     /**
@@ -166,7 +191,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public Map<String, Object> selectByMedicineName(String medicineName, Integer whseId, int offset, int limit) {
         // 初始化结果集
-        Map<String, Object> ext = new HashMap<>();
+        Map<String, Object> resultSet = new HashMap<>();
         List<Stock> stockList=new ArrayList<>();
         long total = 0;
         boolean isPagination = true;
@@ -196,9 +221,9 @@ public class StockServiceImpl implements StockService {
             e.printStackTrace();
         }
 
-        ext.put("data", stockList);
-        ext.put("total", total);
-        return ext;
+        resultSet.put("data", stockList);
+        resultSet.put("total", total);
+        return resultSet;
     }
 
     /**
@@ -223,7 +248,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public Map<String, Object> selectByMedicineCategory(String medicineCategory, Integer whseId, int offset, int limit) {
         // 初始化结果集
-        Map<String, Object> ext = new HashMap<>();
+        Map<String, Object> resultSet = new HashMap<>();
         List<Stock> stockList=new ArrayList<>();
         long total = 0;
         boolean isPaginatin = true;
@@ -253,9 +278,9 @@ public class StockServiceImpl implements StockService {
             e.printStackTrace();
         }
 
-        ext.put("data", stockList);
-        ext.put("total", total);
-        return ext;
+        resultSet.put("data", stockList);
+        resultSet.put("total", total);
+        return resultSet;
     }
 
     /**

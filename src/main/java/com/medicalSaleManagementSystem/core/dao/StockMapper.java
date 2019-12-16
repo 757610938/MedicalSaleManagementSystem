@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.dao;
 
+import com.medicalSaleManagementSystem.core.model.BO.StockBo;
 import com.medicalSaleManagementSystem.core.model.entity.Stock;
 import com.medicalSaleManagementSystem.core.model.entity.StockExample;
 import java.util.List;
@@ -33,7 +34,7 @@ public interface StockMapper {
      * 选择所有的库存信息
      * @return 返回所有的库存信息
      */
-    List<Stock> selectAllAndWhseId(@Param("whseId") Integer whseId);
+    List<StockBo> selectAllAndWhseId(@Param("whseId") Integer whseId);
 
     /**
      * 选择指定药品ID和仓库ID的库存信息
