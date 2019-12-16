@@ -47,7 +47,7 @@ public class PurchaseController {
      */
     @RequestMapping( value = "/purchase", method = RequestMethod.POST )
     @ResponseBody
-    public Resp insertSelective(@RequestParam PurchaseVO purchaseVO){
+    public Resp insertSelective(@RequestBody PurchaseVO purchaseVO){
         try{
             System.out.println("测试打印----》"+purchaseVO);
             if (purchaseVO.getPutDtlList().size()<= 0){

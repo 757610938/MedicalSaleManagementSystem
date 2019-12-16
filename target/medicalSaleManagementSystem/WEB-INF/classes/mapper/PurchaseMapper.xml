@@ -118,7 +118,7 @@
         from tb_purchase
         where pur_id = #{purId,jdbcType=INTEGER}
     </select>
-    <select id="selectByPurOrderId" parameterType="java.lang.String" resultMap="purchaseAndDtl">
+    <select id="selectPurAndDtlByPurOrderId" parameterType="java.lang.String" resultMap="purchaseAndDtl">
         SELECT
             tb_purchase.pur_id,
             tb_purchase.pur_Order_Id,
@@ -140,6 +140,20 @@
             tb_purchase
         INNER JOIN tb_purchase_dtl ON tb_purchase_dtl.pur_Order_Id = tb_purchase.pur_Order_Id
          where tb_purchase.pur_Order_Id = #{purOrderId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectPurByPurOrderId" parameterType="java.lang.String" resultMap="purchaseAndDtl">
+        SELECT
+            pur_id,
+            pur_Order_Id,
+            supplier_id,
+            user_Number,
+            pur_Total_Money,
+            pur_Status,
+            Warehouse_id,
+            pur__Name
+        FROM
+            tb_purchase
+         where pur_Order_Id = #{purOrderId,jdbcType=VARCHAR}
     </select>
     <select id="getAllPurOrderId"  resultType="java.lang.Integer">
     SELECT
