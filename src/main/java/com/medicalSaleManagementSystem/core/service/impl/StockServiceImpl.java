@@ -87,6 +87,7 @@ public class StockServiceImpl implements StockService {
         resultSet.put("data", stockBoList);
         resultSet.put("total", total);
         System.out.println(resultSet);
+        System.out.println(resultSet);
         return resultSet;
     }
 
