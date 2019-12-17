@@ -163,4 +163,23 @@ public class SupplierController {
         //500
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
+    /*
+     * 功能描述: <br>
+     * 〈〉获取所有供应商编号
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/17 16:21
+     */
+    @RequestMapping ( value = "/suppliers", method = RequestMethod.GET)
+    @ResponseBody
+    public Resp getAllPrimaryKey(){
+        try {
+            List<Integer> list = supplierService.getAllPrimaryKey();
+            return Resp.httpStatus(HttpStatus.OK,"获取所有供应商编号成功",list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
 }

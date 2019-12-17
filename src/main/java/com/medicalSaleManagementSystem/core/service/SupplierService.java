@@ -62,5 +62,5 @@ public interface SupplierService {
      * @Author: 林贤钦
      * @Date: 2019/12/17 15:37
      */
-    List<Supplier> vagueSelectByPrimaryKey(Integer primaryKey);
+    List<Integer> getAllPrimaryKey();
 }

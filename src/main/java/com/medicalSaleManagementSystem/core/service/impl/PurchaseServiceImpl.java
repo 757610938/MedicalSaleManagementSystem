@@ -30,7 +30,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     private PurchaseDtlService purchaseDtlService;
     /*
      * 功能描述: <br>
-     * 〈〉
+     * 〈〉向数据库存入采购单信息
      * @Param:
      * @Return: 
      * @Author: 林贤钦
@@ -63,18 +63,11 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public String makePurchaseOrder(PurchaseBO record) {
         try {
-            //1.创建采购单。
-            String result = insertSelective(record);
-            Double purTotalMoney=0.0;
-            for (PurchaseDtlBO purchaseDtlBO : record.getPurDtlList()) {
-                //累加金额
-                purTotalMoney= purTotalMoney+purchaseDtlBO.getPurDtlAmount()*purchaseDtlBO.getPurDtlPrice();
-            }
-            record.setPurTotalMoney(purTotalMoney);//计算采购金额
+            String result = insertSelective(record); //1.创建采购单。
+            record.setPurTotalMoney(calculatedAmount(record));//计算采购金额
             if (result==null||"".equals(result)||result=="400"||result=="500"){
                 return  result;//采购单存入错误
             }
-            System.out.println(result);
             //遍历record.getPutDtlList()
             for (PurchaseDtlBO purchaseDtlBO : record.getPurDtlList()) {
                 //3. 每一项设置采购单编号
@@ -90,6 +83,23 @@ public class PurchaseServiceImpl implements PurchaseService {
             e.printStackTrace();
         }
         return "500";
+    }
+
+    /*
+     * 功能描述: <br>
+     * 〈〉计算采购单总金额
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/17 21:02
+     */
+    private Double calculatedAmount(PurchaseBO record){
+        Double purTotalMoney=0.0;
+        for (PurchaseDtlBO purchaseDtlBO : record.getPurDtlList()) {
+            //累加金额
+            purTotalMoney= purTotalMoney+purchaseDtlBO.getPurDtlAmount()*purchaseDtlBO.getPurDtlPrice();
+        }
+        return purTotalMoney;
     }
 
     @Override
@@ -199,6 +209,35 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
+    public String updatePurOrderAndDtl(PurchaseBO record) {
+        try {
+            if ("".equals(record.getPurOrderId())||record.getPurOrderId()==null){
+                return "400";//编号不存在
+            }
+            record.setPurTotalMoney(calculatedAmount(record));//计算采购金额
+            PurchaseExample purchaseExample = new PurchaseExample();
+            PurchaseExample.Criteria criteria = purchaseExample.createCriteria();
+            Purchase purchase = new Purchase();
+            BeanUtilEx.copyProperties(purchase,record);
+            int i = purchaseMapper.updateByPrimaryKey(purchase);//更新数据库的采购单
+            if ( i == 0){
+                return "400";
+            }
+            for (PurchaseDtlBO purchaseDtlBO : record.getPurDtlList()) {
+                //遍历更新数据库的采购项
+                i=purchaseDtlService.updateByPrimaryKeySelective(purchaseDtlBO);
+                if ( i == 0){
+                    return "400";
+                }
+            }
+            return "200";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "500";
+    }
+
+    @Override
     public List<Purchase> getAll() {
         return purchaseMapper.getAll();
     }
@@ -216,6 +255,11 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public List<PurchaseBO> getAllByUserNumber(String userNumber) {
         return purchaseMapper.getAllByUserNumber("%"+userNumber+"%");
+    }
+
+    @Override
+    public List<PurchaseBO> getAllByPurStatusAndKeyword(String purStatus, String Keyword) {
+        return purchaseMapper.getAllByPurStatusAndKeyword(purStatus,"%"+Keyword+"%");
     }
 
 }

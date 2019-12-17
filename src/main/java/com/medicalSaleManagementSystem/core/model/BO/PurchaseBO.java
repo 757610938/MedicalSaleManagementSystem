@@ -113,4 +113,21 @@ public class PurchaseBO {
     public void setPurDtlList(List<PurchaseDtlBO> purDtlList) {
         this.purDtlList = purDtlList;
     }
+
+    @Override
+    public String toString() {
+        return "PurchaseBO{" +
+                "purDtlList=" + purDtlList +
+                ", purId=" + purId +
+                ", purOrderId='" + purOrderId + '\'' +
+                ", purName='" + purName + '\'' +
+                ", supplierId=" + supplierId +
+                ", userNumber='" + userNumber + '\'' +
+                ", purTotalMoney=" + purTotalMoney +
+                ", purStatus='" + purStatus + '\'' +
+                ", warehouseId=" + warehouseId +
+                ", purDate=" + purDate +
+                ", purRemark='" + purRemark + '\'' +
+                '}';
+    }
 }

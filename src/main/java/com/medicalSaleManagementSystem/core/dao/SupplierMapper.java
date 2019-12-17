@@ -31,4 +31,5 @@ public interface SupplierMapper {
 
     int updateByPrimaryKey(Supplier record);
 
+    List<Integer> getAllPrimaryKey();
 }

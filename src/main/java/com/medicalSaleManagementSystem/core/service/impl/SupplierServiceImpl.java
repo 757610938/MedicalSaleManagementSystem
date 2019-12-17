@@ -77,7 +77,8 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public List<Supplier> vagueSelectByPrimaryKey(Integer primaryKey) {
-        return null;
+    public List<Integer> getAllPrimaryKey() {
+        return supplierMapper.getAllPrimaryKey();
     }
+
 }

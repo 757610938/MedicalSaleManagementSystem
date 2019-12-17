@@ -54,7 +54,7 @@ public class PurchaseController {
     }
     /*
      * 功能描述: <br>
-     * 〈〉提交审核采购单信息
+     * 〈〉保存并且提交审核采购单信息
      * @Param: [purchaseVO]
      * @Return: com.medicalSaleManagementSystem.util.message.Resp
      * @Author: 林贤钦
@@ -81,6 +81,43 @@ public class PurchaseController {
         }
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
+    /*
+     * 功能描述: <br>
+     * 〈〉审核采购单
+     * @Param: examineResult--->采购单状态，purchaseBO--->采购单详情
+     * @Return: com.medicalSaleManagementSystem.util.message.Resp
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 15:24
+     */
+    @RequestMapping( value = "purchase/examine/{examineResult}", method = RequestMethod.POST )
+    @ResponseBody
+    public Resp examinePur(@RequestBody(required = false) PurchaseBO purchaseBO,@PathVariable String examineResult){
+        try{
+            if (examineResult==null||"".equals(examineResult)){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"审核采购单失败");
+            }
+            //修改采购单状态为"未审核状态"
+            purchaseBO.setPurStatus(examineResult);
+            //更新采购单
+            String s = purchaseService.updatePurOrderAndDtl(purchaseBO);
+            if (s!="200"){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"审核采购单失败");
+            }
+            return Resp.httpStatus(HttpStatus.OK,"提交审核采购单成功！");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+
+    /*
+     * 功能描述: <br>
+     * 〈〉将采购单存入数据库
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/17 20:53
+     */
     private String insertSelective(PurchaseBO purchaseBO){
         if (purchaseBO.getPurDtlList().size()<= 0){
             return "400";
@@ -162,7 +199,7 @@ public class PurchaseController {
     }
     /*
      * 功能描述: <br>
-     * 〈〉提交审核订单
+     * 〈〉；  r提交审核订单
      * @Param:
      * @Return:
      * @Author: 林贤钦
@@ -233,7 +270,7 @@ public class PurchaseController {
     }
     /*
      * 功能描述: <br>
-     * 〈〉获取该员工的采购单编号
+     * 〈〉获取该员工的采购单
      * @Param:
      * @Return:
      * @Author: 林贤钦
@@ -246,9 +283,36 @@ public class PurchaseController {
             //设置现在的页数为pageNum，显示的条数为pageSize条
             PageHelper.startPage(pageNum, pageSize);
             List<PurchaseBO> purchaseList = purchaseService.getAllByUserNumber(userNumber);
-
             if (purchaseList.size()<=0){
                 return  Resp.httpStatus(HttpStatus.BAD_REQUEST,"查询失败");
+            }
+            PageInfo<PurchaseBO> pageInfo  = new PageInfo<>(purchaseList);
+            return Resp.httpStatus(HttpStatus.OK,"查询成功！",pageInfo);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //500
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+
+    /*
+     * 功能描述: <br>
+     * 〈〉获取该员工的采购单
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/15 22:18
+     */
+    @RequestMapping ( value = "/purchases/{pageNum}/{pageSize}/{purStatus}/{Keyword}", method = RequestMethod.GET )
+    @ResponseBody
+    public Resp getAllByPurStatusAndKeyword(@PathVariable String purStatus,@PathVariable int pageNum ,
+                                            @PathVariable int pageSize,@PathVariable String Keyword){
+        try{
+            //设置现在的页数为pageNum，显示的条数为pageSize条A
+            PageHelper.startPage(pageNum, pageSize);
+            List<PurchaseBO> purchaseList = purchaseService.getAllByPurStatusAndKeyword(purStatus,Keyword);
+            if (purchaseList.size()<=0){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"没有数据！");
             }
             PageInfo<PurchaseBO> pageInfo  = new PageInfo<>(purchaseList);
             return Resp.httpStatus(HttpStatus.OK,"查询成功！",pageInfo);

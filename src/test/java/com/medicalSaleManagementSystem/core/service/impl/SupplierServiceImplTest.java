@@ -33,6 +33,9 @@ public class SupplierServiceImplTest {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         //2.获取业务层对象
         SupplierServiceImpl supplierService = ac.getBean("supplierServiceImpl", SupplierServiceImpl.class);
-
+        List<Integer> allPrimaryKey = supplierService.getAllPrimaryKey();
+        for (Integer integer : allPrimaryKey) {
+            System.out.println(integer);
+        }
     }
 }

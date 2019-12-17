@@ -98,6 +98,15 @@ public interface PurchaseService {
     int updateByPrimaryKeySelective(PurchaseBO record);
     /*
      * 功能描述: <br>
+     * 〈〉更新采购单《包含采购项》
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/17 20:57
+     */
+    String updatePurOrderAndDtl(PurchaseBO record);
+    /*
+     * 功能描述: <br>
      * 〈查询所有采购单信息〉
      * @Param:
      * @Return: List<Purchase>
@@ -133,5 +142,5 @@ public interface PurchaseService {
      */
     List<PurchaseBO>  getAllByUserNumber(String userNumber);
 
-
+    List<PurchaseBO> getAllByPurStatusAndKeyword(String purStatus,String Keyword);
 }

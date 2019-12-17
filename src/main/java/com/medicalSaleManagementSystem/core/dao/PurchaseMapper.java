@@ -40,4 +40,6 @@ public interface PurchaseMapper {
     PurchaseBO selectPurAndDtlByPurOrderId(String purOrderId);
 
     PurchaseBO selectPurByPurOrderId(String purOrderId);
+
+    List<PurchaseBO> getAllByPurStatusAndKeyword(@Param("purStatus")String purStatus,@Param("Keyword") String Keyword);
 }
