@@ -47,13 +47,20 @@ public interface SupplierService {
     List<Supplier> getAll();
     /*
      * 功能描述: <br>
-     * 〈〉
+     * 〈〉通过模糊查询名字获取供应商信息
      * @Param:
      * @Return: List<Supplier>
      * @Author: 林贤钦
      * @Date: 2019/12/12 21:35
      */
     List<Supplier> vagueSelectByPrimaryName(String name);
-
-
+    /*
+     * 功能描述: <br>
+     * 〈〉模糊查询id获取供应商信息
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/17 15:37
+     */
+    List<Supplier> vagueSelectByPrimaryKey(Integer primaryKey);
 }

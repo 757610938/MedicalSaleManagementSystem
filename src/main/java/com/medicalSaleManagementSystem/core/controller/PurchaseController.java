@@ -186,7 +186,7 @@ public class PurchaseController {
 
     /*
      * 功能描述: <br>
-     * 〈〉获取所有采购单id
+     * 〈〉获取所有采购单编号
      * @Param:
      * @Return:
      * @Author: 林贤钦

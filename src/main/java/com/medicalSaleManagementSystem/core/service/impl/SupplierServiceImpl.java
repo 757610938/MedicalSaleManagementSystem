@@ -75,4 +75,9 @@ public class SupplierServiceImpl implements SupplierService {
         criteria.andSupplierNameLike("%"+name+"%");
         return supplierMapper.selectByExample(supplierExample);
     }
+
+    @Override
+    public List<Supplier> vagueSelectByPrimaryKey(Integer primaryKey) {
+        return null;
+    }
 }
