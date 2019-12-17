@@ -22,9 +22,9 @@ public class OutstockServiceImplTest {
         OutstockServiceImpl outstockService = ac.getBean("outstockServiceImpl", OutstockServiceImpl.class);
         OutstockApplyRecord outstockApply=new OutstockApplyRecord();
         outstockApply.setOutstockAmount(100);
-        outstockApply.setMedicineId(1000002);
-        outstockApply.setUserNumber(04171225);
-        outstockApply.setOutstockApplyRemark("请按时...");
+        outstockApply.setMedicineId(1000003);
+        outstockApply.setUserNumber(2323);
+        outstockApply.setOutstockApplyRemark("ssasfas...");
         outstockApply.setOutstockApplyCategory("销售出库");
         outstockService.addOutstock(outstockApply);
     }

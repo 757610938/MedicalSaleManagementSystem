@@ -68,11 +68,13 @@ public class PurchaseController {
             if (result=="400"||result=="500"){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"增加采购单失败");
             }
+
             //修改采购单状态为"未审核状态"
             String status = purchaseService.updateOrderByPurOrderIdAndPurStatus(result, "审核中");
             if (status != "200"){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"提交审核采购单失败");
             }
+
             return Resp.httpStatus(HttpStatus.OK,"提交审核采购单成功！");
         }catch (Exception e){
             e.printStackTrace();
@@ -244,6 +246,7 @@ public class PurchaseController {
             //设置现在的页数为pageNum，显示的条数为pageSize条
             PageHelper.startPage(pageNum, pageSize);
             List<PurchaseBO> purchaseList = purchaseService.getAllByUserNumber(userNumber);
+
             if (purchaseList.size()<=0){
                 return  Resp.httpStatus(HttpStatus.BAD_REQUEST,"查询失败");
             }

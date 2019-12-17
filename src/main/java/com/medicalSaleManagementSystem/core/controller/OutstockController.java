@@ -11,12 +11,13 @@ import com.medicalSaleManagementSystem.util.message.HttpStatus;
 import com.medicalSaleManagementSystem.util.message.Resp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
 
-@RequestMapping
+@Controller
 @Scope(value = "prototype")
 public class OutstockController {
 
@@ -32,7 +33,12 @@ public class OutstockController {
 
     @RequestMapping(value = "/outstockManage/outstock", method = RequestMethod.POST)
     @ResponseBody
-    public Resp addWarehouse(@RequestBody OutstockApplyRecord outstockApply){
+    public Resp addWarehouse(@RequestBody(required = false) OutstockApplyRecord outstockApply){
+        System.out.println(outstockApply);
+        if (outstockApply==null){
+            System.out.println("封装失败");
+            return Resp.httpStatus(HttpStatus.BAD_REQUEST, "出库申请表生成失败");
+        }
         try {
             outstockApply.setOutstockTime(new Date(System.currentTimeMillis()));
             outstockService.addOutstock(outstockApply);
@@ -45,15 +51,15 @@ public class OutstockController {
 
     @RequestMapping(value = "/outstockManage/outstock/{pageNum}/{pageSize}", method = RequestMethod.GET)
     @ResponseBody
-    public Resp warehouseList(@PathVariable(value = "pageNum") int pageNum, @PathVariable(value = "pageSize") int pageSize) {
+    public Resp warehouseList(@PathVariable int pageNum, @PathVariable int pageSize) {
         try {
             PageHelper.startPage(pageNum, pageSize);
             List<OutstockApplyRecord> outstockApplyRecordList = outstockService.findAllOutstockApply();
             PageInfo pageInfo = new PageInfo(outstockApplyRecordList, 5);
-            return Resp.httpStatus(HttpStatus.OK, "仓库列表更新成功", pageInfo);
+            return Resp.httpStatus(HttpStatus.OK, "入库申请单列表更新成功", pageInfo);
         } catch (Exception e) {
             e.printStackTrace();
-            return Resp.httpStatus(HttpStatus.BAD_REQUEST, "仓库列表更新失败");
+            return Resp.httpStatus(HttpStatus.BAD_REQUEST, "入库申请单列表更新失败");
         }
     }
 
