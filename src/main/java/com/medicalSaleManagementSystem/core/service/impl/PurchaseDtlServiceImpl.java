@@ -2,6 +2,7 @@ package com.medicalSaleManagementSystem.core.service.impl;
 
 import com.medicalSaleManagementSystem.core.dao.PurchaseDtlMapper;
 import com.medicalSaleManagementSystem.core.dao.PurchaseDtlStatusMapper;
+import com.medicalSaleManagementSystem.core.model.BO.PurchaseDtlBO;
 import com.medicalSaleManagementSystem.core.model.DTO.PurchaseDtlDTO;
 import com.medicalSaleManagementSystem.core.model.entity.PurchaseDtl;
 import com.medicalSaleManagementSystem.core.service.MedicineService;
@@ -25,7 +26,7 @@ public class PurchaseDtlServiceImpl implements PurchaseDtlService {
     private PurchaseDtlMapper purchaseDtlMapper;
 
     @Override
-    public int insertSelective(PurchaseDtlDTO record) {
+    public int insertSelective(PurchaseDtlBO record) {
         try {
             if ("".equals(record.getPurOrderId())||record.getPurOrderId()==null){
                 return 0;//如果采购单的编号为空，返回0
@@ -53,7 +54,7 @@ public class PurchaseDtlServiceImpl implements PurchaseDtlService {
     }
 
     @Override
-    public int updateByPrimaryKeySelective(PurchaseDtlDTO record) {
+    public int updateByPrimaryKeySelective(PurchaseDtlBO record) {
         if (record.getPurDtlId()== null || record.getPurDtlId() <= 0){
             return 0;
         }

@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class PurchaseDTO {
-    private List<PurchaseDtlDTO> putDtlList;
+    private List<PurchaseDtlDTO> purDtlList;
 
     private Integer purId;
 
@@ -108,18 +108,18 @@ public class PurchaseDTO {
         this.purRemark = purRemark == null ? null : purRemark.trim();
     }
 
-    public List<PurchaseDtlDTO> getPutDtlList() {
-        return putDtlList;
+    public List<PurchaseDtlDTO> getPurDtlList() {
+        return purDtlList;
     }
 
-    public void setPutDtlList(List<PurchaseDtlDTO> putDtlList) {
-        this.putDtlList = putDtlList;
+    public void setPurDtlList(List<PurchaseDtlDTO> purDtlList) {
+        this.purDtlList = purDtlList;
     }
 
     @Override
     public String toString() {
         return "PurchaseDTO{" +
-                "putDtlList=" + putDtlList +
+                "putDtlList=" + purDtlList +
                 ", purId=" + purId +
                 ", purOrderId='" + purOrderId + '\'' +
                 ", purName='" + purName + '\'' +

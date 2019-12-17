@@ -29,22 +29,6 @@ public class PurchaseServiceImplTest {
         //2.获取业务层对象
         PurchaseServiceImpl purchaseService = ac.getBean("purchaseServiceImpl", PurchaseServiceImpl.class);
 
-        PurchaseDTO purchaseDTO =  new PurchaseDTO();
-        purchaseDTO.setPurName("测试");
-        purchaseDTO.setSupplierId(200000);
-        purchaseDTO.setUserNumber("04171213");
-        purchaseDTO.setPurTotalMoney(4564654.0);
-
-        PurchaseDtlDTO purchaseDtlDTO = new PurchaseDtlDTO();
-        purchaseDtlDTO.setMedicineId(1000001);
-        purchaseDtlDTO.setMedicineName("龟龙中风丸");
-
-        List<PurchaseDtlDTO> list = new ArrayList<>();
-        list.add(purchaseDtlDTO);
-        purchaseDTO.setPutDtlList(list);
-        System.out.println(purchaseDTO);
-        String s = purchaseService.makePurchaseOrder(purchaseDTO);
-        System.out.println(s);
 
     }
 }

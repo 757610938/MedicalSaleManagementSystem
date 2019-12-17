@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class PurchaseVO {
-    private List<PurchaseDtlVO> putDtlList;
+    private List<PurchaseDtlVO> purDtlList;
 
     private Integer purId;
 
@@ -108,12 +108,12 @@ public class PurchaseVO {
         this.purRemark = purRemark == null ? null : purRemark.trim();
     }
 
-    public List<PurchaseDtlVO> getPutDtlList() {
-        return putDtlList;
+    public List<PurchaseDtlVO> getPurDtlList() {
+        return purDtlList;
     }
 
-    public void setPutDtlList(List<PurchaseDtlVO> putDtlList) {
-        this.putDtlList = putDtlList;
+    public void setPurDtlList(List<PurchaseDtlVO> purDtlList) {
+        this.purDtlList = purDtlList;
     }
 
     @Override
@@ -129,7 +129,7 @@ public class PurchaseVO {
                 ", warehouseId=" + warehouseId +
                 ", purDate=" + purDate +
                 ", purRemark='" + purRemark + '\'' +
-                ", putDtlList=" + putDtlList +
+                ", putDtlList=" + purDtlList +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.service;
 
+import com.medicalSaleManagementSystem.core.model.BO.PurchaseDtlBO;
 import com.medicalSaleManagementSystem.core.model.DTO.PurchaseDtlDTO;
 import com.medicalSaleManagementSystem.core.model.entity.PurchaseDtl;
 
@@ -20,7 +21,7 @@ public interface PurchaseDtlService {
      * @Author: 林贤钦
      * @Date: 2019/12/14 21:12
      */
-    int insertSelective( PurchaseDtlDTO record);
+    int insertSelective( PurchaseDtlBO record);
     /*
      * 功能描述: <br>
      * 〈〉删除采购项
@@ -38,7 +39,7 @@ public interface PurchaseDtlService {
      * @Author: 林贤钦
      * @Date: 2019/12/14 21:30
      */
-    int updateByPrimaryKeySelective(PurchaseDtlDTO record);
+    int updateByPrimaryKeySelective(PurchaseDtlBO record);
     /*
      * 功能描述: <br>
      * 〈〉查询采购项

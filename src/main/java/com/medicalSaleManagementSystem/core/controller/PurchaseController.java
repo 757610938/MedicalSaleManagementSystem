@@ -2,26 +2,17 @@ package com.medicalSaleManagementSystem.core.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.hazelcast.nio.tcp.spinning.SpinningOutputThread;
-import com.medicalSaleManagementSystem.core.model.BO.MedicineBO;
 import com.medicalSaleManagementSystem.core.model.BO.PurchaseBO;
-import com.medicalSaleManagementSystem.core.model.DTO.MedicineDTO;
-import com.medicalSaleManagementSystem.core.model.DTO.PurchaseDTO;
-import com.medicalSaleManagementSystem.core.model.VO.MedicineVO;
 import com.medicalSaleManagementSystem.core.model.VO.PurchaseVO;
-import com.medicalSaleManagementSystem.core.model.entity.Medicine;
 import com.medicalSaleManagementSystem.core.model.entity.Purchase;
 import com.medicalSaleManagementSystem.core.service.PurchaseService;
 import com.medicalSaleManagementSystem.util.BeanUtilEx;
-import com.medicalSaleManagementSystem.util.OrderCodeFactory;
-import com.medicalSaleManagementSystem.util.TypeCastHelper;
 import com.medicalSaleManagementSystem.util.message.HttpStatus;
 import com.medicalSaleManagementSystem.util.message.Resp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +30,7 @@ public class PurchaseController {
     private PurchaseService purchaseService;
     /*
      * 功能描述: <br>
-     * 〈〉增加采购单信息
+     * 〈〉保存采购单信息
      * @Param: [purchaseVO]
      * @Return: com.medicalSaleManagementSystem.util.message.Resp
      * @Author: 林贤钦
@@ -47,26 +38,53 @@ public class PurchaseController {
      */
     @RequestMapping( value = "/purchase", method = RequestMethod.POST )
     @ResponseBody
-    public Resp insertSelective(@RequestBody PurchaseVO purchaseVO){
+    public Resp savePur(@RequestBody(required = false) PurchaseBO purchaseBO){
+        System.out.println("保存采购单");
+        System.out.println(purchaseBO);
         try{
-            System.out.println("测试打印----》"+purchaseVO);
-            if (purchaseVO.getPutDtlList().size()<= 0){
-                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"采购项不能为空");
-            }
-            PurchaseDTO purchaseDTO=new PurchaseDTO();
-            BeanUtilEx.copyProperties(purchaseDTO,purchaseVO);//转化实体类
-            String result = purchaseService.makePurchaseOrder(purchaseDTO);//调用service方法存入采购单
-            if (result!="200"){
+            String result = insertSelective(purchaseBO);
+            if (result=="400"||result=="500"){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"增加采购单失败");
             }
             return Resp.httpStatus(HttpStatus.OK,"增加采购单成功！");
         }catch (Exception e){
             e.printStackTrace();
         }
-        //500
         return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
     }
-
+    /*
+     * 功能描述: <br>
+     * 〈〉提交审核采购单信息
+     * @Param: [purchaseVO]
+     * @Return: com.medicalSaleManagementSystem.util.message.Resp
+     * @Author: 林贤钦
+     * @Date: 2019/12/14 15:24
+     */
+    @RequestMapping( value = "purchase/submitPur", method = RequestMethod.POST )
+    @ResponseBody
+    public Resp submitPur(@RequestBody(required = false) PurchaseBO purchaseBO){
+        try{
+            String result = insertSelective(purchaseBO);
+            if (result=="400"||result=="500"){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"增加采购单失败");
+            }
+            //修改采购单状态为"未审核状态"
+            String status = purchaseService.updateOrderByPurOrderIdAndPurStatus(result, "审核中");
+            if (status != "200"){
+                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"提交审核采购单失败");
+            }
+            return Resp.httpStatus(HttpStatus.OK,"提交审核采购单成功！");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Resp.httpStatus(HttpStatus.INTERNAL_SERVER_ERROR,"系统内部错误");
+    }
+    private String insertSelective(PurchaseBO purchaseBO){
+        if (purchaseBO.getPurDtlList().size()<= 0){
+            return "400";
+        }
+        return  purchaseService.makePurchaseOrder(purchaseBO);//调用service方法存入采购单
+    }
     /*
      * 功能描述: <br>
      * 〈〉通过purOrderId查找采购单信息
@@ -127,11 +145,9 @@ public class PurchaseController {
      */
     @RequestMapping ( value = "/purchase", method = RequestMethod.PUT )
     @ResponseBody
-    public Resp updateByPrimaryKeySelective(@RequestBody PurchaseVO purchaseVO){
+    public Resp updateByPrimaryKeySelective(@RequestBody PurchaseBO purchaseBO){
         try{
-            PurchaseDTO purchaseDTO=new PurchaseDTO();
-            BeanUtilEx.copyProperties(purchaseDTO,purchaseVO);//转化实体类
-            int i = purchaseService.updateByPrimaryKeySelective(purchaseDTO);//调用service方法更新药品信息
+            int i = purchaseService.updateByPrimaryKeySelective(purchaseBO);//调用service方法更新药品信息
             if(i==0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"更新采购单信息失败");
             }

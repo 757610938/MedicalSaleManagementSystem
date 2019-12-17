@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class PurchaseBO {
-    private List<PurchaseDtlBO> putDtlList;
+    private List<PurchaseDtlBO> purDtlList;
 
     private Integer purId;
 
@@ -106,11 +106,11 @@ public class PurchaseBO {
         this.purRemark = purRemark == null ? null : purRemark.trim();
     }
 
-    public List<PurchaseDtlBO> getPutDtlList() {
-        return putDtlList;
+    public List<PurchaseDtlBO> getPurDtlList() {
+        return purDtlList;
     }
 
-    public void setPutDtlList(List<PurchaseDtlBO> putDtlList) {
-        this.putDtlList = putDtlList;
+    public void setPurDtlList(List<PurchaseDtlBO> purDtlList) {
+        this.purDtlList = purDtlList;
     }
 }

@@ -3,8 +3,6 @@ package com.medicalSaleManagementSystem.core.service.impl;
 import com.medicalSaleManagementSystem.core.dao.PurchaseMapper;
 import com.medicalSaleManagementSystem.core.model.BO.PurchaseBO;
 import com.medicalSaleManagementSystem.core.model.BO.PurchaseDtlBO;
-import com.medicalSaleManagementSystem.core.model.DTO.PurchaseDTO;
-import com.medicalSaleManagementSystem.core.model.DTO.PurchaseDtlDTO;
 import com.medicalSaleManagementSystem.core.model.entity.Purchase;
 import com.medicalSaleManagementSystem.core.model.entity.PurchaseExample;
 import com.medicalSaleManagementSystem.core.service.PurchaseDtlService;
@@ -39,7 +37,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      * @Date: 2019/12/15 13:43
      */
     @Override
-    public String insertSelective(PurchaseDTO record) {
+    public String insertSelective(PurchaseBO record) {
         try {
             if("".equals(record.getUserNumber())||record.getUserNumber()==null){
                 return "400";
@@ -63,14 +61,14 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public String makePurchaseOrder(PurchaseDTO record) {
+    public String makePurchaseOrder(PurchaseBO record) {
         try {
             //1.创建采购单。
             String result = insertSelective(record);
             Double purTotalMoney=0.0;
-            for (PurchaseDtlDTO purchaseDtlDTO : record.getPutDtlList()) {
+            for (PurchaseDtlBO purchaseDtlBO : record.getPurDtlList()) {
                 //累加金额
-                purTotalMoney= purTotalMoney+purchaseDtlDTO.getPurDtlAmount()*purchaseDtlDTO.getPurDtlPrice();
+                purTotalMoney= purTotalMoney+purchaseDtlBO.getPurDtlAmount()*purchaseDtlBO.getPurDtlPrice();
             }
             record.setPurTotalMoney(purTotalMoney);//计算采购金额
             if (result==null||"".equals(result)||result=="400"||result=="500"){
@@ -78,16 +76,16 @@ public class PurchaseServiceImpl implements PurchaseService {
             }
             System.out.println(result);
             //遍历record.getPutDtlList()
-            for (PurchaseDtlDTO purchaseDtlDTO : record.getPutDtlList()) {
+            for (PurchaseDtlBO purchaseDtlBO : record.getPurDtlList()) {
                 //3. 每一项设置采购单编号
-                purchaseDtlDTO.setPurOrderId(result);
+                purchaseDtlBO.setPurOrderId(result);
                 //4. 添加采购项
-                int i = purchaseDtlService.insertSelective(purchaseDtlDTO);
+                int i = purchaseDtlService.insertSelective(purchaseDtlBO);
                 if (i==0){
                     return "400";
                 }
             }
-            return "200";
+            return result;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -111,7 +109,7 @@ public class PurchaseServiceImpl implements PurchaseService {
             if (purchaseBO==null){
                 return 0;
             }
-            for (PurchaseDtlBO purchaseDtlBO : purchaseBO.getPutDtlList()) {
+            for (PurchaseDtlBO purchaseDtlBO : purchaseBO.getPurDtlList()) {
                 //调用方法删除每一项
                 purchaseDtlService.deleteByPrimaryKey(purchaseDtlBO.getPurDtlId());
             }
@@ -186,7 +184,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public int updateByPrimaryKeySelective(PurchaseDTO record) {
+    public int updateByPrimaryKeySelective(PurchaseBO record) {
         try{
             if (record.getPurId() == null ||record.getPurId() <= 0){
                 return 0;

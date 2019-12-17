@@ -24,7 +24,7 @@ public interface PurchaseService {
      * @Author: 林贤钦
      * @Date: 2019/12/14 20:45
      */
-    String insertSelective(PurchaseDTO record);
+    String insertSelective(PurchaseBO record);
     /*
      * 功能描述: <br>
      * 〈〈创建采购单〉<包含采购项>〉
@@ -33,7 +33,7 @@ public interface PurchaseService {
      * @Author: 林贤钦
      * @Date: 2019/12/16 9:41
      */
-    String makePurchaseOrder(PurchaseDTO record);
+    String makePurchaseOrder(PurchaseBO record);
     /*
      * 功能描述: <br>
      * 〈删除采购单〉
@@ -95,7 +95,7 @@ public interface PurchaseService {
      * @Author: 林贤钦
      * @Date: 2019/12/14 20:46
      */
-    int updateByPrimaryKeySelective(PurchaseDTO record);
+    int updateByPrimaryKeySelective(PurchaseBO record);
     /*
      * 功能描述: <br>
      * 〈查询所有采购单信息〉

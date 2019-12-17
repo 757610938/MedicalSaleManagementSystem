@@ -24,7 +24,7 @@
         <result column="Warehouse_id" jdbcType="INTEGER" property="warehouseId" />
         <result column="pur_Date" jdbcType="TIMESTAMP" property="purDate" />
         <result column="pur__Remark" jdbcType="VARCHAR" property="purRemark" />
-        <collection property="putDtlList" ofType="com.medicalSaleManagementSystem.core.model.BO.PurchaseDtlBO">
+        <collection property="purDtlList" ofType="com.medicalSaleManagementSystem.core.model.BO.PurchaseDtlBO">
             <id column="pur_Dtl_id" jdbcType="INTEGER" property="purDtlId" />
             <result column="pur_Dtl_Order_Id" jdbcType="VARCHAR" property="purDtlOrderId" />
             <result column="pur_Order_Id" jdbcType="VARCHAR" property="purOrderId" />
