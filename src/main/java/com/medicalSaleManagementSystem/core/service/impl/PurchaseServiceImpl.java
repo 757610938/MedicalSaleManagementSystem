@@ -46,9 +46,7 @@ public class PurchaseServiceImpl implements PurchaseService {
             BeanUtilEx.copyProperties(purchase,record);
             String purOrderId= OrderCodeFactory.getPurchaseCode(TypeCastHelper.toLong(70000));
             purchase.setPurOrderId(purOrderId);//生成单号
-            if ("".equals(purchase.getPurStatus())||purchase.getPurStatus()==null){
-                purchase.setPurStatus("未审核");//如果为空，则设置默认状态
-            }
+            purchase.setPurStatus("未审核");
             int i = purchaseMapper.insertSelective(purchase);
             if (i==0){
                 return  "400";
@@ -63,8 +61,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public String makePurchaseOrder(PurchaseBO record) {
         try {
-            String result = insertSelective(record); //1.创建采购单。
             record.setPurTotalMoney(calculatedAmount(record));//计算采购金额
+            String result = insertSelective(record); //1.创建采购单。
             if (result==null||"".equals(result)||result=="400"||result=="500"){
                 return  result;//采购单存入错误
             }

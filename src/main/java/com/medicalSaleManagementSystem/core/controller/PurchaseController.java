@@ -72,7 +72,7 @@ public class PurchaseController {
             }
 
             //修改采购单状态为"未审核状态"
-            String status = purchaseService.updateOrderByPurOrderIdAndPurStatus(result, "审核中");
+            String status = purchaseService.updateOrderByPurOrderIdAndPurStatus(result, "未审核");
             if (status != "200"){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"提交审核采购单失败");
             }
@@ -91,15 +91,10 @@ public class PurchaseController {
      * @Author: 林贤钦
      * @Date: 2019/12/14 15:24
      */
-    @RequestMapping( value = "purchase/examine/{examineResult}", method = RequestMethod.POST )
+    @RequestMapping( value = "purchase/examine", method = RequestMethod.POST )
     @ResponseBody
-    public Resp examinePur(@RequestBody(required = false) PurchaseBO purchaseBO,@PathVariable String examineResult){
+    public Resp examinePur(@RequestBody(required = false) PurchaseBO purchaseBO){
         try{
-            if (examineResult==null||"".equals(examineResult)){
-                return Resp.httpStatus(HttpStatus.BAD_REQUEST,"审核采购单失败");
-            }
-            //修改采购单状态为"未审核状态"
-            purchaseBO.setPurStatus(examineResult);
             //更新采购单
             String s = purchaseService.updatePurOrderAndDtl(purchaseBO);
             if (s!="200"){

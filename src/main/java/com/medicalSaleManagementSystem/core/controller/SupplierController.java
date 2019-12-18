@@ -1,18 +1,23 @@
 package com.medicalSaleManagementSystem.core.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.medicalSaleManagementSystem.core.model.DTO.SupplierDTO;
 import com.medicalSaleManagementSystem.core.model.VO.SupplierVO;
+import com.medicalSaleManagementSystem.core.model.VO.ValueVo;
 import com.medicalSaleManagementSystem.core.model.entity.Supplier;
 import com.medicalSaleManagementSystem.core.service.SupplierService;
 import com.medicalSaleManagementSystem.util.BeanUtilEx;
+import com.medicalSaleManagementSystem.util.TypeCastHelper;
 import com.medicalSaleManagementSystem.util.message.HttpStatus;
 import com.medicalSaleManagementSystem.util.message.Resp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -176,9 +181,8 @@ public class SupplierController {
     public Resp getAllPrimaryKey(){
         try {
             List<Integer> list = supplierService.getAllPrimaryKey();
-            Map<String, Object> ext = new HashMap<>();
-            ext.put("list", list);
-            return Resp.httpStatus(HttpStatus.OK,"获取所有供应商编号成功",ext);
+            JSON.toJSONString(list);
+            return Resp.httpStatus(HttpStatus.OK,"获取所有供应商编号成功",list);
         } catch (Exception e) {
             e.printStackTrace();
         }
