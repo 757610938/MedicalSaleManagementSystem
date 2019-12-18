@@ -176,7 +176,9 @@ public class SupplierController {
     public Resp getAllPrimaryKey(){
         try {
             List<Integer> list = supplierService.getAllPrimaryKey();
-            return Resp.httpStatus(HttpStatus.OK,"获取所有供应商编号成功",list);
+            Map<String, Object> ext = new HashMap<>();
+            ext.put("list", list);
+            return Resp.httpStatus(HttpStatus.OK,"获取所有供应商编号成功",ext);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package com.medicalSaleManagementSystem.core.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.medicalSaleManagementSystem.core.model.BO.PurchaseBO;
 import com.medicalSaleManagementSystem.core.model.BO.SaleBO;
 import com.medicalSaleManagementSystem.core.model.entity.Sale;
 import com.medicalSaleManagementSystem.core.service.SaleService;

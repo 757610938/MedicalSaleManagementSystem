@@ -227,7 +227,7 @@ public class SaleServiceImpl implements SaleService {
 
     @Override
     public List<Sale> getAllSale() {
-        return null;
+        return saleMapper.getAllSale();
     }
 
     @Override
