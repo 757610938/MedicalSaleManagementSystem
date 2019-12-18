@@ -72,7 +72,7 @@ public class OutstockController {
     @RequestMapping(value = "/outstockManage/outstock", method = RequestMethod.PUT)
     @ResponseBody
     public Resp updateOutstockValid(@RequestBody OutstockApplyVO outstockApplyVO) {
-
+        System.out.println(outstockApplyVO);
         return outstockService.updateOutstockApplyValid(outstockApplyVO);
     }
 

@@ -72,7 +72,7 @@
   </sql>
   <sql id="Base_Column_List">
     outstock_apply_id, outstock_Dtl_Number, outstock_time, user_Number, outstock_Apply_Category, 
-    outstock_Apply_Remark, medicine_id, outstock_Amount
+    outstock_Apply_Remark, medicine_id, outstock_Amount,valid
   </sql>
   <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecordExample" resultMap="BaseResultMap">
     select
@@ -107,11 +107,11 @@
   <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecord">
     insert into tb_outstock_apply_record (outstock_apply_id, outstock_Dtl_Number, 
       outstock_time, user_Number, outstock_Apply_Category, 
-      outstock_Apply_Remark, medicine_id, outstock_Amount
+      outstock_Apply_Remark, medicine_id, outstock_Amount,valid
       )
     values (#{outstockApplyId,jdbcType=INTEGER}, #{outstockDtlNumber,jdbcType=VARCHAR}, 
       #{outstockTime,jdbcType=TIMESTAMP}, #{userNumber,jdbcType=INTEGER}, #{outstockApplyCategory,jdbcType=VARCHAR}, 
-      #{outstockApplyRemark,jdbcType=VARCHAR}, #{medicineId,jdbcType=INTEGER}, #{outstockAmount,jdbcType=INTEGER}
+      #{outstockApplyRemark,jdbcType=VARCHAR}, #{medicineId,jdbcType=INTEGER}, #{outstockAmount,jdbcType=INTEGER},#{valid,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.OutstockApplyRecord">
@@ -202,6 +202,9 @@
       <if test="record.outstockAmount != null">
         outstock_Amount = #{record.outstockAmount,jdbcType=INTEGER},
       </if>
+      <if test="record.valid != null">
+        valid = #{record.valid,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -245,6 +248,10 @@
       <if test="outstockAmount != null">
         outstock_Amount = #{outstockAmount,jdbcType=INTEGER},
       </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
+      </if>
+
     </set>
     where outstock_apply_id = #{outstockApplyId,jdbcType=INTEGER}
   </update>

@@ -75,12 +75,14 @@ public class OutstockServiceImpl implements OutstockService {
             if (outstockApplyVO.getOutstockApplyId() == null || outstockApplyVO.getOutstockApplyId() <= 0) {
                 return Resp.fail("当前出库申请单ID为非法ID");
             }
+            System.out.println("我来修改状态了...");
             OutstockApplyRecord outstockApplyRecord = outstockApplyVOToEntity(outstockApplyVO);
-            OutstockApplyRecordExample outstockApplyRecordExample = new OutstockApplyRecordExample();
+            System.out.println(outstockApplyRecord);
+           /* OutstockApplyRecordExample outstockApplyRecordExample = new OutstockApplyRecordExample();
             OutstockApplyRecordExample.Criteria criteria = outstockApplyRecordExample.createCriteria();
             criteria.andOutstockApplyIdEqualTo(outstockApplyRecord.getOutstockApplyId());
             List<OutstockApplyRecord> outstockApplyRecordList = outstockApplyRecordMapper.selectByExample(outstockApplyRecordExample);
-            outstockApplyRecord.setOutstockApplyId(outstockApplyRecordList.get(0).getOutstockApplyId());
+            outstockApplyRecord.setOutstockApplyId(outstockApplyRecordList.get(0).getOutstockApplyId());*/
             outstockApplyRecordMapper.updateByPrimaryKeySelective(outstockApplyRecord);
         } catch (Exception e) {
             e.printStackTrace();
