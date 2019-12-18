@@ -116,7 +116,7 @@ public class OutstockServiceImpl implements OutstockService {
             }
             System.out.println(result);
             //遍历record.getOutstockDtlBOList()
-            for (OutstockDtlBO outstockDtlBO : record.getOutstockDtlBOList()) {
+            for (OutstockDtlBO outstockDtlBO : record.getOutstockDtlList()) {
                 //为每一项添加出库单编号
                 outstockDtlBO.setOutstockNumber(result);
                 //添加出库详细项

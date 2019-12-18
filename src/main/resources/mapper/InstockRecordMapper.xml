@@ -141,6 +141,7 @@
           tb_instock_dtl.instock_Remark,
           tb_instock_dtl.apply_Amount,
           tb_instock_dtl.apply_Remark,
+          tb_instock_dtl.instock_Dtl_Number,
           tb_instock_dtl.instock_Number
         FROM
           tb_instock_record
@@ -185,6 +186,7 @@
           tb_instock_dtl.instock_Remark,
           tb_instock_dtl.apply_Amount,
           tb_instock_dtl.apply_Remark,
+          tb_instock_dtl.instock_Dtl_Number,
           tb_instock_dtl.instock_Number
         FROM
             tb_instock_record
@@ -225,7 +227,6 @@
         FROM
             tb_instock_record
     </select>
-
 
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

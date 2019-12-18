@@ -7,7 +7,7 @@ import java.util.List;
 
 public class OutstockVO {
 
-    private List<OutstockDtlVO> outstockDtlVOList;
+    private List<OutstockDtlVO> outstockDtlList;
 
     private Integer outstockId;
 
@@ -26,7 +26,7 @@ public class OutstockVO {
     @Override
     public String toString() {
         return "OutstockVO{" +
-                "outstockDtlVOList=" + outstockDtlVOList +
+                "outstockDtlList=" + outstockDtlList +
                 ", outstockId=" + outstockId +
                 ", outstockNumber='" + outstockNumber + '\'' +
                 ", outstockCategory='" + outstockCategory + '\'' +
@@ -37,12 +37,12 @@ public class OutstockVO {
                 '}';
     }
 
-    public List<OutstockDtlVO> getOutstockDtlVOList() {
-        return outstockDtlVOList;
+    public List<OutstockDtlVO> getOutstockDtlList() {
+        return outstockDtlList;
     }
 
-    public void setOutstockDtlVOList(List<OutstockDtlVO> outstockDtlVOList) {
-        this.outstockDtlVOList = outstockDtlVOList;
+    public void setOutstockDtlList(List<OutstockDtlVO> outstockDtlList) {
+        this.outstockDtlList = outstockDtlList;
     }
 
     public Integer getOutstockId() {

@@ -26,8 +26,27 @@
             <result column="whse_id" jdbcType="INTEGER" property="whseId"/>
             <result column="outstock_Number" jdbcType="VARCHAR" property="outstockNumber"/>
         </collection>
-
     </resultMap>
+
+    <resultMap id="outstockAndDtl2" type="com.medicalSaleManagementSystem.core.model.BO.OutstockBO">
+        <id column="outstock_id" jdbcType="INTEGER" property="outstockId"/>
+        <result column="outstock_Number" jdbcType="VARCHAR" property="outstockNumber"/>
+        <result column="outstock_Category" jdbcType="VARCHAR" property="outstockCategory"/>
+        <result column="outstock_Time" jdbcType="TIMESTAMP" property="outstockTime"/>
+        <result column="user_Number" jdbcType="VARCHAR" property="userNumber"/>
+        <result column="outstock_Remark" jdbcType="VARCHAR" property="outstockRemark"/>
+        <result column="outstock_Dtl_Id" jdbcType="INTEGER" property="outstockDtlId"/>
+        <collection property="outstockDtlList" ofType="com.medicalSaleManagementSystem.core.model.BO.OutstockDtlBO">
+            <id column="outstock_Dtl_id" jdbcType="INTEGER" property="outstockDtlId"/>
+            <result column="outstock_Dtl_Number" jdbcType="VARCHAR" property="outstockDtlNumber"/>
+            <result column="medicine_id" jdbcType="INTEGER" property="medicineId"/>
+            <result column="outstock_Amount" jdbcType="INTEGER" property="outstockAmount"/>
+            <result column="whse_id" jdbcType="INTEGER" property="whseId"/>
+            <result column="outstock_Number" jdbcType="VARCHAR" property="outstockNumber"/>
+        </collection>
+    </resultMap>
+
+
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -115,7 +134,7 @@
     </select>
 
     <!--通过出库单号查询出库单及其出库单项-->
-    <select id="selectOutstockAndDtlByOutstockNumber" parameterType="java.lang.String" resultMap="outstockAndDtl">
+    <select id="selectOutstockAndDtlByOutstockNumber" parameterType="java.lang.String" resultMap="outstockAndDtl2">
         SELECT
             tb_outstock_record.outstock_id,
             tb_outstock_record.outstock_Number,

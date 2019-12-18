@@ -98,7 +98,7 @@ public class OutstockController {
     }
 
     private String insertSelective(OutstockBO outstockBO){
-        if (outstockBO.getOutstockDtlBOList().size()<=0){
+        if (outstockBO.getOutstockDtlList().size()<=0){
             return "400";
         }
         return  outstockService.addOutstockDtl(outstockBO);
