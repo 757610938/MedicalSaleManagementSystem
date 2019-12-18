@@ -1,8 +1,12 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.VO;
 
 import java.util.Date;
+import java.util.List;
 
-public class InstockRecord {
+public class InstockVO {
+
+    private List<InstockDtlVO> instockDtlVOList;
+
     private Integer instockId;
 
     private String instockNumber;
@@ -17,6 +21,28 @@ public class InstockRecord {
 
     private String instockRemark;
 
+    @Override
+    public String toString() {
+        return "InstockVO{" +
+                "instockDtlVOList=" + instockDtlVOList +
+                ", instockId=" + instockId +
+                ", instockNumber='" + instockNumber + '\'' +
+                ", instockCategory='" + instockCategory + '\'' +
+                ", userNumber='" + userNumber + '\'' +
+                ", instockTime=" + instockTime +
+                ", instockDtlId=" + instockDtlId +
+                ", instockRemark='" + instockRemark + '\'' +
+                '}';
+    }
+
+    public List<InstockDtlVO> getInstockDtlVOList() {
+        return instockDtlVOList;
+    }
+
+    public void setInstockDtlVOList(List<InstockDtlVO> instockDtlVOList) {
+        this.instockDtlVOList = instockDtlVOList;
+    }
+
     public Integer getInstockId() {
         return instockId;
     }
@@ -30,7 +56,7 @@ public class InstockRecord {
     }
 
     public void setInstockNumber(String instockNumber) {
-        this.instockNumber = instockNumber == null ? null : instockNumber.trim();
+        this.instockNumber = instockNumber;
     }
 
     public String getInstockCategory() {
@@ -38,7 +64,7 @@ public class InstockRecord {
     }
 
     public void setInstockCategory(String instockCategory) {
-        this.instockCategory = instockCategory == null ? null : instockCategory.trim();
+        this.instockCategory = instockCategory;
     }
 
     public String getUserNumber() {
@@ -46,7 +72,7 @@ public class InstockRecord {
     }
 
     public void setUserNumber(String userNumber) {
-        this.userNumber = userNumber == null ? null : userNumber.trim();
+        this.userNumber = userNumber;
     }
 
     public Date getInstockTime() {
@@ -70,6 +96,6 @@ public class InstockRecord {
     }
 
     public void setInstockRemark(String instockRemark) {
-        this.instockRemark = instockRemark == null ? null : instockRemark.trim();
+        this.instockRemark = instockRemark;
     }
 }

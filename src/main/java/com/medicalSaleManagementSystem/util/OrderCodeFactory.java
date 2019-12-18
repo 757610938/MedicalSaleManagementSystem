@@ -151,6 +151,16 @@ public class OrderCodeFactory {
     public  static String getPurchaseDtlCode(Long userId){
         return PURDTL_ORDER+getCode(userId);
     }
+
+    public static String getOutstockCode(Long userId){
+        return PURDTL_ORDER+getCode(userId);
+    }
+
+    public static String getOutstockDtlCode(Long userId){
+        return PURDTL_ORDER+getCode(userId);
+    }
+
+
     /*
      * 功能描述: <br>
      * 〈〉生成采购订单项编号

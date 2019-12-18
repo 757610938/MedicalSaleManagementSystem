@@ -1,6 +1,6 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.VO;
 
-public class OutstocDtl {
+public class OutstockDtlVO {
     private Integer outstockDtlId;
 
     private String outstockDtlNumber;
@@ -10,6 +10,20 @@ public class OutstocDtl {
     private Integer outstockAmount;
 
     private Integer whseId;
+
+    private String outstockNumber;
+
+    @Override
+    public String toString() {
+        return "OutstockDtlVO{" +
+                "outstockDtlId=" + outstockDtlId +
+                ", outstockDtlNumber='" + outstockDtlNumber + '\'' +
+                ", medicineId=" + medicineId +
+                ", outstockAmount=" + outstockAmount +
+                ", whseId=" + whseId +
+                ", outstockNumber='" + outstockNumber + '\'' +
+                '}';
+    }
 
     public Integer getOutstockDtlId() {
         return outstockDtlId;
@@ -24,7 +38,7 @@ public class OutstocDtl {
     }
 
     public void setOutstockDtlNumber(String outstockDtlNumber) {
-        this.outstockDtlNumber = outstockDtlNumber == null ? null : outstockDtlNumber.trim();
+        this.outstockDtlNumber = outstockDtlNumber;
     }
 
     public Integer getMedicineId() {
@@ -49,5 +63,13 @@ public class OutstocDtl {
 
     public void setWhseId(Integer whseId) {
         this.whseId = whseId;
+    }
+
+    public String getOutstockNumber() {
+        return outstockNumber;
+    }
+
+    public void setOutstockNumber(String outstockNumber) {
+        this.outstockNumber = outstockNumber;
     }
 }

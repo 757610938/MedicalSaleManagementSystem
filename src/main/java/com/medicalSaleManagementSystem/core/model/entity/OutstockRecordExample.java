@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OutstocRecordExample {
+public class OutstockRecordExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public OutstocRecordExample() {
+    public OutstockRecordExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -165,73 +165,73 @@ public class OutstocRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdIsNull() {
-            addCriterion("outstock_List_Id is null");
+        public Criteria andOutstockNumberIsNull() {
+            addCriterion("outstock_Number is null");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdIsNotNull() {
-            addCriterion("outstock_List_Id is not null");
+        public Criteria andOutstockNumberIsNotNull() {
+            addCriterion("outstock_Number is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdEqualTo(String value) {
-            addCriterion("outstock_List_Id =", value, "outstockListId");
+        public Criteria andOutstockNumberEqualTo(String value) {
+            addCriterion("outstock_Number =", value, "outstockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdNotEqualTo(String value) {
-            addCriterion("outstock_List_Id <>", value, "outstockListId");
+        public Criteria andOutstockNumberNotEqualTo(String value) {
+            addCriterion("outstock_Number <>", value, "outstockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdGreaterThan(String value) {
-            addCriterion("outstock_List_Id >", value, "outstockListId");
+        public Criteria andOutstockNumberGreaterThan(String value) {
+            addCriterion("outstock_Number >", value, "outstockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdGreaterThanOrEqualTo(String value) {
-            addCriterion("outstock_List_Id >=", value, "outstockListId");
+        public Criteria andOutstockNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("outstock_Number >=", value, "outstockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdLessThan(String value) {
-            addCriterion("outstock_List_Id <", value, "outstockListId");
+        public Criteria andOutstockNumberLessThan(String value) {
+            addCriterion("outstock_Number <", value, "outstockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdLessThanOrEqualTo(String value) {
-            addCriterion("outstock_List_Id <=", value, "outstockListId");
+        public Criteria andOutstockNumberLessThanOrEqualTo(String value) {
+            addCriterion("outstock_Number <=", value, "outstockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdLike(String value) {
-            addCriterion("outstock_List_Id like", value, "outstockListId");
+        public Criteria andOutstockNumberLike(String value) {
+            addCriterion("outstock_Number like", value, "outstockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdNotLike(String value) {
-            addCriterion("outstock_List_Id not like", value, "outstockListId");
+        public Criteria andOutstockNumberNotLike(String value) {
+            addCriterion("outstock_Number not like", value, "outstockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdIn(List<String> values) {
-            addCriterion("outstock_List_Id in", values, "outstockListId");
+        public Criteria andOutstockNumberIn(List<String> values) {
+            addCriterion("outstock_Number in", values, "outstockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdNotIn(List<String> values) {
-            addCriterion("outstock_List_Id not in", values, "outstockListId");
+        public Criteria andOutstockNumberNotIn(List<String> values) {
+            addCriterion("outstock_Number not in", values, "outstockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdBetween(String value1, String value2) {
-            addCriterion("outstock_List_Id between", value1, value2, "outstockListId");
+        public Criteria andOutstockNumberBetween(String value1, String value2) {
+            addCriterion("outstock_Number between", value1, value2, "outstockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockListIdNotBetween(String value1, String value2) {
-            addCriterion("outstock_List_Id not between", value1, value2, "outstockListId");
+        public Criteria andOutstockNumberNotBetween(String value1, String value2) {
+            addCriterion("outstock_Number not between", value1, value2, "outstockNumber");
             return (Criteria) this;
         }
 
@@ -305,243 +305,133 @@ public class OutstocRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateIsNull() {
-            addCriterion("outstock_Date is null");
+        public Criteria andOutstockTimeIsNull() {
+            addCriterion("outstock_Time is null");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateIsNotNull() {
-            addCriterion("outstock_Date is not null");
+        public Criteria andOutstockTimeIsNotNull() {
+            addCriterion("outstock_Time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateEqualTo(Date value) {
-            addCriterion("outstock_Date =", value, "outstockDate");
+        public Criteria andOutstockTimeEqualTo(Date value) {
+            addCriterion("outstock_Time =", value, "outstockTime");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateNotEqualTo(Date value) {
-            addCriterion("outstock_Date <>", value, "outstockDate");
+        public Criteria andOutstockTimeNotEqualTo(Date value) {
+            addCriterion("outstock_Time <>", value, "outstockTime");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateGreaterThan(Date value) {
-            addCriterion("outstock_Date >", value, "outstockDate");
+        public Criteria andOutstockTimeGreaterThan(Date value) {
+            addCriterion("outstock_Time >", value, "outstockTime");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateGreaterThanOrEqualTo(Date value) {
-            addCriterion("outstock_Date >=", value, "outstockDate");
+        public Criteria andOutstockTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("outstock_Time >=", value, "outstockTime");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateLessThan(Date value) {
-            addCriterion("outstock_Date <", value, "outstockDate");
+        public Criteria andOutstockTimeLessThan(Date value) {
+            addCriterion("outstock_Time <", value, "outstockTime");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateLessThanOrEqualTo(Date value) {
-            addCriterion("outstock_Date <=", value, "outstockDate");
+        public Criteria andOutstockTimeLessThanOrEqualTo(Date value) {
+            addCriterion("outstock_Time <=", value, "outstockTime");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateIn(List<Date> values) {
-            addCriterion("outstock_Date in", values, "outstockDate");
+        public Criteria andOutstockTimeIn(List<Date> values) {
+            addCriterion("outstock_Time in", values, "outstockTime");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateNotIn(List<Date> values) {
-            addCriterion("outstock_Date not in", values, "outstockDate");
+        public Criteria andOutstockTimeNotIn(List<Date> values) {
+            addCriterion("outstock_Time not in", values, "outstockTime");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateBetween(Date value1, Date value2) {
-            addCriterion("outstock_Date between", value1, value2, "outstockDate");
+        public Criteria andOutstockTimeBetween(Date value1, Date value2) {
+            addCriterion("outstock_Time between", value1, value2, "outstockTime");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockDateNotBetween(Date value1, Date value2) {
-            addCriterion("outstock_Date not between", value1, value2, "outstockDate");
+        public Criteria andOutstockTimeNotBetween(Date value1, Date value2) {
+            addCriterion("outstock_Time not between", value1, value2, "outstockTime");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdIsNull() {
-            addCriterion("medincine_id is null");
+        public Criteria andUserNumberIsNull() {
+            addCriterion("user_Number is null");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdIsNotNull() {
-            addCriterion("medincine_id is not null");
+        public Criteria andUserNumberIsNotNull() {
+            addCriterion("user_Number is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdEqualTo(Integer value) {
-            addCriterion("medincine_id =", value, "medincineId");
+        public Criteria andUserNumberEqualTo(String value) {
+            addCriterion("user_Number =", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdNotEqualTo(Integer value) {
-            addCriterion("medincine_id <>", value, "medincineId");
+        public Criteria andUserNumberNotEqualTo(String value) {
+            addCriterion("user_Number <>", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdGreaterThan(Integer value) {
-            addCriterion("medincine_id >", value, "medincineId");
+        public Criteria andUserNumberGreaterThan(String value) {
+            addCriterion("user_Number >", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("medincine_id >=", value, "medincineId");
+        public Criteria andUserNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("user_Number >=", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdLessThan(Integer value) {
-            addCriterion("medincine_id <", value, "medincineId");
+        public Criteria andUserNumberLessThan(String value) {
+            addCriterion("user_Number <", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdLessThanOrEqualTo(Integer value) {
-            addCriterion("medincine_id <=", value, "medincineId");
+        public Criteria andUserNumberLessThanOrEqualTo(String value) {
+            addCriterion("user_Number <=", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdIn(List<Integer> values) {
-            addCriterion("medincine_id in", values, "medincineId");
+        public Criteria andUserNumberLike(String value) {
+            addCriterion("user_Number like", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdNotIn(List<Integer> values) {
-            addCriterion("medincine_id not in", values, "medincineId");
+        public Criteria andUserNumberNotLike(String value) {
+            addCriterion("user_Number not like", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdBetween(Integer value1, Integer value2) {
-            addCriterion("medincine_id between", value1, value2, "medincineId");
+        public Criteria andUserNumberIn(List<String> values) {
+            addCriterion("user_Number in", values, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedincineIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("medincine_id not between", value1, value2, "medincineId");
+        public Criteria andUserNumberNotIn(List<String> values) {
+            addCriterion("user_Number not in", values, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockNumberIsNull() {
-            addCriterion("outstock_Number is null");
+        public Criteria andUserNumberBetween(String value1, String value2) {
+            addCriterion("user_Number between", value1, value2, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andOutstockNumberIsNotNull() {
-            addCriterion("outstock_Number is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOutstockNumberEqualTo(Integer value) {
-            addCriterion("outstock_Number =", value, "outstockNumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andOutstockNumberNotEqualTo(Integer value) {
-            addCriterion("outstock_Number <>", value, "outstockNumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andOutstockNumberGreaterThan(Integer value) {
-            addCriterion("outstock_Number >", value, "outstockNumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andOutstockNumberGreaterThanOrEqualTo(Integer value) {
-            addCriterion("outstock_Number >=", value, "outstockNumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andOutstockNumberLessThan(Integer value) {
-            addCriterion("outstock_Number <", value, "outstockNumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andOutstockNumberLessThanOrEqualTo(Integer value) {
-            addCriterion("outstock_Number <=", value, "outstockNumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andOutstockNumberIn(List<Integer> values) {
-            addCriterion("outstock_Number in", values, "outstockNumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andOutstockNumberNotIn(List<Integer> values) {
-            addCriterion("outstock_Number not in", values, "outstockNumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andOutstockNumberBetween(Integer value1, Integer value2) {
-            addCriterion("outstock_Number between", value1, value2, "outstockNumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andOutstockNumberNotBetween(Integer value1, Integer value2) {
-            addCriterion("outstock_Number not between", value1, value2, "outstockNumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdIsNull() {
-            addCriterion("emp_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdIsNotNull() {
-            addCriterion("emp_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdEqualTo(Integer value) {
-            addCriterion("emp_id =", value, "empId");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdNotEqualTo(Integer value) {
-            addCriterion("emp_id <>", value, "empId");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdGreaterThan(Integer value) {
-            addCriterion("emp_id >", value, "empId");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("emp_id >=", value, "empId");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdLessThan(Integer value) {
-            addCriterion("emp_id <", value, "empId");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdLessThanOrEqualTo(Integer value) {
-            addCriterion("emp_id <=", value, "empId");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdIn(List<Integer> values) {
-            addCriterion("emp_id in", values, "empId");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdNotIn(List<Integer> values) {
-            addCriterion("emp_id not in", values, "empId");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdBetween(Integer value1, Integer value2) {
-            addCriterion("emp_id between", value1, value2, "empId");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmpIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("emp_id not between", value1, value2, "empId");
+        public Criteria andUserNumberNotBetween(String value1, String value2) {
+            addCriterion("user_Number not between", value1, value2, "userNumber");
             return (Criteria) this;
         }
 
@@ -612,6 +502,66 @@ public class OutstocRecordExample {
 
         public Criteria andOutstockRemarkNotBetween(String value1, String value2) {
             addCriterion("outstock_Remark not between", value1, value2, "outstockRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdIsNull() {
+            addCriterion("outstock_Dtl_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdIsNotNull() {
+            addCriterion("outstock_Dtl_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdEqualTo(Integer value) {
+            addCriterion("outstock_Dtl_id =", value, "outstockDtlId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdNotEqualTo(Integer value) {
+            addCriterion("outstock_Dtl_id <>", value, "outstockDtlId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdGreaterThan(Integer value) {
+            addCriterion("outstock_Dtl_id >", value, "outstockDtlId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("outstock_Dtl_id >=", value, "outstockDtlId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdLessThan(Integer value) {
+            addCriterion("outstock_Dtl_id <", value, "outstockDtlId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdLessThanOrEqualTo(Integer value) {
+            addCriterion("outstock_Dtl_id <=", value, "outstockDtlId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdIn(List<Integer> values) {
+            addCriterion("outstock_Dtl_id in", values, "outstockDtlId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdNotIn(List<Integer> values) {
+            addCriterion("outstock_Dtl_id not in", values, "outstockDtlId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdBetween(Integer value1, Integer value2) {
+            addCriterion("outstock_Dtl_id between", value1, value2, "outstockDtlId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockDtlIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("outstock_Dtl_id not between", value1, value2, "outstockDtlId");
             return (Criteria) this;
         }
     }

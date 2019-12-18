@@ -1,8 +1,12 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.BO;
 
 import java.util.Date;
+import java.util.List;
 
-public class InstockRecord {
+public class InstockBO {
+
+    private List<InstockDtlBO> instockDtlBOList;
+
     private Integer instockId;
 
     private String instockNumber;
@@ -16,6 +20,16 @@ public class InstockRecord {
     private Integer instockDtlId;
 
     private String instockRemark;
+
+
+
+    public List<InstockDtlBO> getInstockDtlBOList() {
+        return instockDtlBOList;
+    }
+
+    public void setInstockDtlBOList(List<InstockDtlBO> instockDtlBOList) {
+        this.instockDtlBOList = instockDtlBOList;
+    }
 
     public Integer getInstockId() {
         return instockId;
@@ -71,5 +85,19 @@ public class InstockRecord {
 
     public void setInstockRemark(String instockRemark) {
         this.instockRemark = instockRemark == null ? null : instockRemark.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "InstockBO{" +
+                "instockDtlBOList=" + instockDtlBOList +
+                ", instockId=" + instockId +
+                ", instockNumber='" + instockNumber + '\'' +
+                ", instockCategory='" + instockCategory + '\'' +
+                ", userNumber='" + userNumber + '\'' +
+                ", instockTime=" + instockTime +
+                ", instockDtlId=" + instockDtlId +
+                ", instockRemark='" + instockRemark + '\'' +
+                '}';
     }
 }
