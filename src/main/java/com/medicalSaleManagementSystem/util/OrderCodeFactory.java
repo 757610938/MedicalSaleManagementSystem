@@ -37,7 +37,8 @@ public class OrderCodeFactory {
 
     private static final String PURDTL_ORDER="8";
 
-    private static final String PURDTLSTATUS_ORDER="9";
+    private static final String SALE_ORDER="5";
+    private static final String SAlEDTL_ORDER="6";
     /**
      * 随即编码
      */
@@ -153,13 +154,24 @@ public class OrderCodeFactory {
     }
     /*
      * 功能描述: <br>
-     * 〈〉生成采购订单项编号
+     * 〈〉生成销售单编号
      * @Param:
      * @Return:
      * @Author: 林贤钦
      * @Date: 2019/12/15 13:23
      */
-    public  static String getPurchaseDtlStatusCode(Long userId){
-        return PURDTLSTATUS_ORDER+getCode(userId);
+    public  static String getSaleCode(Long userId){
+        return SALE_ORDER+getCode(userId);
+    }
+    /*
+     * 功能描述: <br>
+     * 〈〉生成销售订单项编号
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/15 13:23
+     */
+    public  static String getSaleDtlCode(Long userId){
+        return SAlEDTL_ORDER+getCode(userId);
     }
 }

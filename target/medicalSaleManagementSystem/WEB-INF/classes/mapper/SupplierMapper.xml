@@ -98,6 +98,11 @@
     from tb_supplier
     where supplier_id = #{supplierId,jdbcType=INTEGER}
   </select>
+  <select id="getAllPrimaryKey" resultType="java.lang.Integer">
+    select
+        supplier_id
+    from tb_supplier
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_supplier
     where supplier_id = #{supplierId,jdbcType=INTEGER}

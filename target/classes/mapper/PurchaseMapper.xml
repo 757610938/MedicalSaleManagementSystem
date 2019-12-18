@@ -211,7 +211,14 @@
         or pur_Order_Id like #{userNumber,jdbcType=VARCHAR}
         or pur_Status like #{userNumber,jdbcType=VARCHAR}
     </select>
-
+    <select id="getAllByPurStatusAndKeyword"  parameterType="java.lang.String" resultMap="purchaseAndDtl">
+        SELECT  *  FROM
+	    (SELECT *  FROM tb_purchase
+		where pur_Status = #{purStatus,jdbcType=VARCHAR}) AS table1
+        where table1.pur__Name like #{Keyword,jdbcType=VARCHAR}
+        or  table1.user_Number like #{Keyword,jdbcType=VARCHAR}
+        or  table1.pur_Order_Id like #{Keyword,jdbcType=VARCHAR}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_purchase
     where pur_id = #{purId,jdbcType=INTEGER}

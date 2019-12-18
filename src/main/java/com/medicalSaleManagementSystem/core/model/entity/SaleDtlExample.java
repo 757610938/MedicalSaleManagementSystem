@@ -164,143 +164,143 @@ public class SaleDtlExample {
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidIsNull() {
-            addCriterion("sale_Dtl_OrderId is null");
+        public Criteria andSaleDtlOrderIdIsNull() {
+            addCriterion("sale_Dtl_Order_Id is null");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidIsNotNull() {
-            addCriterion("sale_Dtl_OrderId is not null");
+        public Criteria andSaleDtlOrderIdIsNotNull() {
+            addCriterion("sale_Dtl_Order_Id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidEqualTo(String value) {
-            addCriterion("sale_Dtl_OrderId =", value, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdEqualTo(String value) {
+            addCriterion("sale_Dtl_Order_Id =", value, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidNotEqualTo(String value) {
-            addCriterion("sale_Dtl_OrderId <>", value, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdNotEqualTo(String value) {
+            addCriterion("sale_Dtl_Order_Id <>", value, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidGreaterThan(String value) {
-            addCriterion("sale_Dtl_OrderId >", value, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdGreaterThan(String value) {
+            addCriterion("sale_Dtl_Order_Id >", value, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidGreaterThanOrEqualTo(String value) {
-            addCriterion("sale_Dtl_OrderId >=", value, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdGreaterThanOrEqualTo(String value) {
+            addCriterion("sale_Dtl_Order_Id >=", value, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidLessThan(String value) {
-            addCriterion("sale_Dtl_OrderId <", value, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdLessThan(String value) {
+            addCriterion("sale_Dtl_Order_Id <", value, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidLessThanOrEqualTo(String value) {
-            addCriterion("sale_Dtl_OrderId <=", value, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdLessThanOrEqualTo(String value) {
+            addCriterion("sale_Dtl_Order_Id <=", value, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidLike(String value) {
-            addCriterion("sale_Dtl_OrderId like", value, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdLike(String value) {
+            addCriterion("sale_Dtl_Order_Id like", value, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidNotLike(String value) {
-            addCriterion("sale_Dtl_OrderId not like", value, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdNotLike(String value) {
+            addCriterion("sale_Dtl_Order_Id not like", value, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidIn(List<String> values) {
-            addCriterion("sale_Dtl_OrderId in", values, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdIn(List<String> values) {
+            addCriterion("sale_Dtl_Order_Id in", values, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidNotIn(List<String> values) {
-            addCriterion("sale_Dtl_OrderId not in", values, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdNotIn(List<String> values) {
+            addCriterion("sale_Dtl_Order_Id not in", values, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidBetween(String value1, String value2) {
-            addCriterion("sale_Dtl_OrderId between", value1, value2, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdBetween(String value1, String value2) {
+            addCriterion("sale_Dtl_Order_Id between", value1, value2, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleDtlOrderidNotBetween(String value1, String value2) {
-            addCriterion("sale_Dtl_OrderId not between", value1, value2, "saleDtlOrderid");
+        public Criteria andSaleDtlOrderIdNotBetween(String value1, String value2) {
+            addCriterion("sale_Dtl_Order_Id not between", value1, value2, "saleDtlOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidIsNull() {
-            addCriterion("sale_OrderId is null");
+        public Criteria andSaleOrderIdIsNull() {
+            addCriterion("sale_Order_Id is null");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidIsNotNull() {
-            addCriterion("sale_OrderId is not null");
+        public Criteria andSaleOrderIdIsNotNull() {
+            addCriterion("sale_Order_Id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidEqualTo(String value) {
-            addCriterion("sale_OrderId =", value, "saleOrderid");
+        public Criteria andSaleOrderIdEqualTo(String value) {
+            addCriterion("sale_Order_Id =", value, "saleOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidNotEqualTo(String value) {
-            addCriterion("sale_OrderId <>", value, "saleOrderid");
+        public Criteria andSaleOrderIdNotEqualTo(String value) {
+            addCriterion("sale_Order_Id <>", value, "saleOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidGreaterThan(String value) {
-            addCriterion("sale_OrderId >", value, "saleOrderid");
+        public Criteria andSaleOrderIdGreaterThan(String value) {
+            addCriterion("sale_Order_Id >", value, "saleOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidGreaterThanOrEqualTo(String value) {
-            addCriterion("sale_OrderId >=", value, "saleOrderid");
+        public Criteria andSaleOrderIdGreaterThanOrEqualTo(String value) {
+            addCriterion("sale_Order_Id >=", value, "saleOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidLessThan(String value) {
-            addCriterion("sale_OrderId <", value, "saleOrderid");
+        public Criteria andSaleOrderIdLessThan(String value) {
+            addCriterion("sale_Order_Id <", value, "saleOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidLessThanOrEqualTo(String value) {
-            addCriterion("sale_OrderId <=", value, "saleOrderid");
+        public Criteria andSaleOrderIdLessThanOrEqualTo(String value) {
+            addCriterion("sale_Order_Id <=", value, "saleOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidLike(String value) {
-            addCriterion("sale_OrderId like", value, "saleOrderid");
+        public Criteria andSaleOrderIdLike(String value) {
+            addCriterion("sale_Order_Id like", value, "saleOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidNotLike(String value) {
-            addCriterion("sale_OrderId not like", value, "saleOrderid");
+        public Criteria andSaleOrderIdNotLike(String value) {
+            addCriterion("sale_Order_Id not like", value, "saleOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidIn(List<String> values) {
-            addCriterion("sale_OrderId in", values, "saleOrderid");
+        public Criteria andSaleOrderIdIn(List<String> values) {
+            addCriterion("sale_Order_Id in", values, "saleOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidNotIn(List<String> values) {
-            addCriterion("sale_OrderId not in", values, "saleOrderid");
+        public Criteria andSaleOrderIdNotIn(List<String> values) {
+            addCriterion("sale_Order_Id not in", values, "saleOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidBetween(String value1, String value2) {
-            addCriterion("sale_OrderId between", value1, value2, "saleOrderid");
+        public Criteria andSaleOrderIdBetween(String value1, String value2) {
+            addCriterion("sale_Order_Id between", value1, value2, "saleOrderId");
             return (Criteria) this;
         }
 
-        public Criteria andSaleOrderidNotBetween(String value1, String value2) {
-            addCriterion("sale_OrderId not between", value1, value2, "saleOrderid");
+        public Criteria andSaleOrderIdNotBetween(String value1, String value2) {
+            addCriterion("sale_Order_Id not between", value1, value2, "saleOrderId");
             return (Criteria) this;
         }
 
@@ -364,6 +364,136 @@ public class SaleDtlExample {
             return (Criteria) this;
         }
 
+        public Criteria andMedicineNameIsNull() {
+            addCriterion("medicine_Name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameIsNotNull() {
+            addCriterion("medicine_Name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameEqualTo(String value) {
+            addCriterion("medicine_Name =", value, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameNotEqualTo(String value) {
+            addCriterion("medicine_Name <>", value, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameGreaterThan(String value) {
+            addCriterion("medicine_Name >", value, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameGreaterThanOrEqualTo(String value) {
+            addCriterion("medicine_Name >=", value, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameLessThan(String value) {
+            addCriterion("medicine_Name <", value, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameLessThanOrEqualTo(String value) {
+            addCriterion("medicine_Name <=", value, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameLike(String value) {
+            addCriterion("medicine_Name like", value, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameNotLike(String value) {
+            addCriterion("medicine_Name not like", value, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameIn(List<String> values) {
+            addCriterion("medicine_Name in", values, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameNotIn(List<String> values) {
+            addCriterion("medicine_Name not in", values, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameBetween(String value1, String value2) {
+            addCriterion("medicine_Name between", value1, value2, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicineNameNotBetween(String value1, String value2) {
+            addCriterion("medicine_Name not between", value1, value2, "medicineName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceIsNull() {
+            addCriterion("sale_Dtl_Price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceIsNotNull() {
+            addCriterion("sale_Dtl_Price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceEqualTo(Double value) {
+            addCriterion("sale_Dtl_Price =", value, "saleDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceNotEqualTo(Double value) {
+            addCriterion("sale_Dtl_Price <>", value, "saleDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceGreaterThan(Double value) {
+            addCriterion("sale_Dtl_Price >", value, "saleDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("sale_Dtl_Price >=", value, "saleDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceLessThan(Double value) {
+            addCriterion("sale_Dtl_Price <", value, "saleDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceLessThanOrEqualTo(Double value) {
+            addCriterion("sale_Dtl_Price <=", value, "saleDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceIn(List<Double> values) {
+            addCriterion("sale_Dtl_Price in", values, "saleDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceNotIn(List<Double> values) {
+            addCriterion("sale_Dtl_Price not in", values, "saleDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceBetween(Double value1, Double value2) {
+            addCriterion("sale_Dtl_Price between", value1, value2, "saleDtlPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlPriceNotBetween(Double value1, Double value2) {
+            addCriterion("sale_Dtl_Price not between", value1, value2, "saleDtlPrice");
+            return (Criteria) this;
+        }
+
         public Criteria andSaleDtlTotalAmountIsNull() {
             addCriterion("sale_Dtl_Total_Amount is null");
             return (Criteria) this;
@@ -421,6 +551,76 @@ public class SaleDtlExample {
 
         public Criteria andSaleDtlTotalAmountNotBetween(Integer value1, Integer value2) {
             addCriterion("sale_Dtl_Total_Amount not between", value1, value2, "saleDtlTotalAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusIsNull() {
+            addCriterion("sale_Dtl_Status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusIsNotNull() {
+            addCriterion("sale_Dtl_Status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusEqualTo(String value) {
+            addCriterion("sale_Dtl_Status =", value, "saleDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusNotEqualTo(String value) {
+            addCriterion("sale_Dtl_Status <>", value, "saleDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusGreaterThan(String value) {
+            addCriterion("sale_Dtl_Status >", value, "saleDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("sale_Dtl_Status >=", value, "saleDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusLessThan(String value) {
+            addCriterion("sale_Dtl_Status <", value, "saleDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusLessThanOrEqualTo(String value) {
+            addCriterion("sale_Dtl_Status <=", value, "saleDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusLike(String value) {
+            addCriterion("sale_Dtl_Status like", value, "saleDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusNotLike(String value) {
+            addCriterion("sale_Dtl_Status not like", value, "saleDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusIn(List<String> values) {
+            addCriterion("sale_Dtl_Status in", values, "saleDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusNotIn(List<String> values) {
+            addCriterion("sale_Dtl_Status not in", values, "saleDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusBetween(String value1, String value2) {
+            addCriterion("sale_Dtl_Status between", value1, value2, "saleDtlStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleDtlStatusNotBetween(String value1, String value2) {
+            addCriterion("sale_Dtl_Status not between", value1, value2, "saleDtlStatus");
             return (Criteria) this;
         }
 

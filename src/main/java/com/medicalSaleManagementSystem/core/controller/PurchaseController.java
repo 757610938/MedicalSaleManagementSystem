@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -199,7 +201,7 @@ public class PurchaseController {
     }
     /*
      * 功能描述: <br>
-     * 〈〉；  r提交审核订单
+     * 〈〉；  提交审核订单
      * @Param:
      * @Return:
      * @Author: 林贤钦
@@ -284,7 +286,7 @@ public class PurchaseController {
             PageHelper.startPage(pageNum, pageSize);
             List<PurchaseBO> purchaseList = purchaseService.getAllByUserNumber(userNumber);
             if (purchaseList.size()<=0){
-                return  Resp.httpStatus(HttpStatus.BAD_REQUEST,"查询失败");
+                return  Resp.httpStatus(HttpStatus.BAD_REQUEST,"没有数据！");
             }
             PageInfo<PurchaseBO> pageInfo  = new PageInfo<>(purchaseList);
             return Resp.httpStatus(HttpStatus.OK,"查询成功！",pageInfo);
@@ -311,6 +313,7 @@ public class PurchaseController {
             //设置现在的页数为pageNum，显示的条数为pageSize条A
             PageHelper.startPage(pageNum, pageSize);
             List<PurchaseBO> purchaseList = purchaseService.getAllByPurStatusAndKeyword(purStatus,Keyword);
+
             if (purchaseList.size()<=0){
                 return Resp.httpStatus(HttpStatus.BAD_REQUEST,"没有数据！");
             }

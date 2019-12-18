@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.SaleMapper">
-
   <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.Sale">
     <id column="sale_id" jdbcType="INTEGER" property="saleId" />
     <result column="sale_Order_Id" jdbcType="VARCHAR" property="saleOrderId" />
     <result column="cust_id" jdbcType="INTEGER" property="custId" />
     <result column="user_Number" jdbcType="VARCHAR" property="userNumber" />
     <result column="sale_Total_Money" jdbcType="DOUBLE" property="saleTotalMoney" />
+    <result column="sale_Status" jdbcType="VARCHAR" property="saleStatus" />
+    <result column="sale_Date" jdbcType="TIMESTAMP" property="saleDate" />
+    <result column="sale_Remark" jdbcType="VARCHAR" property="saleRemark" />
+  </resultMap>
+  <resultMap id="SaleAndDtl" type="com.medicalSaleManagementSystem.core.model.BO.SaleBO">
+    <id column="sale_id" jdbcType="INTEGER" property="saleId" />
+    <result column="sale_Order_Id" jdbcType="VARCHAR" property="saleOrderId" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="user_Number" jdbcType="VARCHAR" property="userNumber" />
+    <result column="sale_Total_Money" jdbcType="DOUBLE" property="saleTotalMoney" />
+    <result column="sale_Status" jdbcType="VARCHAR" property="saleStatus" />
+    <result column="sale_Date" jdbcType="TIMESTAMP" property="saleDate" />
+    <result column="sale_Remark" jdbcType="VARCHAR" property="saleRemark" />
+    <collection property="saleDtlList" ofType="com.medicalSaleManagementSystem.core.model.BO.SaleDtlBO">
+      <id column="sale_Dtl_id" jdbcType="INTEGER" property="saleDtlId" />
+      <result column="sale_Dtl_Order_Id" jdbcType="VARCHAR" property="saleDtlOrderId" />
+      <result column="sale_Order_Id" jdbcType="VARCHAR" property="saleOrderId" />
+      <result column="medicine_id" jdbcType="INTEGER" property="medicineId" />
+      <result column="sale_Dtl_Total_Amount" jdbcType="INTEGER" property="saleDtlTotalAmount" />
+      <result column="sale_Dtl_Remark" jdbcType="VARCHAR" property="saleDtlRemark" />
+    </collection>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +88,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    sale_id, sale_Order_Id, cust_id, user_Number, sale_Total_Money
+    sale_id, sale_Order_Id, cust_id, user_Number, sale_Total_Money, sale_Status, sale_Date,
+    sale_Remark
   </sql>
   <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.SaleExample" resultMap="BaseResultMap">
     select
@@ -85,10 +106,61 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from tb_sale
     where sale_id = #{saleId,jdbcType=INTEGER}
+  </select>
+  <select id="selectSaleAndDtlBySaleOrderId" resultMap="SaleAndDtl"  parameterType="java.lang.String">
+    SELECT
+      tb_sale.sale_id,
+      tb_sale.sale_Order_Id,
+      tb_sale.cust_id,
+      tb_sale.user_Number,
+      tb_sale.sale_Total_Money,
+      tb_sale.sale_Status,
+      tb_sale.sale_Date,
+      tb_sale.sale_Remark,
+      tb_sale_dtl.sale_Dtl_id,
+      tb_sale_dtl.sale_Dtl_Order_Id,
+      tb_sale_dtl.sale_Order_Id,
+      tb_sale_dtl.medicine_id,
+      tb_sale_dtl.medicine_Name,
+      tb_sale_dtl.sale_Dtl_Price,
+      tb_sale_dtl.sale_Dtl_Total_Amount,
+      tb_sale_dtl.sale_Dtl_Status,
+      tb_sale_dtl.sale_Dtl_Remark
+    FROM
+      tb_sale
+    INNER JOIN tb_sale_dtl ON tb_sale_dtl.sale_Order_Id = tb_sale.sale_Order_Id
+    where tb_sale.sale_Order_Id = #{SaleOrderId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectSaleBySaleOrderId" resultMap="SaleAndDtl"  parameterType="java.lang.String">
+    SELECT
+      tb_sale.sale_id,
+      tb_sale.sale_Order_Id,
+      tb_sale.cust_id,
+      tb_sale.user_Number,
+      tb_sale.sale_Total_Money,
+      tb_sale.sale_Status,
+      tb_sale.sale_Date,
+      tb_sale.sale_Remark,
+    FROM
+      tb_sale
+    where tb_sale.sale_Order_Id = #{SaleOrderId,jdbcType=VARCHAR}
+  </select>
+  <select id="getAllSale" resultMap="BaseResultMap">
+    SELECT
+      tb_sale.sale_id,
+      tb_sale.sale_Order_Id,
+      tb_sale.cust_id,
+      tb_sale.user_Number,
+      tb_sale.sale_Total_Money,
+      tb_sale.sale_Status,
+      tb_sale.sale_Date,
+      tb_sale.sale_Remark
+    FROM
+      tb_sale
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_sale
@@ -101,10 +173,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.Sale">
-    insert into tb_sale (sale_id, sale_Order_Id, cust_id, 
-      user_Number, sale_Total_Money)
-    values (#{saleId,jdbcType=INTEGER}, #{saleOrderId,jdbcType=VARCHAR}, #{custId,jdbcType=INTEGER}, 
-      #{userNumber,jdbcType=VARCHAR}, #{saleTotalMoney,jdbcType=DOUBLE})
+    insert into tb_sale (sale_id, sale_Order_Id, cust_id,
+      user_Number, sale_Total_Money, sale_Status,
+      sale_Date, sale_Remark)
+    values (#{saleId,jdbcType=INTEGER}, #{saleOrderId,jdbcType=VARCHAR}, #{custId,jdbcType=INTEGER},
+      #{userNumber,jdbcType=VARCHAR}, #{saleTotalMoney,jdbcType=DOUBLE}, #{saleStatus,jdbcType=VARCHAR},
+      #{saleDate,jdbcType=TIMESTAMP}, #{saleRemark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.Sale">
     insert into tb_sale
@@ -124,6 +198,15 @@
       <if test="saleTotalMoney != null">
         sale_Total_Money,
       </if>
+      <if test="saleStatus != null">
+        sale_Status,
+      </if>
+      <if test="saleDate != null">
+        sale_Date,
+      </if>
+      <if test="saleRemark != null">
+        sale_Remark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="saleId != null">
@@ -140,6 +223,15 @@
       </if>
       <if test="saleTotalMoney != null">
         #{saleTotalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="saleStatus != null">
+        #{saleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="saleDate != null">
+        #{saleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saleRemark != null">
+        #{saleRemark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -167,6 +259,15 @@
       <if test="record.saleTotalMoney != null">
         sale_Total_Money = #{record.saleTotalMoney,jdbcType=DOUBLE},
       </if>
+      <if test="record.saleStatus != null">
+        sale_Status = #{record.saleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleDate != null">
+        sale_Date = #{record.saleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.saleRemark != null">
+        sale_Remark = #{record.saleRemark,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -175,10 +276,13 @@
   <update id="updateByExample" parameterType="map">
     update tb_sale
     set sale_id = #{record.saleId,jdbcType=INTEGER},
-      sale_Order_Id = #{record.saleOrderId,jdbcType=VARCHAR},
-      cust_id = #{record.custId,jdbcType=INTEGER},
-      user_Number = #{record.userNumber,jdbcType=VARCHAR},
-      sale_Total_Money = #{record.saleTotalMoney,jdbcType=DOUBLE}
+    sale_Order_Id = #{record.saleOrderId,jdbcType=VARCHAR},
+    cust_id = #{record.custId,jdbcType=INTEGER},
+    user_Number = #{record.userNumber,jdbcType=VARCHAR},
+    sale_Total_Money = #{record.saleTotalMoney,jdbcType=DOUBLE},
+    sale_Status = #{record.saleStatus,jdbcType=VARCHAR},
+    sale_Date = #{record.saleDate,jdbcType=TIMESTAMP},
+    sale_Remark = #{record.saleRemark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -198,6 +302,15 @@
       <if test="saleTotalMoney != null">
         sale_Total_Money = #{saleTotalMoney,jdbcType=DOUBLE},
       </if>
+      <if test="saleStatus != null">
+        sale_Status = #{saleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="saleDate != null">
+        sale_Date = #{saleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saleRemark != null">
+        sale_Remark = #{saleRemark,jdbcType=VARCHAR},
+      </if>
     </set>
     where sale_id = #{saleId,jdbcType=INTEGER}
   </update>
@@ -206,7 +319,10 @@
     set sale_Order_Id = #{saleOrderId,jdbcType=VARCHAR},
       cust_id = #{custId,jdbcType=INTEGER},
       user_Number = #{userNumber,jdbcType=VARCHAR},
-      sale_Total_Money = #{saleTotalMoney,jdbcType=DOUBLE}
+      sale_Total_Money = #{saleTotalMoney,jdbcType=DOUBLE},
+      sale_Status = #{saleStatus,jdbcType=VARCHAR},
+      sale_Date = #{saleDate,jdbcType=TIMESTAMP},
+      sale_Remark = #{saleRemark,jdbcType=VARCHAR}
     where sale_id = #{saleId,jdbcType=INTEGER}
   </update>
 </mapper>

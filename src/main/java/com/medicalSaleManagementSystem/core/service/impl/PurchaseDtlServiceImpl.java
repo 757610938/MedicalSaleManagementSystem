@@ -34,7 +34,7 @@ public class PurchaseDtlServiceImpl implements PurchaseDtlService {
             PurchaseDtl purchaseDtl = new PurchaseDtl();
             BeanUtilEx.copyProperties(purchaseDtl,record);
             //生成采购项编号
-            String PurDtlOrderId = OrderCodeFactory.getPurchaseDtlCode(TypeCastHelper.toLong(80000));
+            String PurDtlOrderId = OrderCodeFactory.getSaleDtlCode(TypeCastHelper.toLong(60000));
             purchaseDtl.setPurDtlOrderId(PurDtlOrderId);
             return purchaseDtlMapper.insertSelective(purchaseDtl);//生成采购项
         }catch (Exception e){

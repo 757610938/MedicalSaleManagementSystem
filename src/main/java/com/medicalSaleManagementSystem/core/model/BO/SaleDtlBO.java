@@ -1,6 +1,6 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.BO;
 
-public class SaleDtl {
+public class SaleDtlBO {
     private Integer saleDtlId;
 
     private String saleDtlOrderId;

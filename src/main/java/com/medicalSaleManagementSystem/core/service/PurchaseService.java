@@ -141,6 +141,13 @@ public interface PurchaseService {
      * @Date: 2019/12/15 12:04
      */
     List<PurchaseBO>  getAllByUserNumber(String userNumber);
-
+    /*
+     * 功能描述: <br>
+     * 〈〉在特定采购单的状态下 模糊查询员工账号，采购名获取采购单列表
+     * @Param:
+     * @Return:
+     * @Author: 林贤钦
+     * @Date: 2019/12/18 2:08
+     */
     List<PurchaseBO> getAllByPurStatusAndKeyword(String purStatus,String Keyword);
 }

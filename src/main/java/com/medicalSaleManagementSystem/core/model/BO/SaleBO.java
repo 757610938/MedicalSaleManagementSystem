@@ -1,8 +1,10 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.BO;
 
 import java.util.Date;
+import java.util.List;
 
-public class Sale {
+public class SaleBO {
+    List<SaleDtlBO> saleDtlList;
     private Integer saleId;
 
     private String saleOrderId;
@@ -81,5 +83,28 @@ public class Sale {
 
     public void setSaleRemark(String saleRemark) {
         this.saleRemark = saleRemark == null ? null : saleRemark.trim();
+    }
+
+    public List<SaleDtlBO> getSaleDtlList() {
+        return saleDtlList;
+    }
+
+    public void setSaleDtlList(List<SaleDtlBO> saleDtlList) {
+        this.saleDtlList = saleDtlList;
+    }
+
+    @Override
+    public String toString() {
+        return "SaleBO{" +
+                "saleDtlList=" + saleDtlList +
+                ", saleId=" + saleId +
+                ", saleOrderId='" + saleOrderId + '\'' +
+                ", custId=" + custId +
+                ", userNumber='" + userNumber + '\'' +
+                ", saleTotalMoney=" + saleTotalMoney +
+                ", saleStatus='" + saleStatus + '\'' +
+                ", saleDate=" + saleDate +
+                ", saleRemark='" + saleRemark + '\'' +
+                '}';
     }
 }

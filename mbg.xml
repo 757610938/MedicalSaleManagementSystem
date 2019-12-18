@@ -57,8 +57,8 @@
 
         <table schema="" tableName="tb_medicine" domainObjectName="Medicine"></table>
 
-        <table schema="" tableName="tb_outstock_dtl" domainObjectName="OutstocDtl"></table>
-        <table schema="" tableName="tb_outstock_record" domainObjectName="OutstocRecord"></table>
+        <table schema="" tableName="tb_outstock_dtl" domainObjectName="OutstockDtl"></table>
+        <table schema="" tableName="tb_outstock_record" domainObjectName="OutstockRecord"></table>
 
         <table schema="" tableName="tb_purchase" domainObjectName="Purchase"></table>
         <table schema="" tableName="tb_purchase_dtl" domainObjectName="PurchaseDtl"></table>

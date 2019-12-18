@@ -5,6 +5,7 @@ import com.medicalSaleManagementSystem.core.model.entity.SaleDtlExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
+
 public interface SaleDtlMapper {
     long countByExample(SaleDtlExample example);
 
