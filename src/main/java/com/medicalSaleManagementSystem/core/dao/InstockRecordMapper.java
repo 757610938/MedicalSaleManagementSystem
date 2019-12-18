@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.dao;
 
+import com.medicalSaleManagementSystem.core.model.BO.InstockBO;
 import com.medicalSaleManagementSystem.core.model.entity.InstockRecord;
 import com.medicalSaleManagementSystem.core.model.entity.InstockRecordExample;
 import java.util.List;
@@ -27,4 +28,17 @@ public interface InstockRecordMapper {
     int updateByPrimaryKeySelective(InstockRecord record);
 
     int updateByPrimaryKey(InstockRecord record);
+
+
+    InstockBO selectInstockAndDtlByInstockNumber(String instockNumber);
+
+    InstockBO selectInstockByInstockNumber(String instockNumber);
+
+    List<InstockBO> selectByFuzzySearch(String instockNumber);
+
+    List<InstockRecord> selectAllInstock();
+
+    List<InstockBO> selectAllInstockAndDtl();
+
+    List<Integer> selectAllInstockNumber();
 }

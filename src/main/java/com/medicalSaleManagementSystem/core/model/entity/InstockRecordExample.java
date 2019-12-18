@@ -165,73 +165,73 @@ public class InstockRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdIsNull() {
-            addCriterion("instock_List_Id is null");
+        public Criteria andInstockNumberIsNull() {
+            addCriterion("instock_Number is null");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdIsNotNull() {
-            addCriterion("instock_List_Id is not null");
+        public Criteria andInstockNumberIsNotNull() {
+            addCriterion("instock_Number is not null");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdEqualTo(String value) {
-            addCriterion("instock_List_Id =", value, "instockListId");
+        public Criteria andInstockNumberEqualTo(String value) {
+            addCriterion("instock_Number =", value, "instockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdNotEqualTo(String value) {
-            addCriterion("instock_List_Id <>", value, "instockListId");
+        public Criteria andInstockNumberNotEqualTo(String value) {
+            addCriterion("instock_Number <>", value, "instockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdGreaterThan(String value) {
-            addCriterion("instock_List_Id >", value, "instockListId");
+        public Criteria andInstockNumberGreaterThan(String value) {
+            addCriterion("instock_Number >", value, "instockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdGreaterThanOrEqualTo(String value) {
-            addCriterion("instock_List_Id >=", value, "instockListId");
+        public Criteria andInstockNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("instock_Number >=", value, "instockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdLessThan(String value) {
-            addCriterion("instock_List_Id <", value, "instockListId");
+        public Criteria andInstockNumberLessThan(String value) {
+            addCriterion("instock_Number <", value, "instockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdLessThanOrEqualTo(String value) {
-            addCriterion("instock_List_Id <=", value, "instockListId");
+        public Criteria andInstockNumberLessThanOrEqualTo(String value) {
+            addCriterion("instock_Number <=", value, "instockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdLike(String value) {
-            addCriterion("instock_List_Id like", value, "instockListId");
+        public Criteria andInstockNumberLike(String value) {
+            addCriterion("instock_Number like", value, "instockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdNotLike(String value) {
-            addCriterion("instock_List_Id not like", value, "instockListId");
+        public Criteria andInstockNumberNotLike(String value) {
+            addCriterion("instock_Number not like", value, "instockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdIn(List<String> values) {
-            addCriterion("instock_List_Id in", values, "instockListId");
+        public Criteria andInstockNumberIn(List<String> values) {
+            addCriterion("instock_Number in", values, "instockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdNotIn(List<String> values) {
-            addCriterion("instock_List_Id not in", values, "instockListId");
+        public Criteria andInstockNumberNotIn(List<String> values) {
+            addCriterion("instock_Number not in", values, "instockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdBetween(String value1, String value2) {
-            addCriterion("instock_List_Id between", value1, value2, "instockListId");
+        public Criteria andInstockNumberBetween(String value1, String value2) {
+            addCriterion("instock_Number between", value1, value2, "instockNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockListIdNotBetween(String value1, String value2) {
-            addCriterion("instock_List_Id not between", value1, value2, "instockListId");
+        public Criteria andInstockNumberNotBetween(String value1, String value2) {
+            addCriterion("instock_Number not between", value1, value2, "instockNumber");
             return (Criteria) this;
         }
 
@@ -305,183 +305,193 @@ public class InstockRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdIsNull() {
-            addCriterion("medicine_id is null");
+        public Criteria andUserNumberIsNull() {
+            addCriterion("user_Number is null");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdIsNotNull() {
-            addCriterion("medicine_id is not null");
+        public Criteria andUserNumberIsNotNull() {
+            addCriterion("user_Number is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdEqualTo(Integer value) {
-            addCriterion("medicine_id =", value, "medicineId");
+        public Criteria andUserNumberEqualTo(String value) {
+            addCriterion("user_Number =", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdNotEqualTo(Integer value) {
-            addCriterion("medicine_id <>", value, "medicineId");
+        public Criteria andUserNumberNotEqualTo(String value) {
+            addCriterion("user_Number <>", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdGreaterThan(Integer value) {
-            addCriterion("medicine_id >", value, "medicineId");
+        public Criteria andUserNumberGreaterThan(String value) {
+            addCriterion("user_Number >", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("medicine_id >=", value, "medicineId");
+        public Criteria andUserNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("user_Number >=", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdLessThan(Integer value) {
-            addCriterion("medicine_id <", value, "medicineId");
+        public Criteria andUserNumberLessThan(String value) {
+            addCriterion("user_Number <", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdLessThanOrEqualTo(Integer value) {
-            addCriterion("medicine_id <=", value, "medicineId");
+        public Criteria andUserNumberLessThanOrEqualTo(String value) {
+            addCriterion("user_Number <=", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdIn(List<Integer> values) {
-            addCriterion("medicine_id in", values, "medicineId");
+        public Criteria andUserNumberLike(String value) {
+            addCriterion("user_Number like", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdNotIn(List<Integer> values) {
-            addCriterion("medicine_id not in", values, "medicineId");
+        public Criteria andUserNumberNotLike(String value) {
+            addCriterion("user_Number not like", value, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdBetween(Integer value1, Integer value2) {
-            addCriterion("medicine_id between", value1, value2, "medicineId");
+        public Criteria andUserNumberIn(List<String> values) {
+            addCriterion("user_Number in", values, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("medicine_id not between", value1, value2, "medicineId");
+        public Criteria andUserNumberNotIn(List<String> values) {
+            addCriterion("user_Number not in", values, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberIsNull() {
-            addCriterion("instock_Number is null");
+        public Criteria andUserNumberBetween(String value1, String value2) {
+            addCriterion("user_Number between", value1, value2, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberIsNotNull() {
-            addCriterion("instock_Number is not null");
+        public Criteria andUserNumberNotBetween(String value1, String value2) {
+            addCriterion("user_Number not between", value1, value2, "userNumber");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberEqualTo(Integer value) {
-            addCriterion("instock_Number =", value, "instockNumber");
+        public Criteria andInstockTimeIsNull() {
+            addCriterion("instock_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberNotEqualTo(Integer value) {
-            addCriterion("instock_Number <>", value, "instockNumber");
+        public Criteria andInstockTimeIsNotNull() {
+            addCriterion("instock_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberGreaterThan(Integer value) {
-            addCriterion("instock_Number >", value, "instockNumber");
+        public Criteria andInstockTimeEqualTo(Date value) {
+            addCriterion("instock_time =", value, "instockTime");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberGreaterThanOrEqualTo(Integer value) {
-            addCriterion("instock_Number >=", value, "instockNumber");
+        public Criteria andInstockTimeNotEqualTo(Date value) {
+            addCriterion("instock_time <>", value, "instockTime");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberLessThan(Integer value) {
-            addCriterion("instock_Number <", value, "instockNumber");
+        public Criteria andInstockTimeGreaterThan(Date value) {
+            addCriterion("instock_time >", value, "instockTime");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberLessThanOrEqualTo(Integer value) {
-            addCriterion("instock_Number <=", value, "instockNumber");
+        public Criteria andInstockTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("instock_time >=", value, "instockTime");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberIn(List<Integer> values) {
-            addCriterion("instock_Number in", values, "instockNumber");
+        public Criteria andInstockTimeLessThan(Date value) {
+            addCriterion("instock_time <", value, "instockTime");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberNotIn(List<Integer> values) {
-            addCriterion("instock_Number not in", values, "instockNumber");
+        public Criteria andInstockTimeLessThanOrEqualTo(Date value) {
+            addCriterion("instock_time <=", value, "instockTime");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberBetween(Integer value1, Integer value2) {
-            addCriterion("instock_Number between", value1, value2, "instockNumber");
+        public Criteria andInstockTimeIn(List<Date> values) {
+            addCriterion("instock_time in", values, "instockTime");
             return (Criteria) this;
         }
 
-        public Criteria andInstockNumberNotBetween(Integer value1, Integer value2) {
-            addCriterion("instock_Number not between", value1, value2, "instockNumber");
+        public Criteria andInstockTimeNotIn(List<Date> values) {
+            addCriterion("instock_time not in", values, "instockTime");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdIsNull() {
-            addCriterion("emp_id is null");
+        public Criteria andInstockTimeBetween(Date value1, Date value2) {
+            addCriterion("instock_time between", value1, value2, "instockTime");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdIsNotNull() {
-            addCriterion("emp_id is not null");
+        public Criteria andInstockTimeNotBetween(Date value1, Date value2) {
+            addCriterion("instock_time not between", value1, value2, "instockTime");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdEqualTo(Integer value) {
-            addCriterion("emp_id =", value, "empId");
+        public Criteria andInstockDtlIdIsNull() {
+            addCriterion("instock_Dtl_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdNotEqualTo(Integer value) {
-            addCriterion("emp_id <>", value, "empId");
+        public Criteria andInstockDtlIdIsNotNull() {
+            addCriterion("instock_Dtl_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdGreaterThan(Integer value) {
-            addCriterion("emp_id >", value, "empId");
+        public Criteria andInstockDtlIdEqualTo(Integer value) {
+            addCriterion("instock_Dtl_id =", value, "instockDtlId");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("emp_id >=", value, "empId");
+        public Criteria andInstockDtlIdNotEqualTo(Integer value) {
+            addCriterion("instock_Dtl_id <>", value, "instockDtlId");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdLessThan(Integer value) {
-            addCriterion("emp_id <", value, "empId");
+        public Criteria andInstockDtlIdGreaterThan(Integer value) {
+            addCriterion("instock_Dtl_id >", value, "instockDtlId");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdLessThanOrEqualTo(Integer value) {
-            addCriterion("emp_id <=", value, "empId");
+        public Criteria andInstockDtlIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("instock_Dtl_id >=", value, "instockDtlId");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdIn(List<Integer> values) {
-            addCriterion("emp_id in", values, "empId");
+        public Criteria andInstockDtlIdLessThan(Integer value) {
+            addCriterion("instock_Dtl_id <", value, "instockDtlId");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdNotIn(List<Integer> values) {
-            addCriterion("emp_id not in", values, "empId");
+        public Criteria andInstockDtlIdLessThanOrEqualTo(Integer value) {
+            addCriterion("instock_Dtl_id <=", value, "instockDtlId");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdBetween(Integer value1, Integer value2) {
-            addCriterion("emp_id between", value1, value2, "empId");
+        public Criteria andInstockDtlIdIn(List<Integer> values) {
+            addCriterion("instock_Dtl_id in", values, "instockDtlId");
             return (Criteria) this;
         }
 
-        public Criteria andEmpIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("emp_id not between", value1, value2, "empId");
+        public Criteria andInstockDtlIdNotIn(List<Integer> values) {
+            addCriterion("instock_Dtl_id not in", values, "instockDtlId");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstockDtlIdBetween(Integer value1, Integer value2) {
+            addCriterion("instock_Dtl_id between", value1, value2, "instockDtlId");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstockDtlIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("instock_Dtl_id not between", value1, value2, "instockDtlId");
             return (Criteria) this;
         }
 
@@ -552,66 +562,6 @@ public class InstockRecordExample {
 
         public Criteria andInstockRemarkNotBetween(String value1, String value2) {
             addCriterion("instock_Remark not between", value1, value2, "instockRemark");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeIsNull() {
-            addCriterion("instock_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeIsNotNull() {
-            addCriterion("instock_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeEqualTo(Date value) {
-            addCriterion("instock_time =", value, "instockTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeNotEqualTo(Date value) {
-            addCriterion("instock_time <>", value, "instockTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeGreaterThan(Date value) {
-            addCriterion("instock_time >", value, "instockTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("instock_time >=", value, "instockTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeLessThan(Date value) {
-            addCriterion("instock_time <", value, "instockTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeLessThanOrEqualTo(Date value) {
-            addCriterion("instock_time <=", value, "instockTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeIn(List<Date> values) {
-            addCriterion("instock_time in", values, "instockTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeNotIn(List<Date> values) {
-            addCriterion("instock_time not in", values, "instockTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeBetween(Date value1, Date value2) {
-            addCriterion("instock_time between", value1, value2, "instockTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andInstockTimeNotBetween(Date value1, Date value2) {
-            addCriterion("instock_time not between", value1, value2, "instockTime");
             return (Criteria) this;
         }
     }

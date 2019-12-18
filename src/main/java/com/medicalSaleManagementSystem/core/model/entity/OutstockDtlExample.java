@@ -3,14 +3,14 @@ package com.medicalSaleManagementSystem.core.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OutstocDtlExample {
+public class OutstockDtlExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public OutstocDtlExample() {
+    public OutstockDtlExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -411,6 +411,76 @@ public class OutstocDtlExample {
 
         public Criteria andWhseIdNotBetween(Integer value1, Integer value2) {
             addCriterion("whse_id not between", value1, value2, "whseId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberIsNull() {
+            addCriterion("outstock_Number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberIsNotNull() {
+            addCriterion("outstock_Number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberEqualTo(String value) {
+            addCriterion("outstock_Number =", value, "outstockNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberNotEqualTo(String value) {
+            addCriterion("outstock_Number <>", value, "outstockNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberGreaterThan(String value) {
+            addCriterion("outstock_Number >", value, "outstockNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("outstock_Number >=", value, "outstockNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberLessThan(String value) {
+            addCriterion("outstock_Number <", value, "outstockNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberLessThanOrEqualTo(String value) {
+            addCriterion("outstock_Number <=", value, "outstockNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberLike(String value) {
+            addCriterion("outstock_Number like", value, "outstockNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberNotLike(String value) {
+            addCriterion("outstock_Number not like", value, "outstockNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberIn(List<String> values) {
+            addCriterion("outstock_Number in", values, "outstockNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberNotIn(List<String> values) {
+            addCriterion("outstock_Number not in", values, "outstockNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberBetween(String value1, String value2) {
+            addCriterion("outstock_Number between", value1, value2, "outstockNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOutstockNumberNotBetween(String value1, String value2) {
+            addCriterion("outstock_Number not between", value1, value2, "outstockNumber");
             return (Criteria) this;
         }
     }

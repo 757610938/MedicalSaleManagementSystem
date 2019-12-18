@@ -1,6 +1,7 @@
-package com.medicalSaleManagementSystem.core.model.entity;
+package com.medicalSaleManagementSystem.core.model.BO;
 
-public class InstockDtl {
+public class InstockDtlBO {
+
     private Integer instockDtlId;
 
     private Integer medicineId;
@@ -25,10 +26,9 @@ public class InstockDtl {
 
     private String instockDtlNumber;
 
-
     @Override
     public String toString() {
-        return "InstockDtl{" +
+        return "InstockDtlBO{" +
                 "instockDtlId=" + instockDtlId +
                 ", medicineId=" + medicineId +
                 ", checkMedicineAmount=" + checkMedicineAmount +
@@ -50,14 +50,6 @@ public class InstockDtl {
 
     public void setInstockDtlNumber(String instockDtlNumber) {
         this.instockDtlNumber = instockDtlNumber;
-    }
-
-    public String getInstockNumber() {
-        return instockNumber;
-    }
-
-    public void setInstockNumber(String instockNumber) {
-        this.instockNumber = instockNumber== null ? null : instockNumber.trim();
     }
 
     public Integer getInstockDtlId() {
@@ -97,7 +89,7 @@ public class InstockDtl {
     }
 
     public void setCheckRemark(String checkRemark) {
-        this.checkRemark = checkRemark == null ? null : checkRemark.trim();
+        this.checkRemark = checkRemark== null ? null : checkRemark.trim();
     }
 
     public Integer getWhseId() {
@@ -121,7 +113,7 @@ public class InstockDtl {
     }
 
     public void setInstockRemark(String instockRemark) {
-        this.instockRemark = instockRemark == null ? null : instockRemark.trim();
+        this.instockRemark = instockRemark== null ? null : instockRemark.trim();
     }
 
     public Integer getApplyAmount() {
@@ -137,6 +129,14 @@ public class InstockDtl {
     }
 
     public void setApplyRemark(String applyRemark) {
-        this.applyRemark = applyRemark == null ? null : applyRemark.trim();
+        this.applyRemark = applyRemark== null ? null : applyRemark.trim();
+    }
+
+    public String getInstockNumber() {
+        return instockNumber;
+    }
+
+    public void setInstockNumber(String instockNumber) {
+        this.instockNumber = instockNumber== null ? null : instockNumber.trim();
     }
 }

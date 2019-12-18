@@ -1,281 +1,311 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.medicalSaleManagementSystem.core.dao.InstockDtlMapper">
-  <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.InstockDtl">
-    <id column="instock_Dtl_id" jdbcType="INTEGER" property="instockDtlId" />
-    <result column="medicine_id" jdbcType="INTEGER" property="medicineId" />
-    <result column="check_Medicine_Amount" jdbcType="INTEGER" property="checkMedicineAmount" />
-    <result column="check_Pass_Amount" jdbcType="INTEGER" property="checkPassAmount" />
-    <result column="check_Remark" jdbcType="VARCHAR" property="checkRemark" />
-    <result column="whse_id" jdbcType="INTEGER" property="whseId" />
-    <result column="instock_Amount" jdbcType="INTEGER" property="instockAmount" />
-    <result column="instock_Remark" jdbcType="VARCHAR" property="instockRemark" />
-    <result column="apply_Amount" jdbcType="INTEGER" property="applyAmount" />
-    <result column="apply_Remark" jdbcType="VARCHAR" property="applyRemark" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.medicalSaleManagementSystem.core.model.entity.InstockDtl">
+        <id column="instock_Dtl_id" jdbcType="INTEGER" property="instockDtlId"/>
+        <result column="medicine_id" jdbcType="INTEGER" property="medicineId"/>
+        <result column="check_Medicine_Amount" jdbcType="INTEGER" property="checkMedicineAmount"/>
+        <result column="check_Pass_Amount" jdbcType="INTEGER" property="checkPassAmount"/>
+        <result column="check_Remark" jdbcType="VARCHAR" property="checkRemark"/>
+        <result column="whse_id" jdbcType="INTEGER" property="whseId"/>
+        <result column="instock_Amount" jdbcType="INTEGER" property="instockAmount"/>
+        <result column="instock_Remark" jdbcType="VARCHAR" property="instockRemark"/>
+        <result column="apply_Amount" jdbcType="INTEGER" property="applyAmount"/>
+        <result column="apply_Remark" jdbcType="VARCHAR" property="applyRemark"/>
+        <result column="instock_Number" jdbcType="VARCHAR" property="instockNumber"/>
+        <result column="instock_Dtl_Number" jdbcType="VARCHAR" property="instockDtlNumber"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     instock_Dtl_id, medicine_id, check_Medicine_Amount, check_Pass_Amount, check_Remark, 
-    whse_id, instock_Amount, instock_Remark, apply_Amount, apply_Remark
+    whse_id, instock_Amount, instock_Remark, apply_Amount, apply_Remark,instock_Number,instock_Dtl_Number
   </sql>
-  <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtlExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tb_instock_dtl
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from tb_instock_dtl
-    where instock_Dtl_id = #{instockDtlId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtlExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from tb_instock_dtl
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_instock_dtl
+        where instock_Dtl_id = #{instockDtlId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_instock_dtl
     where instock_Dtl_id = #{instockDtlId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtlExample">
-    delete from tb_instock_dtl
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtl">
+    <delete id="deleteByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtlExample">
+        delete from tb_instock_dtl
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtl">
     insert into tb_instock_dtl (instock_Dtl_id, medicine_id, check_Medicine_Amount, 
       check_Pass_Amount, check_Remark, whse_id, 
       instock_Amount, instock_Remark, apply_Amount, 
-      apply_Remark)
+      apply_Remark,instock_Number,instock_Dtl_Number)
     values (#{instockDtlId,jdbcType=INTEGER}, #{medicineId,jdbcType=INTEGER}, #{checkMedicineAmount,jdbcType=INTEGER}, 
       #{checkPassAmount,jdbcType=INTEGER}, #{checkRemark,jdbcType=VARCHAR}, #{whseId,jdbcType=INTEGER}, 
       #{instockAmount,jdbcType=INTEGER}, #{instockRemark,jdbcType=VARCHAR}, #{applyAmount,jdbcType=INTEGER}, 
-      #{applyRemark,jdbcType=VARCHAR})
+      #{applyRemark,jdbcType=VARCHAR},#{instockNumber,jdbcType=VARCHAR},#{instockDtlNumber,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtl">
-    insert into tb_instock_dtl
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="instockDtlId != null">
-        instock_Dtl_id,
-      </if>
-      <if test="medicineId != null">
-        medicine_id,
-      </if>
-      <if test="checkMedicineAmount != null">
-        check_Medicine_Amount,
-      </if>
-      <if test="checkPassAmount != null">
-        check_Pass_Amount,
-      </if>
-      <if test="checkRemark != null">
-        check_Remark,
-      </if>
-      <if test="whseId != null">
-        whse_id,
-      </if>
-      <if test="instockAmount != null">
-        instock_Amount,
-      </if>
-      <if test="instockRemark != null">
-        instock_Remark,
-      </if>
-      <if test="applyAmount != null">
-        apply_Amount,
-      </if>
-      <if test="applyRemark != null">
-        apply_Remark,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="instockDtlId != null">
-        #{instockDtlId,jdbcType=INTEGER},
-      </if>
-      <if test="medicineId != null">
-        #{medicineId,jdbcType=INTEGER},
-      </if>
-      <if test="checkMedicineAmount != null">
-        #{checkMedicineAmount,jdbcType=INTEGER},
-      </if>
-      <if test="checkPassAmount != null">
-        #{checkPassAmount,jdbcType=INTEGER},
-      </if>
-      <if test="checkRemark != null">
-        #{checkRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="whseId != null">
-        #{whseId,jdbcType=INTEGER},
-      </if>
-      <if test="instockAmount != null">
-        #{instockAmount,jdbcType=INTEGER},
-      </if>
-      <if test="instockRemark != null">
-        #{instockRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="applyAmount != null">
-        #{applyAmount,jdbcType=INTEGER},
-      </if>
-      <if test="applyRemark != null">
-        #{applyRemark,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtlExample" resultType="java.lang.Long">
-    select count(*) from tb_instock_dtl
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update tb_instock_dtl
-    <set>
-      <if test="record.instockDtlId != null">
-        instock_Dtl_id = #{record.instockDtlId,jdbcType=INTEGER},
-      </if>
-      <if test="record.medicineId != null">
+    <insert id="insertSelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtl">
+        insert into tb_instock_dtl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="instockDtlId != null">
+                instock_Dtl_id,
+            </if>
+            <if test="medicineId != null">
+                medicine_id,
+            </if>
+            <if test="checkMedicineAmount != null">
+                check_Medicine_Amount,
+            </if>
+            <if test="checkPassAmount != null">
+                check_Pass_Amount,
+            </if>
+            <if test="checkRemark != null">
+                check_Remark,
+            </if>
+            <if test="whseId != null">
+                whse_id,
+            </if>
+            <if test="instockAmount != null">
+                instock_Amount,
+            </if>
+            <if test="instockRemark != null">
+                instock_Remark,
+            </if>
+            <if test="applyAmount != null">
+                apply_Amount,
+            </if>
+            <if test="applyRemark != null">
+                apply_Remark,
+            </if>
+            <if test="instockNumber !=null">
+                instock_Number,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="instockDtlId != null">
+                #{instockDtlId,jdbcType=INTEGER},
+            </if>
+            <if test="medicineId != null">
+                #{medicineId,jdbcType=INTEGER},
+            </if>
+            <if test="checkMedicineAmount != null">
+                #{checkMedicineAmount,jdbcType=INTEGER},
+            </if>
+            <if test="checkPassAmount != null">
+                #{checkPassAmount,jdbcType=INTEGER},
+            </if>
+            <if test="checkRemark != null">
+                #{checkRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="whseId != null">
+                #{whseId,jdbcType=INTEGER},
+            </if>
+            <if test="instockAmount != null">
+                #{instockAmount,jdbcType=INTEGER},
+            </if>
+            <if test="instockRemark != null">
+                #{instockRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="applyAmount != null">
+                #{applyAmount,jdbcType=INTEGER},
+            </if>
+            <if test="applyRemark != null">
+                #{applyRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="instockNumber !=null">
+                #{instockNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="instockDtlNumber !=null">
+                #{instockDtlNumber,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtlExample"
+            resultType="java.lang.Long">
+        select count(*) from tb_instock_dtl
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update tb_instock_dtl
+        <set>
+            <if test="record.instockDtlId != null">
+                instock_Dtl_id = #{record.instockDtlId,jdbcType=INTEGER},
+            </if>
+            <if test="record.medicineId != null">
+                medicine_id = #{record.medicineId,jdbcType=INTEGER},
+            </if>
+            <if test="record.checkMedicineAmount != null">
+                check_Medicine_Amount = #{record.checkMedicineAmount,jdbcType=INTEGER},
+            </if>
+            <if test="record.checkPassAmount != null">
+                check_Pass_Amount = #{record.checkPassAmount,jdbcType=INTEGER},
+            </if>
+            <if test="record.checkRemark != null">
+                check_Remark = #{record.checkRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.whseId != null">
+                whse_id = #{record.whseId,jdbcType=INTEGER},
+            </if>
+            <if test="record.instockAmount != null">
+                instock_Amount = #{record.instockAmount,jdbcType=INTEGER},
+            </if>
+            <if test="record.instockRemark != null">
+                instock_Remark = #{record.instockRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.applyAmount != null">
+                apply_Amount = #{record.applyAmount,jdbcType=INTEGER},
+            </if>
+            <if test="record.applyRemark != null">
+                apply_Remark = #{record.applyRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.instockNumber !=null">
+                instock_Number =#{instockNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.instockDtlNumber !=null">
+                instock_Dtl_Number=#{instockDtlNumber,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update tb_instock_dtl
+        set instock_Dtl_id = #{record.instockDtlId,jdbcType=INTEGER},
         medicine_id = #{record.medicineId,jdbcType=INTEGER},
-      </if>
-      <if test="record.checkMedicineAmount != null">
         check_Medicine_Amount = #{record.checkMedicineAmount,jdbcType=INTEGER},
-      </if>
-      <if test="record.checkPassAmount != null">
         check_Pass_Amount = #{record.checkPassAmount,jdbcType=INTEGER},
-      </if>
-      <if test="record.checkRemark != null">
         check_Remark = #{record.checkRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.whseId != null">
         whse_id = #{record.whseId,jdbcType=INTEGER},
-      </if>
-      <if test="record.instockAmount != null">
         instock_Amount = #{record.instockAmount,jdbcType=INTEGER},
-      </if>
-      <if test="record.instockRemark != null">
         instock_Remark = #{record.instockRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.applyAmount != null">
         apply_Amount = #{record.applyAmount,jdbcType=INTEGER},
-      </if>
-      <if test="record.applyRemark != null">
         apply_Remark = #{record.applyRemark,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tb_instock_dtl
-    set instock_Dtl_id = #{record.instockDtlId,jdbcType=INTEGER},
-      medicine_id = #{record.medicineId,jdbcType=INTEGER},
-      check_Medicine_Amount = #{record.checkMedicineAmount,jdbcType=INTEGER},
-      check_Pass_Amount = #{record.checkPassAmount,jdbcType=INTEGER},
-      check_Remark = #{record.checkRemark,jdbcType=VARCHAR},
-      whse_id = #{record.whseId,jdbcType=INTEGER},
-      instock_Amount = #{record.instockAmount,jdbcType=INTEGER},
-      instock_Remark = #{record.instockRemark,jdbcType=VARCHAR},
-      apply_Amount = #{record.applyAmount,jdbcType=INTEGER},
-      apply_Remark = #{record.applyRemark,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtl">
-    update tb_instock_dtl
-    <set>
-      <if test="medicineId != null">
-        medicine_id = #{medicineId,jdbcType=INTEGER},
-      </if>
-      <if test="checkMedicineAmount != null">
-        check_Medicine_Amount = #{checkMedicineAmount,jdbcType=INTEGER},
-      </if>
-      <if test="checkPassAmount != null">
-        check_Pass_Amount = #{checkPassAmount,jdbcType=INTEGER},
-      </if>
-      <if test="checkRemark != null">
-        check_Remark = #{checkRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="whseId != null">
-        whse_id = #{whseId,jdbcType=INTEGER},
-      </if>
-      <if test="instockAmount != null">
-        instock_Amount = #{instockAmount,jdbcType=INTEGER},
-      </if>
-      <if test="instockRemark != null">
-        instock_Remark = #{instockRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="applyAmount != null">
-        apply_Amount = #{applyAmount,jdbcType=INTEGER},
-      </if>
-      <if test="applyRemark != null">
-        apply_Remark = #{applyRemark,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where instock_Dtl_id = #{instockDtlId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtl">
+        instock_Number=#{instockNumber,jdbcType=VARCHAR},
+        instock_Dtl_Number=#{instockDtlNumber,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtl">
+        update tb_instock_dtl
+        <set>
+            <if test="medicineId != null">
+                medicine_id = #{medicineId,jdbcType=INTEGER},
+            </if>
+            <if test="checkMedicineAmount != null">
+                check_Medicine_Amount = #{checkMedicineAmount,jdbcType=INTEGER},
+            </if>
+            <if test="checkPassAmount != null">
+                check_Pass_Amount = #{checkPassAmount,jdbcType=INTEGER},
+            </if>
+            <if test="checkRemark != null">
+                check_Remark = #{checkRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="whseId != null">
+                whse_id = #{whseId,jdbcType=INTEGER},
+            </if>
+            <if test="instockAmount != null">
+                instock_Amount = #{instockAmount,jdbcType=INTEGER},
+            </if>
+            <if test="instockRemark != null">
+                instock_Remark = #{instockRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="applyAmount != null">
+                apply_Amount = #{applyAmount,jdbcType=INTEGER},
+            </if>
+            <if test="applyRemark != null">
+                apply_Remark = #{applyRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="instockNumber !=null">
+                instock_Number=#{instockNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="instockDtlNumber !=null">
+                instock_Dtl_Number=#{instockDtlNumber,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where instock_Dtl_id = #{instockDtlId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.medicalSaleManagementSystem.core.model.entity.InstockDtl">
     update tb_instock_dtl
     set medicine_id = #{medicineId,jdbcType=INTEGER},
       check_Medicine_Amount = #{checkMedicineAmount,jdbcType=INTEGER},
@@ -285,7 +315,9 @@
       instock_Amount = #{instockAmount,jdbcType=INTEGER},
       instock_Remark = #{instockRemark,jdbcType=VARCHAR},
       apply_Amount = #{applyAmount,jdbcType=INTEGER},
-      apply_Remark = #{applyRemark,jdbcType=VARCHAR}
+      apply_Remark = #{applyRemark,jdbcType=VARCHAR},
+      instock_Number=#{instockNumber,jdbcType=VARCHAR},
+      instock_Dtl_Number=#{instockDtlNumber,jdbcType=VARCHAR}
     where instock_Dtl_id = #{instockDtlId,jdbcType=INTEGER}
   </update>
 </mapper>
