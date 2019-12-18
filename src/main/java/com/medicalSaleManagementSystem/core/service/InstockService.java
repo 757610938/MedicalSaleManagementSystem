@@ -1,5 +1,6 @@
 package com.medicalSaleManagementSystem.core.service;
 
+import com.medicalSaleManagementSystem.core.model.BO.InstockBO;
 import com.medicalSaleManagementSystem.core.model.entity.InstockApplyRecord;
 import com.medicalSaleManagementSystem.core.model.entity.InstockCheckRecord;
 import com.medicalSaleManagementSystem.core.model.entity.InstockRecord;
@@ -43,4 +44,13 @@ public interface InstockService {
      * @return
      */
     List<InstockRecord> findAllInstock();
+
+    String addInstockDtl(InstockBO record);
+
+    String insertSelective(InstockBO record);
+
+    InstockBO selectInstockAndDtlByInstockNumber(String instockNumber);
+    InstockBO selectInstockByInstockNumber(String instockNumber);
+
+    List<InstockRecord> selectAllInstock();
 }

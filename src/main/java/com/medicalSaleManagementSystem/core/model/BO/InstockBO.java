@@ -5,7 +5,7 @@ import java.util.List;
 
 public class InstockBO {
 
-    private List<InstockDtlBO> instockDtlBOList;
+    private List<InstockDtlBO> instockDtlList;
 
     private Integer instockId;
 
@@ -22,13 +22,12 @@ public class InstockBO {
     private String instockRemark;
 
 
-
-    public List<InstockDtlBO> getInstockDtlBOList() {
-        return instockDtlBOList;
+    public List<InstockDtlBO> getInstockDtlList() {
+        return instockDtlList;
     }
 
-    public void setInstockDtlBOList(List<InstockDtlBO> instockDtlBOList) {
-        this.instockDtlBOList = instockDtlBOList;
+    public void setInstockDtlList(List<InstockDtlBO> instockDtlList) {
+        this.instockDtlList = instockDtlList;
     }
 
     public Integer getInstockId() {
@@ -90,7 +89,7 @@ public class InstockBO {
     @Override
     public String toString() {
         return "InstockBO{" +
-                "instockDtlBOList=" + instockDtlBOList +
+                "instockDtlList=" + instockDtlList +
                 ", instockId=" + instockId +
                 ", instockNumber='" + instockNumber + '\'' +
                 ", instockCategory='" + instockCategory + '\'' +
